@@ -22,7 +22,7 @@ public class Main extends Application {
         //inloggen of registreren
         Scanner sc= new Scanner(System.in);
         System.out.println("inloggen of registreren?");
-
+        DataServerMain dsm= new DataServerMain();
         String username="";
         String password="";
 
@@ -33,6 +33,18 @@ public class Main extends Application {
                 username=sc.nextLine();
                 System.out.println("password");
                 password=sc.nextLine();
+
+
+                if(dsm.checkUser(username, password)){
+                    System.out.println("login correct");
+                }
+                else{
+                    System.out.println("login incorrect");
+                }
+
+
+
+
                 break;
             case "registreren":
                 System.out.println("je kooos voor registreren");
@@ -44,6 +56,9 @@ public class Main extends Application {
                 while(!first.equals(password)) {
                     if (first.equals(sc.nextLine())) {
                         password = first;
+                        // save user and password in database dit MOET VIA APPSERVER
+
+                        dsm.insertUser(username, password);
                     }
                     else{
                         System.out.println("foutieve bevestiging, probeer opnieuw");
@@ -55,10 +70,7 @@ public class Main extends Application {
                 break;
         }
 
-        // save user and password in database dit MOET VIA APPSERVER
-        System.out.println("je username en password zijn: "+username+" "+password);
-        DataServerMain dsm= new DataServerMain();
-        dsm.insertUser(username, password);
+
     }
 
 
