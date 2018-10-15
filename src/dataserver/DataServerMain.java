@@ -4,6 +4,8 @@ import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataServerMain {
 
@@ -56,7 +58,7 @@ public class DataServerMain {
             Connection conn = this.connect();
             PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
-            pstmt.setString(1, password);
+            pstmt.setString(1, name);
 
             ResultSet rs  = pstmt.executeQuery();
                     String retrievePassword="";
@@ -70,6 +72,35 @@ public class DataServerMain {
                     } else {
                         return false;
                     }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public boolean userNameExists(String name){
+            String sql = "SELECT Username FROM Persons WHERE Username=?";
+
+            try (
+
+                Connection conn = this.connect();
+                PreparedStatement pstmt  = conn.prepareStatement(sql)){
+
+                pstmt.setString(1, name);
+
+                ResultSet rs  = pstmt.executeQuery();
+                List<String> users= new ArrayList<>();
+
+                while(rs.next()){
+                    users.add(rs.getString("Username"));
+                }
+
+
+                if (users.size()>0) {
+                    return true;
+                } else {
+                    return false;
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

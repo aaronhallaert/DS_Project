@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="465.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.LobbyScreen">
+   <children>
+      <Label layoutX="33.0" layoutY="29.0" text="Lobby" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <ListView layoutX="30.0" layoutY="66.0" prefHeight="300.0" prefWidth="547.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="65.0" />
+      <Button layoutX="486.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Join" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="30.0" />
+      <Button layoutX="383.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Spectate" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="135.0" />
+      <Hyperlink fx:id="logoutLink" layoutX="524.0" layoutY="27.0" onAction="#logout" text="Logout" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0" />
+   </children>
+</AnchorPane>
