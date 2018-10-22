@@ -1,5 +1,6 @@
 package client;
 
+import appserver.AppServerInterface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,8 +8,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class Main extends Application {
+
+    public static Registry appRegistry;
+    public static AppServerInterface impl;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -18,6 +24,15 @@ public class Main extends Application {
         primaryStage.setScene(startScene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+
+        // setup communicatie met application server
+        // fire to localhost port 1900
+        appRegistry= LocateRegistry.getRegistry("localhost",1900);
+        // search for application service
+        impl=(AppServerInterface) appRegistry.lookup("AppserverService");
+        impl.receiveHelloWorld("hello world");
+
     }
 
 

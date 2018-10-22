@@ -1,8 +1,10 @@
 package client;
 
-import dataserver.DataServerMain;
+import appserver.AppServerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 
 public class LoginScreen {
@@ -22,11 +24,20 @@ public class LoginScreen {
     @FXML
     Label errorLoginMessage;
 
-    DataServerMain dsm;
-
+    Registry myRegistry;
+    AppServerInterface appImpl;
     @FXML
     public void initialize(){
-        dsm=new DataServerMain();
+        try {
+            //fire to localhost port 1900
+            myRegistry = LocateRegistry.getRegistry("localhost", 1900);
+
+            // search for application service
+            appImpl = (AppServerInterface) myRegistry.lookup("AppserverService");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         errorLoginMessage.setVisible(false);
     }
 
@@ -41,19 +52,21 @@ public class LoginScreen {
         String username=usernameField.getText();
 
         String password=passwordField.getText();
-
-        if(dsm.checkUser(username, password)){
+    try {
+        if (appImpl.loginUser(username, password)) {
             System.out.println("login correct");
             errorLoginMessage.setVisible(false);
             Main.goToLobby();
             // Hide this current window (if this is what you want)
             registreerLink.getScene().getWindow().hide();
-        }
-        else{
+        } else {
             errorLoginMessage.setVisible(true);
+
         }
-
-
+    }
+    catch (Exception e){
+        e.printStackTrace();
+    }
 
     }
 }

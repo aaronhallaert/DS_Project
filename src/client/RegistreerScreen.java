@@ -1,5 +1,6 @@
 package client;
 
+import appserver.AppServerInterface;
 import dataserver.DataServerMain;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class RegistreerScreen {
 
@@ -33,16 +37,26 @@ public class RegistreerScreen {
     @FXML
     Label errorMessageUsername;
 
-    DataServerMain dsm;
+    Registry myRegistry;
+    AppServerInterface appImpl;
 
     @FXML
     public void initialize(){
-        dsm=new DataServerMain();
+        try {
+            //fire to localhost port 1900
+            myRegistry = LocateRegistry.getRegistry("localhost", 1900);
+
+            // search for application service
+            appImpl = (AppServerInterface) myRegistry.lookup("AppserverService");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         errorMessagePassword.setVisible(false);
         errorMessageUsername.setVisible(false);
     }
 
-    public void registreer(){
+    public void registreer() throws RemoteException {
 
         errorMessagePassword.setVisible(false);
         errorMessageUsername.setVisible(false);
@@ -51,13 +65,13 @@ public class RegistreerScreen {
         String firstPassword= passwordField.getText();
         String confirmPassword= confirmPasswordField.getText();
 
-        if(!dsm.userNameExists(username)) {
+        if(!appImpl.userNameExists(username)) {
 
             if (firstPassword.equals(confirmPassword)) {
 
 
-                // save user and password in database dit MOET VIA APPSERVER
-                dsm.insertUser(username, confirmPassword);
+
+                appImpl.insertUser(username, confirmPassword);
 
 
                 verwijsNaarLoginScreen();
