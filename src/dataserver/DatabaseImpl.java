@@ -19,8 +19,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
 
     @Override
-    public boolean checkUser(String naam, String paswoord) throws RemoteException {
-        String sql = "SELECT Password FROM Persons WHERE Username=?";
+    public boolean checkUserCred(String naam, String paswoord) throws RemoteException {
+        String sql = "SELECT Password, Salt FROM Persons WHERE Username=?";
 
         try (
 
@@ -31,12 +31,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
             ResultSet rs  = pstmt.executeQuery();
             String retrievePassword="";
+            String retrieveSalt="";
             // loop through the result set
             while (rs.next()) {
                 retrievePassword = rs.getString("Password");
+                retrieveSalt= rs.getString("Salt");
             }
 
-            if (retrievePassword.equals(Hashing.sha256().hashString(paswoord, StandardCharsets.UTF_8).toString())) {
+            if (retrievePassword.equals(hash(paswoord, retrieveSalt))) {
                 return true;
             } else {
                 return false;
@@ -55,14 +57,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      */
     @Override
     public void insertUser(String name, String password) {
-        String sql = "INSERT INTO Persons(Username,Password) VALUES(?,?)";
-
+        String sql = "INSERT INTO Persons(Username,Password, Salt) VALUES(?,?,?)";
+        String salt=hash((System.currentTimeMillis()+"RandomString"));
+        String hashedPaswoord= hash(password, salt);
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
-            pstmt.setString(2, Hashing.sha256()
-                    .hashString(password, StandardCharsets.UTF_8)
-                    .toString());
+            pstmt.setString(2, hashedPaswoord);
+            pstmt.setString(3, salt);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -116,5 +118,13 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             System.out.println(e.getMessage());
         }
         return conn;
+    }
+
+    private static String hash(String password, String salt){
+        return Hashing.sha256().hashString((password + salt),StandardCharsets.UTF_8).toString();
+    }
+
+    private static String hash(String password){
+        return Hashing.sha256().hashString((password),StandardCharsets.UTF_8).toString();
     }
 }
