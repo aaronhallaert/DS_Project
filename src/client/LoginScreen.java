@@ -1,6 +1,7 @@
 package client;
 
-import appserver.AppServerInterface;
+import interfaces.AppServerInterface;
+import interfaces.DispatchInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.rmi.registry.LocateRegistry;
@@ -24,20 +25,10 @@ public class LoginScreen {
     @FXML
     Label errorLoginMessage;
 
-    Registry myRegistry;
-    AppServerInterface appImpl;
+
     @FXML
     public void initialize(){
-        try {
-            //fire to localhost port 1900
-            myRegistry = LocateRegistry.getRegistry("localhost", 1900);
 
-            // search for application service
-            appImpl = (AppServerInterface) myRegistry.lookup("AppserverService");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
         errorLoginMessage.setVisible(false);
     }
 
@@ -53,7 +44,7 @@ public class LoginScreen {
 
         String password=passwordField.getText();
     try {
-        if (appImpl.loginUser(username, password)) {
+        if (Main.cnts.getDispatchImpl().loginUser(username, password)) {
             System.out.println("login correct");
             errorLoginMessage.setVisible(false);
             Main.goToLobby();

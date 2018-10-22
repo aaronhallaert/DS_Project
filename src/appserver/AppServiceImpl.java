@@ -1,8 +1,8 @@
 package appserver;
 
-import dataserver.DatabaseInterface;
+import interfaces.AppServerInterface;
+import interfaces.DatabaseInterface;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -32,21 +32,5 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         System.out.println(test);
     }
 
-    @Override
-    public boolean loginUser(String naam, String paswoord) throws RemoteException{
-        // connectie met database om in te loggen
 
-        return databaseImpl.checkUser(naam, paswoord);
-    }
-
-    @Override
-    public boolean userNameExists(String username) throws RemoteException {
-        return databaseImpl.userNameExists(username);
-    }
-
-    @Override
-    public void insertUser(String username, String confirmPassword) throws RemoteException {
-
-        databaseImpl.insertUser(username, confirmPassword);
-    }
 }

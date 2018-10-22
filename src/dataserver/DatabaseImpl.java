@@ -1,6 +1,7 @@
 package dataserver;
 
 
+import interfaces.DatabaseInterface;
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;

@@ -1,6 +1,6 @@
 package client;
 
-import appserver.AppServerInterface;
+import interfaces.AppServerInterface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +13,7 @@ import java.rmi.registry.Registry;
 
 public class Main extends Application {
 
-    public static Registry appRegistry;
-    public static AppServerInterface impl;
+    public static Connections cnts;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -25,13 +24,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-
-        // setup communicatie met application server
-        // fire to localhost port 1900
-        appRegistry= LocateRegistry.getRegistry("localhost",1900);
-        // search for application service
-        impl=(AppServerInterface) appRegistry.lookup("AppserverService");
-        impl.receiveHelloWorld("hello world");
+        cnts= new Connections(1900,1902);
+        cnts.getAppImpl().receiveHelloWorld("hello world");
 
     }
 

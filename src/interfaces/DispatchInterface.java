@@ -1,11 +1,9 @@
-package appserver;
-
+package interfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface AppServerInterface extends Remote {
+public interface DispatchInterface extends Remote {
 
-    void receiveHelloWorld(String test) throws RemoteException;
 
     boolean loginUser(String naam, String paswoord) throws RemoteException;
 

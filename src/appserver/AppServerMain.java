@@ -1,6 +1,6 @@
 package appserver;
 
-import dataserver.DatabaseInterface;
+import interfaces.DatabaseInterface;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
