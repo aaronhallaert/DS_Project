@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="465.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.SpelView">
+   <children>
+
+       <Label layoutX="33.0" layoutY="29.0" text="Game" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+           <font>
+               <Font name="System Bold" size="25.0" />
+           </font>
+       </Label>
+
+      <AnchorPane layoutX="14.0" layoutY="68.0" prefHeight="383.0" prefWidth="520.0" />
+   </children>
+</AnchorPane>

@@ -18,5 +18,6 @@
       <Button layoutX="486.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Join" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="30.0" />
       <Button layoutX="383.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Spectate" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="135.0" />
       <Hyperlink fx:id="logoutLink" layoutX="524.0" layoutY="27.0" onAction="#logout" text="Logout" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0" />
+      <Button fx:id="startGame" layoutX="275.0" layoutY="400.0" mnemonicParsing="false" onAction="#startSpel" prefHeight="25.0" prefWidth="85.0" text="BeginSpel1P" />
    </children>
 </AnchorPane>

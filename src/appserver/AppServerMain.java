@@ -15,7 +15,7 @@ public class AppServerMain {
             appRegistry.rebind("AppserverService", new AppServiceImpl());
 
             // setup communicatie met databaseserver
-            // fire to localhost port ...
+            // fire to localhost port 1901
             Registry dataRegistry= LocateRegistry.getRegistry("localhost",Integer.parseInt(args[1]));
             // search for database service
             DatabaseInterface impl=(DatabaseInterface) dataRegistry.lookup("DatabaseService");

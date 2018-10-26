@@ -14,7 +14,7 @@ public class DataServerMain {
 
     public static void main(String[] args) {
 
-        //vast poortnummer
+        //vast poortnummer 1901
         try {
             System.out.println("dataserver gelaunched op: "+ args[0]);
             Registry dataRegistry= LocateRegistry.createRegistry(Integer.parseInt(args[0]));

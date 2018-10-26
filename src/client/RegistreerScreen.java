@@ -54,7 +54,6 @@ public class RegistreerScreen {
             if (firstPassword.equals(confirmPassword)) {
 
 
-
                 Main.cnts.getDispatchImpl().insertUser(username, confirmPassword);
 
 

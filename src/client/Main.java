@@ -15,6 +15,24 @@ public class Main extends Application {
 
     public static Connections cnts;
 
+    public static void goToSpel() {
+
+        // back to login
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(Main.class.getResource("spelView.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage spelViewStage= new Stage();
+        spelViewStage.setTitle("Memory");
+        Scene startScene= new Scene(root,386 , 323); //misschien nog wijzigen
+        spelViewStage.setScene(startScene);
+        spelViewStage.setResizable(false);
+        spelViewStage.show();
+
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("loginscreen.fxml"));
@@ -76,6 +94,10 @@ public class Main extends Application {
         registrerStage.setResizable(false);
         registrerStage.show();
     }
+
+    //alle methoden voor de spel logica zelf komen hier
+
+    //einde methoden voor spel
 
     public static void main(String[] args) {
         launch(args);

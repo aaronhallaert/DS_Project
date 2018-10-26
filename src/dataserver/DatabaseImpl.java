@@ -109,8 +109,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      */
     public Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:D:\\School\\Ind Ing\\iiw Master\\Semester 1\\Gedistribueerde Systemen\\DS_Project\\data\\memorydb.db";
-        //String url = "jdbc:sqlite:C:\\Users\\tibor\\JavaProjects\\DS_Project\\DS_Project\\data\\memorydb.db";
+        //String url = "jdbc:sqlite:D:\\School\\Ind Ing\\iiw Master\\Semester 1\\Gedistribueerde Systemen\\DS_Project\\data\\memorydb.db";
+        String url = "jdbc:sqlite:C:\\Users\\tibor\\JavaProjects\\DS_Project\\DS_Project\\data\\memorydb.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
