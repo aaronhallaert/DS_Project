@@ -1,13 +1,10 @@
 package client;
 
-import interfaces.AppServerInterface;
-import interfaces.DispatchInterface;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+
 
 public class RegistreerScreen {
 
