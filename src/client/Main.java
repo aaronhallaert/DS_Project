@@ -23,8 +23,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        cnts= new Connections(1900,1902);
-        cnts.getAppImpl().receiveHelloWorld("hello world");
+        cnts= new Connections(1902);
+
 
     }
 

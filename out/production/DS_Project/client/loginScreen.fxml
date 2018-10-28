@@ -22,6 +22,5 @@
       </Label>
       <Hyperlink fx:id="registreerLink" layoutX="60.0" layoutY="251.0" onAction="#verwijsNaarRegistreerScreen" text="Nog geen account? Registreer hier" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="251.0" />
       <Label fx:id="errorLoginMessage" layoutX="67.0" layoutY="224.0" text="Foutieve inloggegevens" textFill="RED" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="224.0" />
-      <Button fx:id="imageUploadPage" layoutX="267.0" layoutY="50.0" mnemonicParsing="false" onAction="#goToLoginPage" text="naar uploadPage" />
    </children>
 </AnchorPane>

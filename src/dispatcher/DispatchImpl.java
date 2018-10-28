@@ -1,8 +1,10 @@
 package dispatcher;
 
+import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -25,14 +27,24 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
 
     @Override
-    public boolean loginUser(String naam, String paswoord) throws RemoteException{
+    public AppServerInterface loginUser(String naam, String paswoord) throws RemoteException{
 
         //als credentials juist zijn, maak nieuwe token voor deze persoon aan
         if(databaseImpl.checkUserCred(naam, paswoord)){
             databaseImpl.createToken(naam, paswoord);
-            return true;
+
+            try {
+                Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appserverPoort);
+                AppServerInterface appImpl = (AppServerInterface) appRegistry.lookup("AppserverService");
+                return appImpl;
+            }
+            catch(NotBoundException ne){
+                ne.printStackTrace();
+                return null;
+            }
+
         }
-        return false;
+        return null;
     }
 
     @Override

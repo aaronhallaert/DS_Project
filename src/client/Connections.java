@@ -9,20 +9,15 @@ import java.rmi.registry.Registry;
 public class Connections {
 
     Registry dispatchRegistry;
-    Registry appRegistry;
 
     AppServerInterface appImpl;
     DispatchInterface dispatchImpl;
 
-    public Connections(int appserverpoort, int dispatcherpoort ) {
+    public Connections(int dispatcherpoort ) {
 
         try {
             dispatchRegistry = LocateRegistry.getRegistry("localhost", dispatcherpoort);
-            appRegistry = LocateRegistry.getRegistry("localhost", appserverpoort);
-
-            appImpl=(AppServerInterface) appRegistry.lookup("AppserverService");
             dispatchImpl=(DispatchInterface) dispatchRegistry.lookup("DispatchService");
-
         }
         catch(Exception e){
             e.printStackTrace();
