@@ -41,7 +41,6 @@ public class LoginScreen {
     public void login(){
 
         String username=usernameField.getText();
-
         String password=passwordField.getText();
     try {
         if (Main.cnts.getDispatchImpl().loginUser(username, password)) {
