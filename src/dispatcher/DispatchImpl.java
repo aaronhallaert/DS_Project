@@ -26,9 +26,13 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     @Override
     public boolean loginUser(String naam, String paswoord) throws RemoteException{
-        // connectie met database om in te loggen
 
-        return databaseImpl.checkUserCred(naam, paswoord);
+        //als credentials juist zijn, maak nieuwe token voor deze persoon aan
+        if(databaseImpl.checkUserCred(naam, paswoord)){
+            databaseImpl.createToken(naam, paswoord);
+            return true;
+        }
+        return false;
     }
 
     @Override

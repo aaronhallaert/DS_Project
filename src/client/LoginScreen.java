@@ -28,6 +28,7 @@ public class LoginScreen {
     public void initialize(){
 
         errorLoginMessage.setVisible(false);
+
     }
 
     public void verwijsNaarRegistreerScreen(){
@@ -38,8 +39,9 @@ public class LoginScreen {
 
     public void login(){
 
-        String username=usernameField.getText();
-        String password=passwordField.getText();
+    String username=usernameField.getText();
+    String password=passwordField.getText();
+
     try {
         if (Main.cnts.getDispatchImpl().loginUser(username, password)) {
             System.out.println("login correct");

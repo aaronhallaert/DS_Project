@@ -5,6 +5,7 @@ import interfaces.DatabaseInterface;
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
@@ -101,6 +102,51 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         return false;
     }
 
+    @Override
+    public String createToken(String username, String password)throws RemoteException {
+        if(checkUserCred(username, password)){
+            String sql="UPDATE Persons SET token=?, token_timestamp=? WHERE Username= ?;";
+            String token= hash(password+System.currentTimeMillis());
+
+            try{
+                Connection conn= this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, token);
+                pstmt.setLong(2, System.currentTimeMillis());
+                pstmt.setString(3, username);
+                pstmt.executeUpdate();
+            }
+            catch (SQLException se){
+                se.printStackTrace();
+            }
+
+            return token;
+        }
+        else return null;
+    }
+
+    @Override
+    public boolean isTokenValid(String username, String token) throws RemoteException{
+        String sql = "SELECT token_timestamp FROM users WHERE username = ? AND token = ?";
+        try{
+            Connection conn =connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            pstmt.setString(2, token);
+            ResultSet rs = pstmt.executeQuery();
+            long currentTime = System.currentTimeMillis();
+            while(rs.next()){
+                // 24 uur controle
+                if(currentTime - rs.getLong("token_timestamp") < 86400000){
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch(SQLException se){
+            return false;
+        }
+    }
 
     /**
      * Connect to the test.db database
