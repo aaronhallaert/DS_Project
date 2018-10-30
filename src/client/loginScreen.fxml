@@ -23,5 +23,6 @@
       <Hyperlink fx:id="registreerLink" layoutX="60.0" layoutY="251.0" onAction="#verwijsNaarRegistreerScreen" text="Nog geen account? Registreer hier" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="251.0" />
       <Label fx:id="errorLoginMessage" layoutX="67.0" layoutY="224.0" text="Foutieve inloggegevens" textFill="RED" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="224.0" />
       <Hyperlink fx:id="tokenLogin" layoutX="65.0" layoutY="275.0" onAction="#loginWithToken" text="Login met session-token" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="280.0" />
+      <Label fx:id="sessionCancelled" layoutX="245.0" layoutY="283.0" text="Uw sessie is vervallen" textFill="RED" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="283.0" />
    </children>
 </AnchorPane>

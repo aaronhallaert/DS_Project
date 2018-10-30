@@ -6,6 +6,9 @@ import interfaces.AppServerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
 public class LoginScreen {
@@ -25,10 +28,14 @@ public class LoginScreen {
     @FXML
     Label errorLoginMessage;
 
+    @FXML
+    Label sessionCancelled;
+
 
     @FXML
     public void initialize(){
         errorLoginMessage.setVisible(false);
+        sessionCancelled.setVisible(false);
     }
 
     public void verwijsNaarRegistreerScreen(){
@@ -42,12 +49,15 @@ public class LoginScreen {
             AppServerInterface appImpl=Main.cnts.getDispatchImpl().loginWithToken(User.getCurrentUser().getToken(), User.getCurrentUser().getUsername());
 
             if(appImpl != null){
+                sessionCancelled.setVisible(false);
                 errorLoginMessage.setVisible(false);
                 Main.cnts.setAppImpl(appImpl);
                 Main.goToLobby();
                 registreerLink.getScene().getWindow().hide();
             }
             else{
+                sessionCancelled.setVisible(true);
+                errorLoginMessage.setVisible(false);
                 System.out.println("uw sessie is vervallen error message");
             }
         }
@@ -65,6 +75,7 @@ public class LoginScreen {
         AppServerInterface appImpl;
         if ((appImpl=Main.cnts.getDispatchImpl().loginUser(username, password))!=null) {
             errorLoginMessage.setVisible(false);
+            sessionCancelled.setVisible(false);
             Main.cnts.setAppImpl(appImpl);
             User.getCurrentUser().setUsername(username);
             User.getCurrentUser().setToken(Main.cnts.getDispatchImpl().getToken(username));
@@ -73,7 +84,15 @@ public class LoginScreen {
             System.out.println(Main.cnts.getDispatchImpl().getToken(username));
             Main.goToLobby();
             registreerLink.getScene().getWindow().hide();
+
+            try {
+                updateUserFile();
+            }
+            catch (IOException io){
+                io.printStackTrace();
+            }
         } else {
+            sessionCancelled.setVisible(false);
             errorLoginMessage.setVisible(true);
 
         }
@@ -82,5 +101,12 @@ public class LoginScreen {
         e.printStackTrace();
     }
 
+    }
+
+    public void updateUserFile() throws IOException {
+        FileWriter fileWriter = new FileWriter("src/client/userfile.txt");
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print(User.getCurrentUser().getUsername() +", " + User.getCurrentUser().getToken());
+        printWriter.close();
     }
 }

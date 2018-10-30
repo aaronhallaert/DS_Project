@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 
@@ -27,7 +29,12 @@ public class Main extends Application {
 
 
         // @TODO load in username en token from txt file
-
+        BufferedReader br = new BufferedReader(new FileReader("src/client/userfile.txt"));
+        String line= br.readLine();
+        br.close();
+        String[] gegevens= line.split(", ");
+        User.getCurrentUser().setUsername(gegevens[0]);
+        User.getCurrentUser().setToken(gegevens[1]);
     }
 
 
