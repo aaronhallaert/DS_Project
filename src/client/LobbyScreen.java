@@ -21,6 +21,11 @@ public class LobbyScreen {
     }
 
     public void logout(){
+        try {
+            Main.cnts.getDispatchImpl().logoutUser(User.getCurrentUser().getUsername());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         Main.goToLogin();
         // Hide this current window
         logoutLink.getScene().getWindow().hide();

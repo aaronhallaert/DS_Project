@@ -1,10 +1,12 @@
 package dispatcher;
 
+import appserver.AppServiceImpl;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -25,6 +27,11 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         }
     }
 
+    @Override
+    public void logoutUser(String username) throws RemoteException{
+        databaseImpl.cancelToken(username);
+
+    }
 
     @Override
     public AppServerInterface loginUser(String naam, String paswoord) throws RemoteException{
@@ -33,15 +40,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         if(databaseImpl.checkUserCred(naam, paswoord)){
             databaseImpl.createToken(naam, paswoord);
 
-            try {
-                Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appserverPoort);
-                AppServerInterface appImpl = (AppServerInterface) appRegistry.lookup("AppserverService");
-                return appImpl;
-            }
-            catch(NotBoundException ne){
-                ne.printStackTrace();
-                return null;
-            }
+            return setupConnectionWithAppImpl();
 
         }
         return null;
@@ -55,5 +54,32 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void insertUser(String username, String confirmPassword) throws RemoteException {
         databaseImpl.insertUser(username, confirmPassword);
+    }
+
+    @Override
+    public String getToken(String username) throws RemoteException {
+        return databaseImpl.getToken(username);
+    }
+
+    @Override
+    public AppServerInterface loginWithToken(String token, String username) throws RemoteException {
+        if(databaseImpl.isTokenValid(username, token)){
+            return setupConnectionWithAppImpl();
+        }
+        else{
+            return null;
+        }
+    }
+
+    private AppServerInterface setupConnectionWithAppImpl() throws RemoteException{
+        try {
+            Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appserverPoort);
+            AppServerInterface appImpl = (AppServerInterface) appRegistry.lookup("AppserverService");
+            return appImpl;
+        }
+        catch(NotBoundException ne){
+            ne.printStackTrace();
+            return null;
+        }
     }
 }

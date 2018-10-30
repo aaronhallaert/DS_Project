@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="323.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.LoginScreen">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="323.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.LoginScreen">
    <children>
       <TextField fx:id="usernameField" layoutX="60.0" layoutY="136.0" prefHeight="25.0" prefWidth="256.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="136.0" />
       <PasswordField fx:id="passwordField" layoutX="60.0" layoutY="192.0" prefHeight="25.0" prefWidth="256.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="192.0" />
@@ -22,5 +22,6 @@
       </Label>
       <Hyperlink fx:id="registreerLink" layoutX="60.0" layoutY="251.0" onAction="#verwijsNaarRegistreerScreen" text="Nog geen account? Registreer hier" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="251.0" />
       <Label fx:id="errorLoginMessage" layoutX="67.0" layoutY="224.0" text="Foutieve inloggegevens" textFill="RED" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="224.0" />
+      <Hyperlink fx:id="tokenLogin" layoutX="65.0" layoutY="275.0" onAction="#loginWithToken" text="Login met session-token" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="280.0" />
    </children>
 </AnchorPane>

@@ -12,4 +12,8 @@ public interface DatabaseInterface extends Remote {
     String createToken(String username, String password) throws RemoteException;
 
     boolean isTokenValid(String username, String token) throws RemoteException;
+
+    void cancelToken(String username) throws RemoteException;
+
+    String getToken(String username) throws RemoteException;
 }

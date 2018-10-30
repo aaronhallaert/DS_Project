@@ -5,7 +5,6 @@ import interfaces.DatabaseInterface;
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
@@ -14,8 +13,10 @@ import java.util.List;
 
 public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterface {
 
-    public DatabaseImpl() throws RemoteException{
 
+    Connection conn;
+    public DatabaseImpl() throws RemoteException{
+        conn= connect();
     }
 
 
@@ -25,7 +26,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         try (
 
-            Connection conn = this.connect();
+
             PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
             pstmt.setString(1, naam);
@@ -62,7 +63,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         String salt=hash((System.currentTimeMillis()+"RandomString"));
         String hashedPaswoord= hash(password, salt);
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, hashedPaswoord);
             pstmt.setString(3, salt);
@@ -78,8 +79,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         try (
 
-                Connection conn = this.connect();
-                PreparedStatement pstmt  = conn.prepareStatement(sql)){
+
+            PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
             pstmt.setString(1, name);
 
@@ -109,7 +110,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             String token= hash(password+System.currentTimeMillis());
 
             try{
-                Connection conn= this.connect();
+
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, token);
                 pstmt.setLong(2, System.currentTimeMillis());
@@ -127,9 +128,9 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     @Override
     public boolean isTokenValid(String username, String token) throws RemoteException{
-        String sql = "SELECT token_timestamp FROM users WHERE username = ? AND token = ?";
+        String sql = "SELECT token_timestamp FROM Persons WHERE username = ? AND token = ?";
         try{
-            Connection conn =connect();
+
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,username);
             pstmt.setString(2, token);
@@ -147,6 +148,42 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             return false;
         }
     }
+
+    @Override
+    public void cancelToken(String username) throws RemoteException{
+        String sql = "UPDATE Persons SET token_timestamp=? WHERE Username= ?;";
+
+        try{
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,"0");
+            pstmt.setString(2, username);
+            pstmt.executeUpdate();
+        }
+        catch (SQLException se){
+            se.printStackTrace();
+        }
+    }
+
+    @Override
+    public String getToken(String username) throws RemoteException{
+        String sql = "SELECT token FROM Persons WHERE Username = ? ";
+        try{
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.getString("token");
+
+
+        }
+        catch(SQLException se){
+
+            se.printStackTrace();
+            return null;
+        }
+    }
+
 
     /**
      * Connect to the test.db database

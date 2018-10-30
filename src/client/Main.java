@@ -26,6 +26,8 @@ public class Main extends Application {
         cnts= new Connections(1902);
 
 
+        // @TODO load in username en token from txt file
+
     }
 
 
