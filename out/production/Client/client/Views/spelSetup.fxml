@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="465.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controllers.SpelSetupScreen">
+
+    <children>
+
+        <Label layoutX="33.0" layoutY="29.0" text="Game setup" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+
+        <RadioButton fx:id="radioButton4X4" layoutX="127.0" layoutY="152.0" mnemonicParsing="false" text="4 X 4 " AnchorPane.leftAnchor="112.0" AnchorPane.topAnchor="150.0" />
+        <RadioButton fx:id="radioButton6X6" layoutX="285.0" layoutY="150.0" mnemonicParsing="false" text="6 X 6" AnchorPane.leftAnchor="276.0" AnchorPane.topAnchor="150.0" />
+        <RadioButton fx:id="radioButtonSetA" layoutX="112.0" layoutY="304.0" mnemonicParsing="false" text="Rappers" AnchorPane.leftAnchor="112.0" AnchorPane.topAnchor="260.0" />
+        <RadioButton fx:id="radioButtonSetB" layoutX="276.0" layoutY="304.0" mnemonicParsing="false" text="YuGiOh" AnchorPane.leftAnchor="276.0" AnchorPane.topAnchor="260.0" />
+        <RadioButton fx:id="radioButtonSetC" layoutX="440.0" layoutY="304.0" mnemonicParsing="false" text="memes" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="260.0" />
+
+
+        <Label layoutX="30.0" layoutY="87.0" text="Rooster grootte:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="90.0">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <Label layoutX="38.0" layoutY="239.0" text="Afbeelding set:" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="200.0">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+
+        <Button fx:id="startSpel" layoutX="288.0" layoutY="419.0" mnemonicParsing="false" onAction="#loadSettings" text="Start" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="280.0" />
+      <Button fx:id="toLobby" layoutX="541.0" layoutY="420.0" mnemonicParsing="false" onAction="#goToLobby" text="terug" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <ImageView fx:id="fotoVoorbeeldSetA" fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="100.0" />
+      <ImageView fx:id="fotoVoorbeeldSetB" fitHeight="100.0" fitWidth="100.0" layoutX="246.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="250.0" />
+      <ImageView fx:id="fotoVoorbeeldSetC" fitHeight="100.0" fitWidth="100.0" layoutX="256.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="410.0" />
+
+
+
+    </children>
+
+</AnchorPane>

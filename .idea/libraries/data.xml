@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="data">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/DatabaseServer/data/guava-23.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/DatabaseServer/data/sqlite-jdbc-3.23.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
