@@ -83,7 +83,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public byte[] getImage(String naam) throws RemoteException {
 
-        System.out.println("dispatchImpl: lijn 47: check");
+        //System.out.println("dispatchImpl: lijn 47: check");
         byte[] afbeelding = databaseImpl.getImage(naam);
         //InputStream returner = databaseImpl.getImage(naam);
         //System.out.println("check check");

@@ -30,16 +30,16 @@ public class LobbyRefreshThread extends Thread{
                     LobbyScreen.gameInfoList = new ArrayList<GameInfo>(serverList);
                     System.out.println("refresh");
 
-                    System.out.println("wait na refresh in lrt");
+                    //System.out.println("wait na refresh in lrt");
                     wait(5000);
-                    System.out.println("wait na refresh buiten lrt");
+                    //System.out.println("wait na refresh buiten lrt");
                     ls.refresh();
                 }
 
                 else{
-                    System.out.println("wait binnen in lrt");
+                    //System.out.println("wait binnen in lrt");
                     wait(5000);
-                    System.out.println("wait buiten in lrt");
+                    //System.out.println("wait buiten in lrt");
                 }
             }
         }

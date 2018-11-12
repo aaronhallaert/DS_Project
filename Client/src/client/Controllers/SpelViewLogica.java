@@ -2,6 +2,7 @@ package client.Controllers;
 
 import Classes.GameInfo;
 import client.Main;
+import client.SupportiveThreads.ReceiveThread;
 import client.SupportiveThreads.WaitPlayerThread;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +39,10 @@ public class SpelViewLogica extends Thread{
         // in deze thread wacht men op een 2de speler
         Thread waitPlayer= new WaitPlayerThread(this, gameInfo);
         waitPlayer.start();
+
+        //in deze thread voert men de commando's uit op de andere speler zijn ding
+        Thread receiveThread = new ReceiveThread(Main.activeUser, Main.currentGameId, spvGui);
+        receiveThread.start();
 
 
 

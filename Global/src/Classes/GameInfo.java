@@ -49,6 +49,7 @@ public class GameInfo implements Serializable {
             aantalSpelersConnected++;
             System.out.println("notifyke join");
             notifyAll();
+            System.out.println("join in gameInfo succesvol");
             return true;
         }
         else{

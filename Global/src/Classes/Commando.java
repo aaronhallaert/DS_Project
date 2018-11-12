@@ -1,6 +1,8 @@
 package Classes;
 
-public class Commando {
+import java.io.Serializable;
+
+public class Commando implements Serializable {
 
     private String commandoType;// -> state maken, :FLIP , UNFLIP
     private int uniqueTileId; // visualtile.id

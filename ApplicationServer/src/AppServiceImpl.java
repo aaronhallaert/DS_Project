@@ -1,3 +1,4 @@
+import Classes.Commando;
 import Classes.Game;
 import Classes.GameInfo;
 import Classes.GameState;
@@ -9,6 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AppServiceImpl extends UnicastRemoteObject implements AppServerInterface {
 
@@ -126,7 +128,16 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public boolean join(String activeUser, int currentGameIdAttempt) throws RemoteException {
-        return this.getGameInfo(currentGameIdAttempt).join(activeUser);
+
+        //aanpassing omdat er ook nog moet gejoined worden in de gameState
+        if(this.getGameInfo(currentGameIdAttempt).join(activeUser)){
+            //als het eerste lukt, dan zal het 2e ook lukken, daarom is het volgende een void
+
+            this.getGameSate(currentGameIdAttempt).join(activeUser);
+            //setGameStatenaam nog
+            return true;
+        }
+        return false;
 
 
     }
@@ -136,6 +147,34 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return this.getGameInfo(currentGameId).changeInPlayers(aantalSpelersConnected);
     }
 
+
+    /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
+     *  omdraaien door het commando in z'n inbox te laten verschijnen, die 2e speler pullt dan het commando en executet
+     *  het
+     *
+     * @param commando : "FLIP" + uniqueTileId
+     * @param activeUser : de actieve user die het triggerd
+     * @param currentGameId : voor het huidige spelletje (als hij er meerdere heeft lopen)
+     * @throws RemoteException
+     */
+    @Override
+    public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
+
+        //zetten we dit in gameInfo of in gameState
+        // --> gameState
+        System.out.println("AppServiceImpl : executeFlipcommando: door user: "+activeUser);
+        getGameSate(currentGameId).executeCommando(commando,activeUser);
+    }
+
+    @Override
+    public synchronized List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
+
+        System.out.println("AppServiceImpl : getInbox: door user: "+userName);
+        return getGameSate(currentGameId).getInbox(userName);
+
+
+
+    }
     //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
 
 

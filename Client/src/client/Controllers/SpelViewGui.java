@@ -39,6 +39,8 @@ public class SpelViewGui extends Thread {
 
     private ArrayList<VisualTile> visualTilesList;
 
+
+
     @FXML
     public void initialize() throws RemoteException, InterruptedException {
 
@@ -121,6 +123,7 @@ public class SpelViewGui extends Thread {
             //opgeslaan in deze arrayList zodat we ze nog kunnen laten flippen op commando
             visualTilesList.add(tile);
 
+
             root.getChildren().add(tile);
 
 
@@ -128,8 +131,36 @@ public class SpelViewGui extends Thread {
 
     }
 
+    public void executeCommando(Commando commando){
+
+        int uniqueTileId = commando.getUniqueTileId();
+
+        VisualTile deTile = getTileMetUniqueId(uniqueTileId, visualTilesList);
+        //execute het commando
+        if(commando.getCommandoType().equals("FLIP")){
+
+            deTile.flip();
+
+        }
+        else if(commando.getCommandoType().equals("UNFLIP")){
+
+            deTile.unflip();
+
+        }
+        else{
+
+            System.out.println("fout in verwerkCommando's: SpelViewGui.java");
+            System.out.println("fout in verwerking, instructie was niet FLIP of UNFLIP");
+
+        }
 
 
+    }
+
+
+
+    //todo: remove this
+    // als je commandos binnenkrijgt van de appserver, om ze te executen
     public void executeCommandos(ArrayList<Commando> commandoLijst){
 
         for (int i = 0; i < commandoLijst.size(); i++) {
@@ -172,8 +203,4 @@ public class SpelViewGui extends Thread {
     }
 
 
-    public void printWaardeWaardoorDuidelijk() {
-        System.out.println("print waardoor duidelijk");
-        System.out.println(gameInfo.getFotoSet());
-    }
 }

@@ -1,11 +1,13 @@
 package interfaces;
 
+import Classes.Commando;
 import Classes.GameInfo;
 import Classes.GameState;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface AppServerInterface extends Remote {
 
@@ -23,6 +25,9 @@ public interface AppServerInterface extends Remote {
 
     boolean changeInPlayers(Integer aantalSpelersConnected, int currentGameId) throws RemoteException;
 
+    void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException;
+
+    public List<Commando> getInbox(String userName, int gameId) throws RemoteException;
 
     //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
 

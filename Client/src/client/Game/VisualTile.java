@@ -1,5 +1,6 @@
 package client.Game;
 
+import Classes.Commando;
 import Classes.Tile;
 import client.Main;
 import javafx.animation.ScaleTransition;
@@ -15,6 +16,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.ByteArrayInputStream;
+import java.io.Serializable;
+import java.rmi.RemoteException;
 
 public class VisualTile extends StackPane {
 
@@ -72,7 +75,6 @@ public class VisualTile extends StackPane {
 
 
 
-
     }
 
     //commando's nodig zodat we instructies van de appserver kunnen uitvoeren
@@ -90,7 +92,24 @@ public class VisualTile extends StackPane {
 
     //todo: regel gans da spel ier eja
     private void handleMouseClick(MouseEvent mouseEvent) {
+        System.out.println("tile clicked");
         stVerbergAchterkant.play();
+        geefFlipCommandoDoorAanAppServer(this.getUniqueId());
+    }
+
+    //todo: move this op enige manier naar de ap
+    private void geefFlipCommandoDoorAanAppServer(int uniqueId) {
+        Commando commando = new Commando("FLIP",uniqueId);
+        try {
+            Main.cnts.getAppImpl().executeFlipCommando(commando, Main.activeUser, Main.currentGameId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void geefCommandoDoorAanAppServer(int uniqueTileId) {
+
     }
 
     public int getUniqueId(){return uniqueId;}

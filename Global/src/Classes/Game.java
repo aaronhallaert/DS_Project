@@ -44,7 +44,7 @@ public class Game implements Serializable {
         gameInfo = new GameInfo(gameId, hostName, dimensions, set);
         System.out.println("gameInfo made");
 
-        gameState = new GameState(gameId, dimensions,set);
+        gameState = new GameState(gameId, dimensions,set, hostName);
         System.out.println("gameState made");
     }
 
