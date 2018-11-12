@@ -9,5 +9,14 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="data" level="project" />
     <orderEntry type="module" module-name="Global" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/lib/guava-23.6-jre.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -79,17 +79,18 @@ public class GameState implements Serializable {
     }
 
 
-    public synchronized void executeCommando(Commando commando, String activeUser) {
+    public //synchronized
+    void executeCommando(Commando commando, String activeUser) {
 
         if (activeUser.equals(naamSpelerA)) {
             System.out.println("commando added in joinSpeler zijn inbox");
             inboxSpelerB.add(commando);
-            notifyAll();
+            //notifyAll();
             System.out.println("executCommando notify in GameState");
         } else if (activeUser.equals(naamSpelerB)) {
             System.out.println("commando added in createSpeler zijn inbox");
             inboxSpelerA.add(commando);
-            notifyAll();
+            //notifyAll();
             System.out.println("executCommando notify in GameState");
         } else {
             System.out.println("fout in executeCommando in GameState.java: geen commando added in mailbox andere pers");
@@ -99,19 +100,21 @@ public class GameState implements Serializable {
 
     }
 
-    public synchronized List<Commando> getInbox(String userName) {
+    public
+    //synchronized
+    List<Commando> getInbox(String userName) {
 
         System.out.println("GameState: getInbox door user"+userName);
         if (userName.equals(naamSpelerA)) {
 
             while (inboxSpelerA.isEmpty()) {
-                try {
+                //try {
                     System.out.println("inbox is leeg, wait started");
-                    wait();
+                    //wait();
                     System.out.println("iets nieuws in de inbox van user "+naamSpelerA+": wait stopped");
-                } catch (InterruptedException e) {
+                /*} catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
 
             List<Commando> inbox = new ArrayList<Commando>(inboxSpelerA);
@@ -122,13 +125,13 @@ public class GameState implements Serializable {
         } else if (userName.equals(naamSpelerB)) {
 
             while (inboxSpelerB.isEmpty()) {
-                try {
+                //try {
                     System.out.println("inbox is leeg, wait started");
-                    wait();
+                    //wait();
                     System.out.println("iets nieuws in de inbox van usser"+naamSpelerB+" : wait stopped");
-                } catch (InterruptedException e) {
+                /*} catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
 
             List<Commando> inbox = new ArrayList<Commando>(inboxSpelerB);
