@@ -65,16 +65,6 @@ public class SpelViewGui extends Thread {
             //disable alle muisclicks
             this.disableMouseClick();
 
-            //todo: remove this code block
-            Commando c1 = new Commando("FLIP", 1);
-            Commando c2 = new Commando("FlIP", 2);
-            Commando c3 = new Commando("FLIP", 3);
-            ArrayList<Commando> cl = new ArrayList<>();
-            cl.add(c1);
-            cl.add(c2);
-            cl.add(c3);
-            this.executeCommandos(cl);
-            System.out.println("als je da flippen weg wil, kijkt naar SpelViewGui regel 67");
             //tot hier mag weg: is een voorbeeldje
 
         }
@@ -145,6 +135,20 @@ public class SpelViewGui extends Thread {
         else if(commando.getCommandoType().equals("UNFLIP")){
 
             deTile.unflip();
+
+        }
+        else if(commando.getCommandoType().equals("SWITCH")){
+
+            if(isMouseClickEnabled()){
+                disableMouseClick();
+            }
+            else{enableMouseClick();}
+
+        }
+        else if(commando.getCommandoType().equals("LOCK")){
+
+            System.out.println("disabling tile met nummer :"+uniqueTileId);
+            deTile.setDisable(true);
 
         }
         else{
