@@ -138,6 +138,9 @@ public class GameState implements Serializable {
 
         huidigeTile.setFlippedOver(true);
 
+        //zodat je niet 2x op dezelfde tile kan klikken
+        executeCommandoBoth(new Commando("LOCK", huidigeTile.getUniqueIdentifier()));
+
         if(tegelsFlipped == 2){
             System.out.println("tegelsFlipped is 2 , hele boel logica nu");
 
@@ -169,6 +172,9 @@ public class GameState implements Serializable {
                 //draai ze terug om
                 executeCommandoBoth(new Commando("UNFLIP", vorigeTile.getUniqueIdentifier()));
                 executeCommandoBoth(new Commando("UNFLIP", huidigeTile.getUniqueIdentifier()));
+                executeCommandoBoth(new Commando("UNLOCK", vorigeTile.getUniqueIdentifier()));
+                executeCommandoBoth(new Commando("UNLOCK", huidigeTile.getUniqueIdentifier()));
+
 
                 //misschien hier naar volgende speler gaan ofzo
                 executeCommandoBoth(new Commando("SWITCH", 1)); // 1 is testwaarde, zodat we hem toch gaan vinden

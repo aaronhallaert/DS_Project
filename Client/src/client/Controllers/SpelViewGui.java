@@ -151,6 +151,11 @@ public class SpelViewGui extends Thread {
             deTile.setDisable(true);
 
         }
+
+        else if(commando.getCommandoType().equals("UNLOCK")){
+            deTile.setDisable(false);
+        }
+
         else{
 
             System.out.println("fout in verwerkCommando's: SpelViewGui.java");
