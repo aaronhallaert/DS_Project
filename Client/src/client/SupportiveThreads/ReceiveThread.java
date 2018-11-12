@@ -16,6 +16,7 @@ public class ReceiveThread extends Thread {
     public ReceiveThread(String userName, int gameId, SpelViewGui spv){
         this.userName = userName;
         this.gameId =gameId;
+        this.spv = spv;
     }
 
 
@@ -28,7 +29,7 @@ public class ReceiveThread extends Thread {
 
         while(true){
             try{
-                for( Commando c : Main.cnts.getAppImpl().getInbox(userName,gameId)){
+                for(Commando c : Main.cnts.getAppImpl().getInbox(userName,gameId)){
                     System.out.println("commando gevonden, proberen te executen");
                     Platform.runLater(()->{
                         spv.executeCommando(c);

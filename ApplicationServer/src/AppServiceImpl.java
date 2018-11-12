@@ -167,7 +167,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public synchronized List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
+    public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
 
         System.out.println("AppServiceImpl : getInbox: door user: "+userName);
         return getGameSate(currentGameId).getInbox(userName);

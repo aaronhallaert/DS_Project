@@ -118,6 +118,7 @@ public class GameState implements Serializable {
             }
 
             List<Commando> inbox = new ArrayList<Commando>(inboxSpelerA);
+            inboxSpelerA.clear();
             System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
             //miss moet de inbox nu leeggemaakt worden
             return inbox;
@@ -133,8 +134,8 @@ public class GameState implements Serializable {
                     e.printStackTrace();
                 }*/
             }
-
             List<Commando> inbox = new ArrayList<Commando>(inboxSpelerB);
+            inboxSpelerB.clear();
             System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
             //miss moet de inbox nu leeggemaakt worden
             return inbox;

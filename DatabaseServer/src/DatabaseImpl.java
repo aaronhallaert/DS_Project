@@ -26,9 +26,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     public void connect() {
         // SQLite connection string
         //String url = "jdbc:sqlite:D:\\School\\Ind Ing\\iiw Master\\Semester 1\\Gedistribueerde Systemen\\DS_Project\\data\\memorydb.db";
-        //String workingDir = System.getProperty("user.dir");
-        //String url = "jdbc:sqlite:"+workingDir+"\\DatabaseServer\\data\\memorydb.db";
-        String url = "jdbc:sqlite:C:\\Users\\tibor\\JavaProjects\\DS_Project\\DS_Project\\DatabaseServer\\data\\memorydb.db";
+        String workingDir = System.getProperty("user.dir");
+        String url = "jdbc:sqlite:"+workingDir+"\\DatabaseServer\\data\\memorydb.db";
         try {
             if(conn == null || conn.isClosed()) {
                 conn = DriverManager.getConnection(url);
