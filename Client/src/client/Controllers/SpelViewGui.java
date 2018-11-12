@@ -18,6 +18,12 @@ public class SpelViewGui extends Thread {
     private Label gameTitel;
 
     @FXML
+    private Label mijnScoreLabel; private int mijnScore;
+
+    @FXML
+    private Label zijnScoreLabel; private int zijnScore;
+
+    @FXML
     private Label aanDeBeurtLabel;
 
     @FXML
@@ -119,6 +125,11 @@ public class SpelViewGui extends Thread {
 
         }
 
+        mijnScore = 0;
+        zijnScore = 0;
+        mijnScoreLabel.setText("0");
+        zijnScoreLabel.setText("0");
+
     }
 
     public void executeCommando(Commando commando){
@@ -154,6 +165,29 @@ public class SpelViewGui extends Thread {
 
         else if(commando.getCommandoType().equals("UNLOCK")){
             deTile.setDisable(false);
+        }
+        else if(commando.getCommandoType().equals("AWARDTOME")){
+            mijnScore++;
+            mijnScoreLabel.setText(mijnScore+"");
+
+        }
+        else if(commando.getCommandoType().equals("AWARDTOYOU")){
+            zijnScore++;
+            zijnScoreLabel.setText(zijnScore+"");
+        }
+        else if(commando.getCommandoType().equals("WIN")){
+            disableMouseClick();
+            wachtenLabel.setText("WINNER WINNER CHICKEN DINNER");
+        }
+
+        else if(commando.getCommandoType().equals("LOSS")){
+            disableMouseClick();
+            wachtenLabel.setText("LOSER");
+        }
+
+        else if(commando.getCommandoType().equals("DRAW")){
+            disableMouseClick();
+            wachtenLabel.setText("GELIJKSPEL");
         }
 
         else{

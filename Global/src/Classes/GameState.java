@@ -15,6 +15,7 @@ public class GameState implements Serializable {
     static int tegelsFlipped;
     static int vorigeTileUniqueId;
     static int huidigeTileUniqueId;
+    static int aantalParenFound;
     // scores
     private int aantalParen;
     private int aantalPerRij;
@@ -41,6 +42,7 @@ public class GameState implements Serializable {
         inboxSpelerA = new ArrayList<Commando>();
         inboxSpelerB = new ArrayList<Commando>();
 
+        aantalParenFound =0;
         tegelsFlipped = 0;
 
         aantalPuntenSpelerA = 0;
@@ -94,7 +96,7 @@ public class GameState implements Serializable {
         return tegelsList;
     }
 
-
+    // als je active user hier zet, wordt het in de omgekeerde speler zijn spel uitgevoerd
     public synchronized void executeCommando(Commando commando, String activeUser) {
 
         //doorspelen van het commando naar de andere speler
@@ -138,7 +140,7 @@ public class GameState implements Serializable {
 
         huidigeTile.setFlippedOver(true);
 
-        //zodat je niet 2x op dezelfde tile kan klikken
+        //zodat je niet 2x op dezelfde tile kan klikken om te vergelijken, anders zou het kloppen en krijg je punt
         executeCommandoBoth(new Commando("LOCK", huidigeTile.getUniqueIdentifier()));
 
         if(tegelsFlipped == 2){
@@ -149,8 +151,11 @@ public class GameState implements Serializable {
 
             if(huidigeTile.getId() == vorigeTile.getId()){
 
+
                 System.out.println("tzijn dezelfde");
                 System.out.println("award 1 punt aan de speler");
+
+
 
                 //award punt
                 awardPuntTo(activeUser);
@@ -159,8 +164,38 @@ public class GameState implements Serializable {
                 huidigeTile.setFound(true);
                 vorigeTile.setFound(true);
 
+                //zorgen dat je er niet meer nog eens kan op drukken nadat ze gevonden zijn
                 executeCommandoBoth(new Commando("LOCK", huidigeTile.getUniqueIdentifier()));
                 executeCommandoBoth(new Commando("LOCK", vorigeTile.getUniqueIdentifier()));
+
+                aantalParenFound++;
+
+                //als alle tegels gevonden zijn
+                if(aantalParenFound == aantalParen){
+
+                    //who is the winner?
+                    if(aantalPuntenSpelerA > aantalPuntenSpelerB){
+                        // A is the winner
+                        inboxSpelerA.add(new Commando("WIN",1));
+                        inboxSpelerB.add(new Commando("LOSS",1));
+                        notifyAll();
+
+                    }
+                    else if(aantalPuntenSpelerA < aantalPuntenSpelerB){
+                        // B is the winner
+
+                        inboxSpelerB.add(new Commando("WIN",1));
+                        inboxSpelerA.add(new Commando("LOSS",1));
+                        notifyAll();
+
+                    }
+                    else{
+                        //its a draw
+                        executeCommandoBoth(new Commando("DRAW",1));
+
+                    }
+                }
+
 
 
             }else{
@@ -172,6 +207,8 @@ public class GameState implements Serializable {
                 //draai ze terug om
                 executeCommandoBoth(new Commando("UNFLIP", vorigeTile.getUniqueIdentifier()));
                 executeCommandoBoth(new Commando("UNFLIP", huidigeTile.getUniqueIdentifier()));
+
+                //zorgen dat deze tegels terug clickable zijn
                 executeCommandoBoth(new Commando("UNLOCK", vorigeTile.getUniqueIdentifier()));
                 executeCommandoBoth(new Commando("UNLOCK", huidigeTile.getUniqueIdentifier()));
 
@@ -198,10 +235,16 @@ public class GameState implements Serializable {
 
         if(activeUser.equals(naamSpelerA)){
             aantalPuntenSpelerA ++;
+
+                                        //deze 1 is een dummywaarde
+            inboxSpelerA.add(new Commando("AWARDTOME", 1));
+            inboxSpelerB.add(new Commando("AWARDTOYOU", 1));
         }
 
         else if(activeUser.equals(naamSpelerB)){
             aantalPuntenSpelerB ++;
+            inboxSpelerB.add(new Commando("AWARDTOME", 1));
+            inboxSpelerA.add(new Commando("AWARDTOYOU", 1));
         }
 
         else{

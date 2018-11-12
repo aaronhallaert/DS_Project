@@ -14,12 +14,14 @@
        </Label>
 
       <AnchorPane fx:id="root" layoutX="14.0" layoutY="68.0" prefHeight="460.0" prefWidth="460.0" />
-      <Label layoutX="300.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="aan de beur:" />
-      <Label fx:id="aanDeBeurtLabel" layoutX="501.0" layoutY="30.0" prefHeight="17.0" prefWidth="77.0" />
       <Label fx:id="wachtenLabel" layoutX="161.0" layoutY="21.0" text="WACHTEN" textFill="RED" AnchorPane.leftAnchor="161.0" AnchorPane.topAnchor="21.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
+      <Label fx:id="aanDeBeurtLabel" layoutX="310.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="mijn score:" />
+      <Label fx:id="aanDeBeurtLabel" layoutX="310.0" layoutY="41.0" prefHeight="17.0" prefWidth="77.0" text="zijn score:" />
+      <Label fx:id="mijnScoreLabel" layoutX="387.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="0" />
+      <Label fx:id="zijnScoreLabel" layoutX="387.0" layoutY="41.0" prefHeight="17.0" prefWidth="77.0" text="0" />
    </children>
 </AnchorPane>
