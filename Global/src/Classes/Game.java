@@ -32,7 +32,6 @@ public class Game implements Serializable {
 
 
     /**
-     *
      * @param hostName
      * @param dimensions grootte van het rooster (6X6 of 4X4)
      * @param set de set van afbeeldingen die we willen gebruiken
