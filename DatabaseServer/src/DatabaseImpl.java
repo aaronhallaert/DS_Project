@@ -199,6 +199,12 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
     }
 
+
+    /**
+     * token timestamp op 0 zetten in db
+     * @param username naam van de actieve gebruiker
+     * @throws RemoteException
+     */
     @Override
     public void cancelToken(String username) throws RemoteException{
         String sql = "UPDATE Persons SET token_timestamp=? WHERE Username= ?;";
