@@ -29,6 +29,10 @@ public interface AppServerInterface extends Remote {
 
     public List<Commando> getInbox(String userName, int gameId) throws RemoteException;
 
+    byte[] getImage(String naam)throws RemoteException;
+
+    void storeImage(String naamFoto, byte[] afbeelding) throws RemoteException;
+
     //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
 
 

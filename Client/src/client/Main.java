@@ -37,7 +37,7 @@ public class Main extends Application {
 
         try {
 
-            afbeelding = Main.cnts.dispatchImpl.getImage(naam);
+            afbeelding = Main.cnts.appImpl.getImage(naam);
 
             //converteren van de byte[] naar een waarde die imageView aankan
             ByteArrayInputStream is =  new ByteArrayInputStream(afbeelding);
@@ -59,7 +59,7 @@ public class Main extends Application {
 
         try {
 
-            afbeelding = Main.cnts.dispatchImpl.getImage(naam);
+            afbeelding = Main.cnts.appImpl.getImage(naam);
 
         } catch (RemoteException e) {
             e.printStackTrace();

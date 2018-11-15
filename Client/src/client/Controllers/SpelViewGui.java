@@ -138,17 +138,17 @@ public class SpelViewGui extends Thread {
 
         VisualTile deTile = getTileMetUniqueId(uniqueTileId, visualTilesList);
         //execute het commando
-        if(commando.getCommandoType().equals("FLIP")){
+        if(commando.getType().equals("FLIP")){
 
             deTile.flip();
 
         }
-        else if(commando.getCommandoType().equals("UNFLIP")){
+        else if(commando.getType().equals("UNFLIP")){
 
             deTile.unflip();
 
         }
-        else if(commando.getCommandoType().equals("SWITCH")){
+        else if(commando.getType().equals("SWITCH")){
 
             if(isMouseClickEnabled()){
                 disableMouseClick();
@@ -156,36 +156,36 @@ public class SpelViewGui extends Thread {
             else{enableMouseClick();}
 
         }
-        else if(commando.getCommandoType().equals("LOCK")){
+        else if(commando.getType().equals("LOCK")){
 
             System.out.println("disabling tile met nummer :"+uniqueTileId);
             deTile.setDisable(true);
 
         }
 
-        else if(commando.getCommandoType().equals("UNLOCK")){
+        else if(commando.getType().equals("UNLOCK")){
             deTile.setDisable(false);
         }
-        else if(commando.getCommandoType().equals("AWARDTOME")){
+        else if(commando.getType().equals("AWARDTOME")){
             mijnScore++;
             mijnScoreLabel.setText(mijnScore+"");
 
         }
-        else if(commando.getCommandoType().equals("AWARDTOYOU")){
+        else if(commando.getType().equals("AWARDTOYOU")){
             zijnScore++;
             zijnScoreLabel.setText(zijnScore+"");
         }
-        else if(commando.getCommandoType().equals("WIN")){
+        else if(commando.getType().equals("WIN")){
             disableMouseClick();
             wachtenLabel.setText("WINNER WINNER CHICKEN DINNER");
         }
 
-        else if(commando.getCommandoType().equals("LOSS")){
+        else if(commando.getType().equals("LOSS")){
             disableMouseClick();
             wachtenLabel.setText("LOSER");
         }
 
-        else if(commando.getCommandoType().equals("DRAW")){
+        else if(commando.getType().equals("DRAW")){
             disableMouseClick();
             wachtenLabel.setText("GELIJKSPEL");
         }
@@ -213,12 +213,12 @@ public class SpelViewGui extends Thread {
 
             VisualTile deTile = getTileMetUniqueId(uniqueTileId, visualTilesList);
             //execute het commando
-            if(commando.getCommandoType().equals("FLIP")){
+            if(commando.getType().equals("FLIP")){
 
                 deTile.flip();
 
             }
-            else if(commando.getCommandoType().equals("UNFLIP")){
+            else if(commando.getType().equals("UNFLIP")){
 
                 deTile.unflip();
 

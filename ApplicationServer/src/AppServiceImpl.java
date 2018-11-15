@@ -178,6 +178,31 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
 
 
+    /**
+     * vraag aan db om een bytestream die een image voorstelt te geven
+     * @param naam de id van de image
+     * @return de image in een array van bytes
+     * @throws RemoteException
+     */
+    @Override
+    public byte[] getImage(String naam) throws RemoteException {
 
+        byte[] afbeelding = databaseImpl.getImage(naam);
+        return afbeelding;
+    }
+
+
+    /**
+     * vraag aan db om een bytestream die een image voorstelt te storen
+     * @param naam de id van de image
+     * @param afbeelding de image in een array van bytes
+     * @throws RemoteException
+     */
+    @Override
+    public void storeImage(String naam, byte[] afbeelding) throws RemoteException{
+
+        databaseImpl.storeImage(naam,afbeelding);
+
+    }
 
 }

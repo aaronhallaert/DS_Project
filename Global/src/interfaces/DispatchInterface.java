@@ -16,9 +16,6 @@ public interface DispatchInterface extends Remote {
 
     void insertUser(String username, String confirmPassword) throws RemoteException;
 
-    byte[] getImage(String naam)throws RemoteException;
-
-    void storeImage(String naamFoto, byte[] afbeelding) throws RemoteException;
 
 
     String getToken(String username) throws RemoteException;

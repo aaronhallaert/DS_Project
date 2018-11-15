@@ -41,7 +41,7 @@ public class ImageUploaderController {
             //nu nog de byte array versturen.
             String naamFoto = naam.getText().toString();
 
-            Main.cnts.dispatchImpl.storeImage(naamFoto, afbeelding);
+            Main.cnts.appImpl.storeImage(naamFoto, afbeelding);
 
             uploaded.setVisible(true);
         }
