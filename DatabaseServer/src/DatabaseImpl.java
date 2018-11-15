@@ -15,48 +15,55 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     private static Connection conn = null;
 
+
     public DatabaseImpl() throws RemoteException{
+        // maakt connectie met sql database
         connect();
     }
 
+
     /**
-     * Connect to the test.db database
-     *
+     * connectie met databank maken
      */
     public void connect() {
+
         // SQLite connection string
-        //String url = "jdbc:sqlite:D:\\School\\Ind Ing\\iiw Master\\Semester 1\\Gedistribueerde Systemen\\DS_Project\\data\\memorydb.db";
         String workingDir = System.getProperty("user.dir");
         String url = "jdbc:sqlite:"+workingDir+"\\DatabaseServer\\data\\memorydb.db";
+
         try {
             if(conn == null || conn.isClosed()) {
                 conn = DriverManager.getConnection(url);
-                //System.out.println("connection opened");
             }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("error in connect() methode");
-        }
-    }
-
-    /**
-     * close the connection to the test.db database
-     */
-    public void closeConnection() {
-
-        try {
-            conn.close();
-            //System.out.println("connection closed");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("error in closeconnection methode()");
         }
     }
+
+
+    /**
+     * close the connection to the database
+     */
+    public void closeConnection() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 
     //METHODEN VOOR DE PERSONS TABLE
+
+    /**
+     * checkt user credentials
+     * @param naam
+     * @param paswoord
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean checkUserCred(String naam, String paswoord) throws RemoteException {
 
@@ -68,13 +75,9 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         boolean result = false;
 
         try (
-
-
-
+                // opvragen van password en salt in db
             PreparedStatement pstmt  = conn.prepareStatement(sql)){
-
             pstmt.setString(1, naam);
-
             ResultSet rs  = pstmt.executeQuery();
             String retrievePassword="";
             String retrieveSalt="";
@@ -84,18 +87,25 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 retrieveSalt= rs.getString("Salt");
             }
 
+
+                // effectieve controle credentials
             if (retrievePassword.equals(hash(paswoord, retrieveSalt))) {
                 result = true;
             } else {
                 result = false;
             }
+
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
-            System.out.println("sqlexception in checkUserCred");
         }
+
+        // connectie met databank weer sluiten
         closeConnection();
+
         return result;
     }
+
 
     /**
      * Insert a new row into the users table
@@ -109,28 +119,36 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         String salt=hash((System.currentTimeMillis()+"RandomString"));
         String hashedPaswoord= hash(password, salt);
         connect();
+
         try (
+
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, hashedPaswoord);
             pstmt.setString(3, salt);
             pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            System.out.println("problem in insertUser database");
+            e.printStackTrace();
         }
+
+        closeConnection();
     }
 
+
+    /**
+     * check of username al bestaat
+     * @param name
+     * @return
+     */
     @Override
     public boolean userNameExists(String name){
         String sql = "SELECT Username FROM Persons WHERE Username=?";
 
         connect();
         try (
-
-
             PreparedStatement pstmt  = conn.prepareStatement(sql)){
-
             pstmt.setString(1, name);
 
             ResultSet rs  = pstmt.executeQuery();
@@ -139,7 +157,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             while(rs.next()){
                 users.add(rs.getString("Username"));
             }
-
 
             if (users.size()>0) {
                 return true;
@@ -150,12 +167,25 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             e.printStackTrace();
             System.out.println("error in usernameExists");
         }
+
+        closeConnection();
         return false;
     }
 
+
+    /**
+     * aanmaken van token (hash van paswoord en de huidige tijd in ms)
+     * @param username
+     * @param password
+     * @throws RemoteException
+     */
     @Override
-    public String createToken(String username, String password)throws RemoteException {
+    public void createToken(String username, String password)throws RemoteException {
+
+        // enkel als credentials juist zijn
         if(checkUserCred(username, password)){
+
+            // update query
             String sql="UPDATE Persons SET token=?, token_timestamp=? WHERE Username= ?;";
             String token= hash(password+System.currentTimeMillis());
             connect();
@@ -171,13 +201,20 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 se.printStackTrace();
             }
 
-            return token;
         }
-        else return null;
     }
 
+
+    /**
+     * checkt of token niet vervallen is (minder dan 24u)
+     * @param username
+     * @param token
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean isTokenValid(String username, String token) throws RemoteException{
+        connect();
         String sql = "SELECT token_timestamp FROM Persons WHERE username = ? AND token = ?";
         try{
 
@@ -192,11 +229,18 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                     return true;
                 }
             }
+
+            closeConnection();
             return false;
         }
         catch(SQLException se){
+            closeConnection();
+            System.out.println(se.getMessage());
+            se.printStackTrace();
+
             return false;
         }
+
     }
 
 
@@ -221,6 +265,13 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
     }
 
+
+    /**
+     * opvragen van token
+     * @param username
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public String getToken(String username) throws RemoteException{
         String sql = "SELECT token FROM Persons WHERE Username = ? ";
@@ -236,24 +287,36 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         }
         catch(SQLException se){
-
+            System.out.println(se.getMessage());
             se.printStackTrace();
             return null;
         }
     }
 
+
     private static String hash(String password, String salt){
         return Hashing.sha256().hashString((password + salt),StandardCharsets.UTF_8).toString();
     }
+
 
     private static String hash(String password){
         return Hashing.sha256().hashString((password),StandardCharsets.UTF_8).toString();
     }
 
+
+
+
     //METHODEN VOOR DE PICTURES TABLE
 
-    @Override /* METHODE NOG NIET OKé */
-    public byte[] getImage(String naam) throws RemoteException { //in 0 zit de achterkant van de foto
+
+    /**
+     * effectief de array van bytes in de db opvragen
+     * @param afbeeldingId de naam van de afbeelding
+     * @return de array van bytes
+     * @throws RemoteException
+     */
+    @Override
+    public byte[] getImage(String afbeeldingId) throws RemoteException { //in 0 zit de achterkant van de foto
 
         String sql = "SELECT image FROM pictures WHERE naam=?";
 
@@ -264,32 +327,31 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         try {
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            pstmt.setString(1, naam);
-
+            pstmt.setString(1, afbeeldingId);
             ResultSet rs = pstmt.executeQuery();
-
             array = rs.getBytes("image");
-
             rs.close();
             pstmt.close();
-
-
 
         }
 
         catch (SQLException e) {
-            System.out.println("exception in databaseImpl alweer");
             e.printStackTrace();
         }
 
         closeConnection();
-
         return array;
     }
 
+
+    /**
+     * effectief de array van bytes in de db opslaan
+     * @param afbeeldingId
+     * @param afbeelding
+     * @throws RemoteException
+     */
     @Override
-    public void storeImage(String naamFoto, byte[] afbeelding) throws RemoteException{
+    public void storeImage(String afbeeldingId, byte[] afbeelding) throws RemoteException{
 
         System.out.println("database storen van een image started");
 
@@ -299,20 +361,18 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         try {
 
-
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, naamFoto);
+            pstmt.setString(1, afbeeldingId);
             pstmt.setBytes(2, afbeelding);
             pstmt.executeUpdate();
-
             pstmt.close();
-            conn.close();
 
         } catch (SQLException e) {
-            System.out.println("fout in converteren van de afbeelding");
+            System.out.println(e.getMessage());
             e.printStackTrace();
-            System.out.println("fout in converteren van de afbeelding");
         }
+
+        closeConnection();
 
     }
 
