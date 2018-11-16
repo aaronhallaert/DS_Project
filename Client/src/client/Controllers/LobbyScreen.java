@@ -35,7 +35,10 @@ public class LobbyScreen {
     public TableColumn<GameObs, String> gameIdColumn;
 
     @FXML
-    public TableColumn<GameObs, String> hostColumn;
+    public TableColumn<GameObs, String> clientAColumn;
+
+    @FXML
+    public TableColumn<GameObs, String> clientBColumn;
 
     @FXML
     public TableColumn<GameObs, String> fotoSetColumn;
@@ -43,9 +46,6 @@ public class LobbyScreen {
     @FXML
     public TableColumn<GameObs, Integer> roosterSizeColumn;
 
-    //todo: wss weg en direct callen
-    //deze list moet in de gamesListViewer komen
-    //todo: wrs dit automatisch refreshen na x aantal seconden? geen idee aparte thread ??
     public static ArrayList<GameInfo> gameInfoList;
     public static ObservableList<GameObs> gamesObsList;
 
@@ -63,21 +63,20 @@ public class LobbyScreen {
 
 
             //waarden van de tabel invullen
-            //https://stackoverflow.com/questions/34794995/how-to-serialize-observablelist/34795127
-            //https://medium.com/@keeptoo/adding-data-to-javafx-tableview-stepwise-df582acbae4f
+
             //deze strings zijn de exacte attribuutnamen van GameObs
             gameIdColumn.setCellValueFactory(new PropertyValueFactory<>("gameId"));
-            hostColumn.setCellValueFactory(new PropertyValueFactory<>("host"));
+            clientAColumn.setCellValueFactory(new PropertyValueFactory<>("clientA"));
+            clientBColumn.setCellValueFactory(new PropertyValueFactory<>("clientB"));
             fotoSetColumn.setCellValueFactory(new PropertyValueFactory<>("fotoSet"));
             roosterSizeColumn.setCellValueFactory(new PropertyValueFactory<>("roosterSize"));
 
             // add data to table
             activeGamesTable.setItems(gamesObsList);
 
+            // thread die om de 5 seconden de lobbytafel refresht aanmaken + opstarten
             Thread checkAvailableGames= new LobbyRefreshThread(this);
             checkAvailableGames.start();
-
-
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -98,11 +97,6 @@ public class LobbyScreen {
         Main.goToLogin();
         // Hide this current window
         logoutLink.getScene().getWindow().hide();
-    }
-
-    //onclick van de create game knop
-    public void createGame(){
-        //todo: vul in?
     }
 
     @FXML
