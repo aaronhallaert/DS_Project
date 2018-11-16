@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Commando implements Serializable {
 
-    // 1 indien niet van toepassing op het commando (vb WIN, LOSS)
+    // 1 indien niet van toepassing op het commando (vb WIN, LOSS) : deze commandos werken niet in op een tile
     private int uniqueTileId;
 
 
