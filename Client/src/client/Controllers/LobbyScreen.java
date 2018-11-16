@@ -124,6 +124,7 @@ public class LobbyScreen {
             try {
                 if(Main.cnts.getAppImpl().join(Main.activeUser, currentGameIdAttempt)){
                     Main.currentGameId=currentGameIdAttempt;
+                    spelSetup.getScene().getWindow().hide();
                     SpelViewLogica spv = new SpelViewLogica();
                     spv.start();
                 }

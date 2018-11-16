@@ -6,6 +6,7 @@ import Classes.GameState;
 import client.Game.VisualTile;
 import client.Main;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -28,6 +29,9 @@ public class SpelViewGui extends Thread {
 
     @FXML
     private Label wachtenLabel;
+
+    @FXML
+    private Button leave;
 
     // variabelen die de game kunnen weergeven hier?
 
@@ -93,6 +97,16 @@ public class SpelViewGui extends Thread {
         return !root.isDisabled();
     }
 
+
+    @FXML
+    public void leaveGame(){
+        // stop dit
+        // stop de thread
+        leave.getScene().getWindow().hide();
+        //todo: fix die juiste stop ier tho, das lijk nog nen belangrijken
+
+        Main.goToLobby();
+    }
 
 
     private void setupInitieleGame(GameInfo gameInfo, GameState initieleGameState) {
