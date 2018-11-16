@@ -124,11 +124,13 @@ public class LobbyScreen {
             try {
                 if(Main.cnts.getAppImpl().join(Main.activeUser, currentGameIdAttempt)){
                     Main.currentGameId=currentGameIdAttempt;
-                    spelSetup.getScene().getWindow().hide();
+//                    spelSetup.getScene().getWindow().hide();
                     SpelViewLogica spv = new SpelViewLogica();
                     spv.start();
                 }
                 else{ // als geen successvolle join
+                    System.out.println("joinen voor een 2e keer!!!!! implementeer dit a broer");
+                    System.out.println("Lobbyscreen.java : join methode");
 
                     //todo: laat iets zien ivm foute / slechte join : er is al reeds een 2e speler
 

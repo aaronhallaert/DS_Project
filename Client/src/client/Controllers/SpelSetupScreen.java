@@ -99,7 +99,9 @@ public class SpelSetupScreen {
         Main.currentGameId = Main.cnts.getAppImpl().createGame(Main.activeUser, dimensies, set);
         Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).join(Main.activeUser);
         //fire up spelScreen, empty?
+        //radioButton4X4.getScene().getWindow().hide();
         Main.goToSpel();
+
 
 
         //switchen naar een bepaalde key ipv Main.activeUser
