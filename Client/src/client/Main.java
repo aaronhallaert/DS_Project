@@ -24,12 +24,17 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
+    //globale variabelen die we vaak gebruiken
     public static String activeUser;
-    public static Connections cnts;
+    public static Connections cnts; //connectie naar de appserver, database, dispatcher
     public static int currentGameId = 0;
 
-    // ENKEL VOOR STATISCHE FOTOS, NIET VOOR MEMORYSPEL ZELF DUS
-    //om een foto in te laden van de database, en hem direct te storen in een ImageView
+    /**
+     * wordt gebruikt om een afbeelding in te laden, maar enkel in de menu's , de kaartjes worden ingeladen met een
+     * andere methode
+     * @param kader
+     * @param naam
+     */
     public static void setImage(ImageView kader, String naam) {
 
         byte[] afbeelding = null;
@@ -51,7 +56,11 @@ public class Main extends Application {
         }
     }
 
-    //TODO: kijken als dit misschien niet Image moet returnen
+    /** deze methode wordt gebruikt wanneer we de afbeeldingen van de kaartjes willen inladen
+     *
+     * @param naam
+     * @return
+     */
     public static byte[] loadImageBytes(String naam){
 
         byte[] afbeelding = null;
@@ -67,6 +76,11 @@ public class Main extends Application {
         return afbeelding;
     }
 
+    /**
+     *
+     * @param gameInfoLijst
+     * @return
+     */
     public static ObservableList<GameObs> configureList(ArrayList<GameInfo> gameInfoLijst) {
 
         ArrayList<GameObs> returnList = new ArrayList<GameObs>();

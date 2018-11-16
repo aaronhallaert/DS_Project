@@ -10,8 +10,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * stelt lokaal een game voor
+ * stelt lokaal een game voor in de datatable in het lobbyScreen.
  * de params simpleStringProperty enzo, hebben temaken met de voorstelling in de table van de lobby
+ *
+ * om de 5 seconden vraagt de Client aan de Appserver de lijst van GameInfo's
+ * deze lijst met GameInfo elementen wordt dan in een lijst van GameObs gegoten zodat het eenvoudig te visualiseren is
+ * in een datatable
  *
  */
 public class GameObs  {
