@@ -7,6 +7,9 @@ import client.Main;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * deze thread zorgt ervoor dat er om de 5 seconden de tabel in het lobbyscreen gereset wordt
+ */
 public class LobbyRefreshThread extends Thread{
 
     private LobbyScreen ls;

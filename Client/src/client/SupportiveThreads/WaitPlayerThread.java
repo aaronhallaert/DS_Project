@@ -4,6 +4,10 @@ import Classes.GameInfo;
 import client.Controllers.SpelViewLogica;
 import client.Main;
 
+/**
+ * deze thread wacht op de 2e speler (opdat hij gejoind is) alvorens de eerste speler kan beginnen met zijn kaartjes
+ * om te draaien
+ */
 public class WaitPlayerThread extends Thread {
 
 

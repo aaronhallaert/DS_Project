@@ -2,7 +2,6 @@ package client;
 
 import Classes.GameInfo;
 import client.Controllers.SpelViewLogica;
-import client.Game.MemoryPuzzleApp;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -156,26 +155,6 @@ public class Main extends Application {
         registrerStage.setScene(startScene);
         registrerStage.setResizable(false);
         registrerStage.show();
-    }
-
-    //todo: remove goToSpelMethodes!
-    //TODO: spel starten met bepaalde configuraties gebeurd vanuit hier
-    //todo: verouderde methode...
-    public static void goToSpel(int dimensies, char set) {
-
-        Parent root = null;
-        System.out.println("passé met parameters");
-
-        // wrapper met Platform klasse want je kan geen klasse die erft van 'Application' runnen in
-        // een already running application
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                new MemoryPuzzleApp().start(new Stage(), dimensies, set);
-            }
-        });
-
-
     }
 
     // deze methode wordt nu gebruikt om het spel in te laden met de current id
