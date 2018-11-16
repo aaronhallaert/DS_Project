@@ -3,15 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,7 +85,7 @@
     <session id="1809099310">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.19" value="2" />
@@ -119,13 +115,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="24585" />
-          <entry key="txt" value="683" />
+          <entry key="txt" value="762" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="24585" />
-          <entry key="PLAIN_TEXT" value="683" />
+          <entry key="PLAIN_TEXT" value="762" />
         </counts>
       </usages-collector>
     </session>
@@ -173,7 +169,7 @@
         <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="202">
-              <caret line="35" column="87" lean-forward="true" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="87" />
+              <caret line="35" column="87" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -200,7 +196,7 @@
         <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
-              <caret line="96" column="38" lean-forward="true" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
+              <caret line="96" column="38" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -418,7 +414,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542392005917" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542392118378" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -537,7 +533,7 @@
       <workItem from="1542296034964" duration="4171000" />
       <workItem from="1542371551764" duration="3405000" />
       <workItem from="1542377626017" duration="2795000" />
-      <workItem from="1542387371134" duration="4588000" />
+      <workItem from="1542387371134" duration="4762000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -679,11 +675,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542391011024</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="rejoinen is nu extreem buggy maar mogelijk">
+      <created>1542392146676</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1542392146676</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31049000" />
+    <option name="totallyTimeSpent" value="31223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -698,7 +701,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2483871" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32419354" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32419354" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991131" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -783,7 +786,8 @@
     <MESSAGE value="leavegame button init" />
     <MESSAGE value="probleem met een scherm onzichtbaar te maken" />
     <MESSAGE value="klaar om rejoin te implementeren" />
-    <option name="LAST_COMMIT_MESSAGE" value="klaar om rejoin te implementeren" />
+    <MESSAGE value="rejoinen is nu extreem buggy maar mogelijk" />
+    <option name="LAST_COMMIT_MESSAGE" value="rejoinen is nu extreem buggy maar mogelijk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1048,7 +1052,7 @@
     <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
-          <caret line="35" column="87" lean-forward="true" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="87" />
+          <caret line="35" column="87" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="87" />
         </state>
       </provider>
     </entry>
@@ -1076,7 +1080,7 @@
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
-          <caret line="96" column="38" lean-forward="true" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
+          <caret line="96" column="38" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
         </state>
       </provider>
     </entry>
