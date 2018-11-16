@@ -2,15 +2,23 @@ package Classes;
 
 import java.io.Serializable;
 
+/**
+ * is altijd een deel van een Game
+ * voornamelijk de zaken om de game voor te stellen in de lobbyTabel
+ */
 public class GameInfo implements Serializable {
 
-    private int gameId;
-    private String clientA;
-    private String clientB;
-    private Integer aantalSpelersConnected;
-    private String fotoSet;
-    private Integer roosterSize;
 
+    private int gameId; //random gegenereerd nummer tussen 1 en 1000
+    private String clientA; // de speler die de game creert
+    private String clientB; // de speler die eeen gecreerede game joint
+    private Integer aantalSpelersConnected;
+    private String fotoSet; // variabele die aangeeft welke preset van fotos er zal ingeladen worden
+    private Integer roosterSize; // grootte van het rooster
+
+    /** wordt nergens opgeroepen, tenzij er ergens iets fout gaat (een game die niet gevonden wordt bvb)
+     *      als de game niet gevonden wordt wordt een lege nieuwe game opgeroepen
+     */
     public GameInfo(){
         this.gameId = 0;
         this.clientA = "";
@@ -20,8 +28,8 @@ public class GameInfo implements Serializable {
         this.fotoSet = "";
     }
 
-    /** opgeroepen bij het maken van een nieuwe game!
-     *  wordt opgeroepen vanuit de clientB
+    /** opgeroepen bij het maken van een nieuwe game
+     *  de speler die de game creeerde is speler A
      * @param gameId
      * @param hostName
      * @param dimensions
@@ -38,12 +46,18 @@ public class GameInfo implements Serializable {
 
     }
 
+
     public String toString(){
         return"game met clientA: "+ clientA +", clientB: "+ clientB +" fotoset: "+fotoSet+" sizerooster = "+roosterSize+"X"+roosterSize;
     }
 
+
+    // wordt door speler2 opgeroepen,
+    // todo: zorgen dat speler 1 ook kan joinen
     public synchronized boolean join(String user){
         System.out.println("client "+ user+ " probeert te joinen");
+
+        // als het een initiele join is
         if(!clientA.equals(user) && clientB.equals("")){
             clientB = user;
             aantalSpelersConnected++;
@@ -52,16 +66,29 @@ public class GameInfo implements Serializable {
             System.out.println("join in gameInfo succesvol");
             return true;
         }
+
+        //todo: wat als er geen initiele join is?
         else{
+            /*
+             kijken welke user het is, als de user niet klopt geef je een error
+             als speler 1,
+             als speler 2,..
+             spelerConnected++
+
+             */
             return false;
         }
-
 
     }
 
 
+    /** wordt getriggerd als speler 1 in het spel zit, en speler 2 terug joint
+     *
+     * @param currentNumberOfPlayers hoeveel spelers er gejoind zijn volgens de client
+     * @return
+     */
     public synchronized boolean changeInPlayers(int currentNumberOfPlayers){
-        System.out.println("jawel hoor");
+
         while(currentNumberOfPlayers==aantalSpelersConnected){
             try {
                 System.out.println("CIP wait begin");
@@ -76,9 +103,7 @@ public class GameInfo implements Serializable {
     }
 
 
-
     /* GETTERS SETTERS */
-
     public int getGameId() {
         return gameId;
     }
@@ -126,8 +151,4 @@ public class GameInfo implements Serializable {
     public void setRoosterSize(Integer roosterSize) {
         this.roosterSize = roosterSize;
     }
-
-
-
-
 }
