@@ -52,8 +52,7 @@ public class GameInfo implements Serializable {
     }
 
 
-    // wordt door speler2 opgeroepen,
-    // todo: zorgen dat speler 1 ook kan joinen
+    // wordt eenmaal door speler2 opgeroepen
     public synchronized boolean join(String user){
         System.out.println("client "+ user+ " probeert te joinen");
 
@@ -67,7 +66,7 @@ public class GameInfo implements Serializable {
             return true;
         }
 
-        //todo: wat als er geen initiele join is?
+        //todo: wat als er geen initiele join is -> rejoin is er dan
         else{
             /*
              kijken welke user het is, als de user niet klopt geef je een error
@@ -81,6 +80,31 @@ public class GameInfo implements Serializable {
 
     }
 
+
+    public synchronized boolean rejoin(String user) {
+
+        System.out.println("client "+ user+ " probeert te REjoinen");
+
+        // als het een initiele join is
+        if(clientA.equals(user)){
+            aantalSpelersConnected++;
+            System.out.println("notifyke join");
+            notifyAll();
+            System.out.println("join in gameInfo succesvol");
+            return true;
+        }
+
+        else if(clientB.equals(user)){
+            aantalSpelersConnected++;
+            System.out.println("notifyke join");
+            notifyAll();
+            System.out.println("join in gameInfo succesvol");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     /** wordt getriggerd als speler 1 in het spel zit, en speler 2 terug joint
      *
@@ -151,4 +175,5 @@ public class GameInfo implements Serializable {
     public void setRoosterSize(Integer roosterSize) {
         this.roosterSize = roosterSize;
     }
+
 }

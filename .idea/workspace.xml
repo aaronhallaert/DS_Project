@@ -4,9 +4,10 @@
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
@@ -104,27 +105,27 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="4" />
-          <entry key="java" value="89" />
+          <entry key="java" value="91" />
           <entry key="pictures" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Database Element" value="1" />
-          <entry key="JAVA" value="89" />
+          <entry key="JAVA" value="91" />
           <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="23747" />
-          <entry key="txt" value="650" />
+          <entry key="java" value="24585" />
+          <entry key="txt" value="683" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="23747" />
-          <entry key="PLAIN_TEXT" value="650" />
+          <entry key="JAVA" value="24585" />
+          <entry key="PLAIN_TEXT" value="683" />
         </counts>
       </usages-collector>
     </session>
@@ -144,8 +145,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="124" column="44" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="44" />
+            <state relative-caret-position="210">
+              <caret line="141" column="124" selection-start-line="141" selection-start-column="124" selection-end-line="141" selection-end-column="124" />
             </state>
           </provider>
         </entry>
@@ -162,7 +163,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
+            <state relative-caret-position="267">
               <caret line="101" column="55" selection-start-line="101" selection-start-column="55" selection-end-line="101" selection-end-column="55" />
             </state>
           </provider>
@@ -171,8 +172,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state relative-caret-position="202">
+              <caret line="35" column="87" lean-forward="true" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -180,8 +181,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="132" column="54" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="54" />
+            <state relative-caret-position="184">
+              <caret line="154" column="24" selection-start-line="154" selection-start-column="24" selection-end-line="154" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="201">
+              <caret line="120" column="5" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -189,8 +199,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="69" column="49" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
+            <state relative-caret-position="175">
+              <caret line="96" column="38" lean-forward="true" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -234,11 +244,9 @@
         <option value="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" />
         <option value="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" />
         <option value="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" />
-        <option value="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/ImageUploaderController.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Game.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Commando.java" />
-        <option value="$PROJECT_DIR$/Global/src/Classes/GameState.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Tile.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Game/VisualTile.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java" />
@@ -250,6 +258,8 @@
         <option value="$PROJECT_DIR$/Client/src/client/Views/spelViewGui.fxml" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" />
+        <option value="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" />
+        <option value="$PROJECT_DIR$/Global/src/Classes/GameState.java" />
         <option value="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" />
@@ -408,7 +418,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542390948585" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542392005917" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -527,7 +537,7 @@
       <workItem from="1542296034964" duration="4171000" />
       <workItem from="1542371551764" duration="3405000" />
       <workItem from="1542377626017" duration="2795000" />
-      <workItem from="1542387371134" duration="3606000" />
+      <workItem from="1542387371134" duration="4588000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -662,16 +672,24 @@
       <option name="project" value="LOCAL" />
       <updated>1542390339567</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="klaar om rejoin te implementeren">
+      <created>1542391011024</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1542391011024</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30067000" />
+    <option name="totallyTimeSpent" value="31049000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23373677" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.23373677" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -764,14 +782,15 @@
     <MESSAGE value="lobbyscreen tabel fix : je ziet nu ook als de 2 e user joint" />
     <MESSAGE value="leavegame button init" />
     <MESSAGE value="probleem met een scherm onzichtbaar te maken" />
-    <option name="LAST_COMMIT_MESSAGE" value="probleem met een scherm onzichtbaar te maken" />
+    <MESSAGE value="klaar om rejoin te implementeren" />
+    <option name="LAST_COMMIT_MESSAGE" value="klaar om rejoin te implementeren" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Global/src/Classes/GameState.java</url>
-          <line>193</line>
+          <line>192</line>
           <properties class="Classes.GameState" method="pasStateAan">
             <option name="EMULATED" value="true" />
           </properties>
@@ -779,13 +798,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Global/src/Classes/GameState.java</url>
-          <line>165</line>
+          <line>164</line>
           <properties />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Global/src/Classes/GameState.java</url>
-          <line>159</line>
+          <line>158</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -882,25 +901,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="398" column="1" selection-start-line="398" selection-start-column="1" selection-end-line="398" selection-end-column="1" />
-          <folding>
-            <element signature="e#14147#14148#0" expanded="true" />
-            <element signature="e#14181#14182#0" expanded="true" />
-            <element signature="e#14217#14218#0" expanded="true" />
-            <element signature="e#14252#14253#0" expanded="true" />
-            <element signature="e#14298#14299#0" expanded="true" />
-            <element signature="e#14331#14332#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
           <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
+          <folding>
+            <element signature="e#906#907#0" expanded="true" />
+            <element signature="e#945#946#0" expanded="true" />
+            <element signature="e#1006#1007#0" expanded="true" />
+            <element signature="e#1062#1063#0" expanded="true" />
+            <element signature="e#1089#1090#0" expanded="true" />
+            <element signature="e#1114#1115#0" expanded="true" />
+            <element signature="e#1147#1148#0" expanded="true" />
+            <element signature="e#1175#1176#0" expanded="true" />
+            <element signature="e#1209#1210#0" expanded="true" />
+            <element signature="e#1239#1240#0" expanded="true" />
+            <element signature="e#1277#1278#0" expanded="true" />
+            <element signature="e#1311#1312#0" expanded="true" />
+            <element signature="e#1343#1344#0" expanded="true" />
+            <element signature="e#1371#1372#0" expanded="true" />
+            <element signature="e#1414#1415#0" expanded="true" />
+            <element signature="e#1448#1449#0" expanded="true" />
+            <element signature="e#1486#1487#0" expanded="true" />
+            <element signature="e#1520#1521#0" expanded="true" />
+            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#1621#1622#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1012,27 +1038,6 @@
       </provider>
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="132" column="54" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="69" column="49" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
@@ -1040,17 +1045,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="35" column="87" lean-forward="true" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="154" column="24" selection-start-line="154" selection-start-column="24" selection-end-line="154" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
+        <state relative-caret-position="267">
           <caret line="101" column="55" selection-start-line="101" selection-start-column="55" selection-end-line="101" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="120" column="5" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="96" column="38" lean-forward="true" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="124" column="44" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="44" />
+        <state relative-caret-position="210">
+          <caret line="141" column="124" selection-start-line="141" selection-start-column="124" selection-end-line="141" selection-end-column="124" />
         </state>
       </provider>
     </entry>

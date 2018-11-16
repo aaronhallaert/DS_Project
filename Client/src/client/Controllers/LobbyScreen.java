@@ -132,7 +132,17 @@ public class LobbyScreen {
                     System.out.println("joinen voor een 2e keer!!!!! implementeer dit a broer");
                     System.out.println("Lobbyscreen.java : join methode");
 
-                    //todo: laat iets zien ivm foute / slechte join : er is al reeds een 2e speler
+                    if(Main.cnts.getAppImpl().rejoin(Main.activeUser, currentGameIdAttempt)){
+
+                        SpelViewLogica spv = new SpelViewLogica();
+                        spv.start();
+
+                    }
+                    else{
+                        System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
+                        //todo: laat iets zien ivm foute / slechte join : er is al reeds een 2e speler
+                    }
+
 
                 }
 

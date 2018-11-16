@@ -33,6 +33,8 @@ public interface AppServerInterface extends Remote {
 
     void storeImage(String naamFoto, byte[] afbeelding) throws RemoteException;
 
+    boolean rejoin(String activeUser, int currentGameIdAttempt) throws RemoteException;
+
     //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
 
 

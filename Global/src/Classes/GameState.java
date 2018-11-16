@@ -120,7 +120,6 @@ public class GameState implements Serializable {
         System.out.println("join in gameState succesvol");
     }
 
-
     // nadat iets in de inbox van een speler is gekomen, wordt die speler getriggerd om zijn mailbox te bekijken en
     // dus dat commando op te halen
 

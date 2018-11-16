@@ -131,16 +131,35 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         //aanpassing omdat er ook nog moet gejoined worden in de gameState
         if(this.getGameInfo(currentGameIdAttempt).join(activeUser)){
-            //als het eerste lukt, dan zal het 2e ook lukken, daarom is het volgende een void
-
+            //als de if clause lukt,
+            // dan zal het getGameState ook lukken, daarom is getGameState een void
             this.getGameSate(currentGameIdAttempt).join(activeUser);
             //setGameStatenaam nog
             return true;
         }
         else {
+            System.out.println("eerste keer joinen loopt fout in appServiceImpl.java");
             return false;
         }
 
+    }
+
+    /** probeert alles op te starten bij een rejoin (dus niet de eerste keer dat we in een game komen)
+     *
+     * @param activeUser
+     * @param currentGameIdAttempt
+     * @return true als de rejoin (de join voor de 2e maal) succesvol is, false indien onmogelijk
+     * @throws RemoteException
+     */
+    @Override
+    public boolean rejoin(String activeUser, int currentGameIdAttempt) throws RemoteException {
+
+        if(this.getGameInfo(currentGameIdAttempt).rejoin(activeUser)){
+
+            return true;
+        }
+
+        return false;
     }
 
     @Override
