@@ -137,8 +137,9 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             //setGameStatenaam nog
             return true;
         }
-        return false;
-
+        else {
+            return false;
+        }
 
     }
 

@@ -60,7 +60,6 @@ public class GameInfo implements Serializable {
         // als het een initiele join is
         if(!clientA.equals(user) && clientB.equals("")){
             clientB = user;
-            System.out.println("joiner is set in Application server");
             aantalSpelersConnected++;
             System.out.println("notifyke join");
             notifyAll();
