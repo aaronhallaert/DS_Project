@@ -3,19 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/SpelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/SpelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Game/MemoryPuzzleApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Game/State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Game/Tegel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Game/VisualTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Game/VisualTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitPlayerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitPlayerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Game/VisualTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Game/VisualTile.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,48 +81,77 @@
     <session id="1809099310">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.19" value="2" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.26" value="1" />
+          <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="2" />
-          <entry key="java" value="74" />
+          <entry key="java" value="77" />
           <entry key="pictures" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Database Element" value="1" />
-          <entry key="JAVA" value="74" />
+          <entry key="JAVA" value="77" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="22181" />
-          <entry key="txt" value="398" />
+          <entry key="java" value="22886" />
+          <entry key="txt" value="467" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="22181" />
-          <entry key="PLAIN_TEXT" value="398" />
+          <entry key="JAVA" value="22886" />
+          <entry key="PLAIN_TEXT" value="467" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/Connections.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="18" column="86" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="86" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="780">
+              <caret line="79" column="6" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -172,11 +189,12 @@
         <option value="$PROJECT_DIR$/Global/src/Classes/Commando.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/GameState.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Tile.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Main.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Game/VisualTile.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitPlayerThread.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Main.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/GameObs.java" />
       </list>
     </option>
   </component>
@@ -343,7 +361,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542380170986" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542380406334" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -461,7 +479,8 @@
       <workItem from="1542136023410" duration="329000" />
       <workItem from="1542296034964" duration="4171000" />
       <workItem from="1542371551764" duration="3405000" />
-      <workItem from="1542377626017" duration="2522000" />
+      <workItem from="1542377626017" duration="2795000" />
+      <workItem from="1542387371134" duration="283000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -554,26 +573,39 @@
       <option name="project" value="LOCAL" />
       <updated>1542379108944</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="threads en Visualtile commentaar">
+      <created>1542380188303</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1542380188303</updated>
+    </task>
+    <task id="LOCAL-00015" summary="gameObs commentaar, verre klaar cpain">
+      <created>1542380433406</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1542380433406</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26188000" />
+    <option name="totallyTimeSpent" value="26744000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22995462" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23373677" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Run with VisualVM" />
-      <window_info anchor="bottom" id="Debug with VisualVM" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.13387097" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.53064513" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32419354" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991131" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -586,6 +618,8 @@
       <window_info anchor="bottom" id="Messages" order="11" weight="0.28709677" />
       <window_info anchor="bottom" id="Statistic" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3292683" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="14" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="15" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -648,7 +682,9 @@
     <MESSAGE value="GameInfo commented" />
     <MESSAGE value="GameState commented" />
     <MESSAGE value="Global/Classes commentaar is klaar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Global/Classes commentaar is klaar" />
+    <MESSAGE value="threads en Visualtile commentaar" />
+    <MESSAGE value="gameObs commentaar, verre klaar cpain" />
+    <option name="LAST_COMMIT_MESSAGE" value="gameObs commentaar, verre klaar cpain" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -677,13 +713,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Connections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="18" column="86" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -815,28 +844,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
           <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
-          <folding>
-            <element signature="e#906#907#0" expanded="true" />
-            <element signature="e#945#946#0" expanded="true" />
-            <element signature="e#1006#1007#0" expanded="true" />
-            <element signature="e#1062#1063#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
-            <element signature="e#1114#1115#0" expanded="true" />
-            <element signature="e#1147#1148#0" expanded="true" />
-            <element signature="e#1175#1176#0" expanded="true" />
-            <element signature="e#1209#1210#0" expanded="true" />
-            <element signature="e#1239#1240#0" expanded="true" />
-            <element signature="e#1277#1278#0" expanded="true" />
-            <element signature="e#1311#1312#0" expanded="true" />
-            <element signature="e#1343#1344#0" expanded="true" />
-            <element signature="e#1371#1372#0" expanded="true" />
-            <element signature="e#1414#1415#0" expanded="true" />
-            <element signature="e#1448#1449#0" expanded="true" />
-            <element signature="e#1486#1487#0" expanded="true" />
-            <element signature="e#1520#1521#0" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
-            <element signature="e#1621#1622#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -861,34 +868,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/MemoryPuzzleApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/Tegel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="109" column="37" lean-forward="true" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/MemoryPuzzleApp.java" />
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/State.java" />
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/Tegel.java" />
     <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitPlayerThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13">
@@ -918,18 +900,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-208">
           <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
-          <folding>
-            <element signature="e#3313#3314#0" expanded="true" />
-            <element signature="e#3355#3356#0" expanded="true" />
-            <element signature="e#3426#3427#0" expanded="true" />
-            <element signature="e#3466#3467#0" expanded="true" />
-            <element signature="e#4820#4821#0" expanded="true" />
-            <element signature="e#4871#4872#0" expanded="true" />
-            <element signature="e#5667#5668#0" expanded="true" />
-            <element signature="e#5722#5723#0" expanded="true" />
-            <element signature="e#5876#5877#0" expanded="true" />
-            <element signature="e#5932#5933#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Connections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="18" column="86" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="79" column="6" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
         </state>
       </provider>
     </entry>

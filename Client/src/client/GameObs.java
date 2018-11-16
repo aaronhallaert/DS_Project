@@ -21,23 +21,23 @@ import javafx.beans.property.SimpleStringProperty;
 public class GameObs  {
 
     private SimpleIntegerProperty gameId;
-    private SimpleStringProperty host;
-    private SimpleStringProperty client;
+    private SimpleStringProperty clientA;
+    private SimpleStringProperty clientB;
     private SimpleIntegerProperty aantalSpelerConnected;
     private SimpleStringProperty fotoSet;
     private SimpleIntegerProperty roosterSize;
 
     public GameObs(GameInfo gameInfo){
         gameId = new SimpleIntegerProperty(gameInfo.getGameId());
-        host = new SimpleStringProperty(gameInfo.getClientA());
-        client = new SimpleStringProperty(gameInfo.getClientB());
+        clientA = new SimpleStringProperty(gameInfo.getClientA());
+        clientB = new SimpleStringProperty(gameInfo.getClientB());
         aantalSpelerConnected = new SimpleIntegerProperty(gameInfo.getAantalSpelersConnected());
         fotoSet = new SimpleStringProperty(gameInfo.getFotoSet());
         roosterSize = new SimpleIntegerProperty(gameInfo.getRoosterSize());
     }
 
     public String toString(){
-        return gameId.getValue() + ", met host: "+host.getValue()+"...";
+        return gameId.getValue() + ", met clientA: "+ clientA.getValue()+"...";
     }
 
     //getters en setters enzo
@@ -53,28 +53,28 @@ public class GameObs  {
         this.gameId.set(gameId);
     }
 
-    public String getHost() {
-        return host.get();
+    public String getClientA() {
+        return clientA.get();
     }
 
-    public SimpleStringProperty hostProperty() {
-        return host;
+    public SimpleStringProperty clientAProperty() {
+        return clientA;
     }
 
-    public void setHost(String host) {
-        this.host.set(host);
+    public void setClientA(String clientA) {
+        this.clientA.set(clientA);
     }
 
-    public String getClient() {
-        return client.get();
+    public String getClientB() {
+        return clientB.get();
     }
 
-    public SimpleStringProperty clientProperty() {
-        return client;
+    public SimpleStringProperty clientBProperty() {
+        return clientB;
     }
 
-    public void setClient(String client) {
-        this.client.set(client);
+    public void setClientB(String client) {
+        this.clientB.set(client);
     }
 
     public int getAantalSpelerConnected() {
@@ -85,9 +85,7 @@ public class GameObs  {
         return aantalSpelerConnected;
     }
 
-    public void setAantalSpelerConnected(int aantalSpelerConnected) {
-        this.aantalSpelerConnected.set(aantalSpelerConnected);
-    }
+    public void setAantalSpelerConnected(int aantalSpelerConnected) { this.aantalSpelerConnected.set(aantalSpelerConnected); }
 
     public String getFotoSet() {
         return fotoSet.get();
