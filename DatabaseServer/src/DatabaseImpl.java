@@ -1,3 +1,7 @@
+import Classes.Game;
+import Classes.GameInfo;
+import Classes.GameState;
+import Classes.Tile;
 import interfaces.DatabaseInterface;
 import com.google.common.hash.Hashing;
 
@@ -291,6 +295,102 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             se.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public ArrayList<Game> getGames() throws RemoteException {
+
+        ArrayList<Game> games= new ArrayList<>();
+        ArrayList<GameInfo>gameInfos= new ArrayList<>();
+        ArrayList<GameState> gameStates= new ArrayList<GameState>();
+
+        String sqlGameInfo= "SELECT * FROM GameInfo";
+        connect();
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sqlGameInfo);
+            ResultSet rs= pstmt.executeQuery();
+            while(rs.next()){
+                int gameId = rs.getInt("gameId");
+                String clientA= rs.getString("clientA");
+                String clientB= rs.getString("clientB");
+                int aantalSpelersConnected= rs.getInt("aantalSpelersConnected");
+                String fotoSet= rs.getString("fotoSet");
+                int roosterSize=rs.getInt("roosterSize");
+                gameInfos.add(new GameInfo(gameId, clientA, clientB, aantalSpelersConnected, fotoSet, roosterSize));
+            }
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        String sqlGameState= "SELECT * FROM GameState";
+        connect();
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sqlGameState);
+            ResultSet rs= pstmt.executeQuery();
+            while(rs.next()){
+                int gameId= rs.getInt("gameId");
+                int aantalParen= rs.getInt("aantalParen");
+                int aantalPerRij= rs.getInt("aantalPerRij");
+                String naamSpelerA= rs.getString("naamSpelerA");
+                String naamSpelerB= rs.getString("naamSpelerB");
+                int aantalPuntenSpelerA= rs.getInt("aantalPuntenSpelerA");
+                int aantalPuntenSpelerB= rs.getInt("aantalPuntenSpelerB");
+                char aandeBeurt= rs.getString("aandeBeurt").charAt(0);
+
+                int tileListId= rs.getInt("tileListId");
+                String tileListSize= rs.getString("tileListSize");
+
+                ArrayList<Tile> tiles= new ArrayList<>();
+                if(tileListSize.equals("4x4")){
+                    String sqlTiles= "SELECT * FROM TileList4x4 WHERE TileListId = ?";
+                    PreparedStatement tilepstmt= conn.prepareStatement(sqlTiles);
+                    ResultSet tilers= tilepstmt.executeQuery();
+                    ArrayList<Integer> tileIds= new ArrayList<>();
+                    while(tilers.next()){
+                        for (int i = 1; i < 17; i++) {
+                            String tile= "Tile"+i;
+                            tileIds.add(rs.getInt(tile));
+                        }
+                    }
+
+                    for (Integer tileId : tileIds) {
+                        String sqlTile= "SELECT * FROM TILE WHERE uniqueIdentifier = ?";
+                        PreparedStatement singleTilepstmt= conn.prepareStatement(sqlTile);
+                        ResultSet tile= singleTilepstmt.executeQuery();
+
+                        while(tile.next()){
+                            int uniqueIdentifier=rs.getInt("uniqueIdentifier");
+                            int id= rs.getInt("id");
+                            String imageId= rs.getString("imageId");
+                            String backImageId= rs.getString("backImageId");
+                            boolean found= rs.getBoolean("found");
+                            boolean flippedOver= rs.getBoolean("flippedOver");
+                            tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
+                        }
+
+                    }
+                }
+
+                gameStates.add(new GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tiles));
+            }
+
+            for (GameInfo gameInfo : gameInfos) {
+                for (GameState gameState : gameStates) {
+                    if(gameInfo.getGameId() == gameState.getGameId()){
+                        games.add(new Game(gameInfo.getGameId(), gameInfo, gameState));
+                    }
+                }
+            }
+
+            return games;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 

@@ -24,6 +24,7 @@ public class GameState implements Serializable {
     static int vorigeTileUniqueId;
     static int huidigeTileUniqueId;
 
+    private int gameId;
     private int aantalParen; // van het rooster
     private int aantalPerRij;// aantal tegels op 1 rij
 
@@ -62,7 +63,7 @@ public class GameState implements Serializable {
      * @param hostName de naam van de speler die de game creert
      */
     public GameState(int gameId, int dimensions, char fotoSet, String hostName) {
-
+        this.gameId=gameId;
         inboxSpelerA = new ArrayList<Commando>();
         inboxSpelerB = new ArrayList<Commando>();
 
@@ -115,6 +116,17 @@ public class GameState implements Serializable {
         //de game is nu gecreeerd
     }
 
+    public GameState(int gameId, int aantalParen, int aantalPerRij, String naamSpelerA, String naamSpelerB, int aantalPuntenSpelerA, int aantalPuntenSpelerB, char aandeBeurt, ArrayList<Tile> tegelsList) {
+        this.gameId=gameId;
+        this.aantalParen = aantalParen;
+        this.aantalPerRij = aantalPerRij;
+        this.naamSpelerA = naamSpelerA;
+        this.naamSpelerB = naamSpelerB;
+        this.aantalPuntenSpelerA = aantalPuntenSpelerA;
+        this.aantalPuntenSpelerB = aantalPuntenSpelerB;
+        this.aandeBeurt = aandeBeurt;
+        this.tegelsList = tegelsList;
+    }
 
     // aanpassing van de gameState als een 2e speler voor het eerst joint
     // todo: pas dit aan zodat mensen kunnen leaven en opnieuw joinen
@@ -450,5 +462,9 @@ public class GameState implements Serializable {
 
         System.out.println("change turn");
         return true;
+    }
+
+    public int getGameId() {
+        return gameId;
     }
 }

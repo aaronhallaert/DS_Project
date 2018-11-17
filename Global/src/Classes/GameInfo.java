@@ -12,9 +12,9 @@ public class GameInfo implements Serializable {
     private int gameId; //random gegenereerd nummer tussen 1 en 1000
     private String clientA; // de speler die de game creert
     private String clientB; // de speler die eeen gecreerede game joint
-    private Integer aantalSpelersConnected;
+    private int aantalSpelersConnected;
     private String fotoSet; // variabele die aangeeft welke preset van fotos er zal ingeladen worden
-    private Integer roosterSize; // grootte van het rooster
+    private int roosterSize; // grootte van het rooster
 
     /** wordt nergens opgeroepen, tenzij er ergens iets fout gaat (een game die niet gevonden wordt bvb)
      *      als de game niet gevonden wordt wordt een lege nieuwe game opgeroepen
@@ -44,6 +44,15 @@ public class GameInfo implements Serializable {
         this.roosterSize = dimensions;
         this.fotoSet = set+"";
 
+    }
+
+    public GameInfo(int gameId, String clientA, String clientB, int aantalSpelersConnected, String fotoSet, int roosterSize) {
+        this.gameId=gameId;
+        this.clientB=clientB;
+        this.clientA=clientA;
+        this.aantalSpelersConnected=aantalSpelersConnected;
+        this.fotoSet=fotoSet;
+        this.roosterSize=roosterSize;
     }
 
 

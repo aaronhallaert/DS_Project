@@ -26,6 +26,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             Registry myRegistry = LocateRegistry.getRegistry("localhost", 1901);
             // search for application service
             databaseImpl = (DatabaseInterface) myRegistry.lookup("DatabaseService");
+
+
+            // load alle games
+            gamesLijst=databaseImpl.getGames();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -183,9 +187,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
 
-        //zetten we dit in gameInfo of in gameState
-        // --> gameState
-       // System.out.println("AppServiceImpl : executeFlipcommando: door user: "+activeUser);
         getGameSate(currentGameId).executeCommando(commando,activeUser);
     }
 
@@ -210,7 +211,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public byte[] getImage(String naam) throws RemoteException {
-
         byte[] afbeelding = databaseImpl.getImage(naam);
         return afbeelding;
     }
@@ -224,9 +224,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public void storeImage(String naam, byte[] afbeelding) throws RemoteException{
-
         databaseImpl.storeImage(naam,afbeelding);
-
     }
 
 }

@@ -1,7 +1,10 @@
 package interfaces;
 
+import Classes.Game;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface DatabaseInterface extends Remote {
 
@@ -22,4 +25,6 @@ public interface DatabaseInterface extends Remote {
     void cancelToken(String username) throws RemoteException;
 
     String getToken(String username) throws RemoteException;
+
+    ArrayList<Game> getGames() throws RemoteException;
 }

@@ -30,6 +30,11 @@ public class Game implements Serializable {
         gameState = new GameState();
     }
 
+    public Game(int gameId, GameInfo gameInfo, GameState gameState){
+        this.gameId= gameId;
+        this.gameInfo=gameInfo;
+        this.gameState=gameState;
+    }
 
     /**
      * @param hostName

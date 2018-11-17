@@ -39,6 +39,17 @@ public class Tile implements Serializable {
         flippedOver= false;
     }
 
+    public Tile(int uniqueIdentifier, int id, String imageId, String backImageId, boolean found, boolean flippedOver) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.id = id;
+        this.imageId = imageId;
+        this.backImageId = backImageId;
+
+        //extras
+        this.found = found;
+        this.flippedOver= flippedOver;
+    }
+
     //getters en setters
     public int getUniqueIdentifier() {
         return uniqueIdentifier;
