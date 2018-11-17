@@ -15,14 +15,14 @@ public class GameState implements Serializable {
 
     // counter die kijkt hoeveel tegels er huidig open liggen, gaat altijd van 0->1->2->0
     // tegelsFlipped is dus geen counter om te kijken hoeveel kaarten er gevonden zijn
-    static int tegelsFlipped;
+    private int tegelsFlipped;
 
     // counter die gebruikt wordt om te bepalen wanneer het spel gedaan is
-    static int aantalParenFound;
+    private int aantalParenFound;
 
     // variabelen, om te controleren of de 2 kaartjes hetzelfde zijn
-    static int vorigeTileUniqueId;
-    static int huidigeTileUniqueId;
+    private int vorigeTileUniqueId;
+    private int huidigeTileUniqueId;
 
     private int gameId;
     private int aantalParen; // van het rooster
@@ -116,7 +116,7 @@ public class GameState implements Serializable {
         //de game is nu gecreeerd
     }
 
-    public GameState(int gameId, int aantalParen, int aantalPerRij, String naamSpelerA, String naamSpelerB, int aantalPuntenSpelerA, int aantalPuntenSpelerB, char aandeBeurt, ArrayList<Tile> tegelsList) {
+    public GameState(int gameId, int aantalParen, int aantalPerRij, String naamSpelerA, String naamSpelerB, int aantalPuntenSpelerA, int aantalPuntenSpelerB, char aandeBeurt, ArrayList<Tile> tegelsList, int aantalParenFound) {
         this.gameId=gameId;
         this.aantalParen = aantalParen;
         this.aantalPerRij = aantalPerRij;
@@ -126,7 +126,8 @@ public class GameState implements Serializable {
         this.aantalPuntenSpelerB = aantalPuntenSpelerB;
         this.aandeBeurt = aandeBeurt;
         this.tegelsList = tegelsList;
-
+        tegelsFlipped=0;
+        this.aantalParenFound=aantalParenFound;
         this.inboxSpelerA= new ArrayList<>();
         this.inboxSpelerB=new ArrayList<>();
     }
@@ -485,5 +486,9 @@ public class GameState implements Serializable {
 
     public void setNaamSpelerB(String naamSpelerB) {
         this.naamSpelerB = naamSpelerB;
+    }
+
+    public int getAantalParenFound() {
+        return aantalParenFound;
     }
 }

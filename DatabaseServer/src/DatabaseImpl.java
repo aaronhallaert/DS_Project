@@ -339,7 +339,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         // push game state
         String pushGameState = "INSERT INTO GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, " +
                 "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize) " +
-                "VALUES(?,?,?,?,?,?,?,?,?)";
+                "VALUES(?,?,?,?,?,?,?,?,?,?)";
         connect();
         try {
             PreparedStatement pstmtGameState=conn.prepareStatement(pushGameState);
@@ -353,7 +353,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             pstmtGameState.setInt(7, game.getGameState().getAantalPuntenSpelerB());
             pstmtGameState.setString(8, Character.toString(game.getGameState().getAandeBeurt()));
             pstmtGameState.setInt(9, game.getGameState().getTegelsList().size());
-
+            pstmtGameState.setInt(10, game.getGameState().getAantalParenFound());
             pstmtGameState.executeUpdate();
 
 
@@ -459,8 +459,10 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 String naamSpelerB= rs.getString("naamSpelerB");
                 int aantalPuntenSpelerA= rs.getInt("aantalPuntenSpelerA");
                 int aantalPuntenSpelerB= rs.getInt("aantalPuntenSpelerB");
+                int aantalParenFound= rs.getInt("aantalParenFound");
 
                 char aandeBeurt= rs.getString("aandeBeurt").charAt(0);
+
 
                 int tileListId= rs.getInt("gameId");
                 int tileListSize= rs.getInt("tileListSize");
@@ -528,7 +530,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
                     }
                 }
-                GameState gs =new GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tiles);
+                GameState gs =new GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tiles, aantalParenFound);
                 gameStates.add(gs);
             }
 
