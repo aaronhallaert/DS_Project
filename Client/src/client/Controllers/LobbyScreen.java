@@ -1,10 +1,11 @@
 package client.Controllers;
 
 import Classes.GameInfo;
+import client.CurrentGame;
 import client.GameObs;
 import client.Main;
 import client.SupportiveThreads.LobbyRefreshThread;
-import client.User;
+import client.CurrentUser;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -89,7 +90,7 @@ public class LobbyScreen {
 
     public void logout(){
         try {
-            Main.cnts.getDispatchImpl().logoutUser(User.getCurrentUser().getUsername());
+            Main.cnts.getDispatchImpl().logoutUser(CurrentUser.getInstance().getUsername());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -122,9 +123,8 @@ public class LobbyScreen {
 
             //try to join
             try {
-                if(Main.cnts.getAppImpl().join(Main.activeUser, currentGameIdAttempt)){
-                    Main.currentGameId=currentGameIdAttempt;
-
+                if(Main.cnts.getAppImpl().join(CurrentUser.getInstance().getUsername(), currentGameIdAttempt)){
+                    CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
                     // ga verder naar GAME
                     SpelViewLogica spv = new SpelViewLogica();

@@ -2,7 +2,7 @@ package client.Controllers;
 
 
 import client.Main;
-import client.User;
+import client.CurrentUser;
 import interfaces.AppServerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -51,7 +51,7 @@ public class LoginScreen {
 
     public void loginWithToken(){
         try{
-            AppServerInterface appImpl=Main.cnts.getDispatchImpl().loginWithToken(User.getCurrentUser().getToken(), User.getCurrentUser().getUsername());
+            AppServerInterface appImpl=Main.cnts.getDispatchImpl().loginWithToken(CurrentUser.getInstance().getToken(), CurrentUser.getInstance().getUsername());
 
             if(appImpl != null){
                 sessionCancelled.setVisible(false);
@@ -82,16 +82,14 @@ public class LoginScreen {
             errorLoginMessage.setVisible(false);
             sessionCancelled.setVisible(false);
             Main.cnts.setAppImpl(appImpl);
-            User.getCurrentUser().setUsername(username);
-            User.getCurrentUser().setToken(Main.cnts.getDispatchImpl().getToken(username));
+            CurrentUser.getInstance().setUsername(username);
+            CurrentUser.getInstance().setToken(Main.cnts.getDispatchImpl().getToken(username));
 
-            System.out.println(User.getCurrentUser().getUsername());
+            System.out.println(CurrentUser.getInstance().getUsername());
             System.out.println(Main.cnts.getDispatchImpl().getToken(username));
             Main.goToLobby();
             registreerLink.getScene().getWindow().hide();
 
-            //extra: set username attribuut
-            Main.activeUser = username;
 
             try {
                 updateUserFile();
@@ -114,7 +112,7 @@ public class LoginScreen {
     public void updateUserFile() throws IOException {
         FileWriter fileWriter = new FileWriter("Client/src/client/userfile.txt");
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(User.getCurrentUser().getUsername() +", " + User.getCurrentUser().getToken());
+        printWriter.print(CurrentUser.getInstance().getUsername() +", " + CurrentUser.getInstance().getToken());
         printWriter.close();
     }
 

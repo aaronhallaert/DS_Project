@@ -1,26 +1,26 @@
 package client;
 
-public class User {
-    private static User currentUser;
+public class CurrentUser {
+    private static CurrentUser currentUser;
     private String username;
     private String token;
 
 
-    private User(){}
+    private CurrentUser(){}
 
-    public static User getCurrentUser(){
+    public static CurrentUser getInstance(){
         if(currentUser==null){
-            synchronized (User.class){
+            synchronized (CurrentUser.class){
                 if(currentUser==null){
-                    currentUser= new User();
+                    currentUser= new CurrentUser();
                 }
             }
         }
         return currentUser;
     }
 
-    public static void setCurrentUser(User currentUser) {
-        User.currentUser = currentUser;
+    public static void setCurrentUser(CurrentUser currentUser) {
+        CurrentUser.currentUser = currentUser;
     }
 
     public String getUsername() {

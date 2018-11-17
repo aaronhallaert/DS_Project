@@ -6,7 +6,7 @@ import Classes.GameState;
 import Classes.Tile;
 import client.Game.VisualTile;
 import client.Main;
-import client.User;
+import client.CurrentUser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -58,8 +58,6 @@ public class SpelViewGui extends Thread {
     public void initialize() throws RemoteException, InterruptedException {
 
         //set label to values in appserver
-        int gameId = Main.currentGameId;
-
         visualTilesList = new ArrayList<VisualTile>();
 
         System.out.println("debug lijn");
@@ -143,7 +141,7 @@ public class SpelViewGui extends Thread {
         }
 
 
-        if(User.getCurrentUser().getUsername().equals(gameInfo.getClientA())){
+        if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
             mijnScore = gameState.getAantalPuntenSpelerA();
             zijnScore = gameState.getAantalPuntenSpelerB();
             if(gameInfo.getAantalSpelersConnected()==2) {

@@ -1,6 +1,7 @@
 package interfaces;
 
 import Classes.Commando;
+import Classes.Game;
 import Classes.GameInfo;
 import Classes.GameState;
 
@@ -34,6 +35,8 @@ public interface AppServerInterface extends Remote {
     boolean changeInPlayers(int currentGameId, int aantalSpelers) throws RemoteException;
 
     void leaveGame(int currentGameId, String username) throws RemoteException;
+
+    Game getGame(int currentGameId) throws RemoteException;
 
     //boolean rejoin(String activeUser, int currentGameIdAttempt) throws RemoteException;
 

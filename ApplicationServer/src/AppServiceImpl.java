@@ -95,6 +95,17 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
+    public Game getGame(int currentGameId) {
+        for (Game game : gamesLijst) {
+            if(game.getGameId()==currentGameId){
+                return game;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public GameInfo getGameInfo(int gameId) throws RemoteException {
 
         for (Game game : gamesLijst) {

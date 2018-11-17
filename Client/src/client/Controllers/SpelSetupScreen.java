@@ -1,6 +1,8 @@
 package client.Controllers;
 
+import client.CurrentGame;
 import client.Main;
+import client.CurrentUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -97,10 +99,7 @@ public class SpelSetupScreen {
         else{set = 'C';}
 
         //todo: insert logica om een state te maken, appserver shit daare
-        Main.currentGameId = Main.cnts.getAppImpl().createGame(Main.activeUser, dimensies, set);
-        Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).join(Main.activeUser);
-        //fire up spelScreen, empty?
-
+        CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(Main.cnts.getAppImpl().createGame(CurrentUser.getInstance().getUsername(), dimensies, set)));
         // opstarten spelview
         Main.goToSpel();
 
@@ -108,15 +107,6 @@ public class SpelSetupScreen {
         Platform.setImplicitExit(false);
         // hide current scene
         radioButton4X4.getScene().getWindow().hide();
-
-
-
-        //switchen naar een bepaalde key ipv Main.activeUser
-        //Main.cnts.getAppImpl().getGameData(Main.activeUser);
-        //Main.goToSpel(dimensies, set);
-
-
-
     }
 
     @FXML

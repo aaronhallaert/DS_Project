@@ -2,6 +2,7 @@ package client.SupportiveThreads;
 
 import Classes.GameInfo;
 import client.Controllers.SpelViewLogica;
+import client.CurrentGame;
 import client.Main;
 
 /**
@@ -29,9 +30,8 @@ public class WaitPlayerThread extends Thread {
 
             try {
                 System.out.println("voorlopig heb ik "+ gameInfo.getAantalSpelersConnected()+ " geconnecteerde spelers, is er verandering?");
-                if(Main.cnts.getAppImpl().changeInPlayers(Main.currentGameId, gameInfo.getAantalSpelersConnected())) {
-                    int updateValuePlayers= Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).getAantalSpelersConnected();
-
+                if(Main.cnts.getAppImpl().changeInPlayers(CurrentGame.getInstance().getGameId(), gameInfo.getAantalSpelersConnected())) {
+                    int updateValuePlayers= Main.cnts.getAppImpl().getGameInfo(CurrentGame.getInstance().getGameId()).getAantalSpelersConnected();
                     if(updateValuePlayers==2){
                         svl.bothPlayersConnected(true);
                         gameInfo.setAantalSpelersConnected(2);

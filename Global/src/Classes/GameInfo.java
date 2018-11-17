@@ -81,8 +81,23 @@ public class GameInfo implements Serializable {
 
     }
 
+    public synchronized boolean changeInPlayers(int aantalSpelers) {
+        while(aantalSpelers==aantalSpelersConnected){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
+        return true;
 
+    }
+
+    public synchronized void playerLeaves() {
+        aantalSpelersConnected--;
+        notifyAll();
+    }
 
     /* GETTERS SETTERS */
     public int getGameId() {
@@ -133,21 +148,5 @@ public class GameInfo implements Serializable {
         this.roosterSize = roosterSize;
     }
 
-    public synchronized boolean changeInPlayers(int aantalSpelers) {
-        while(aantalSpelers==aantalSpelersConnected){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
 
-        return true;
-
-    }
-
-    public synchronized void playerLeaves() {
-        aantalSpelersConnected--;
-        notifyAll();
-    }
 }

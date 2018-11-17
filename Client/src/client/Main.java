@@ -4,7 +4,6 @@ import Classes.GameInfo;
 import client.Controllers.SpelViewLogica;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +24,7 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     //globale variabelen die we vaak gebruiken
-    public static String activeUser;
     public static Connections cnts; //connectie naar de appserver, database, dispatcher
-    public static int currentGameId = 0;
 
     /**
      * wordt gebruikt om een afbeelding in te laden, maar enkel in de menu's , de kaartjes worden ingeladen met een
@@ -111,8 +108,8 @@ public class Main extends Application {
         String line= br.readLine();
         br.close();
         String[] gegevens= line.split(", ");
-        User.getCurrentUser().setUsername(gegevens[0]);
-        User.getCurrentUser().setToken(gegevens[1]);
+        CurrentUser.getInstance().setUsername(gegevens[0]);
+        CurrentUser.getInstance().setToken(gegevens[1]);
     }
 
 

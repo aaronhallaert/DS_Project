@@ -265,6 +265,8 @@ public class GameState implements Serializable {
                         executeCommandoBoth(new Commando("DRAW",1));
 
                     }
+
+
                 }
 
 

@@ -3,8 +3,9 @@ package client.SupportiveThreads;
 import Classes.GameInfo;
 import Classes.GameState;
 import client.Controllers.SpelViewLogica;
+import client.CurrentGame;
 import client.Main;
-import client.User;
+import client.CurrentUser;
 
 import java.rmi.RemoteException;
 
@@ -25,7 +26,7 @@ public class WaitOnTurn extends Thread{
     public void run() {
         super.run();
 
-        if(User.getCurrentUser().getUsername().equals(gameInfo.getClientA())){
+        if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
             myCharUser='A';
         }else{
             myCharUser='B';
@@ -33,8 +34,8 @@ public class WaitOnTurn extends Thread{
 
         while(true){
             try {
-                if(Main.cnts.getAppImpl().changeInTurn(Main.currentGameId, gameState.getAandeBeurt())){
-                    char updatedTurn= Main.cnts.getAppImpl().getGameSate(Main.currentGameId).getAandeBeurt();
+                if(Main.cnts.getAppImpl().changeInTurn(CurrentGame.getInstance().getGameId(), gameState.getAandeBeurt())){
+                    char updatedTurn= Main.cnts.getAppImpl().getGameSate(CurrentGame.getInstance().getGameId()).getAandeBeurt();
                     gameState.setAandeBeurt(updatedTurn);
                     if(updatedTurn==myCharUser){
                         System.out.println("ja tis aan mijn beurt");

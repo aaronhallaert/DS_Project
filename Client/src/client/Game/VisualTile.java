@@ -2,7 +2,9 @@ package client.Game;
 
 import Classes.Commando;
 import Classes.Tile;
+import client.CurrentGame;
 import client.Main;
+import client.CurrentUser;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,7 +18,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.ByteArrayInputStream;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 public class VisualTile extends StackPane {
@@ -114,7 +115,8 @@ public class VisualTile extends StackPane {
     private void geefFlipCommandoDoorAanAppServer(int uniqueId) {
         Commando commando = new Commando("FLIP",uniqueId);
         try {
-            Main.cnts.getAppImpl().executeFlipCommando(commando, Main.activeUser, Main.currentGameId);
+            // Main.cnts.getAppImpl().executeFlipCommando(commando, CurrentUser.getInstance().getUsername(), CurrentGame.getInstance().getGameId());
+            Main.cnts.getAppImpl().executeFlipCommando(commando, CurrentUser.getInstance().getUsername(), CurrentGame.getInstance().getGameId());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

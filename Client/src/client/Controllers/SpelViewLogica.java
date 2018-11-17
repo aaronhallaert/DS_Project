@@ -2,11 +2,12 @@ package client.Controllers;
 
 import Classes.GameInfo;
 import Classes.GameState;
+import client.CurrentGame;
 import client.Main;
 import client.SupportiveThreads.ReceiveThread;
 import client.SupportiveThreads.WaitOnTurn;
 import client.SupportiveThreads.WaitPlayerThread;
-import client.User;
+import client.CurrentUser;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,9 @@ public class SpelViewLogica extends Thread{
     private GameInfo gameInfo;
 
     private GameState gameState;
+    Thread waitPlayer;
+    Thread waitTurn;
+    Thread receiveThread;
 
 
     @Override
@@ -34,15 +38,17 @@ public class SpelViewLogica extends Thread{
 
         try {
             //lokale gameinfo halen uit "echte" gameInfo
-            gameInfo = Main.cnts.getAppImpl().getGameInfo(Main.currentGameId);
-            gameState= Main.cnts.getAppImpl().getGameSate(Main.currentGameId);
+
+            gameInfo= CurrentGame.getInstance().getGameInfo();
+            gameState= CurrentGame.getInstance().getGameState();
+
 
             System.out.println("STARTUP GAME; voorlopig zijn er "+gameInfo.getAantalSpelersConnected()+" spelers aanwezig");
             // in deze thread wacht men op een 2de speler
-            Thread waitPlayer= new WaitPlayerThread(this, gameInfo);
+            waitPlayer= new WaitPlayerThread(this, gameInfo);
             waitPlayer.start();
 
-            Thread waitTurn = new WaitOnTurn(this, gameInfo, gameState);
+            waitTurn = new WaitOnTurn(this, gameInfo, gameState);
             waitTurn.start();
 
             // laden van screen enzo
@@ -55,7 +61,7 @@ public class SpelViewLogica extends Thread{
 
 
         //in deze thread voert men de commando's uit op de andere speler zijn ding
-        Thread receiveThread = new ReceiveThread(Main.activeUser, Main.currentGameId, spvGui);
+        receiveThread = new ReceiveThread(CurrentUser.getInstance().getUsername(), CurrentGame.getInstance().getGameId(), spvGui);
         receiveThread.start();
 
 
@@ -135,8 +141,12 @@ public class SpelViewLogica extends Thread{
 
     public void leave(){
         try {
-            Main.cnts.getAppImpl().leaveGame(Main.currentGameId, User.getCurrentUser().getUsername());
-
+            waitPlayer.stop();
+            waitTurn.stop();
+            receiveThread.stop();
+            Main.cnts.getAppImpl().leaveGame(CurrentGame.getInstance().getGameInfo().getGameId(), CurrentUser.getInstance().getUsername());
+            CurrentGame.resetGame();
+            //currentThread().stop();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -154,7 +164,7 @@ public class SpelViewLogica extends Thread{
 
         int width, height = 0;
 
-        if(Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).getRoosterSize() == 4){
+        if(Main.cnts.getAppImpl().getGameInfo(CurrentGame.getInstance().getGameId()).getRoosterSize() == 4){
             System.out.println("game van 4X4");
             width = 480;
             height = 520;
