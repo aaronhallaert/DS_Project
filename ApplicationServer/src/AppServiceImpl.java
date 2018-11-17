@@ -37,11 +37,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public void receiveHelloWorld(String test) throws RemoteException {
-        System.out.println(test);
-    }
-
-    @Override
     public int createGame(String activeUser, int dimensies, char set) throws RemoteException {
 
         System.out.println("createGame in appserviceImpl triggered");
@@ -53,13 +48,12 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             gameId = (int)(Math.random() * 1000);
         }
 
-
-
-
         Game game = new Game(gameId ,activeUser, dimensies, set);
         gamesLijst.add(game);
         System.out.println("game met naam "+activeUser+" gemaakt!");
         System.out.println("gameslist grootte is nu: "+gamesLijst.size());
+
+        // TODO update database met deze game
 
         return gameId;
 
@@ -131,40 +125,22 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         //aanpassing omdat er ook nog moet gejoined worden in de gameState
         if(this.getGameInfo(currentGameIdAttempt).join(activeUser)){
-            //als de if clause lukt,
+            // als de if clause lukt,
             // dan zal het getGameState ook lukken, daarom is getGameState een void
             this.getGameSate(currentGameIdAttempt).join(activeUser);
             //setGameStatenaam nog
             return true;
         }
         else {
-            System.out.println("eerste keer joinen loopt fout in appServiceImpl.java");
+            System.out.println("joinen loopt fout in appServiceImpl.java");
             return false;
         }
 
     }
 
-    /** probeert alles op te starten bij een rejoin (dus niet de eerste keer dat we in een game komen)
-     *
-     * @param activeUser
-     * @param currentGameIdAttempt
-     * @return true als de rejoin (de join voor de 2e maal) succesvol is, false indien onmogelijk
-     * @throws RemoteException
-     */
     @Override
-    public boolean rejoin(String activeUser, int currentGameIdAttempt) throws RemoteException {
-
-        if(this.getGameInfo(currentGameIdAttempt).rejoin(activeUser)){
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean changeInPlayers(Integer aantalSpelersConnected, int currentGameId) throws RemoteException {
-        return this.getGameInfo(currentGameId).changeInPlayers(aantalSpelersConnected);
+    public boolean changeInPlayers(int currentGameId, int aantalSpelers) throws RemoteException{
+        return this.getGameInfo(currentGameId).changeInPlayers(aantalSpelers);
     }
 
 

@@ -52,7 +52,11 @@ public class GameInfo implements Serializable {
     }
 
 
-    // wordt eenmaal door speler2 opgeroepen
+    /**
+     * join game
+     * @param user naam van user die probeert te joinen
+     * @return true on success, false on fail
+     */
     public synchronized boolean join(String user){
         System.out.println("client "+ user+ " probeert te joinen");
 
@@ -60,71 +64,24 @@ public class GameInfo implements Serializable {
         if(!clientA.equals(user) && clientB.equals("")){
             clientB = user;
             aantalSpelersConnected++;
-            System.out.println("notifyke join");
             notifyAll();
-            System.out.println("join in gameInfo succesvol");
             return true;
         }
 
-        //todo: wat als er geen initiele join is -> rejoin is er dan
+        //todo: check rejoin
+        else if(clientA.equals(user) || clientB.equals(user)){
+            // rejoin
+            aantalSpelersConnected++;
+            notifyAll();
+            return true;
+        }
         else{
-            /*
-             kijken welke user het is, als de user niet klopt geef je een error
-             als speler 1,
-             als speler 2,..
-             spelerConnected++
-
-             */
             return false;
         }
 
     }
 
 
-    public synchronized boolean rejoin(String user) {
-
-        System.out.println("client "+ user+ " probeert te REjoinen");
-
-        // als het een initiele join is
-        if(clientA.equals(user)){
-            aantalSpelersConnected++;
-            System.out.println("notifyke join");
-            notifyAll();
-            System.out.println("join in gameInfo succesvol");
-            return true;
-        }
-
-        else if(clientB.equals(user)){
-            aantalSpelersConnected++;
-            System.out.println("notifyke join");
-            notifyAll();
-            System.out.println("join in gameInfo succesvol");
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    /** wordt getriggerd als speler 1 in het spel zit, en speler 2 terug joint
-     *
-     * @param currentNumberOfPlayers hoeveel spelers er gejoind zijn volgens de client
-     * @return
-     */
-    public synchronized boolean changeInPlayers(int currentNumberOfPlayers){
-
-        while(currentNumberOfPlayers==aantalSpelersConnected){
-            try {
-                System.out.println("CIP wait begin");
-                wait();
-                System.out.println("CIP wait done");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return true;
-    }
 
 
     /* GETTERS SETTERS */
@@ -156,7 +113,7 @@ public class GameInfo implements Serializable {
         return aantalSpelersConnected;
     }
 
-    public void setAantalSpelersConnected(Integer aantalSpelersConnected) {
+    public void setAantalSpelersConnected(int aantalSpelersConnected) {
         this.aantalSpelersConnected = aantalSpelersConnected;
     }
 
@@ -176,4 +133,16 @@ public class GameInfo implements Serializable {
         this.roosterSize = roosterSize;
     }
 
+    public synchronized boolean changeInPlayers(int aantalSpelers) {
+        while(aantalSpelers==aantalSpelersConnected){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return true;
+
+    }
 }

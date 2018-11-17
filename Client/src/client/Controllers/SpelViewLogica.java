@@ -1,6 +1,7 @@
 package client.Controllers;
 
 import Classes.GameInfo;
+import Classes.GameState;
 import client.Main;
 import client.SupportiveThreads.ReceiveThread;
 import client.SupportiveThreads.WaitPlayerThread;
@@ -21,6 +22,8 @@ public class SpelViewLogica extends Thread{
     //lokale gameinfo
     private GameInfo gameInfo;
 
+    private GameState gameState;
+
 
     @Override
     public void run() {
@@ -28,7 +31,7 @@ public class SpelViewLogica extends Thread{
         try {
             //lokale gameinfo halen uit "echte" gameInfo
             gameInfo = Main.cnts.getAppImpl().getGameInfo(Main.currentGameId);
-
+            gameState= Main.cnts.getAppImpl().getGameSate(Main.currentGameId);
             // laden van screen enzo
             spvGui = loadAndSetGui();
         } catch (RemoteException e) {
@@ -53,14 +56,13 @@ public class SpelViewLogica extends Thread{
     /**
      * deze methode zorgt ervoor dat er niet geklikt kan worden op de kaarten als de 2de speler niet aanwezig is
      */
-    public void changeInNumberOfPlayers(){
-        if(!spvGui.isMouseClickEnabled()){
-            spvGui.enableMouseClick();}
-
+    public void bothPlayersConnected(boolean b){
+        if(b) {
+            spvGui.enableMouseClick();
+        }
         else{
             spvGui.disableMouseClick();
         }
-
     }
 
 
@@ -71,18 +73,23 @@ public class SpelViewLogica extends Thread{
      * @throws RemoteException
      */
     private SpelViewGui loadAndSetGui() throws RemoteException {
+
+        System.out.println("load and set gui");
         Parent root = null;
         SpelViewGui controller =null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Views/spelViewGui.fxml"));
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
+            controller.setLogic(this);
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         Parent finalRoot = root;
+        SpelViewGui finalController = controller;
         Platform.runLater(
                 () -> {
                     Stage spelViewStage= new Stage();
@@ -100,6 +107,7 @@ public class SpelViewLogica extends Thread{
                     spelViewStage.setScene(startScene);
                     spelViewStage.setResizable(false);
                     spelViewStage.show();
+                    finalController.setup(gameInfo, gameState);
                 }
         );
 
@@ -111,6 +119,9 @@ public class SpelViewLogica extends Thread{
 
         return controller;
     }
+
+
+
 
     /**
      * screen size variabel afhankelijk van de grootte van het rooster

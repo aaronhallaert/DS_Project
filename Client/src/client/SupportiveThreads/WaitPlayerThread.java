@@ -29,10 +29,22 @@ public class WaitPlayerThread extends Thread {
 
             try {
 
-                if(Main.cnts.getAppImpl().changeInPlayers(gameInfo.getAantalSpelersConnected(), Main.currentGameId)) {
-                    svl.changeInNumberOfPlayers();
-                    gameInfo.setAantalSpelersConnected(Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).getAantalSpelersConnected());
-                    System.out.println("aantal players is verandert, mouseclick wordt al dan niet gedisabled");
+                if(Main.cnts.getAppImpl().changeInPlayers(Main.currentGameId, gameInfo.getAantalSpelersConnected())) {
+                    int updateValuePlayers= Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).getAantalSpelersConnected();
+
+                    if(updateValuePlayers==2){
+                        svl.bothPlayersConnected(true);
+                        gameInfo.setAantalSpelersConnected(2);
+                        System.out.println("beide spelers zijn geconnecteerd");
+                    }
+                    else{
+                        svl.bothPlayersConnected(false);
+                        gameInfo.setAantalSpelersConnected(updateValuePlayers);
+                        System.out.println("niet alle spelers zijn geconnecteerd");
+                    }
+
+
+
                 }
 
             }

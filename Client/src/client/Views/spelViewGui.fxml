@@ -20,8 +20,8 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="aanDeBeurtLabel" layoutX="310.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="mijn score:" />
-      <Label fx:id="aanDeBeurtLabel" layoutX="310.0" layoutY="41.0" prefHeight="17.0" prefWidth="77.0" text="zijn score:" />
+      <Label layoutX="310.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="mijn score:"/>
+      <Label layoutX="310.0" layoutY="41.0" prefHeight="17.0" prefWidth="77.0" text="zijn score:"/>
       <Label fx:id="mijnScoreLabel" layoutX="387.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="0" />
       <Label fx:id="zijnScoreLabel" layoutX="387.0" layoutY="41.0" prefHeight="17.0" prefWidth="77.0" text="0" />
       <Button fx:id="leave" layoutX="426.0" layoutY="25.0" mnemonicParsing="false" onAction="#leaveGame" text="leave" />

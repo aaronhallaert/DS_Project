@@ -74,6 +74,7 @@ public class GameState implements Serializable {
         vorigeTileUniqueId = -1;
 
         naamSpelerA = hostName;
+        naamSpelerB="";
 
         aantalParen = dimensions * dimensions / 2;
         aantalPerRij = dimensions;
@@ -116,8 +117,11 @@ public class GameState implements Serializable {
     // aanpassing van de gameState als een 2e speler voor het eerst joint
     // todo: pas dit aan zodat mensen kunnen leaven en opnieuw joinen
     public void join(String secondUserName) {
-        naamSpelerB = secondUserName;
-        System.out.println("join in gameState succesvol");
+        if(naamSpelerA!=null && naamSpelerB.equals("")){
+            naamSpelerB = secondUserName;
+            System.out.println("join in gameState succesvol");
+        }
+
     }
 
     // nadat iets in de inbox van een speler is gekomen, wordt die speler getriggerd om zijn mailbox te bekijken en
@@ -395,4 +399,23 @@ public class GameState implements Serializable {
         return tegelsList;
     }
 
+    public int getAantalPuntenSpelerA() {
+        return aantalPuntenSpelerA;
+    }
+
+    public void setAantalPuntenSpelerA(int aantalPuntenSpelerA) {
+        this.aantalPuntenSpelerA = aantalPuntenSpelerA;
+    }
+
+    public int getAantalPuntenSpelerB() {
+        return aantalPuntenSpelerB;
+    }
+
+    public void setAantalPuntenSpelerB(int aantalPuntenSpelerB) {
+        this.aantalPuntenSpelerB = aantalPuntenSpelerB;
+    }
+
+    public void setTegelsList(ArrayList<Tile> tegelsList) {
+        this.tegelsList = tegelsList;
+    }
 }

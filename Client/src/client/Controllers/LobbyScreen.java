@@ -5,6 +5,7 @@ import client.GameObs;
 import client.Main;
 import client.SupportiveThreads.LobbyRefreshThread;
 import client.User;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -54,8 +55,6 @@ public class LobbyScreen {
     public void initialize(){
 
         try {
-            Main.cnts.getAppImpl().receiveHelloWorld("hello world");
-
             // eerste maal de gamesLijst van de appserver halen en visualiseren en de datatable
             gameInfoList = Main.cnts.getAppImpl().getGameInfoLijst();
 
@@ -115,6 +114,7 @@ public class LobbyScreen {
         GameObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
         if(deGameToJoin == null){
             //geef iets van info dat je geen game gekozen hebt
+            System.out.println("er bestaat geen dergelijke game");
         }
         else {
             //join this game
@@ -124,25 +124,19 @@ public class LobbyScreen {
             try {
                 if(Main.cnts.getAppImpl().join(Main.activeUser, currentGameIdAttempt)){
                     Main.currentGameId=currentGameIdAttempt;
-//                    spelSetup.getScene().getWindow().hide();
+
+
+                    // ga verder naar GAME
                     SpelViewLogica spv = new SpelViewLogica();
                     spv.start();
+
+                    Platform.setImplicitExit(false);
+                    spelSetup.getScene().getWindow().hide();
                 }
                 else{ // als geen successvolle join
-                    System.out.println("joinen voor een 2e keer!!!!! implementeer dit a broer");
-                    System.out.println("Lobbyscreen.java : join methode");
 
-                    if(Main.cnts.getAppImpl().rejoin(Main.activeUser, currentGameIdAttempt)){
-
-                        SpelViewLogica spv = new SpelViewLogica();
-                        spv.start();
-
-                    }
-                    else{
-                        System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
-                        //todo: laat iets zien ivm foute / slechte join : er is al reeds een 2e speler
-                    }
-
+                    System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
+                    //todo: laat iets zien ivm foute / slechte join : er is al reeds een 2e speler
 
                 }
 

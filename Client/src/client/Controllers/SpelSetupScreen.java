@@ -1,6 +1,7 @@
 package client.Controllers;
 
 import client.Main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -99,15 +100,19 @@ public class SpelSetupScreen {
         Main.currentGameId = Main.cnts.getAppImpl().createGame(Main.activeUser, dimensies, set);
         Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).join(Main.activeUser);
         //fire up spelScreen, empty?
-        //radioButton4X4.getScene().getWindow().hide();
+
+        // opstarten spelview
         Main.goToSpel();
+
+        //dit is nodig zodat de UI thread niet stopt na het hiden van deze window
+        Platform.setImplicitExit(false);
+        // hide current scene
+        radioButton4X4.getScene().getWindow().hide();
 
 
 
         //switchen naar een bepaalde key ipv Main.activeUser
         //Main.cnts.getAppImpl().getGameData(Main.activeUser);
-
-
         //Main.goToSpel(dimensies, set);
 
 

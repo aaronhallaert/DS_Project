@@ -11,8 +11,6 @@ import java.util.List;
 
 public interface AppServerInterface extends Remote {
 
-    void receiveHelloWorld(String test) throws RemoteException;
-
     int createGame(String activeUser, int dimensies, char set) throws RemoteException;
 
     ArrayList<GameInfo> getGameInfoLijst() throws RemoteException;
@@ -23,8 +21,6 @@ public interface AppServerInterface extends Remote {
 
     boolean join(String activeUser, int currentGameIdAttempt) throws RemoteException;
 
-    boolean changeInPlayers(Integer aantalSpelersConnected, int currentGameId) throws RemoteException;
-
     void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException;
 
     public List<Commando> getInbox(String userName, int gameId) throws RemoteException;
@@ -33,7 +29,9 @@ public interface AppServerInterface extends Remote {
 
     void storeImage(String naamFoto, byte[] afbeelding) throws RemoteException;
 
-    boolean rejoin(String activeUser, int currentGameIdAttempt) throws RemoteException;
+    boolean changeInPlayers(int currentGameId, int aantalSpelers) throws RemoteException;
+
+    //boolean rejoin(String activeUser, int currentGameIdAttempt) throws RemoteException;
 
     //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
 
