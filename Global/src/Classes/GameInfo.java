@@ -145,4 +145,9 @@ public class GameInfo implements Serializable {
         return true;
 
     }
+
+    public synchronized void playerLeaves() {
+        aantalSpelersConnected--;
+        notifyAll();
+    }
 }

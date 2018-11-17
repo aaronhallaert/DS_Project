@@ -28,7 +28,7 @@ public class WaitPlayerThread extends Thread {
         while(true) {
 
             try {
-
+                System.out.println("voorlopig heb ik "+ gameInfo.getAantalSpelersConnected()+ " geconnecteerde spelers, is er verandering?");
                 if(Main.cnts.getAppImpl().changeInPlayers(Main.currentGameId, gameInfo.getAantalSpelersConnected())) {
                     int updateValuePlayers= Main.cnts.getAppImpl().getGameInfo(Main.currentGameId).getAantalSpelersConnected();
 

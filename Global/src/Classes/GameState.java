@@ -40,6 +40,8 @@ public class GameState implements Serializable {
     private int aantalPuntenSpelerA;
     private int aantalPuntenSpelerB;
 
+    private char aandeBeurt='A';
+
     //elke tegel moet bijgehouden worden, een tegel kan gewoon meerdere shit bevatten
     private ArrayList<Tile> tegelsList; // Tile = datastructuur voor in de AS, wordt dan geconvergeert naar VisualTile
                                         // in de client
@@ -285,12 +287,20 @@ public class GameState implements Serializable {
                 //de beurt is nu aan de volgende speler
                 executeCommandoBoth(new Commando("SWITCH", 1));// 1 is testwaarde, zodat we hem toch gaan vinden
 
+                if(aandeBeurt=='A'){
+                    aandeBeurt='B';
+                }
+                else{
+                    aandeBeurt='A';
+                }
+
             }
 
 
             //reset de counter die telt hoeveel tegels er openliggen
             tegelsFlipped = 0;
         }
+        notifyAll();
 
     }
 
@@ -345,14 +355,14 @@ public class GameState implements Serializable {
      */
     public synchronized List<Commando> getInbox(String userName) {
 
-        System.out.println("GameState: getInbox door user"+userName);
+       // System.out.println("GameState: getInbox door user"+userName);
         if (userName.equals(naamSpelerA)) {
 
             while (inboxSpelerA.isEmpty()) {
                 try {
-                    System.out.println("inbox is leeg, wait started");
+                    //System.out.println("inbox is leeg, wait started");
                     wait();
-                    System.out.println("iets nieuws in de inbox van user " + naamSpelerA + ": wait stopped");
+                    //System.out.println("iets nieuws in de inbox van user " + naamSpelerA + ": wait stopped");
                 }catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -360,7 +370,7 @@ public class GameState implements Serializable {
 
             List<Commando> inbox = new ArrayList<Commando>(inboxSpelerA);
             inboxSpelerA.clear();
-            System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
+            //System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
             //miss moet de inbox nu leeggemaakt worden
             return inbox;
 
@@ -368,16 +378,16 @@ public class GameState implements Serializable {
 
             while (inboxSpelerB.isEmpty()) {
                 try {
-                    System.out.println("inbox is leeg, wait started");
+                    //System.out.println("inbox is leeg, wait started");
                     wait();
-                    System.out.println("iets nieuws in de inbox van usser"+naamSpelerB+" : wait stopped");
+                    //System.out.println("iets nieuws in de inbox van usser"+naamSpelerB+" : wait stopped");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
             List<Commando> inbox = new ArrayList<Commando>(inboxSpelerB);
             inboxSpelerB.clear();
-            System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
+          //  System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
             //miss moet de inbox nu leeggemaakt worden
             return inbox;
 
@@ -417,5 +427,26 @@ public class GameState implements Serializable {
 
     public void setTegelsList(ArrayList<Tile> tegelsList) {
         this.tegelsList = tegelsList;
+    }
+
+    public char getAandeBeurt() {
+        return aandeBeurt;
+    }
+
+    public void setAandeBeurt(char aandeBeurt) {
+        this.aandeBeurt = aandeBeurt;
+    }
+
+    public synchronized boolean changeInTurn(char userTurn) {
+        while(userTurn==this.aandeBeurt){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("change turn");
+        return true;
     }
 }

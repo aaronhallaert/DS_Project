@@ -34,7 +34,7 @@ public class ReceiveThread extends Thread {
         while(true){
             try{
                 for(Commando c : Main.cnts.getAppImpl().getInbox(userName,gameId)){
-                    System.out.println("commando gevonden, proberen te executen");
+                    //System.out.println("commando gevonden, proberen te executen");
                     Platform.runLater(()->{
                         spv.executeCommando(c);
                     });

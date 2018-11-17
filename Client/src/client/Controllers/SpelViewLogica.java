@@ -4,7 +4,9 @@ import Classes.GameInfo;
 import Classes.GameState;
 import client.Main;
 import client.SupportiveThreads.ReceiveThread;
+import client.SupportiveThreads.WaitOnTurn;
 import client.SupportiveThreads.WaitPlayerThread;
+import client.User;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,24 +30,35 @@ public class SpelViewLogica extends Thread{
     @Override
     public void run() {
 
+
+
         try {
             //lokale gameinfo halen uit "echte" gameInfo
             gameInfo = Main.cnts.getAppImpl().getGameInfo(Main.currentGameId);
             gameState= Main.cnts.getAppImpl().getGameSate(Main.currentGameId);
+
+            System.out.println("STARTUP GAME; voorlopig zijn er "+gameInfo.getAantalSpelersConnected()+" spelers aanwezig");
+            // in deze thread wacht men op een 2de speler
+            Thread waitPlayer= new WaitPlayerThread(this, gameInfo);
+            waitPlayer.start();
+
+            Thread waitTurn = new WaitOnTurn(this, gameInfo, gameState);
+            waitTurn.start();
+
             // laden van screen enzo
             spvGui = loadAndSetGui();
+
+
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
 
-        // in deze thread wacht men op een 2de speler
-        Thread waitPlayer= new WaitPlayerThread(this, gameInfo);
-        waitPlayer.start();
-
         //in deze thread voert men de commando's uit op de andere speler zijn ding
         Thread receiveThread = new ReceiveThread(Main.activeUser, Main.currentGameId, spvGui);
         receiveThread.start();
+
+
 
 
 
@@ -120,7 +133,15 @@ public class SpelViewLogica extends Thread{
         return controller;
     }
 
+    public void leave(){
+        try {
+            Main.cnts.getAppImpl().leaveGame(Main.currentGameId, User.getCurrentUser().getUsername());
 
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     /**
@@ -150,6 +171,15 @@ public class SpelViewLogica extends Thread{
         values.add(height);
         return values;
 
+    }
+
+    public void myTurn(boolean b) {
+        if(b){
+            spvGui.enableMouseClick();
+        }
+        else{
+            spvGui.disableMouseClick();
+        }
     }
 
     //hier komt methode die pollet naar commando's in de mailbox op de appserver

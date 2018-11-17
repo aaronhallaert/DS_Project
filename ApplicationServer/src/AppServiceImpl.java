@@ -140,9 +140,25 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public boolean changeInPlayers(int currentGameId, int aantalSpelers) throws RemoteException{
-        return this.getGameInfo(currentGameId).changeInPlayers(aantalSpelers);
+        if(this.getGameInfo(currentGameId).changeInPlayers(aantalSpelers)){
+            System.out.println("er is verandering in users ontdekt");
+            return true;
+        }else{
+            System.out.println("er geen verandering in users ontdekt");
+            return false;
+        }
+
     }
 
+    @Override
+    public void leaveGame(int currentGameId, String username) throws RemoteException {
+        this.getGameInfo(currentGameId).playerLeaves();
+    }
+
+    @Override
+    public boolean changeInTurn(int currentGameId, char userTurn) throws RemoteException{
+        return this.getGameSate(currentGameId).changeInTurn(userTurn);
+    }
 
     /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
      *  omdraaien door het commando in z'n inbox te laten verschijnen, die 2e speler pullt dan het commando en executet
@@ -158,20 +174,21 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         //zetten we dit in gameInfo of in gameState
         // --> gameState
-        System.out.println("AppServiceImpl : executeFlipcommando: door user: "+activeUser);
+       // System.out.println("AppServiceImpl : executeFlipcommando: door user: "+activeUser);
         getGameSate(currentGameId).executeCommando(commando,activeUser);
     }
 
     @Override
     public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
 
-        System.out.println("AppServiceImpl : getInbox: door user: "+userName);
+       // System.out.println("AppServiceImpl : getInbox: door user: "+userName);
         return getGameSate(currentGameId).getInbox(userName);
 
 
 
     }
     //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
+
 
 
     /**

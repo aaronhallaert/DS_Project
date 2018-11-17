@@ -70,8 +70,7 @@ public class SpelViewGui extends Thread {
         // inladen van de game
         setupGame(gameInfo, gameState);
 
-        //disable alle muisclicks, vanaf er een 2de speler bijkomt zal dit terug geenabled worden
-        this.disableMouseClick();
+
     }
 
 
@@ -97,9 +96,11 @@ public class SpelViewGui extends Thread {
     public void leaveGame(){
         // stop dit
         // stop de thread
+        //todo: fix die juiste stop ier tho, das lijk nog nen belangrijken
+        svl.leave();
+
         leave.getScene().getWindow().hide();
 
-        //todo: fix die juiste stop ier tho, das lijk nog nen belangrijken
 
         Main.goToLobby();
     }
@@ -145,10 +146,37 @@ public class SpelViewGui extends Thread {
         if(User.getCurrentUser().getUsername().equals(gameInfo.getClientA())){
             mijnScore = gameState.getAantalPuntenSpelerA();
             zijnScore = gameState.getAantalPuntenSpelerB();
+            if(gameInfo.getAantalSpelersConnected()==2) {
+                if (gameState.getAandeBeurt() == 'A') {
+                    System.out.println("welkom terug, jouw beurt");
+                    enableMouseClick();
+                } else {
+                    System.out.println("welkom terug, niet jouw beurt");
+                    disableMouseClick();
+                }
+            }
+            else{
+                System.out.println("welkom terug, 2de speler is weg");
+                disableMouseClick();
+            }
         }
         else{
             zijnScore = gameState.getAantalPuntenSpelerA();
             mijnScore = gameState.getAantalPuntenSpelerB();
+            if(gameInfo.getAantalSpelersConnected()==2) {
+                if (gameState.getAandeBeurt() == 'B') {
+                    System.out.println("welkom terug, jouw beurt");
+                    enableMouseClick();
+                } else {
+                    System.out.println("welkom terug, niet jouw beurt");
+                    disableMouseClick();
+                }
+            }
+            else{
+                System.out.println("welkom terug, 2de speler is weg");
+                disableMouseClick();
+            }
+
         }
         mijnScoreLabel.setText(Integer.toString(mijnScore));
         zijnScoreLabel.setText(Integer.toString(zijnScore));
@@ -173,15 +201,13 @@ public class SpelViewGui extends Thread {
         }
         else if(commando.getType().equals("SWITCH")){
 
-            if(isMouseClickEnabled()){
-                disableMouseClick();
-            }
-            else{enableMouseClick();}
+            //TODO ik denk dat dit commando weg mag met huidige implementatie
+
 
         }
         else if(commando.getType().equals("LOCK")){
 
-            System.out.println("disabling tile met nummer :"+uniqueTileId);
+            //System.out.println("disabling tile met nummer :"+uniqueTileId);
             deTile.setDisable(true);
 
         }

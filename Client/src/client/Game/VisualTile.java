@@ -101,7 +101,7 @@ public class VisualTile extends StackPane {
      *
      */
     private void handleMouseClick(MouseEvent mouseEvent) {
-        System.out.println("tile clicked");
+        //System.out.println("tile clicked");
         stVerbergAchterkant.play();
         geefFlipCommandoDoorAanAppServer(this.getUniqueId());
     }
