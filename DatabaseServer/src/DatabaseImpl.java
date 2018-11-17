@@ -389,6 +389,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         catch (SQLException e){
             e.printStackTrace();
         }
+        closeConnection();
 
         return null;
     }
