@@ -55,6 +55,25 @@ public class SpelViewLogica extends Thread{
             spvGui = loadAndSetGui();
 
 
+            // ALS HET AAN MIJN BEURT IS DAN MAGK KLIKKEN EN ALS ER 2 SPELERS GECONNECTEERD ZIJN
+            if(CurrentGame.getInstance().getGameInfo().getAantalSpelersConnected()==2){
+                char myCharUser;
+                if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
+                    myCharUser='A';
+                }else{
+                    myCharUser='B';
+                }
+                if(CurrentGame.getInstance().getGameState().getAandeBeurt()==myCharUser){
+                    myTurn(true);
+                }
+                else{
+                    myTurn(false);
+                }
+                }
+            else{
+                spvGui.disableMouseClick();
+            }
+
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -74,14 +93,26 @@ public class SpelViewLogica extends Thread{
 
     /**
      * deze methode zorgt ervoor dat er niet geklikt kan worden op de kaarten als de 2de speler niet aanwezig is
+     * indien ze dan toch beide aanwezig zijn, wordt eerst nog gecontroleerd of het wel "mijn" beurt is
      */
-    public void bothPlayersConnected(boolean b){
-        if(b) {
-            spvGui.enableMouseClick();
+    public void bothPlayersConnected(boolean b){char myCharUser;
+        if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
+            myCharUser='A';
+        }else{
+            myCharUser='B';
+        }
+        if(CurrentGame.getInstance().getGameState().getAandeBeurt()==myCharUser){
+            if(b) {
+                spvGui.enableMouseClick();
+            }
+            else{
+                spvGui.disableMouseClick();
+            }
         }
         else{
             spvGui.disableMouseClick();
         }
+
     }
 
 

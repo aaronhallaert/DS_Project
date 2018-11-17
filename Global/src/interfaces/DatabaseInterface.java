@@ -26,5 +26,7 @@ public interface DatabaseInterface extends Remote {
 
     String getToken(String username) throws RemoteException;
 
+    void pushGames(ArrayList<Game> games) throws RemoteException;
+
     ArrayList<Game> getGames() throws RemoteException;
 }

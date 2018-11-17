@@ -33,6 +33,8 @@ public class WaitOnTurn extends Thread{
         }
 
         while(true){
+
+
             try {
                 if(Main.cnts.getAppImpl().changeInTurn(CurrentGame.getInstance().getGameId(), gameState.getAandeBeurt())){
                     char updatedTurn= Main.cnts.getAppImpl().getGameSate(CurrentGame.getInstance().getGameId()).getAandeBeurt();

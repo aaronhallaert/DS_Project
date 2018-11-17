@@ -298,6 +298,128 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
     @Override
+    public void pushGames(ArrayList<Game> games) throws RemoteException{
+        for (Game game : games) {
+
+            // push game state
+            pushGameState(game);
+
+            // push tegellijst
+            pushTegellijst(game, game.getGameState().getTegelsList().size());
+
+
+
+            // push Game Info
+            pushGameInfo(game);
+
+
+        }
+    }
+    public void pushGameInfo(Game game){
+        String pushGameInfo= "INSERT INTO GameInfo(gameId, clientA, clientB, aantalSpelersConnected, fotoSet, roosterSize) " +
+                "VALUES (?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement pstmtGameInfo= conn.prepareStatement(pushGameInfo);
+
+            pstmtGameInfo.setInt(1,game.getGameId());
+            pstmtGameInfo.setString(2, game.getGameInfo().getClientA());
+            pstmtGameInfo.setString(3, game.getGameInfo().getClientB());
+            pstmtGameInfo.setInt(4,game.getGameInfo().getAantalSpelersConnected());
+            pstmtGameInfo.setString(5, game.getGameInfo().getFotoSet());
+            pstmtGameInfo.setInt(6,game.getGameInfo().getRoosterSize());
+
+            pstmtGameInfo.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void pushGameState(Game game){
+        // push game state
+        String pushGameState = "INSERT INTO GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, " +
+                "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize) " +
+                "VALUES(?,?,?,?,?,?,?,?,?)";
+        connect();
+        try {
+            PreparedStatement pstmtGameState=conn.prepareStatement(pushGameState);
+
+            pstmtGameState.setInt(1, game.getGameId());
+            pstmtGameState.setInt(2, game.getGameState().getAantalParen());
+            pstmtGameState.setInt(3, game.getGameState().getAantalPerRij());
+            pstmtGameState.setString(4, game.getGameState().getNaamSpelerA());
+            pstmtGameState.setString(5, game.getGameState().getNaamSpelerB());
+            pstmtGameState.setInt(6, game.getGameState().getAantalPuntenSpelerA());
+            pstmtGameState.setInt(7, game.getGameState().getAantalPuntenSpelerB());
+            pstmtGameState.setString(8, Character.toString(game.getGameState().getAandeBeurt()));
+            pstmtGameState.setInt(9, game.getGameState().getTegelsList().size());
+
+            pstmtGameState.executeUpdate();
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pushTegellijst(Game game, int size){
+        StringBuilder sb= new StringBuilder();
+        if (size == 16) {
+            sb.append("INSERT INTO TileList4x4(gameId");
+        }
+        else if (size==36){
+            sb.append("INSERT INTO TileList6x6(gameId");
+        }
+
+        for (int i = 1; i < size+1; i++) {
+            sb.append(", Tile").append(i);
+        }
+        sb.append(") VALUES(?");
+        for (int i = 0; i < size; i++) {
+            sb.append(",?");
+        }
+        sb.append(")");
+
+        String pushList= sb.toString();
+        try {
+            PreparedStatement pstmtTegelLijst = conn.prepareStatement(pushList);
+            pstmtTegelLijst.setInt(1, game.getGameId());
+
+            // push elke tegel
+            int i=2;
+            for (Tile tile : game.getGameState().getTegelsList()) {
+                String pushTegel = "INSERT INTO Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver)" +
+                        "VALUES(?,?,?,?,?,?)";
+
+
+                PreparedStatement pstmtTegel = conn.prepareStatement(pushTegel);
+
+                pstmtTegel.setInt(1, tile.getUniqueIdentifier());
+                pstmtTegel.setInt(2, tile.getId());
+                pstmtTegel.setString(3, tile.getImageId());
+                pstmtTegel.setString(4, tile.getBackImageId());
+                pstmtTegel.setBoolean(5, tile.isFound());
+                pstmtTegel.setBoolean(6, tile.isFlippedOver());
+
+                pstmtTegel.executeUpdate();
+
+                pstmtTegelLijst.setInt(i,tile.getUniqueIdentifier());
+                i++;
+
+
+
+            }
+
+            pstmtTegelLijst.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    @Override
     public ArrayList<Game> getGames() throws RemoteException {
 
         ArrayList<Game> games= new ArrayList<>();
@@ -337,43 +459,77 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 String naamSpelerB= rs.getString("naamSpelerB");
                 int aantalPuntenSpelerA= rs.getInt("aantalPuntenSpelerA");
                 int aantalPuntenSpelerB= rs.getInt("aantalPuntenSpelerB");
+
                 char aandeBeurt= rs.getString("aandeBeurt").charAt(0);
 
-                int tileListId= rs.getInt("tileListId");
-                String tileListSize= rs.getString("tileListSize");
+                int tileListId= rs.getInt("gameId");
+                int tileListSize= rs.getInt("tileListSize");
 
                 ArrayList<Tile> tiles= new ArrayList<>();
-                if(tileListSize.equals("4x4")){
-                    String sqlTiles= "SELECT * FROM TileList4x4 WHERE TileListId = ?";
+                if(tileListSize==16){
+                    String sqlTiles= "SELECT * FROM TileList4x4 WHERE gameId = ?";
                     PreparedStatement tilepstmt= conn.prepareStatement(sqlTiles);
+                    tilepstmt.setString(1, Integer.toString(tileListId));
                     ResultSet tilers= tilepstmt.executeQuery();
                     ArrayList<Integer> tileIds= new ArrayList<>();
                     while(tilers.next()){
                         for (int i = 1; i < 17; i++) {
                             String tile= "Tile"+i;
-                            tileIds.add(rs.getInt(tile));
+                            tileIds.add(tilers.getInt(tile));
                         }
                     }
 
                     for (Integer tileId : tileIds) {
                         String sqlTile= "SELECT * FROM TILE WHERE uniqueIdentifier = ?";
                         PreparedStatement singleTilepstmt= conn.prepareStatement(sqlTile);
+                        singleTilepstmt.setString(1, Integer.toString(tileId));
                         ResultSet tile= singleTilepstmt.executeQuery();
-
+            
                         while(tile.next()){
-                            int uniqueIdentifier=rs.getInt("uniqueIdentifier");
-                            int id= rs.getInt("id");
-                            String imageId= rs.getString("imageId");
-                            String backImageId= rs.getString("backImageId");
-                            boolean found= rs.getBoolean("found");
-                            boolean flippedOver= rs.getBoolean("flippedOver");
+                            int uniqueIdentifier=tile.getInt("uniqueIdentifier");
+                            int id= tile.getInt("id");
+                            String imageId= tile.getString("imageId");
+                            String backImageId= tile.getString("backImageId");
+                            boolean found= tile.getBoolean("found");
+                            boolean flippedOver= tile.getBoolean("flippedOver");
                             tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
                         }
 
                     }
                 }
+                else{
+                    String sqlTiles= "SELECT * FROM TileList6x6 WHERE gameId = ?";
+                    PreparedStatement tilepstmt= conn.prepareStatement(sqlTiles);
+                    tilepstmt.setString(1, Integer.toString(tileListId));
+                    ResultSet tilers= tilepstmt.executeQuery();
+                    ArrayList<Integer> tileIds= new ArrayList<>();
+                    while(tilers.next()){
+                        for (int i = 1; i < 37; i++) {
+                            String tile= "Tile"+i;
+                            tileIds.add(tilers.getInt(tile));
+                        }
+                    }
 
-                gameStates.add(new GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tiles));
+                    for (Integer tileId : tileIds) {
+                        String sqlTile= "SELECT * FROM TILE WHERE uniqueIdentifier = ?";
+                        PreparedStatement singleTilepstmt= conn.prepareStatement(sqlTile);
+                        singleTilepstmt.setString(1, Integer.toString(tileId));
+                        ResultSet tile= singleTilepstmt.executeQuery();
+
+                        while(tile.next()){
+                            int uniqueIdentifier=tile.getInt("uniqueIdentifier");
+                            int id= tile.getInt("id");
+                            String imageId= tile.getString("imageId");
+                            String backImageId= tile.getString("backImageId");
+                            boolean found= tile.getBoolean("found");
+                            boolean flippedOver= tile.getBoolean("flippedOver");
+                            tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
+                        }
+
+                    }
+                }
+                GameState gs =new GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tiles);
+                gameStates.add(gs);
             }
 
             for (GameInfo gameInfo : gameInfos) {

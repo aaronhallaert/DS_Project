@@ -35,7 +35,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             e.printStackTrace();
         }
 
-        gamesLijst = new ArrayList<Game>();
+        //gamesLijst = new ArrayList<>();
         System.out.println("gamesList created");
 
     }
@@ -168,6 +168,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void leaveGame(int currentGameId, String username) throws RemoteException {
         this.getGameInfo(currentGameId).playerLeaves();
+        databaseImpl.pushGames(gamesLijst);
     }
 
     @Override

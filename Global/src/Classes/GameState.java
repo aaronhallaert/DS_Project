@@ -126,6 +126,9 @@ public class GameState implements Serializable {
         this.aantalPuntenSpelerB = aantalPuntenSpelerB;
         this.aandeBeurt = aandeBeurt;
         this.tegelsList = tegelsList;
+
+        this.inboxSpelerA= new ArrayList<>();
+        this.inboxSpelerB=new ArrayList<>();
     }
 
     // aanpassing van de gameState als een 2e speler voor het eerst joint
@@ -466,5 +469,21 @@ public class GameState implements Serializable {
 
     public int getGameId() {
         return gameId;
+    }
+
+    public String getNaamSpelerA() {
+        return naamSpelerA;
+    }
+
+    public void setNaamSpelerA(String naamSpelerA) {
+        this.naamSpelerA = naamSpelerA;
+    }
+
+    public String getNaamSpelerB() {
+        return naamSpelerB;
+    }
+
+    public void setNaamSpelerB(String naamSpelerB) {
+        this.naamSpelerB = naamSpelerB;
     }
 }
