@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/CurrentGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/CurrentGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewLogica.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,6 +56,20 @@
         <item name="memorydb" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="memorydb" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+        <item name="GameState: table" type="ffe0bd85:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="memorydb" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+        <item name="sqlite_master: table" type="ffe0bd85:SqliteImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -115,35 +137,42 @@
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.27" value="1" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="4" />
-          <entry key="java" value="91" />
+          <entry key="gameinfo" value="1" />
+          <entry key="gamestate" value="2" />
+          <entry key="java" value="104" />
           <entry key="pictures" value="1" />
+          <entry key="sqlite_master" value="1" />
+          <entry key="sqlite_sequence" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="1" />
-          <entry key="JAVA" value="91" />
+          <entry key="Database Element" value="6" />
+          <entry key="JAVA" value="104" />
           <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="24585" />
+          <entry key="java" value="24908" />
+          <entry key="sql" value="7" />
           <entry key="txt" value="762" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="24585" />
+          <entry key="JAVA" value="24908" />
           <entry key="PLAIN_TEXT" value="762" />
+          <entry key="SQL" value="7" />
         </counts>
       </usages-collector>
     </session>
@@ -151,44 +180,66 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gamestate">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+            <state relative-caret-position="338">
+              <caret line="169" column="39" selection-start-line="169" selection-start-column="39" selection-end-line="169" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="129" column="30" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
+              <folding>
+                <element signature="e#2395#2396#0" expanded="true" />
+                <element signature="e#2450#2451#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="204" column="53" selection-start-line="204" selection-start-column="53" selection-end-line="204" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#7373#7374#0" expanded="true" />
+                <element signature="e#7412#7413#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/CurrentGame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+              <folding>
+                <element signature="e#281#282#0" expanded="true" />
+                <element signature="e#306#307#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="328" selection-start-line="328" selection-end-line="328" />
+            <state>
+              <caret line="405" column="42" selection-start-line="405" selection-start-column="42" selection-end-line="405" selection-end-column="42" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
                 <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
                 <element signature="method#connect#0;class#DatabaseImpl#0" />
                 <element signature="docComment;method#closeConnection#0;class#DatabaseImpl#0" />
                 <element signature="method#closeConnection#0;class#DatabaseImpl#0" />
-                <element signature="docComment;method#checkUserCred#0;class#DatabaseImpl#0" />
                 <element signature="method#checkUserCred#0;class#DatabaseImpl#0" />
                 <element signature="docComment;method#insertUser#0;class#DatabaseImpl#0" />
                 <element signature="method#insertUser#0;class#DatabaseImpl#0" />
@@ -202,7 +253,6 @@
                 <element signature="docComment;method#getToken#0;class#DatabaseImpl#0" />
                 <element signature="method#getToken#0;class#DatabaseImpl#0" />
                 <element signature="method#pushGameInfo#0;class#DatabaseImpl#0" />
-                <element signature="method#pushGameState#0;class#DatabaseImpl#0" />
                 <element signature="method#hash#0;class#DatabaseImpl#0" />
                 <element signature="method#hash#1;class#DatabaseImpl#0" />
                 <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
@@ -215,16 +265,16 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist4x4">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+        <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5285">
+              <caret line="497" column="51" selection-start-line="497" selection-start-column="51" selection-end-line="497" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tile">
+        <entry file="das://cce0852d-e7ad-4c71-a091-e03bfa15cb73/schema/main/table/gamestate">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
@@ -243,7 +293,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>flip</find>
       <find>executeCommando</find>
       <find>FLIP</find>
       <find>commando gevo</find>
@@ -273,6 +322,7 @@
       <find>tegelsFlipped</find>
       <find>getInbox</find>
       <find>found</find>
+      <find>root.setD</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -294,12 +344,10 @@
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" />
         <option value="$PROJECT_DIR$/Client/src/client/CurrentUser.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/CurrentGame.java" />
         <option value="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Game/VisualTile.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitPlayerThread.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Main.java" />
         <option value="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Game.java" />
@@ -307,10 +355,12 @@
         <option value="$PROJECT_DIR$/Global/src/Classes/Tile.java" />
         <option value="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitOnTurn.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/CurrentGame.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/GameState.java" />
         <option value="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" />
       </list>
     </option>
   </component>
@@ -321,9 +371,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="width" value="1940" />
-    <option name="height" value="2124" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -364,84 +415,61 @@
         <subPane>
           <expand>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="ApplicationServer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ApplicationServer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="Game" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="SupportiveThreads" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Global" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Global" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Global" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Global" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -498,7 +526,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542536457941" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542542589141" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -636,6 +664,7 @@
       <workItem from="1542387371134" duration="4762000" />
       <workItem from="1542486195058" duration="1726000" />
       <workItem from="1542531048542" duration="5246000" />
+      <workItem from="1542540186872" duration="2182000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -851,7 +880,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65831000" />
+    <option name="totallyTimeSpent" value="68013000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -863,9 +892,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2575" height="1424" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1554672" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2322239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -874,16 +904,16 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.40530008" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7057654" visible="true" weight="0.41440743" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" weight="0.39814097" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4998012" weight="0.32920218" />
+      <window_info active="true" anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" visible="true" weight="0.32903227" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.7390318" weight="0.1967742" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49900597" weight="0.39814097" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.2942346" side_tool="true" visible="true" weight="0.41440743" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49821073" weight="0.28582495" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" visible="true" weight="0.32903227" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.4969743" weight="0.32903227" />
       <window_info anchor="bottom" id="Statistic" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3289166" />
       <window_info anchor="bottom" id="Run with VisualVM" order="14" />
@@ -893,7 +923,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.089860834" />
+      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.098335855" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
@@ -1013,14 +1043,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://cce0852d-e7ad-4c71-a091-e03bfa15cb73/schema/main/table/pictures" />
-    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/ImageUploaderController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1045,13 +1067,6 @@
     <entry file="file://$PROJECT_DIR$/Client/src/client/Game/MemoryPuzzleApp.java" />
     <entry file="file://$PROJECT_DIR$/Client/src/client/Game/State.java" />
     <entry file="file://$PROJECT_DIR$/Client/src/client/Game/Tegel.java" />
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Connections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="18" column="86" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="131">
@@ -1075,31 +1090,10 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="698" column="29" selection-start-line="698" selection-start-column="29" selection-end-line="698" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/Commando.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="35" lean-forward="true" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/CurrentUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/CurrentGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1153,13 +1147,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelController.java" />
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/VisualTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="954">
-          <caret line="117" column="148" selection-start-line="117" selection-start-column="148" selection-end-line="117" selection-end-column="148" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1174,13 +1161,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/sqlite_master">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/sqlite_master" />
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -1205,42 +1186,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="129" column="51" selection-start-line="129" selection-start-column="51" selection-end-line="129" selection-end-column="51" />
-          <folding>
-            <element signature="e#2395#2396#0" expanded="true" />
-            <element signature="e#2450#2451#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setupGame#0;class#SpelViewGui#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/persons">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/persons" />
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1273,13 +1219,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="149" column="77" selection-start-line="149" selection-start-column="77" selection-end-line="149" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -1287,73 +1226,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist6x6">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/sqlite_sequence">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/pictures">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist4x4">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tile">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gamestate">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist6x6" />
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/sqlite_sequence" />
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/pictures" />
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist4x4" />
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tile" />
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gamestate" />
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo" />
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
+        <state relative-caret-position="26">
           <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Game/VisualTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1365">
+          <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Connections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="18" column="86" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/CurrentUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://cce0852d-e7ad-4c71-a091-e03bfa15cb73/schema/main/table/sqlite_master">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://cce0852d-e7ad-4c71-a091-e03bfa15cb73/schema/main/table/gameinfo">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://cce0852d-e7ad-4c71-a091-e03bfa15cb73/schema/main/table/sqlite_sequence">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://cce0852d-e7ad-4c71-a091-e03bfa15cb73/schema/main/table/gamestate">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5285">
+          <caret line="497" column="51" selection-start-line="497" selection-start-column="51" selection-end-line="497" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="328" selection-start-line="328" selection-end-line="328" />
+        <state>
+          <caret line="405" column="42" selection-start-line="405" selection-start-column="42" selection-end-line="405" selection-end-column="42" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
             <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
             <element signature="method#connect#0;class#DatabaseImpl#0" />
             <element signature="docComment;method#closeConnection#0;class#DatabaseImpl#0" />
             <element signature="method#closeConnection#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#checkUserCred#0;class#DatabaseImpl#0" />
             <element signature="method#checkUserCred#0;class#DatabaseImpl#0" />
             <element signature="docComment;method#insertUser#0;class#DatabaseImpl#0" />
             <element signature="method#insertUser#0;class#DatabaseImpl#0" />
@@ -1367,13 +1320,71 @@
             <element signature="docComment;method#getToken#0;class#DatabaseImpl#0" />
             <element signature="method#getToken#0;class#DatabaseImpl#0" />
             <element signature="method#pushGameInfo#0;class#DatabaseImpl#0" />
-            <element signature="method#pushGameState#0;class#DatabaseImpl#0" />
             <element signature="method#hash#0;class#DatabaseImpl#0" />
             <element signature="method#hash#1;class#DatabaseImpl#0" />
             <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
             <element signature="method#getImage#0;class#DatabaseImpl#0" />
             <element signature="docComment;method#storeImage#0;class#DatabaseImpl#0" />
             <element signature="method#storeImage#0;class#DatabaseImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/CurrentGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding>
+            <element signature="e#281#282#0" expanded="true" />
+            <element signature="e#306#307#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/application/Platform.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="136" column="23" selection-start-line="136" selection-start-column="23" selection-end-line="136" selection-end-column="23" />
+          <folding>
+            <element signature="e#4880#4881#0" expanded="true" />
+            <element signature="e#4938#4939#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="698" column="29" selection-start-line="698" selection-start-column="29" selection-end-line="698" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="129" column="30" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
+          <folding>
+            <element signature="e#2395#2396#0" expanded="true" />
+            <element signature="e#2450#2451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="169" column="39" selection-start-line="169" selection-start-column="39" selection-end-line="169" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="204" column="53" selection-start-line="204" selection-start-column="53" selection-end-line="204" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7373#7374#0" expanded="true" />
+            <element signature="e#7412#7413#0" expanded="true" />
           </folding>
         </state>
       </provider>

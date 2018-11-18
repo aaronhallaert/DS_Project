@@ -26,8 +26,8 @@ public class SpelViewLogica extends Thread{
 
     //lokale gameinfo
     private GameInfo gameInfo;
-
     private GameState gameState;
+
     Thread waitPlayer;
     Thread waitTurn;
     Thread receiveThread;
@@ -46,14 +46,17 @@ public class SpelViewLogica extends Thread{
 
 
             System.out.println("STARTUP GAME; voorlopig zijn er "+gameInfo.getAantalSpelersConnected()+" spelers aanwezig");
+
             // in deze thread wacht men op een 2de speler
             waitPlayer= new WaitPlayerThread(this, gameInfo);
             waitPlayer.start();
 
+
             waitTurn = new WaitOnTurn(this, gameInfo, gameState);
             waitTurn.start();
 
-            // laden van screen enzo
+
+            // laden van screen en tegels
             spvGui = loadAndSetGui();
 
 

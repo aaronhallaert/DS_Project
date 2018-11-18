@@ -70,7 +70,6 @@ public class SpelViewGui extends Thread {
         // inladen van de game
         setupGame(gameInfo, gameState);
 
-
     }
 
 
@@ -182,6 +181,13 @@ public class SpelViewGui extends Thread {
         }
         mijnScoreLabel.setText(Integer.toString(mijnScore));
         zijnScoreLabel.setText(Integer.toString(zijnScore));
+
+        //extra logica zodat finished game niet meer clickable is
+        if(gameState.getfinished()){
+            System.out.println("tibotibo game is finished");
+            //lock alles
+            root.setDisable(true);
+        }
 
     }
 

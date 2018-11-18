@@ -136,7 +136,6 @@ public class LobbyScreen {
                 else{ // als geen successvolle join
 
                     System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
-                    //todo: laat iets zien ivm foute / slechte join : er is al reeds een 2e speler
 
                 }
 

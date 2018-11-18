@@ -363,11 +363,12 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
 
     }
+
     private void pushGameState(Game game){
         // push game state
         String pushGameState = "INSERT INTO GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, " +
-                "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize, aantalParenFound) " +
-                "VALUES(?,?,?,?,?,?,?,?,?,?)";
+                "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize, aantalParenFound, finished) " +
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         connect();
         try {
             PreparedStatement pstmtGameState=conn.prepareStatement(pushGameState);
@@ -382,6 +383,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             pstmtGameState.setString(8, Character.toString(game.getGameState().getAandeBeurt()));
             pstmtGameState.setInt(9, game.getGameState().getTegelsList().size());
             pstmtGameState.setInt(10, game.getGameState().getAantalParenFound());
+            pstmtGameState.setBoolean(11, game.getGameState().getfinished());
             pstmtGameState.executeUpdate();
 
 

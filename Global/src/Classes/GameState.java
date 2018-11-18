@@ -47,6 +47,8 @@ public class GameState implements Serializable {
     private ArrayList<Tile> tegelsList; // Tile = datastructuur voor in de AS, wordt dan geconvergeert naar VisualTile
                                         // in de client
 
+    private boolean finished;
+
     // default constructor
     public GameState() {
         System.out.println("gameState default constructor opgeroepen : niet de bedoeling");
@@ -81,6 +83,8 @@ public class GameState implements Serializable {
 
         aantalParen = dimensions * dimensions / 2;
         aantalPerRij = dimensions;
+
+        finished = false;
 
         //offset bepalen voor het inladen van de fotos
         int offset = 0;
@@ -133,7 +137,6 @@ public class GameState implements Serializable {
     }
 
     // aanpassing van de gameState als een 2e speler voor het eerst joint
-    // todo: pas dit aan zodat mensen kunnen leaven en opnieuw joinen
     public void join(String secondUserName) {
         if(naamSpelerA!=null && naamSpelerB.equals("") && !naamSpelerA.equals(secondUserName)){
             naamSpelerB = secondUserName;
@@ -257,6 +260,7 @@ public class GameState implements Serializable {
                 //als alle tegels gevonden zijn
                 if(aantalParenFound == aantalParen){
 
+                    finished = true;
 
                     //dan is het spel gedaan
                     //wie is de winnaar?
@@ -489,5 +493,8 @@ public class GameState implements Serializable {
 
     public int getAantalParenFound() {
         return aantalParenFound;
+    }
+
+    public boolean getfinished() { return finished;
     }
 }

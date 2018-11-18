@@ -3,6 +3,7 @@ package client;
 import Classes.Game;
 
 public class CurrentGame {
+
     private static Game game;
 
     public static Game getInstance(){
