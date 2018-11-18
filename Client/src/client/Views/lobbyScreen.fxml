@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Button fx:id="joinButton" layoutX="486.0" layoutY="400.0" mnemonicParsing="false" onAction="#joinGame" prefHeight="25.0" prefWidth="85.0" text="Join" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="30.0" />
-      <Button layoutX="383.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Spectate" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="135.0" />
+      <Button fx:id="spectateButton" layoutX="383.0" layoutY="400.0" mnemonicParsing="false" onAction="#spectate" prefHeight="25.0" prefWidth="85.0" text="Spectate" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="135.0" />
       <Hyperlink fx:id="logoutLink" layoutX="524.0" layoutY="27.0" onAction="#logout" text="Logout" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0" />
       <Button fx:id="spelSetup" layoutX="203.0" layoutY="400.0" mnemonicParsing="false" onAction="#spelSetup" text="create game" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="250.0" />
       <TableView fx:id="activeGamesTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="65.0">

@@ -29,11 +29,14 @@ public class LobbyScreen {
     Button spelSetup;
 
     @FXML
+    Button spectateButton;
+
+    @FXML
     Button joinButton;
 
     @FXML
     private Label joinErrorLabel;
-    private RotateTransition rtAnimation;
+    private RotateTransition errorAnimation;
 
     /* table en al zijn columns */
     @FXML
@@ -86,10 +89,10 @@ public class LobbyScreen {
 
             joinErrorLabel.setVisible(false);
             //shaketransition configureren
-            rtAnimation = new RotateTransition(Duration.millis(50), joinErrorLabel);
-            rtAnimation.setByAngle(10);
-            rtAnimation.setCycleCount(8);
-            rtAnimation.setAutoReverse(true);
+            errorAnimation = new RotateTransition(Duration.millis(50), joinErrorLabel);
+            errorAnimation.setByAngle(10);
+            errorAnimation.setCycleCount(8);
+            errorAnimation.setAutoReverse(true);
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -129,8 +132,9 @@ public class LobbyScreen {
         if(deGameToJoin == null){
             //geef iets van info dat je geen game gekozen hebt
             System.out.println("er bestaat geen dergelijke game");
+            joinErrorLabel.setText("Geen game aangeklikt!");
             joinErrorLabel.setVisible(true);
-            rtAnimation.play();
+            errorAnimation.play();
 
         }
         else {
@@ -151,8 +155,9 @@ public class LobbyScreen {
                 }
                 else{ // als geen successvolle join
 
+                    joinErrorLabel.setText("join failed!");
                     joinErrorLabel.setVisible(true);
-                    rtAnimation.play();
+                    errorAnimation.play();
                     System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
 
                 }
@@ -165,6 +170,14 @@ public class LobbyScreen {
         }
 
 
+
+
+    }
+
+    @FXML
+    public void spectate(){
+
+        GameObs deGameToSpectate = activeGamesTable.getSelectionModel().getSelectedItem();
 
 
     }
