@@ -384,9 +384,8 @@ public class GameState implements Serializable {
         int oldPunten= punten.get(activeUser);
         punten.put(activeUser, oldPunten+1);
 
-        for (String speler : spelers) {
-            inbox.get(speler).add(new Commando("AWARD", activeUser, 1));
-        }
+        executeCommandoToAll(new Commando("AWARD", activeUser, 1));
+
 
 
 
@@ -430,6 +429,8 @@ public class GameState implements Serializable {
             return inboxSpeler;
         }
         else{ // todo : voor de spectator
+
+            inboxSpectators.putIfAbsent(userName, new ArrayList<>());
 
             while (inboxSpectators.get(userName).isEmpty()) {
                 try {

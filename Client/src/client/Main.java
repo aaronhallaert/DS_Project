@@ -172,7 +172,7 @@ public class Main extends Application {
     public static void goToSpel() throws RemoteException {
 
         //spelviewlogica is een thread, deze zal onder meer de gui thread aansturen
-        SpelViewLogica spv = new SpelViewLogica();
+        SpelViewLogica spv = new SpelViewLogica(true);
         spv.start();
 
 

@@ -38,4 +38,8 @@ public interface AppServerInterface extends Remote {
     void leaveGame(int currentGameId, String username) throws RemoteException;
 
     Game getGame(int currentGameId) throws RemoteException;
+
+    void spectate(int gameId, String username) throws RemoteException;
+
+    void unsubscribeSpecator(int gameId, String username) throws RemoteException;
 }

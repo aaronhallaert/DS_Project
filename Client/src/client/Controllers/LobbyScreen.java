@@ -148,7 +148,7 @@ public class LobbyScreen {
                     CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
                     // ga verder naar GAME
-                    SpelViewLogica spv = new SpelViewLogica();
+                    SpelViewLogica spv = new SpelViewLogica(true);
                     spv.start();
 
                     Platform.setImplicitExit(false);
@@ -197,11 +197,11 @@ public class LobbyScreen {
 
                 String thisUser  = CurrentUser.getInstance().getUsername();
 
-
+                Main.cnts.getAppImpl().spectate(CurrentGame.getInstance().getGameState().getGameId(), CurrentUser.getInstance().getUsername());
 
                 if(!CurrentGame.getInstance().getGameInfo().getSpelers().contains(thisUser)) {
                     // ga verder naar spectaten ALLEEN als je niet deelneemt aan de game zelf
-                    SpelViewLogica spv = new SpelViewLogica();
+                    SpelViewLogica spv = new SpelViewLogica(false);
                     spv.start();
                     //dit gaat fout want het zal ontlocked worden waarschijnlijk later
 

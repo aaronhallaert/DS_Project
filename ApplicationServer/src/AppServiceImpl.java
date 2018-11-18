@@ -110,6 +110,17 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
+    public void spectate(int gameId, String username) throws RemoteException {
+        getGame(gameId).getGameState().getSpectators().add(username);
+    }
+
+    @Override
+    public void unsubscribeSpecator(int gameId, String username) throws RemoteException {
+        getGame(gameId).getGameState().getSpectators().remove(username);
+        getGame(gameId).getGameState().getInboxSpectators().remove(username);
+    }
+
+    @Override
     public GameInfo getGameInfo(int gameId) throws RemoteException {
 
         for (Game game : gamesLijst) {

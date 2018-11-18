@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class SpelViewLogica extends Thread{
 
+    private final boolean playerMode;
     private SpelViewGui spvGui;
 
     //lokale gameinfo
@@ -31,6 +32,10 @@ public class SpelViewLogica extends Thread{
     Thread waitPlayer;
     Thread waitTurn;
     Thread receiveThread;
+
+    public SpelViewLogica(boolean playerMode) {
+    this.playerMode= playerMode;
+    }
 
 
     @Override
@@ -47,33 +52,32 @@ public class SpelViewLogica extends Thread{
 
             System.out.println("STARTUP GAME; voorlopig zijn er "+gameInfo.getAantalSpelersConnected()+" spelers aanwezig");
 
-            // in deze thread wacht men op een 2de speler
-            waitPlayer= new WaitPlayerThread(this, gameInfo);
-            waitPlayer.start();
+            if(playerMode) {
+                // in deze thread wacht men op een 2de speler
+                waitPlayer = new WaitPlayerThread(this, gameInfo);
+                waitPlayer.start();
 
 
-            waitTurn = new WaitOnTurn(this, gameInfo, gameState);
-            waitTurn.start();
-
+                waitTurn = new WaitOnTurn(this, gameInfo, gameState);
+                waitTurn.start();
+            }
 
             // laden van screen en tegels
             spvGui = loadAndSetGui();
 
+            if(playerMode) {
+                // ALS HET AAN MIJN BEURT IS DAN MAGK KLIKKEN EN ALS ER 2 SPELERS GECONNECTEERD ZIJN
+                if (CurrentGame.getInstance().getGameInfo().getAantalSpelersConnected() == CurrentGame.getInstance().getGameState().getAantalSpelers()) {
 
-            // ALS HET AAN MIJN BEURT IS DAN MAGK KLIKKEN EN ALS ER 2 SPELERS GECONNECTEERD ZIJN
-            if(CurrentGame.getInstance().getGameInfo().getAantalSpelersConnected()==CurrentGame.getInstance().getGameState().getAantalSpelers()){
 
-
-
-                if(CurrentGame.getInstance().getGameState().getAandeBeurt().equals(CurrentUser.getInstance().getUsername())){
-                    myTurn(true);
+                    if (CurrentGame.getInstance().getGameState().getAandeBeurt().equals(CurrentUser.getInstance().getUsername())) {
+                        myTurn(true);
+                    } else {
+                        myTurn(false);
+                    }
+                } else {
+                    spvGui.disableMouseClick();
                 }
-                else{
-                    myTurn(false);
-                }
-            }
-            else{
-                spvGui.disableMouseClick();
             }
 
         } catch (RemoteException e) {
@@ -175,10 +179,15 @@ public class SpelViewLogica extends Thread{
 
     public void leave(){
         try {
-            waitPlayer.stop();
-            waitTurn.stop();
+            if(playerMode) {
+                waitPlayer.stop();
+                waitTurn.stop();
+                Main.cnts.getAppImpl().leaveGame(CurrentGame.getInstance().getGameInfo().getGameId(), CurrentUser.getInstance().getUsername());
+            }
+            else{
+                Main.cnts.getAppImpl().unsubscribeSpecator(CurrentGame.getInstance().getGameId(), CurrentUser.getInstance().getUsername());
+            }
             receiveThread.stop();
-            Main.cnts.getAppImpl().leaveGame(CurrentGame.getInstance().getGameInfo().getGameId(), CurrentUser.getInstance().getUsername());
             CurrentGame.resetGame();
             //currentThread().stop();
         } catch (RemoteException e) {
