@@ -123,7 +123,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public GameState getGameSate(int gameId) throws RemoteException {
+    public GameState getGameState(int gameId) throws RemoteException {
 
         for (Game game : gamesLijst) {
             if(game.getGameId() == gameId){
@@ -142,7 +142,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         if(this.getGameInfo(currentGameIdAttempt).join(activeUser)){
             // als de if clause lukt,
             // dan zal het getGameState ook lukken, daarom is getGameState een void
-            this.getGameSate(currentGameIdAttempt).join(activeUser);
+            this.getGameState(currentGameIdAttempt).join(activeUser);
             //setGameStatenaam nog
             return true;
         }
@@ -173,7 +173,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public boolean changeInTurn(int currentGameId, char userTurn) throws RemoteException{
-        return this.getGameSate(currentGameId).changeInTurn(userTurn);
+        return this.getGameState(currentGameId).changeInTurn(userTurn);
     }
 
     /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
@@ -188,14 +188,14 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
 
-        getGameSate(currentGameId).executeCommando(commando,activeUser);
+        getGameState(currentGameId).executeCommando(commando,activeUser);
     }
 
     @Override
     public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
 
        // System.out.println("AppServiceImpl : getInbox: door user: "+userName);
-        return getGameSate(currentGameId).getInbox(userName);
+        return getGameState(currentGameId).getInbox(userName);
 
 
 

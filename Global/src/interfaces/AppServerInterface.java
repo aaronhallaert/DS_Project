@@ -4,6 +4,7 @@ import Classes.Commando;
 import Classes.Game;
 import Classes.GameInfo;
 import Classes.GameState;
+import com.sun.org.apache.regexp.internal.RE;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -18,7 +19,7 @@ public interface AppServerInterface extends Remote {
 
     GameInfo getGameInfo(int gameId) throws RemoteException;
 
-    GameState getGameSate(int gameId) throws RemoteException;
+    GameState getGameState(int gameId) throws RemoteException;
 
     boolean join(String activeUser, int currentGameIdAttempt) throws RemoteException;
 
@@ -37,11 +38,4 @@ public interface AppServerInterface extends Remote {
     void leaveGame(int currentGameId, String username) throws RemoteException;
 
     Game getGame(int currentGameId) throws RemoteException;
-
-    //boolean rejoin(String activeUser, int currentGameIdAttempt) throws RemoteException;
-
-    //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
-
-
-    //ArrayList<Tile> getGameData(String activeUser);
 }

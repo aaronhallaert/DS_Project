@@ -37,7 +37,7 @@ public class WaitOnTurn extends Thread{
 
             try {
                 if(Main.cnts.getAppImpl().changeInTurn(CurrentGame.getInstance().getGameId(), gameState.getAandeBeurt())){
-                    char updatedTurn= Main.cnts.getAppImpl().getGameSate(CurrentGame.getInstance().getGameId()).getAandeBeurt();
+                    char updatedTurn= Main.cnts.getAppImpl().getGameState(CurrentGame.getInstance().getGameId()).getAandeBeurt();
                     gameState.setAandeBeurt(updatedTurn);
                     if(updatedTurn==myCharUser){
                         System.out.println("ja tis aan mijn beurt");

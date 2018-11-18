@@ -28,16 +28,17 @@ public class GameState implements Serializable {
     private int aantalParen; // van het rooster
     private int aantalPerRij;// aantal tegels op 1 rij
 
-    //usernames waarmee er ingelogd wordt
+    //usernames waarmee er ingelogd wordt -> in een list
     private String naamSpelerA;
     private String naamSpelerB;
 
     //inboxes, die de spelers checken mbhv een thread.
-    // een speler checkt enkel zijn eigen inbox
+    // een speler checkt enkel zijn eigen inbox -> in een list
     private List<Commando> inboxSpelerA;
     private List<Commando> inboxSpelerB;
+    //private List<Commando> inboxSpectator;  // todo: configure spectator inbox
 
-    //counters om de scores bij te houden
+    //counters om de scores bij te houden -> in een list
     private int aantalPuntenSpelerA;
     private int aantalPuntenSpelerB;
 
@@ -179,6 +180,8 @@ public class GameState implements Serializable {
             System.out.println("fout in executeCommando in GameState.java: geen commando added in mailbox andere pers");
         }
 
+
+
         //aanpassen van de gamestate:
         // doorgeven van de waarde zodat we de 2 laatste geklickte tegels kunnen bekijken
         vorigeTileUniqueId = huidigeTileUniqueId;
@@ -191,11 +194,12 @@ public class GameState implements Serializable {
 
     }
 
-    //verschil met vorige methode is dat dit commando door beide spelers moet uitgevoerd worden
-    private synchronized void executeCommandoBoth(Commando commando){
+    //verschil met vorige methode is dat dit commando door alle spelers + spectators moet uitgevoerd worden
+    private synchronized void executeCommandoToAll(Commando commando){
 
         inboxSpelerA.add(commando);
         inboxSpelerB.add(commando);
+        //inboxSpectator.add(commando);
         notifyAll();
 
     }
@@ -225,7 +229,7 @@ public class GameState implements Serializable {
 
         // lock zetten op de tile, zodat je na hem open te klikken er niet nog eens kan op duwen
         // dus de tile wordt dan unclickable
-        executeCommandoBoth(new Commando("LOCK", huidigeTile.getUniqueIdentifier()));
+        executeCommandoToAll(new Commando("LOCK", huidigeTile.getUniqueIdentifier()));
 
 
         // als je beurt over is (en dus 2 tegels hebt opgengeklikt
@@ -250,8 +254,8 @@ public class GameState implements Serializable {
                 vorigeTile.setFound(true);
 
                 //lock zetten op de net gevonden tegels in beide spelers, zodat ze er niet meer kunnen op klikken
-                executeCommandoBoth(new Commando("LOCK", huidigeTile.getUniqueIdentifier()));
-                executeCommandoBoth(new Commando("LOCK", vorigeTile.getUniqueIdentifier()));
+                executeCommandoToAll(new Commando("LOCK", huidigeTile.getUniqueIdentifier()));
+                executeCommandoToAll(new Commando("LOCK", vorigeTile.getUniqueIdentifier()));
 
                 //counter verhogen
                 aantalParenFound++;
@@ -282,7 +286,7 @@ public class GameState implements Serializable {
                     }
                     else{
                         //its a draw
-                        executeCommandoBoth(new Commando("DRAW",1));
+                        executeCommandoToAll(new Commando("DRAW",1));
 
                     }
 
@@ -299,15 +303,15 @@ public class GameState implements Serializable {
                 huidigeTile.setFlippedOver(false);
 
                 //draai beide tegels terug om (in beide spelers)
-                executeCommandoBoth(new Commando("UNFLIP", vorigeTile.getUniqueIdentifier()));
-                executeCommandoBoth(new Commando("UNFLIP", huidigeTile.getUniqueIdentifier()));
+                executeCommandoToAll(new Commando("UNFLIP", vorigeTile.getUniqueIdentifier()));
+                executeCommandoToAll(new Commando("UNFLIP", huidigeTile.getUniqueIdentifier()));
 
                 //zorgen dat deze tegels terug clickable zijn
-                executeCommandoBoth(new Commando("UNLOCK", vorigeTile.getUniqueIdentifier()));
-                executeCommandoBoth(new Commando("UNLOCK", huidigeTile.getUniqueIdentifier()));
+                executeCommandoToAll(new Commando("UNLOCK", vorigeTile.getUniqueIdentifier()));
+                executeCommandoToAll(new Commando("UNLOCK", huidigeTile.getUniqueIdentifier()));
 
                 //de beurt is nu aan de volgende speler
-                executeCommandoBoth(new Commando("SWITCH", 1));// 1 is testwaarde, zodat we hem toch gaan vinden
+                executeCommandoToAll(new Commando("SWITCH", 1));// 1 is testwaarde, zodat we hem toch gaan vinden
 
                 if(aandeBeurt=='A'){
                     aandeBeurt='B';
@@ -497,4 +501,6 @@ public class GameState implements Serializable {
 
     public boolean getfinished() { return finished;
     }
+
+
 }

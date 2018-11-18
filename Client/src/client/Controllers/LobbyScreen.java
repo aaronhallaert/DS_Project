@@ -132,9 +132,8 @@ public class LobbyScreen {
         if(deGameToJoin == null){
             //geef iets van info dat je geen game gekozen hebt
             System.out.println("er bestaat geen dergelijke game");
-            joinErrorLabel.setText("Geen game aangeklikt!");
-            joinErrorLabel.setVisible(true);
-            errorAnimation.play();
+            displayErrorMessage("Geen game aangeklikt!");
+
 
         }
         else {
@@ -155,9 +154,8 @@ public class LobbyScreen {
                 }
                 else{ // als geen successvolle join
 
-                    joinErrorLabel.setText("join failed!");
-                    joinErrorLabel.setVisible(true);
-                    errorAnimation.play();
+                    displayErrorMessage("join failed");
+
                     System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
 
                 }
@@ -174,6 +172,12 @@ public class LobbyScreen {
 
     }
 
+    private void displayErrorMessage(String message) {
+        joinErrorLabel.setText(message);
+        joinErrorLabel.setVisible(true);
+        errorAnimation.play();
+    }
+
     @FXML
     public void spectate(){
 
@@ -181,5 +185,8 @@ public class LobbyScreen {
 
 
     }
+
+
+
 
 }
