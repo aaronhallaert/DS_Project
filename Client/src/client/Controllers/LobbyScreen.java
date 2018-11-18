@@ -186,9 +186,6 @@ public class LobbyScreen {
         }
         else {
 
-
-
-
             //join this game
             int currentGameIdAttempt = deGameToJoin.getGameId();
 

@@ -473,13 +473,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     private void updateGameInfo(Game game){
         String updateGameInfo= "UPDATE GameInfo " +
-                "SET clientA = ?, clientB = ?" +
+                "SET clientA = ?, clientB = ?, aantalSpelersConnected= ?" +
                 "WHERE gameId = ?";
         try {
             PreparedStatement pstmtGameState= conn.prepareStatement(updateGameInfo);
             pstmtGameState.setString(1,game.getGameInfo().getClientA());
             pstmtGameState.setString(2,game.getGameInfo().getClientB());
-            pstmtGameState.setInt(3, game.getGameId());
+            pstmtGameState.setInt(3, game.getGameInfo().getAantalSpelersConnected());
+            pstmtGameState.setInt(4, game.getGameId());
 
 
 
