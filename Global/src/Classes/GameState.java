@@ -36,7 +36,7 @@ public class GameState implements Serializable {
     // een speler checkt enkel zijn eigen inbox -> in een list
     private List<Commando> inboxSpelerA;
     private List<Commando> inboxSpelerB;
-    //private List<Commando> inboxSpectator;  // todo: configure spectator inbox
+    private List<Commando> inboxSpectator;  // todo: configure spectator inbox
 
     //counters om de scores bij te houden -> in een list
     private int aantalPuntenSpelerA;
@@ -69,6 +69,7 @@ public class GameState implements Serializable {
         this.gameId=gameId;
         inboxSpelerA = new ArrayList<Commando>();
         inboxSpelerB = new ArrayList<Commando>();
+        inboxSpectator = new ArrayList<Commando>();
 
         aantalParenFound =0;
         tegelsFlipped = 0;
@@ -165,6 +166,7 @@ public class GameState implements Serializable {
         if (activeUser.equals(naamSpelerA)) {
             System.out.println("commando added in speler2 zijn inbox");
             inboxSpelerB.add(commando);
+            inboxSpectator.add(commando);
             notifyAll();
             System.out.println("executCommando notify in GameState");
 
@@ -172,6 +174,7 @@ public class GameState implements Serializable {
         else if (activeUser.equals(naamSpelerB)) {
             System.out.println("commando added in createSpeler zijn inbox");
             inboxSpelerA.add(commando);
+            inboxSpectator.add(commando);
             notifyAll();
             System.out.println("executCommando notify in GameState");
 
@@ -199,7 +202,7 @@ public class GameState implements Serializable {
 
         inboxSpelerA.add(commando);
         inboxSpelerB.add(commando);
-        //inboxSpectator.add(commando);
+        inboxSpectator.add(commando);
         notifyAll();
 
     }
@@ -417,8 +420,24 @@ public class GameState implements Serializable {
             return inbox;
 
         }
-        System.out.println("fout in getInbox in GameState.java");
-        return null;
+        else{ // todo : voor de spectator
+
+            while (inboxSpectator.isEmpty()) {
+                try {
+                    //System.out.println("inbox is leeg, wait started");
+                    wait();
+                    //System.out.println("iets nieuws in de inbox van usser"+naamSpelerB+" : wait stopped");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            List<Commando> inbox = new ArrayList<Commando>(inboxSpectator);
+            inboxSpectator.clear();
+            System.out.println("GameState: getInbox, voor spectator");
+            return inbox;
+
+        }
+
     }
 
     //getters

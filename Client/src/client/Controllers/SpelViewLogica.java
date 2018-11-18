@@ -65,16 +65,21 @@ public class SpelViewLogica extends Thread{
                 char myCharUser;
                 if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
                     myCharUser='A';
-                }else{
+                }
+                else if (CurrentUser.getInstance().getUsername().equals(gameInfo.getClientB())){
                     myCharUser='B';
                 }
+                else{
+                    myCharUser='G'; // G van guest
+                }
+
                 if(CurrentGame.getInstance().getGameState().getAandeBeurt()==myCharUser){
                     myTurn(true);
                 }
                 else{
                     myTurn(false);
                 }
-                }
+            }
             else{
                 spvGui.disableMouseClick();
             }
@@ -231,6 +236,10 @@ public class SpelViewLogica extends Thread{
         else{
             spvGui.disableMouseClick();
         }
+    }
+
+    public void spectatorMode() {
+        spvGui.spectatorMode();
     }
 
     //hier komt methode die pollet naar commando's in de mailbox op de appserver

@@ -273,4 +273,8 @@ public class SpelViewGui extends Thread {
     public void setLogic(SpelViewLogica spelViewLogica) {
         this.svl=spelViewLogica;
     }
+
+    public void spectatorMode() {
+        overkoepelendePane.setDisable(true);
+    }
 }

@@ -130,13 +130,14 @@ public class LobbyScreen {
 
         GameObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
         if(deGameToJoin == null){
+
             //geef iets van info dat je geen game gekozen hebt
             System.out.println("er bestaat geen dergelijke game");
             displayErrorMessage("Geen game aangeklikt!");
 
-
         }
         else {
+
             //join this game
             int currentGameIdAttempt = deGameToJoin.getGameId();
 
@@ -172,19 +173,56 @@ public class LobbyScreen {
 
     }
 
+    @FXML
+    public void spectate(){
+
+        GameObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
+        if(deGameToJoin == null){
+
+            //geef iets van info dat je geen game gekozen hebt
+            System.out.println("er bestaat geen dergelijke game");
+            displayErrorMessage("Geen game aangeklikt!");
+
+        }
+        else {
+
+
+
+
+            //join this game
+            int currentGameIdAttempt = deGameToJoin.getGameId();
+
+            //try to join
+            try {
+
+                CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
+
+                // ga verder naar GAME
+                SpelViewLogica spv = new SpelViewLogica();
+                spv.start();
+                //dit gaat fout want het zal ontlocked worden waarschijnlijk later
+                spv.spectatorMode();
+
+                Platform.setImplicitExit(false);
+                spelSetup.getScene().getWindow().hide();
+
+                }
+
+                catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+    }
+
     private void displayErrorMessage(String message) {
         joinErrorLabel.setText(message);
         joinErrorLabel.setVisible(true);
         errorAnimation.play();
     }
 
-    @FXML
-    public void spectate(){
-
-        GameObs deGameToSpectate = activeGamesTable.getSelectionModel().getSelectedItem();
-
-
-    }
 
 
 
