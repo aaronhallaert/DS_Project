@@ -28,5 +28,10 @@
             <TableColumn fx:id="roosterSizeColumn" minWidth="6.0" prefWidth="136.0" text="roosterSize" />
         </columns>
       </TableView>
+      <Label fx:id="joinErrorLabel" layoutX="237.0" layoutY="20.0" text="join failed!" textFill="RED">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

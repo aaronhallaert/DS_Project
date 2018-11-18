@@ -6,11 +6,13 @@ import client.GameObs;
 import client.Main;
 import client.SupportiveThreads.LobbyRefreshThread;
 import client.CurrentUser;
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -28,6 +30,10 @@ public class LobbyScreen {
 
     @FXML
     Button joinButton;
+
+    @FXML
+    private Label joinErrorLabel;
+    private RotateTransition rtAnimation;
 
     /* table en al zijn columns */
     @FXML
@@ -77,6 +83,13 @@ public class LobbyScreen {
             // thread die om de 5 seconden de lobbytafel refresht aanmaken + opstarten
             Thread checkAvailableGames= new LobbyRefreshThread(this);
             checkAvailableGames.start();
+
+            joinErrorLabel.setVisible(false);
+            //shaketransition configureren
+            rtAnimation = new RotateTransition(Duration.millis(50), joinErrorLabel);
+            rtAnimation.setByAngle(10);
+            rtAnimation.setCycleCount(8);
+            rtAnimation.setAutoReverse(true);
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -135,6 +148,8 @@ public class LobbyScreen {
                 }
                 else{ // als geen successvolle join
 
+                    joinErrorLabel.setVisible(true);
+                    rtAnimation.play();
                     System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
 
                 }
