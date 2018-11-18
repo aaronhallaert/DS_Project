@@ -31,20 +31,24 @@ public class WaitPlayerThread extends Thread {
             try {
                 System.out.println("voorlopig heb ik "+ gameInfo.getAantalSpelersConnected()+ " geconnecteerde spelers, is er verandering?");
                 if(Main.cnts.getAppImpl().changeInPlayers(CurrentGame.getInstance().getGameId(), gameInfo.getAantalSpelersConnected())) {
+
                     int updateValuePlayers= Main.cnts.getAppImpl().getGameInfo(CurrentGame.getInstance().getGameId()).getAantalSpelersConnected();
-                    if(updateValuePlayers==2){
+
+                    if (updateValuePlayers == CurrentGame.getInstance().getGameState().getAantalSpelers()){
                         svl.bothPlayersConnected(true);
-                        gameInfo.setAantalSpelersConnected(2);
-                        System.out.println("beide spelers zijn geconnecteerd");
+                        gameInfo.setAantalSpelersConnected(updateValuePlayers);
+                        System.out.println("alle spelers zijn geconnecteerd");
+
+
                     }
                     else{
                         svl.bothPlayersConnected(false);
                         gameInfo.setAantalSpelersConnected(updateValuePlayers);
-                        System.out.println("niet alle spelers zijn geconnecteerd");
+                        System.out.println("nog niet alle spelers zijn geconnecteerd");
                     }
 
-
-
+                    svl.updateGame();
+                    svl.updateScore();
                 }
 
             }

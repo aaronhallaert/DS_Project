@@ -3,6 +3,7 @@ package Classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /*  is altijd een deel van een Game
@@ -29,20 +30,20 @@ public class GameState implements Serializable {
     private int aantalPerRij;// aantal tegels op 1 rij
 
     //usernames waarmee er ingelogd wordt -> in een list
-    private String naamSpelerA;
-    private String naamSpelerB;
+    private ArrayList<String> spelers;
 
     //inboxes, die de spelers checken mbhv een thread.
     // een speler checkt enkel zijn eigen inbox -> in een list
-    private List<Commando> inboxSpelerA;
-    private List<Commando> inboxSpelerB;
-    private List<Commando> inboxSpectator;  // todo: configure spectator inbox
+    private HashMap<String, List<Commando>> inbox;
+
+    private int aantalSpelers;
+    private ArrayList<String> spectators;
+    private HashMap<String, List<Commando>> inboxSpectators;  // todo: configure spectator inbox
 
     //counters om de scores bij te houden -> in een list
-    private int aantalPuntenSpelerA;
-    private int aantalPuntenSpelerB;
+    private HashMap<String, Integer> punten;
 
-    private char aandeBeurt='A';
+    private String aandeBeurt;
 
     //elke tegel moet bijgehouden worden, een tegel kan gewoon meerdere shit bevatten
     private ArrayList<Tile> tegelsList; // Tile = datastructuur voor in de AS, wordt dan geconvergeert naar VisualTile
@@ -67,28 +68,38 @@ public class GameState implements Serializable {
      */
     public GameState(int gameId, int dimensions, char fotoSet, String hostName) {
         this.gameId=gameId;
-        inboxSpelerA = new ArrayList<Commando>();
-        inboxSpelerB = new ArrayList<Commando>();
-        inboxSpectator = new ArrayList<Commando>();
+
+        //TODO; keuze aantal spelers
+        aantalSpelers=3;
+
+        /* initialize gamestate ---------*/
+        inbox= new HashMap<>();
+        spelers= new ArrayList<>();
+        punten= new HashMap<>();
+        inboxSpectators = new HashMap<>();
+        tegelsList = new ArrayList<Tile>();
+        spectators= new ArrayList<>();
 
         aantalParenFound =0;
         tegelsFlipped = 0;
 
-        aantalPuntenSpelerA = 0;
-        aantalPuntenSpelerB = 0;
-
         huidigeTileUniqueId = -1;
         vorigeTileUniqueId = -1;
 
-        naamSpelerA = hostName;
-        naamSpelerB="";
+        finished = false;
 
+        /* toevoegen van user die game maakt ---------*/
+        spelers.add(hostName);
+        punten.put(hostName, 0);
+        inbox.put(hostName, new ArrayList<>());
+        aandeBeurt=hostName;
+
+        /* kenmerken game --------------------*/
         aantalParen = dimensions * dimensions / 2;
         aantalPerRij = dimensions;
 
-        finished = false;
 
-        //offset bepalen voor het inladen van de fotos
+        // offset bepalen voor het inladen van de fotos
         int offset = 0;
         if (fotoSet == 'B') {
             offset = 100;
@@ -96,10 +107,9 @@ public class GameState implements Serializable {
             offset = 300;
         }
 
-        tegelsList = new ArrayList<Tile>();
+        /* init tegels --------------------*/
 
         int uniqueId = 1;
-
         /*  generatie van de Tiles en toevoeging dervan in de arraylist
             elke Tile heeft:
                 - uniqueId, zodat we kunnen weten welke tile er geflipt moet worden
@@ -116,33 +126,34 @@ public class GameState implements Serializable {
 
         }
 
-        //de tegels shuffelen, zodat de positie random is
+        // de tegels shuffelen, zodat de positie random is
         Collections.shuffle(tegelsList);
 
-        //de game is nu gecreeerd
+       // GAME CREATED
     }
 
-    public GameState(int gameId, int aantalParen, int aantalPerRij, String naamSpelerA, String naamSpelerB, int aantalPuntenSpelerA, int aantalPuntenSpelerB, char aandeBeurt, ArrayList<Tile> tegelsList, int aantalParenFound) {
+    public GameState(int gameId, int aantalParen, int aantalPerRij, ArrayList<String> spelers, HashMap<String, Integer> punten, String aandeBeurt, ArrayList<Tile> tegelsList, int aantalParenFound) {
         this.gameId=gameId;
         this.aantalParen = aantalParen;
         this.aantalPerRij = aantalPerRij;
-        this.naamSpelerA = naamSpelerA;
-        this.naamSpelerB = naamSpelerB;
-        this.aantalPuntenSpelerA = aantalPuntenSpelerA;
-        this.aantalPuntenSpelerB = aantalPuntenSpelerB;
+        this.spelers=spelers;
+        this.punten=punten;
         this.aandeBeurt = aandeBeurt;
         this.tegelsList = tegelsList;
         tegelsFlipped=0;
         this.aantalParenFound=aantalParenFound;
-        this.inboxSpelerA= new ArrayList<>();
-        this.inboxSpelerB=new ArrayList<>();
+        this.aantalSpelers= 2;
+        this.inbox= new HashMap<>();
+        this.inboxSpectators=new HashMap<>();
     }
 
     // aanpassing van de gameState als een 2e speler voor het eerst joint
     public void join(String secondUserName) {
-        if(naamSpelerA!=null && naamSpelerB.equals("") && !naamSpelerA.equals(secondUserName)){
-            naamSpelerB = secondUserName;
-            System.out.println("join in gameState succesvol");
+        if(spelers.size()<=aantalSpelers && spelers.size()>0 && !spelers.contains(secondUserName)){
+            spelers.add(secondUserName);
+            punten.put(secondUserName, 0);
+            inbox.put(secondUserName, new ArrayList<>());
+            System.out.println("join in gamestate succesvol");
         }
 
     }
@@ -162,27 +173,28 @@ public class GameState implements Serializable {
      */
     public synchronized void executeCommando(Commando commando, String activeUser) {
 
-        //doorspelen van het commando naar de andere speler
-        if (activeUser.equals(naamSpelerA)) {
-            System.out.println("commando added in speler2 zijn inbox");
-            inboxSpelerB.add(commando);
-            inboxSpectator.add(commando);
-            notifyAll();
-            System.out.println("executCommando notify in GameState");
-
+        for (String speler : spelers) {
+            if (!speler.equals(activeUser)){
+                System.out.println("commando added in "+ speler +" zijn inbox");
+                if(inbox.get(speler) != null) {
+                    inbox.get(speler).add(commando);
+                }
+                else{
+                    inbox.put(speler, new ArrayList<>());
+                    inbox.get(speler).add(commando);
+                }
+            }
         }
-        else if (activeUser.equals(naamSpelerB)) {
-            System.out.println("commando added in createSpeler zijn inbox");
-            inboxSpelerA.add(commando);
-            inboxSpectator.add(commando);
-            notifyAll();
-            System.out.println("executCommando notify in GameState");
-
+        for (String spectator : spectators) {
+            if(inboxSpectators.get(spectator) != null) {
+                inboxSpectators.get(spectator).add(commando);
+            }
+            else{
+                inboxSpectators.put(spectator, new ArrayList<>());
+                inboxSpectators.get(spectator).add(commando);
+            }
         }
-        else {
-            System.out.println("fout in executeCommando in GameState.java: geen commando added in mailbox andere pers");
-        }
-
+        notifyAll();
 
 
         //aanpassen van de gamestate:
@@ -200,9 +212,15 @@ public class GameState implements Serializable {
     //verschil met vorige methode is dat dit commando door alle spelers + spectators moet uitgevoerd worden
     private synchronized void executeCommandoToAll(Commando commando){
 
-        inboxSpelerA.add(commando);
-        inboxSpelerB.add(commando);
-        inboxSpectator.add(commando);
+        for (List<Commando> commandoList : inbox.values()) {
+            commandoList.add(commando);
+        }
+
+        for (List<Commando> commandoList : inboxSpectators.values()) {
+            commandoList.add(commando);
+        }
+
+
         notifyAll();
 
     }
@@ -272,26 +290,42 @@ public class GameState implements Serializable {
                     //dan is het spel gedaan
                     //wie is de winnaar?
 
-                    if(aantalPuntenSpelerA > aantalPuntenSpelerB){
-                        // A is the winner
-                        inboxSpelerA.add(new Commando("WIN",1));
-                        inboxSpelerB.add(new Commando("LOSS",1));
-                        notifyAll();
+                    ArrayList<String> winners= new ArrayList<>();
 
+                    int max= Collections.max(punten.values());
+
+                    for (String speler : punten.keySet()) {
+                        int punt= punten.get(speler);
+                        if(punt == max){
+                            winners.add(speler);
+                        }
                     }
-                    else if(aantalPuntenSpelerA < aantalPuntenSpelerB){
-                        // B is the winner
 
-                        inboxSpelerB.add(new Commando("WIN",1));
-                        inboxSpelerA.add(new Commando("LOSS",1));
-                        notifyAll();
+                    if(winners.size()==1){
+                        String winner= winners.get(0);
+
+                        for (String speler : spelers) {
+                            if(!speler.equals(winner)){
+                                inbox.get(speler).add(new Commando("LOSS",1));
+                            }
+                            else{
+                                inbox.get(speler).add(new Commando("WIN", 1));
+                            }
+                        }
 
                     }
                     else{
-                        //its a draw
-                        executeCommandoToAll(new Commando("DRAW",1));
-
+                        for (String speler : spelers) {
+                            if (!winners.contains(speler)) {
+                                inbox.get(speler).add(new Commando("LOSS", 1));
+                            }
+                        }
+                        for (String winner : winners) {
+                            inbox.get(winner).add(new Commando("DRAW", 1));
+                        }
                     }
+
+                    notifyAll();
 
 
                 }
@@ -316,13 +350,19 @@ public class GameState implements Serializable {
                 //de beurt is nu aan de volgende speler
                 executeCommandoToAll(new Commando("SWITCH", 1));// 1 is testwaarde, zodat we hem toch gaan vinden
 
-                if(aandeBeurt=='A'){
-                    aandeBeurt='B';
-                }
-                else{
-                    aandeBeurt='A';
-                }
 
+                for (int i = 0; i < spelers.size(); i++) {
+                    String speler= spelers.get(i);
+                    if(aandeBeurt.equals(speler)){
+                        if(i!=spelers.size()-1) {
+                            aandeBeurt = spelers.get(i + 1);
+                        }
+                        else{
+                            aandeBeurt= spelers.get(0);
+                        }
+                        break;
+                    }
+                }
             }
 
 
@@ -341,22 +381,14 @@ public class GameState implements Serializable {
      */
     private void awardPuntTo(String activeUser) {
 
+        int oldPunten= punten.get(activeUser);
+        punten.put(activeUser, oldPunten+1);
 
-        if(activeUser.equals(naamSpelerA)){
-            aantalPuntenSpelerA ++;        //deze 1 is een dummywaarde
-            inboxSpelerA.add(new Commando("AWARDTOME",  1));
-            inboxSpelerB.add(new Commando("AWARDTOYOU", 1));
+        for (String speler : spelers) {
+            inbox.get(speler).add(new Commando("AWARD", activeUser, 1));
         }
 
-        else if(activeUser.equals(naamSpelerB)){
-            aantalPuntenSpelerB ++;
-            inboxSpelerB.add(new Commando("AWARDTOME",  1));
-            inboxSpelerA.add(new Commando("AWARDTOYOU", 1));
-        }
 
-        else{
-            System.out.println("fout in awardPuntTo : GameState");
-        }
 
     }
 
@@ -383,46 +415,23 @@ public class GameState implements Serializable {
      * @return
      */
     public synchronized List<Commando> getInbox(String userName) {
-        System.out.println("GameState: getInbox door user"+userName+ " en speler A is "+ naamSpelerA +" naam speler B " + naamSpelerB );
-        if (userName.equals(naamSpelerA)) {
 
-            while (inboxSpelerA.isEmpty()) {
+        if(spelers.contains(userName)) {
+            while (inbox.get(userName).isEmpty()) {
                 try {
-                    //System.out.println("inbox is leeg, wait started");
                     wait();
-                    //System.out.println("iets nieuws in de inbox van user " + naamSpelerA + ": wait stopped");
-                }catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            List<Commando> inbox = new ArrayList<Commando>(inboxSpelerA);
-            inboxSpelerA.clear();
-            //System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
-            //miss moet de inbox nu leeggemaakt worden
-            return inbox;
-
-        } else if (userName.equals(naamSpelerB)) {
-
-            while (inboxSpelerB.isEmpty()) {
-                try {
-                    //System.out.println("inbox is leeg, wait started");
-                    wait();
-                    //System.out.println("iets nieuws in de inbox van usser"+naamSpelerB+" : wait stopped");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            List<Commando> inbox = new ArrayList<Commando>(inboxSpelerB);
-            inboxSpelerB.clear();
-          //  System.out.println("inbox met grootte :"+inbox.size()+" gereturned");
-            //miss moet de inbox nu leeggemaakt worden
-            return inbox;
+            List<Commando> inboxSpeler = new ArrayList<>(inbox.get(userName));
+            inbox.get(userName).clear();
 
+            return inboxSpeler;
         }
         else{ // todo : voor de spectator
 
-            while (inboxSpectator.isEmpty()) {
+            while (inboxSpectators.get(userName).isEmpty()) {
                 try {
                     //System.out.println("inbox is leeg, wait started");
                     wait();
@@ -431,11 +440,9 @@ public class GameState implements Serializable {
                     e.printStackTrace();
                 }
             }
-            List<Commando> inbox = new ArrayList<Commando>(inboxSpectator);
-            inboxSpectator.clear();
-            System.out.println("GameState: getInbox, voor spectator");
-            return inbox;
-
+            List<Commando> inboxSpectator = new ArrayList<Commando>(inboxSpectators.get(userName));
+            inboxSpectators.get(userName).clear();
+            return inboxSpectator;
         }
 
     }
@@ -453,36 +460,22 @@ public class GameState implements Serializable {
         return tegelsList;
     }
 
-    public int getAantalPuntenSpelerA() {
-        return aantalPuntenSpelerA;
-    }
 
-    public void setAantalPuntenSpelerA(int aantalPuntenSpelerA) {
-        this.aantalPuntenSpelerA = aantalPuntenSpelerA;
-    }
-
-    public int getAantalPuntenSpelerB() {
-        return aantalPuntenSpelerB;
-    }
-
-    public void setAantalPuntenSpelerB(int aantalPuntenSpelerB) {
-        this.aantalPuntenSpelerB = aantalPuntenSpelerB;
-    }
 
     public void setTegelsList(ArrayList<Tile> tegelsList) {
         this.tegelsList = tegelsList;
     }
 
-    public char getAandeBeurt() {
+    public String getAandeBeurt() {
         return aandeBeurt;
     }
 
-    public void setAandeBeurt(char aandeBeurt) {
+    public void setAandeBeurt(String aandeBeurt) {
         this.aandeBeurt = aandeBeurt;
     }
 
-    public synchronized boolean changeInTurn(char userTurn) {
-        while(userTurn==this.aandeBeurt){
+    public synchronized boolean changeInTurn(String userTurn) {
+        while(userTurn.equals(this.aandeBeurt)){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -490,28 +483,11 @@ public class GameState implements Serializable {
             }
         }
 
-        System.out.println("change turn");
         return true;
     }
 
     public int getGameId() {
         return gameId;
-    }
-
-    public String getNaamSpelerA() {
-        return naamSpelerA;
-    }
-
-    public void setNaamSpelerA(String naamSpelerA) {
-        this.naamSpelerA = naamSpelerA;
-    }
-
-    public String getNaamSpelerB() {
-        return naamSpelerB;
-    }
-
-    public void setNaamSpelerB(String naamSpelerB) {
-        this.naamSpelerB = naamSpelerB;
     }
 
     public int getAantalParenFound() {
@@ -521,5 +497,99 @@ public class GameState implements Serializable {
     public boolean getfinished() { return finished;
     }
 
+    public int getTegelsFlipped() {
+        return tegelsFlipped;
+    }
 
+    public void setTegelsFlipped(int tegelsFlipped) {
+        this.tegelsFlipped = tegelsFlipped;
+    }
+
+    public void setAantalParenFound(int aantalParenFound) {
+        this.aantalParenFound = aantalParenFound;
+    }
+
+    public int getVorigeTileUniqueId() {
+        return vorigeTileUniqueId;
+    }
+
+    public void setVorigeTileUniqueId(int vorigeTileUniqueId) {
+        this.vorigeTileUniqueId = vorigeTileUniqueId;
+    }
+
+    public int getHuidigeTileUniqueId() {
+        return huidigeTileUniqueId;
+    }
+
+    public void setHuidigeTileUniqueId(int huidigeTileUniqueId) {
+        this.huidigeTileUniqueId = huidigeTileUniqueId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
+
+    public void setAantalParen(int aantalParen) {
+        this.aantalParen = aantalParen;
+    }
+
+    public void setAantalPerRij(int aantalPerRij) {
+        this.aantalPerRij = aantalPerRij;
+    }
+
+    public ArrayList<String> getSpelers() {
+        return spelers;
+    }
+
+    public void setSpelers(ArrayList<String> spelers) {
+        this.spelers = spelers;
+    }
+
+    public HashMap<String, List<Commando>> getInbox() {
+        return inbox;
+    }
+
+    public void setInbox(HashMap<String, List<Commando>> inbox) {
+        this.inbox = inbox;
+    }
+
+    public int getAantalSpelers() {
+        return aantalSpelers;
+    }
+
+    public void setAantalSpelers(int aantalSpelers) {
+        this.aantalSpelers = aantalSpelers;
+    }
+
+    public ArrayList<String> getSpectators() {
+        return spectators;
+    }
+
+    public void setSpectators(ArrayList<String> spectators) {
+        this.spectators = spectators;
+    }
+
+    public HashMap<String, List<Commando>> getInboxSpectators() {
+        return inboxSpectators;
+    }
+
+    public void setInboxSpectators(HashMap<String, List<Commando>> inboxSpectators) {
+        this.inboxSpectators = inboxSpectators;
+    }
+
+    public HashMap<String, Integer> getPunten() {
+        return punten;
+    }
+
+    public void setPunten(HashMap<String, Integer> punten) {
+        this.punten = punten;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
 }

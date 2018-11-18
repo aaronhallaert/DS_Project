@@ -1,6 +1,7 @@
 package Classes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * is altijd een deel van een Game
@@ -10,8 +11,8 @@ public class GameInfo implements Serializable {
 
 
     private int gameId; //random gegenereerd nummer tussen 1 en 1000
-    private String clientA; // de speler die de game creert
-    private String clientB; // de speler die eeen gecreerede game joint
+    private ArrayList<String> spelers;
+    private int aantalSpelers;
     private int aantalSpelersConnected;
     private String fotoSet; // variabele die aangeeft welke preset van fotos er zal ingeladen worden
     private int roosterSize; // grootte van het rooster
@@ -21,8 +22,7 @@ public class GameInfo implements Serializable {
      */
     public GameInfo(){
         this.gameId = 0;
-        this.clientA = "";
-        this.clientB = "";
+        this.spelers= new ArrayList<>();
         this.aantalSpelersConnected = 0;
         this.roosterSize = 0;
         this.fotoSet = "";
@@ -38,26 +38,41 @@ public class GameInfo implements Serializable {
     public GameInfo(int gameId, String hostName, int dimensions, char set){
         System.out.println("game constructor in appserver, Game.java triggerd");
         this.gameId = gameId;
-        this.clientA = hostName;
-        this.clientB = "";
+        this.spelers= new ArrayList<>();
+        spelers.add(hostName);
         this.aantalSpelersConnected =1;
         this.roosterSize = dimensions;
         this.fotoSet = set+"";
 
+        // TODO keuze aantal spelers
+        this.aantalSpelers=3;
+
     }
 
-    public GameInfo(int gameId, String clientA, String clientB, int aantalSpelersConnected, String fotoSet, int roosterSize) {
+    public GameInfo(int gameId, ArrayList<String> spelers, int aantalSpelersConnected, String fotoSet, int roosterSize) {
         this.gameId=gameId;
-        this.clientB=clientB;
-        this.clientA=clientA;
+        this.spelers=spelers;
         this.aantalSpelersConnected=aantalSpelersConnected;
         this.fotoSet=fotoSet;
         this.roosterSize=roosterSize;
+
+        // TODO keuze aantal spelers
+        this.aantalSpelers=3;
     }
 
 
     public String toString(){
-        return"game met clientA: "+ clientA +", clientB: "+ clientB +" fotoset: "+fotoSet+" sizerooster = "+roosterSize+"X"+roosterSize;
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("game met clients: \n");
+        for (String speler : spelers) {
+            sb.append(speler+ "\n");
+        }
+
+        sb.append("met  fotoset: "+fotoSet+" sizerooster = "+roosterSize+"X"+roosterSize);
+
+
+        return sb.toString();
     }
 
 
@@ -69,16 +84,14 @@ public class GameInfo implements Serializable {
     public synchronized boolean join(String user){
         System.out.println("client "+ user+ " probeert te joinen");
 
-        // als het een initiele join is
-        if(!clientA.equals(user) && clientB.equals("")){
-            clientB = user;
+        if(spelers.size() < aantalSpelers && !spelers.contains(user)){
+            // initiele join van deze speler
+            spelers.add(user);
             aantalSpelersConnected++;
             notifyAll();
             return true;
         }
-
-        //todo: check rejoin
-        else if(clientA.equals(user) || clientB.equals(user)){
+        else if(spelers.contains(user)){
             // rejoin
             aantalSpelersConnected++;
             notifyAll();
@@ -87,6 +100,8 @@ public class GameInfo implements Serializable {
         else{
             return false;
         }
+
+
 
     }
 
@@ -106,7 +121,7 @@ public class GameInfo implements Serializable {
     public synchronized void playerLeaves(String userName) {
 
         //alleen als de 'leaver' een speler is
-        if(userName.equals(clientA) || userName.equals(clientB)) {
+        if(spelers.contains(userName)){
             aantalSpelersConnected--;
         }
         notifyAll();
@@ -121,21 +136,6 @@ public class GameInfo implements Serializable {
         this.gameId = gameId;
     }
 
-    public String getClientA() {
-        return clientA;
-    }
-
-    public void setClientA(String clientA) {
-        this.clientA = clientA;
-    }
-
-    public String getClientB() {
-        return clientB;
-    }
-
-    public void setClientB(String clientB) {
-        this.clientB = clientB;
-    }
 
     public Integer getAantalSpelersConnected() {
         return aantalSpelersConnected;
@@ -161,5 +161,23 @@ public class GameInfo implements Serializable {
         this.roosterSize = roosterSize;
     }
 
+    public ArrayList<String> getSpelers() {
+        return spelers;
+    }
 
+    public void setSpelers(ArrayList<String> spelers) {
+        this.spelers = spelers;
+    }
+
+    public int getAantalSpelers() {
+        return aantalSpelers;
+    }
+
+    public void setAantalSpelers(int aantalSpelers) {
+        this.aantalSpelers = aantalSpelers;
+    }
+
+    public void setRoosterSize(int roosterSize) {
+        this.roosterSize = roosterSize;
+    }
 }

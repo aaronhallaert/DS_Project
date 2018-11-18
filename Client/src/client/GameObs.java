@@ -9,6 +9,9 @@ import Classes.GameInfo;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * stelt lokaal een game voor in de datatable in het lobbyScreen.
  * de params simpleStringProperty enzo, hebben temaken met de voorstelling in de table van de lobby
@@ -21,23 +24,24 @@ import javafx.beans.property.SimpleStringProperty;
 public class GameObs  {
 
     private SimpleIntegerProperty gameId;
-    private SimpleStringProperty clientA;
-    private SimpleStringProperty clientB;
+    private List<SimpleStringProperty> spelers;
     private SimpleIntegerProperty aantalSpelerConnected;
     private SimpleStringProperty fotoSet;
     private SimpleIntegerProperty roosterSize;
 
     public GameObs(GameInfo gameInfo){
         gameId = new SimpleIntegerProperty(gameInfo.getGameId());
-        clientA = new SimpleStringProperty(gameInfo.getClientA());
-        clientB = new SimpleStringProperty(gameInfo.getClientB());
+        spelers= new ArrayList<>();
+        for (String speler : gameInfo.getSpelers()) {
+            spelers.add(new SimpleStringProperty(speler));
+        }
         aantalSpelerConnected = new SimpleIntegerProperty(gameInfo.getAantalSpelersConnected());
         fotoSet = new SimpleStringProperty(gameInfo.getFotoSet());
         roosterSize = new SimpleIntegerProperty(gameInfo.getRoosterSize());
     }
 
     public String toString(){
-        return gameId.getValue() + ", met clientA: "+ clientA.getValue()+"...";
+        return gameId.getValue() + ", met host: "+ spelers.get(0).getValue()+"...";
     }
 
     //getters en setters enzo
@@ -51,30 +55,6 @@ public class GameObs  {
 
     public void setGameId(int gameId) {
         this.gameId.set(gameId);
-    }
-
-    public String getClientA() {
-        return clientA.get();
-    }
-
-    public SimpleStringProperty clientAProperty() {
-        return clientA;
-    }
-
-    public void setClientA(String clientA) {
-        this.clientA.set(clientA);
-    }
-
-    public String getClientB() {
-        return clientB.get();
-    }
-
-    public SimpleStringProperty clientBProperty() {
-        return clientB;
-    }
-
-    public void setClientB(String client) {
-        this.clientB.set(client);
     }
 
     public int getAantalSpelerConnected() {

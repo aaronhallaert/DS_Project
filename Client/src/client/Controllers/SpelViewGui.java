@@ -4,6 +4,7 @@ import Classes.Commando;
 import Classes.GameInfo;
 import Classes.GameState;
 import Classes.Tile;
+import client.CurrentGame;
 import client.Game.VisualTile;
 import client.Main;
 import client.CurrentUser;
@@ -22,12 +23,9 @@ public class SpelViewGui extends Thread {
     @FXML
     private Label gameTitel;
 
+    // TODO make scorelabel in fxml
     @FXML
-    private Label mijnScoreLabel; private int mijnScore;
-
-    @FXML
-    private Label zijnScoreLabel; private int zijnScore;
-
+    private Label scoreLabel;
     @FXML
     private Label aanDeBeurtLabel;
 
@@ -144,43 +142,24 @@ public class SpelViewGui extends Thread {
         }
 
 
-        if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
-            mijnScore = gameState.getAantalPuntenSpelerA();
-            zijnScore = gameState.getAantalPuntenSpelerB();
-            if(gameInfo.getAantalSpelersConnected()==2) {
-                if (gameState.getAandeBeurt() == 'A') {
-                    System.out.println("welkom terug, jouw beurt");
-                    enableMouseClick();
-                } else {
-                    System.out.println("welkom terug, niet jouw beurt");
-                    disableMouseClick();
-                }
-            }
-            else{
-                System.out.println("welkom terug, 2de speler is weg");
+        if(gameInfo.getAantalSpelersConnected()==gameState.getAantalSpelers()) {
+            if (gameState.getAandeBeurt().equals(CurrentUser.getInstance().getUsername())) {
+                System.out.println("welkom terug, jouw beurt");
+                enableMouseClick();
+            } else {
+                System.out.println("welkom terug, niet jouw beurt");
                 disableMouseClick();
             }
         }
         else{
-            zijnScore = gameState.getAantalPuntenSpelerA();
-            mijnScore = gameState.getAantalPuntenSpelerB();
-            if(gameInfo.getAantalSpelersConnected()==2) {
-                if (gameState.getAandeBeurt() == 'B') {
-                    System.out.println("welkom terug, jouw beurt");
-                    enableMouseClick();
-                } else {
-                    System.out.println("welkom terug, niet jouw beurt");
-                    disableMouseClick();
-                }
-            }
-            else{
-                System.out.println("welkom terug, 2de speler is weg");
-                disableMouseClick();
-            }
-
+            System.out.println("welkom terug, 2de speler is weg");
+            disableMouseClick();
         }
-        mijnScoreLabel.setText(Integer.toString(mijnScore));
-        zijnScoreLabel.setText(Integer.toString(zijnScore));
+
+
+       visualiseerPunten();
+
+
 
         //extra logica zodat finished game niet meer clickable is
         if(gameState.getfinished()){
@@ -223,14 +202,12 @@ public class SpelViewGui extends Thread {
         else if(commando.getType().equals("UNLOCK")){
             deTile.setDisable(false);
         }
-        else if(commando.getType().equals("AWARDTOME")){
-            mijnScore++;
-            mijnScoreLabel.setText(mijnScore+"");
+        else if(commando.getType().equals("AWARD")){
 
-        }
-        else if(commando.getType().equals("AWARDTOYOU")){
-            zijnScore++;
-            zijnScoreLabel.setText(zijnScore+"");
+            String user= commando.getEffectOnUser();
+            CurrentGame.getInstance().getGameState().getPunten().put(user, CurrentGame.getInstance().getGameState().getPunten().get(user)+1);
+            visualiseerPunten();
+
         }
         else if(commando.getType().equals("WIN")){
             disableMouseClick();
@@ -269,6 +246,22 @@ public class SpelViewGui extends Thread {
         return null;
     }
 
+
+    public void visualiseerPunten(){
+        StringBuilder score= new StringBuilder();
+        for (String speler : CurrentGame.getInstance().getGameState().getSpelers()) {
+            score.append(speler+": "+ CurrentGame.getInstance().getGameState().getPunten().get(speler)+"\n");
+        }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                scoreLabel.setText(score.toString());
+            }
+        });
+
+
+    }
 
     public void setLogic(SpelViewLogica spelViewLogica) {
         this.svl=spelViewLogica;

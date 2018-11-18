@@ -11,7 +11,7 @@ public class Commando implements Serializable {
     // 1 indien niet van toepassing op het commando (vb WIN, LOSS) : deze commandos werken niet in op een tile
     private int uniqueTileId;
 
-
+    private String effectOnUser;
     /*
       FLIP, UNFLIP van een kaartje,
       SWITCH (user switch),
@@ -29,11 +29,24 @@ public class Commando implements Serializable {
 
     }
 
+    public Commando(String type, String activeUser, int i) {
+        this.type= type;
+        this.uniqueTileId= i;
+        this.effectOnUser= activeUser;
+    }
+
 
     public String getType() {
         return type;
     }
 
+    public String getEffectOnUser() {
+        return effectOnUser;
+    }
+
+    public void setEffectOnUser(String effectOnUser) {
+        this.effectOnUser = effectOnUser;
+    }
 
     public int getUniqueTileId() {
         return uniqueTileId;

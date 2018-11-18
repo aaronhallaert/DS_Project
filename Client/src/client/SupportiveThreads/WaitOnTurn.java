@@ -14,7 +14,6 @@ public class WaitOnTurn extends Thread{
     private GameState gameState;
     private GameInfo gameInfo;
 
-    private char myCharUser;
 
     public WaitOnTurn(SpelViewLogica svl, GameInfo gameInfo, GameState gameState){
         this.svl=svl;
@@ -26,20 +25,15 @@ public class WaitOnTurn extends Thread{
     public void run() {
         super.run();
 
-        if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
-            myCharUser='A';
-        }else{
-            myCharUser='B';
-        }
 
         while(true){
 
 
             try {
                 if(Main.cnts.getAppImpl().changeInTurn(CurrentGame.getInstance().getGameId(), gameState.getAandeBeurt())){
-                    char updatedTurn= Main.cnts.getAppImpl().getGameState(CurrentGame.getInstance().getGameId()).getAandeBeurt();
+                    String updatedTurn= Main.cnts.getAppImpl().getGameState(CurrentGame.getInstance().getGameId()).getAandeBeurt();
                     gameState.setAandeBeurt(updatedTurn);
-                    if(updatedTurn==myCharUser){
+                    if(updatedTurn.equals(CurrentUser.getInstance().getUsername())){
                         System.out.println("ja tis aan mijn beurt");
                         svl.myTurn(true);
                     }

@@ -23,7 +23,7 @@ public interface AppServerInterface extends Remote {
 
     boolean join(String activeUser, int currentGameIdAttempt) throws RemoteException;
 
-    boolean changeInTurn(int currentGameId, char userTurn) throws RemoteException;
+    boolean changeInTurn(int currentGameId, String userTurn) throws RemoteException;
 
     void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException;
 

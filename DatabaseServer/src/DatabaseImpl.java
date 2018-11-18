@@ -303,8 +303,10 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     }
 
+
     @Override
     public void pushGames(ArrayList<Game> games) throws RemoteException{
+        /*
         // vraag alle game id's op uit db
         Set<Integer> gameIdList= new HashSet<>();
         connect();
@@ -342,8 +344,9 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
 
         closeConnection();
+        */
     }
-    private void pushGameInfo(Game game){
+    /*private void pushGameInfo(Game game){
         String pushGameInfo= "INSERT INTO GameInfo(gameId, clientA, clientB, aantalSpelersConnected, fotoSet, roosterSize) " +
                 "VALUES (?,?,?,?,?,?)";
 
@@ -514,10 +517,10 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
 
     }
-
+*/
     @Override
     public ArrayList<Game> getGames() throws RemoteException {
-
+/*
         ArrayList<Game> games= new ArrayList<>();
         ArrayList<GameInfo>gameInfos= new ArrayList<>();
         ArrayList<GameState> gameStates= new ArrayList<GameState>();
@@ -626,8 +629,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
 
         return tiles;
-
-
+*/
+return (new ArrayList<>());
     }
 
     private static String hash(String password, String salt){

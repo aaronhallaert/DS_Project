@@ -172,7 +172,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public boolean changeInTurn(int currentGameId, char userTurn) throws RemoteException{
+    public boolean changeInTurn(int currentGameId, String userTurn) throws RemoteException{
         return this.getGameState(currentGameId).changeInTurn(userTurn);
     }
 

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="overkoepelendePane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controllers.SpelViewGui">
+<AnchorPane fx:id="overkoepelendePane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controllers.SpelViewGui">
    <children>
 
        <Label fx:id="gameTitel" layoutX="33.0" layoutY="29.0" text="Game" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
@@ -20,10 +20,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label layoutX="310.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="mijn score:"/>
-      <Label layoutX="310.0" layoutY="41.0" prefHeight="17.0" prefWidth="77.0" text="zijn score:"/>
-      <Label fx:id="mijnScoreLabel" layoutX="387.0" layoutY="20.0" prefHeight="17.0" prefWidth="77.0" text="0" />
-      <Label fx:id="zijnScoreLabel" layoutX="387.0" layoutY="41.0" prefHeight="17.0" prefWidth="77.0" text="0" />
+      <Label fx:id="scoreLabel" layoutX="300.0" layoutY="13.0" prefHeight="49.0" prefWidth="77.0" text="0" />
       <Button fx:id="leave" layoutX="426.0" layoutY="25.0" mnemonicParsing="false" onAction="#leaveGame" text="leave" />
    </children>
 </AnchorPane>

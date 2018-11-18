@@ -61,19 +61,11 @@ public class SpelViewLogica extends Thread{
 
 
             // ALS HET AAN MIJN BEURT IS DAN MAGK KLIKKEN EN ALS ER 2 SPELERS GECONNECTEERD ZIJN
-            if(CurrentGame.getInstance().getGameInfo().getAantalSpelersConnected()==2){
-                char myCharUser;
-                if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
-                    myCharUser='A';
-                }
-                else if (CurrentUser.getInstance().getUsername().equals(gameInfo.getClientB())){
-                    myCharUser='B';
-                }
-                else{
-                    myCharUser='G'; // G van guest
-                }
+            if(CurrentGame.getInstance().getGameInfo().getAantalSpelersConnected()==CurrentGame.getInstance().getGameState().getAantalSpelers()){
 
-                if(CurrentGame.getInstance().getGameState().getAandeBeurt()==myCharUser){
+
+
+                if(CurrentGame.getInstance().getGameState().getAandeBeurt().equals(CurrentUser.getInstance().getUsername())){
                     myTurn(true);
                 }
                 else{
@@ -105,13 +97,9 @@ public class SpelViewLogica extends Thread{
      * deze methode zorgt ervoor dat er niet geklikt kan worden op de kaarten als de 2de speler niet aanwezig is
      * indien ze dan toch beide aanwezig zijn, wordt eerst nog gecontroleerd of het wel "mijn" beurt is
      */
-    public void bothPlayersConnected(boolean b){char myCharUser;
-        if(CurrentUser.getInstance().getUsername().equals(gameInfo.getClientA())){
-            myCharUser='A';
-        }else{
-            myCharUser='B';
-        }
-        if(CurrentGame.getInstance().getGameState().getAandeBeurt()==myCharUser){
+    public void bothPlayersConnected(boolean b){
+
+        if(CurrentGame.getInstance().getGameState().getAandeBeurt().equals(CurrentUser.getInstance().getUsername())){
             if(b) {
                 spvGui.enableMouseClick();
             }
@@ -240,6 +228,21 @@ public class SpelViewLogica extends Thread{
 
     public void spectatorMode() {
         spvGui.spectatorMode();
+    }
+
+    public void updateScore() {
+
+        spvGui.visualiseerPunten();
+
+
+    }
+
+    public void updateGame() {
+        try {
+            CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(CurrentGame.getInstance().getGameId()));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     //hier komt methode die pollet naar commando's in de mailbox op de appserver

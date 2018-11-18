@@ -196,11 +196,10 @@ public class LobbyScreen {
                 CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
                 String thisUser  = CurrentUser.getInstance().getUsername();
-                String gameUserA = CurrentGame.getInstance().getGameInfo().getClientA();
-                String gameUserB = CurrentGame.getInstance().getGameInfo().getClientB();
 
 
-                if(!thisUser.equals(gameUserA)  && !thisUser.equals(gameUserB)) {
+
+                if(!CurrentGame.getInstance().getGameInfo().getSpelers().contains(thisUser)) {
                     // ga verder naar spectaten ALLEEN als je niet deelneemt aan de game zelf
                     SpelViewLogica spv = new SpelViewLogica();
                     spv.start();
