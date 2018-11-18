@@ -5,9 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,22 +66,22 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="1" />
-          <entry key="gameinfo" value="8" />
-          <entry key="gamestate" value="10" />
-          <entry key="java" value="138" />
+          <entry key="gameinfo" value="10" />
+          <entry key="gamestate" value="12" />
+          <entry key="java" value="141" />
           <entry key="persons" value="3" />
-          <entry key="pictures" value="4" />
+          <entry key="pictures" value="5" />
           <entry key="sqlite_master" value="2" />
-          <entry key="sqlite_sequence" value="2" />
-          <entry key="tile" value="9" />
-          <entry key="tilelist4x4" value="9" />
-          <entry key="tilelist6x6" value="4" />
+          <entry key="sqlite_sequence" value="3" />
+          <entry key="tile" value="11" />
+          <entry key="tilelist4x4" value="11" />
+          <entry key="tilelist6x6" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="51" />
-          <entry key="JAVA" value="138" />
+          <entry key="Database Element" value="62" />
+          <entry key="JAVA" value="141" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -92,14 +90,15 @@
           <entry key="cell" value="2" />
           <entry key="dummy" value="11" />
           <entry key="fxml" value="57" />
-          <entry key="java" value="11293" />
-          <entry key="txt" value="604" />
+          <entry key="java" value="12260" />
+          <entry key="txt" value="663" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="11293" />
-          <entry key="PLAIN_TEXT" value="615" />
+          <entry key="JAVA" value="12256" />
+          <entry key="PLAIN_TEXT" value="674" />
+          <entry key="SQL" value="4" />
           <entry key="Scratch" value="2" />
           <entry key="XML" value="57" />
         </counts>
@@ -161,64 +160,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java">
+        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="34">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="137" column="59" selection-start-line="137" selection-start-column="59" selection-end-line="137" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="144" column="53" selection-start-line="144" selection-start-column="53" selection-end-line="144" selection-end-column="53" />
-              <folding>
-                <element signature="e#667#707#0" />
-                <element signature="docComment;method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
-                <element signature="method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
-                <element signature="docComment;method#getGameInfoLijst#0;class#AppServiceImpl#0" />
-                <element signature="method#getGame#0;class#AppServiceImpl#0" />
-                <element signature="method#getGameInfo#0;class#AppServiceImpl#0" />
-                <element signature="method#getGameSate#0;class#AppServiceImpl#0" />
-                <element signature="method#changeInPlayers#0;class#AppServiceImpl#0" />
-                <element signature="method#changeInTurn#0;class#AppServiceImpl#0" />
-                <element signature="docComment;method#executeFlipCommando#0;class#AppServiceImpl#0" />
-                <element signature="method#executeFlipCommando#0;class#AppServiceImpl#0" />
-                <element signature="method#getInbox#0;class#AppServiceImpl#0" />
-                <element signature="docComment;method#getImage#0;class#AppServiceImpl#0" />
-                <element signature="method#getImage#0;class#AppServiceImpl#0" />
-                <element signature="docComment;method#storeImage#0;class#AppServiceImpl#0" />
-                <element signature="method#storeImage#0;class#AppServiceImpl#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="292" selection-start-line="292" selection-end-line="292" />
+            <state relative-caret-position="317">
+              <caret line="328" selection-start-line="328" selection-end-line="328" />
               <folding>
                 <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
                 <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
@@ -237,9 +200,9 @@
                 <element signature="method#isTokenValid#0;class#DatabaseImpl#0" />
                 <element signature="docComment;method#cancelToken#0;class#DatabaseImpl#0" />
                 <element signature="docComment;method#getToken#0;class#DatabaseImpl#0" />
+                <element signature="method#getToken#0;class#DatabaseImpl#0" />
                 <element signature="method#pushGameInfo#0;class#DatabaseImpl#0" />
                 <element signature="method#pushGameState#0;class#DatabaseImpl#0" />
-                <element signature="method#pushTegellijst#0;class#DatabaseImpl#0" />
                 <element signature="method#hash#0;class#DatabaseImpl#0" />
                 <element signature="method#hash#1;class#DatabaseImpl#0" />
                 <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
@@ -252,34 +215,16 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tile">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist6x6">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist4x4">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tile">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
@@ -298,7 +243,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>leav</find>
       <find>flip</find>
       <find>executeCommando</find>
       <find>FLIP</find>
@@ -328,6 +272,7 @@
       <find>pushGameState</find>
       <find>tegelsFlipped</find>
       <find>getInbox</find>
+      <find>found</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -364,8 +309,8 @@
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitOnTurn.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java" />
-        <option value="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/GameState.java" />
+        <option value="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" />
       </list>
     </option>
   </component>
@@ -376,8 +321,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-12" />
-    <option name="width" value="3006" />
+    <option name="x" value="-11" />
+    <option name="width" value="1940" />
     <option name="height" value="2124" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -553,7 +498,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542534094133" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542536457941" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -690,7 +635,7 @@
       <workItem from="1542377626017" duration="2795000" />
       <workItem from="1542387371134" duration="4762000" />
       <workItem from="1542486195058" duration="1726000" />
-      <workItem from="1542531048542" duration="3028000" />
+      <workItem from="1542531048542" duration="5246000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -895,11 +840,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542533749605</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="alles ok, enkel nog game updaten bij 2de leave">
+      <created>1542534213121</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1542534213121</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63613000" />
+    <option name="totallyTimeSpent" value="65831000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -922,7 +874,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.40530008" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49065608" visible="true" weight="0.4175058" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7057654" visible="true" weight="0.41440743" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" weight="0.39814097" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -930,7 +882,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5093439" side_tool="true" visible="true" weight="0.4175058" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.2942346" side_tool="true" visible="true" weight="0.41440743" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49821073" weight="0.28582495" />
       <window_info anchor="bottom" id="Statistic" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3289166" />
@@ -941,7 +893,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.14194831" />
+      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.089860834" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
@@ -1007,7 +959,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="game is playable" />
     <MESSAGE value="bugfix, je kan niet 2x op dezelfde tile klikken" />
     <MESSAGE value="speelbaar, maar nog niet statless" />
     <MESSAGE value="commentaar in dispatchimpl added" />
@@ -1032,7 +983,8 @@
     <MESSAGE value="volledige game in database (voorlopig enkel 1 game, 1 keer insteken, zonder update)&#10;&#10;probleem is da'k nie weet wa er nu unique id is van die tegels, is da ook&#10;unique id over meerdere games?" />
     <MESSAGE value="eindstand wordt weergegeven als game uit db komt, was nog bug" />
     <MESSAGE value="database ok, enkel nog update, maar fout in joinmethode" />
-    <option name="LAST_COMMIT_MESSAGE" value="database ok, enkel nog update, maar fout in joinmethode" />
+    <MESSAGE value="alles ok, enkel nog game updaten bij 2de leave" />
+    <option name="LAST_COMMIT_MESSAGE" value="alles ok, enkel nog game updaten bij 2de leave" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1229,13 +1181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/sqlite_sequence">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -1289,101 +1234,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/persons">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/pictures">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tile">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist4x4">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist6x6">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gamestate">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="292" selection-start-line="292" selection-end-line="292" />
-          <folding>
-            <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
-            <element signature="method#connect#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#closeConnection#0;class#DatabaseImpl#0" />
-            <element signature="method#closeConnection#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#checkUserCred#0;class#DatabaseImpl#0" />
-            <element signature="method#checkUserCred#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#insertUser#0;class#DatabaseImpl#0" />
-            <element signature="method#insertUser#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#userNameExists#0;class#DatabaseImpl#0" />
-            <element signature="method#userNameExists#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#createToken#0;class#DatabaseImpl#0" />
-            <element signature="method#createToken#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#isTokenValid#0;class#DatabaseImpl#0" />
-            <element signature="method#isTokenValid#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#cancelToken#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#getToken#0;class#DatabaseImpl#0" />
-            <element signature="method#pushGameInfo#0;class#DatabaseImpl#0" />
-            <element signature="method#pushGameState#0;class#DatabaseImpl#0" />
-            <element signature="method#pushTegellijst#0;class#DatabaseImpl#0" />
-            <element signature="method#hash#0;class#DatabaseImpl#0" />
-            <element signature="method#hash#1;class#DatabaseImpl#0" />
-            <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
-            <element signature="method#getImage#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#storeImage#0;class#DatabaseImpl#0" />
-            <element signature="method#storeImage#0;class#DatabaseImpl#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1421,8 +1275,106 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="137" column="59" selection-start-line="137" selection-start-column="59" selection-end-line="137" selection-end-column="59" />
+        <state relative-caret-position="445">
+          <caret line="149" column="77" selection-start-line="149" selection-start-column="77" selection-end-line="149" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/ReceiveThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist6x6">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/sqlite_sequence">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/pictures">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tilelist4x4">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/tile">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gamestate">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="328" selection-start-line="328" selection-end-line="328" />
+          <folding>
+            <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
+            <element signature="method#connect#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#closeConnection#0;class#DatabaseImpl#0" />
+            <element signature="method#closeConnection#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#checkUserCred#0;class#DatabaseImpl#0" />
+            <element signature="method#checkUserCred#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#insertUser#0;class#DatabaseImpl#0" />
+            <element signature="method#insertUser#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#userNameExists#0;class#DatabaseImpl#0" />
+            <element signature="method#userNameExists#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#createToken#0;class#DatabaseImpl#0" />
+            <element signature="method#createToken#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#isTokenValid#0;class#DatabaseImpl#0" />
+            <element signature="method#isTokenValid#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#cancelToken#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#getToken#0;class#DatabaseImpl#0" />
+            <element signature="method#getToken#0;class#DatabaseImpl#0" />
+            <element signature="method#pushGameInfo#0;class#DatabaseImpl#0" />
+            <element signature="method#pushGameState#0;class#DatabaseImpl#0" />
+            <element signature="method#hash#0;class#DatabaseImpl#0" />
+            <element signature="method#hash#1;class#DatabaseImpl#0" />
+            <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
+            <element signature="method#getImage#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#storeImage#0;class#DatabaseImpl#0" />
+            <element signature="method#storeImage#0;class#DatabaseImpl#0" />
+          </folding>
         </state>
       </provider>
     </entry>

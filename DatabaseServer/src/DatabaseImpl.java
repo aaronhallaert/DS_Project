@@ -332,13 +332,18 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
             else{
                 //update game nodig
+                updateGameState(game);
+
+                updateGameInfo(game);
+
+                updateTegelLijst(game);
             }
 
         }
 
         closeConnection();
     }
-    public void pushGameInfo(Game game){
+    private void pushGameInfo(Game game){
         String pushGameInfo= "INSERT INTO GameInfo(gameId, clientA, clientB, aantalSpelersConnected, fotoSet, roosterSize) " +
                 "VALUES (?,?,?,?,?,?)";
 
@@ -358,7 +363,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
 
     }
-    public void pushGameState(Game game){
+    private void pushGameState(Game game){
         // push game state
         String pushGameState = "INSERT INTO GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, " +
                 "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize, aantalParenFound) " +
@@ -386,7 +391,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
     }
 
-    public void pushTegellijst(Game game, int size){
+    private void pushTegellijst(Game game, int size){
         StringBuilder sb= new StringBuilder();
         if (size == 16) {
             sb.append("INSERT INTO TileList4x4(gameId");
@@ -412,7 +417,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             // push elke tegel
             int i=2;
             for (Tile tile : game.getGameState().getTegelsList()) {
-                String pushTegel = "INSERT INTO Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver, gameId)" +
+                String pushTegel = "INSERT INTO Tile(uniqueIdentifier, id, imageId, backImageId, isfound, flippedOver, gameId)" +
                         "VALUES(?,?,?,?,?,?,?)";
 
 
@@ -442,7 +447,71 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
     }
     
-    
+    private void updateGameState(Game game){
+        String updateGameString= "UPDATE GameState " +
+                "SET aantalPuntenSpelerA = ?, aantalPuntenSpelerB = ?, aandeBeurt= ?, aantalParenFound= ?" +
+                "WHERE gameId = ?";
+        try {
+            PreparedStatement pstmtGameState= conn.prepareStatement(updateGameString);
+            pstmtGameState.setInt(1,game.getGameState().getAantalPuntenSpelerA());
+            pstmtGameState.setInt(2,game.getGameState().getAantalPuntenSpelerB());
+            pstmtGameState.setString(3, Character.toString(game.getGameState().getAandeBeurt()));
+            pstmtGameState.setInt(4, game.getGameState().getAantalParenFound());
+            pstmtGameState.setInt(5, game.getGameId());
+
+
+            pstmtGameState.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateGameInfo(Game game){
+        String updateGameInfo= "UPDATE GameInfo " +
+                "SET clientA = ?, clientB = ?" +
+                "WHERE gameId = ?";
+        try {
+            PreparedStatement pstmtGameState= conn.prepareStatement(updateGameInfo);
+            pstmtGameState.setString(1,game.getGameInfo().getClientA());
+            pstmtGameState.setString(2,game.getGameInfo().getClientB());
+            pstmtGameState.setInt(3, game.getGameId());
+
+
+
+            pstmtGameState.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateTegelLijst(Game game){
+
+        for (Tile tile : game.getGameState().getTegelsList()) {
+            String updateTile= "UPDATE Tile " +
+                    "SET flippedOver = ?, isfound = ?"+
+                    "WHERE gameId= ? AND uniqueIdentifier = ?";
+
+            try {
+                PreparedStatement pstmtTile= conn.prepareStatement(updateTile);
+                pstmtTile.setBoolean(1, tile.isFound());
+                pstmtTile.setBoolean(2, tile.isFlippedOver());
+                pstmtTile.setInt(3, game.getGameId());
+                pstmtTile.setInt(4, tile.getUniqueIdentifier());
+
+                pstmtTile.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
     @Override
     public ArrayList<Game> getGames() throws RemoteException {
 
@@ -546,7 +615,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 int id= tile.getInt("id");
                 String imageId= tile.getString("imageId");
                 String backImageId= tile.getString("backImageId");
-                boolean found= tile.getBoolean("found");
+                boolean found= tile.getBoolean("isfound");
                 boolean flippedOver= tile.getBoolean("flippedOver");
                 tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
             }
