@@ -129,6 +129,9 @@ public class LobbyScreen {
         if(deGameToJoin == null){
             //geef iets van info dat je geen game gekozen hebt
             System.out.println("er bestaat geen dergelijke game");
+            joinErrorLabel.setVisible(true);
+            rtAnimation.play();
+
         }
         else {
             //join this game
