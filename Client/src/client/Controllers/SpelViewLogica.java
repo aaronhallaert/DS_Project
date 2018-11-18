@@ -9,10 +9,12 @@ import client.SupportiveThreads.WaitOnTurn;
 import client.SupportiveThreads.WaitPlayerThread;
 import client.CurrentUser;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -157,6 +159,11 @@ public class SpelViewLogica extends Thread{
                     spelViewStage.setScene(startScene);
                     spelViewStage.setResizable(false);
                     spelViewStage.show();
+                    spelViewStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                        public void handle(WindowEvent we) {
+                           leave();
+                        }});
+
                     finalController.setup(gameInfo, gameState);
                 }
         );

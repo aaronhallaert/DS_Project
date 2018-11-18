@@ -12,7 +12,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterface {
 
@@ -256,7 +258,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     @Override
     public void cancelToken(String username) throws RemoteException{
         String sql = "UPDATE Persons SET token_timestamp=? WHERE Username= ?;";
-
+        connect();
         try{
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -267,6 +269,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         catch (SQLException se){
             se.printStackTrace();
         }
+        closeConnection();
     }
 
 
@@ -286,34 +289,54 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,username);
             ResultSet rs = pstmt.executeQuery();
-            return rs.getString("token");
-
+            String s= rs.getString("token");
+            closeConnection();
+            return s;
 
         }
         catch(SQLException se){
             System.out.println(se.getMessage());
             se.printStackTrace();
+            closeConnection();
             return null;
         }
+
     }
 
     @Override
     public void pushGames(ArrayList<Game> games) throws RemoteException{
+        // vraag alle game id's op uit db
+        Set<Integer> gameIdList= new HashSet<>();
+        connect();
+        String getGameId= "SELECT gameId FROM GameInfo";
+        try {
+            PreparedStatement pstmt= conn.prepareStatement(getGameId);
+            ResultSet rs= pstmt.executeQuery();
+            while(rs.next()){
+                gameIdList.add(rs.getInt("gameId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         for (Game game : games) {
+            if(!gameIdList.contains(game.getGameId())) {
+                // push game state
+                pushGameState(game);
 
-            // push game state
-            pushGameState(game);
+                // push tegellijst
+                pushTegellijst(game, game.getGameState().getTegelsList().size());
 
-            // push tegellijst
-            pushTegellijst(game, game.getGameState().getTegelsList().size());
-
-
-
-            // push Game Info
-            pushGameInfo(game);
-
+                // push Game Info
+                pushGameInfo(game);
+            }
+            else{
+                //update game nodig
+            }
 
         }
+
+        closeConnection();
     }
     public void pushGameInfo(Game game){
         String pushGameInfo= "INSERT INTO GameInfo(gameId, clientA, clientB, aantalSpelersConnected, fotoSet, roosterSize) " +
@@ -338,7 +361,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     public void pushGameState(Game game){
         // push game state
         String pushGameState = "INSERT INTO GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, " +
-                "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize) " +
+                "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize, aantalParenFound) " +
                 "VALUES(?,?,?,?,?,?,?,?,?,?)";
         connect();
         try {
@@ -389,8 +412,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             // push elke tegel
             int i=2;
             for (Tile tile : game.getGameState().getTegelsList()) {
-                String pushTegel = "INSERT INTO Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver)" +
-                        "VALUES(?,?,?,?,?,?)";
+                String pushTegel = "INSERT INTO Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver, gameId)" +
+                        "VALUES(?,?,?,?,?,?,?)";
 
 
                 PreparedStatement pstmtTegel = conn.prepareStatement(pushTegel);
@@ -401,6 +424,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 pstmtTegel.setString(4, tile.getBackImageId());
                 pstmtTegel.setBoolean(5, tile.isFound());
                 pstmtTegel.setBoolean(6, tile.isFlippedOver());
+                pstmtTegel.setInt(7, game.getGameId());
 
                 pstmtTegel.executeUpdate();
 
@@ -464,72 +488,10 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 char aandeBeurt= rs.getString("aandeBeurt").charAt(0);
 
 
-                int tileListId= rs.getInt("gameId");
+
                 int tileListSize= rs.getInt("tileListSize");
 
-                ArrayList<Tile> tiles= new ArrayList<>();
-                if(tileListSize==16){
-                    String sqlTiles= "SELECT * FROM TileList4x4 WHERE gameId = ?";
-                    PreparedStatement tilepstmt= conn.prepareStatement(sqlTiles);
-                    tilepstmt.setString(1, Integer.toString(tileListId));
-                    ResultSet tilers= tilepstmt.executeQuery();
-                    ArrayList<Integer> tileIds= new ArrayList<>();
-                    while(tilers.next()){
-                        for (int i = 1; i < 17; i++) {
-                            String tile= "Tile"+i;
-                            tileIds.add(tilers.getInt(tile));
-                        }
-                    }
-
-                    for (Integer tileId : tileIds) {
-                        String sqlTile= "SELECT * FROM TILE WHERE uniqueIdentifier = ?";
-                        PreparedStatement singleTilepstmt= conn.prepareStatement(sqlTile);
-                        singleTilepstmt.setString(1, Integer.toString(tileId));
-                        ResultSet tile= singleTilepstmt.executeQuery();
-            
-                        while(tile.next()){
-                            int uniqueIdentifier=tile.getInt("uniqueIdentifier");
-                            int id= tile.getInt("id");
-                            String imageId= tile.getString("imageId");
-                            String backImageId= tile.getString("backImageId");
-                            boolean found= tile.getBoolean("found");
-                            boolean flippedOver= tile.getBoolean("flippedOver");
-                            tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
-                        }
-
-                    }
-                }
-                else{
-                    String sqlTiles= "SELECT * FROM TileList6x6 WHERE gameId = ?";
-                    PreparedStatement tilepstmt= conn.prepareStatement(sqlTiles);
-                    tilepstmt.setString(1, Integer.toString(tileListId));
-                    ResultSet tilers= tilepstmt.executeQuery();
-                    ArrayList<Integer> tileIds= new ArrayList<>();
-                    while(tilers.next()){
-                        for (int i = 1; i < 37; i++) {
-                            String tile= "Tile"+i;
-                            tileIds.add(tilers.getInt(tile));
-                        }
-                    }
-
-                    for (Integer tileId : tileIds) {
-                        String sqlTile= "SELECT * FROM TILE WHERE uniqueIdentifier = ?";
-                        PreparedStatement singleTilepstmt= conn.prepareStatement(sqlTile);
-                        singleTilepstmt.setString(1, Integer.toString(tileId));
-                        ResultSet tile= singleTilepstmt.executeQuery();
-
-                        while(tile.next()){
-                            int uniqueIdentifier=tile.getInt("uniqueIdentifier");
-                            int id= tile.getInt("id");
-                            String imageId= tile.getString("imageId");
-                            String backImageId= tile.getString("backImageId");
-                            boolean found= tile.getBoolean("found");
-                            boolean flippedOver= tile.getBoolean("flippedOver");
-                            tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
-                        }
-
-                    }
-                }
+                ArrayList<Tile> tiles=  getTiles(gameId, tileListSize);
                 GameState gs =new GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tiles, aantalParenFound);
                 gameStates.add(gs);
             }
@@ -552,6 +514,49 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         return null;
     }
 
+    private ArrayList<Tile> getTiles(int gameId, int tileListSize) throws SQLException {
+        ArrayList<Tile> tiles= new ArrayList<>();
+        String sqlTiles="";
+        if(tileListSize==16) {
+            sqlTiles = "SELECT * FROM TileList4x4 WHERE gameId = ? ";
+        }
+        else if(tileListSize==36) {
+            sqlTiles="SELECT * FROM TileList6x6 WHERE gameId = ?";
+        }
+        PreparedStatement tilepstmt= conn.prepareStatement(sqlTiles);
+        tilepstmt.setInt(1, gameId);
+        ResultSet tilers= tilepstmt.executeQuery();
+        ArrayList<Integer> tileIds= new ArrayList<>();
+        while(tilers.next()){
+            for (int i = 1; i < tileListSize+1; i++) {
+                String tile= "Tile"+i;
+                tileIds.add(tilers.getInt(tile));
+            }
+        }
+
+        for (Integer tileId : tileIds) {
+            String sqlTile= "SELECT * FROM TILE WHERE uniqueIdentifier = ? and gameId= ?";
+            PreparedStatement singleTilepstmt= conn.prepareStatement(sqlTile);
+            singleTilepstmt.setInt(1, tileId);
+            singleTilepstmt.setInt(2, gameId);
+            ResultSet tile= singleTilepstmt.executeQuery();
+
+            while(tile.next()){
+                int uniqueIdentifier=tile.getInt("uniqueIdentifier");
+                int id= tile.getInt("id");
+                String imageId= tile.getString("imageId");
+                String backImageId= tile.getString("backImageId");
+                boolean found= tile.getBoolean("found");
+                boolean flippedOver= tile.getBoolean("flippedOver");
+                tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
+            }
+
+        }
+
+        return tiles;
+
+
+    }
 
     private static String hash(String password, String salt){
         return Hashing.sha256().hashString((password + salt),StandardCharsets.UTF_8).toString();

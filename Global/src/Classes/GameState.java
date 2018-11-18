@@ -372,8 +372,7 @@ public class GameState implements Serializable {
      * @return
      */
     public synchronized List<Commando> getInbox(String userName) {
-
-       // System.out.println("GameState: getInbox door user"+userName);
+        System.out.println("GameState: getInbox door user"+userName+ " en speler A is "+ naamSpelerA +" naam speler B " + naamSpelerB );
         if (userName.equals(naamSpelerA)) {
 
             while (inboxSpelerA.isEmpty()) {

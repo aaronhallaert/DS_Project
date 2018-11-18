@@ -7,11 +7,13 @@ import Classes.Tile;
 import client.Game.VisualTile;
 import client.Main;
 import client.CurrentUser;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -102,6 +104,8 @@ public class SpelViewGui extends Thread {
 
         Main.goToLobby();
     }
+
+
 
 
     private void setupGame(GameInfo gameInfo, GameState gameState) {
