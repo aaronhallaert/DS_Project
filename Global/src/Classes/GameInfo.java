@@ -103,8 +103,12 @@ public class GameInfo implements Serializable {
 
     }
 
-    public synchronized void playerLeaves() {
-        aantalSpelersConnected--;
+    public synchronized void playerLeaves(String userName) {
+
+        //alleen als de 'leaver' een speler is
+        if(userName.equals(clientA) || userName.equals(clientB)) {
+            aantalSpelersConnected--;
+        }
         notifyAll();
     }
 

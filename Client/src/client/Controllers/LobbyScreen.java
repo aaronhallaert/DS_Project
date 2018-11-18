@@ -195,7 +195,7 @@ public class LobbyScreen {
 
                 CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
-                String thisUser = CurrentUser.getInstance().getUsername();
+                String thisUser  = CurrentUser.getInstance().getUsername();
                 String gameUserA = CurrentGame.getInstance().getGameInfo().getClientA();
                 String gameUserB = CurrentGame.getInstance().getGameInfo().getClientB();
 
@@ -207,10 +207,9 @@ public class LobbyScreen {
                     //dit gaat fout want het zal ontlocked worden waarschijnlijk later
 
                     Platform.setImplicitExit(false);
-
-                    //niks clickable, ooit
                     spelSetup.getScene().getWindow().hide();
                 }
+
                 else{
                     displayErrorMessage("eigen game niet joinbaar!");
                 }

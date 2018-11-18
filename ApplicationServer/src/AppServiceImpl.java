@@ -167,7 +167,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public void leaveGame(int currentGameId, String username) throws RemoteException {
-        this.getGameInfo(currentGameId).playerLeaves();
+        this.getGameInfo(currentGameId).playerLeaves(username);
         databaseImpl.pushGames(gamesLijst);
     }
 
