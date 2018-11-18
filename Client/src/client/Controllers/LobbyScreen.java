@@ -6,6 +6,7 @@ import client.GameObs;
 import client.Main;
 import client.SupportiveThreads.LobbyRefreshThread;
 import client.CurrentUser;
+import com.sun.corba.se.spi.orbutil.fsm.GuardBase;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -194,18 +195,29 @@ public class LobbyScreen {
 
                 CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
-                // ga verder naar GAME
-                SpelViewLogica spv = new SpelViewLogica();
-                spv.start();
-                //dit gaat fout want het zal ontlocked worden waarschijnlijk later
-                spv.spectatorMode();
+                String thisUser = CurrentUser.getInstance().getUsername();
+                String gameUserA = CurrentGame.getInstance().getGameInfo().getClientA();
+                String gameUserB = CurrentGame.getInstance().getGameInfo().getClientB();
 
-                Platform.setImplicitExit(false);
-                spelSetup.getScene().getWindow().hide();
 
+                if(!thisUser.equals(gameUserA)  && !thisUser.equals(gameUserB)) {
+                    // ga verder naar spectaten ALLEEN als je niet deelneemt aan de game zelf
+                    SpelViewLogica spv = new SpelViewLogica();
+                    spv.start();
+                    //dit gaat fout want het zal ontlocked worden waarschijnlijk later
+
+                    Platform.setImplicitExit(false);
+
+                    //niks clickable, ooit
+                    spelSetup.getScene().getWindow().hide();
+                }
+                else{
+                    displayErrorMessage("eigen game niet joinbaar!");
                 }
 
-                catch (RemoteException e) {
+            }
+
+            catch (RemoteException e) {
                 e.printStackTrace();
             }
 
