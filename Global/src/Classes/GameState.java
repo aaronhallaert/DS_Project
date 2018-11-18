@@ -135,7 +135,7 @@ public class GameState implements Serializable {
     // aanpassing van de gameState als een 2e speler voor het eerst joint
     // todo: pas dit aan zodat mensen kunnen leaven en opnieuw joinen
     public void join(String secondUserName) {
-        if(naamSpelerA!=null && naamSpelerB.equals("")){
+        if(naamSpelerA!=null && naamSpelerB.equals("") && !naamSpelerA.equals(secondUserName)){
             naamSpelerB = secondUserName;
             System.out.println("join in gameState succesvol");
         }
