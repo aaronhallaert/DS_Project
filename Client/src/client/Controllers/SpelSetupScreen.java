@@ -6,6 +6,7 @@ import client.CurrentUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
@@ -40,6 +41,9 @@ public class SpelSetupScreen {
     Button test;
 
     @FXML
+    ChoiceBox aantalSpelersPicker;
+
+    @FXML
     ImageView fotoVoorbeeldSetA;
 
     @FXML
@@ -72,6 +76,8 @@ public class SpelSetupScreen {
         Main.setImage(fotoVoorbeeldSetA, "fotoSetA");
         Main.setImage(fotoVoorbeeldSetB, "fotoSetB");
         Main.setImage(fotoVoorbeeldSetC, "fotoSetC");
+
+        aantalSpelersPicker.getItems().addAll(2, 3, 4);
     }
 
     @FXML
@@ -88,6 +94,18 @@ public class SpelSetupScreen {
             dimensies = 6;
         }
 
+        int aantalSpelers = 0;
+        if(aantalSpelersPicker.getValue() != null){
+            aantalSpelers = (int) aantalSpelersPicker.getValue();
+            System.out.println("aantalSpelers is :"+aantalSpelers);
+        }
+        else{
+
+            //todo: errormessage, gelieve spelers te picken!
+            System.out.println("geen aantalspelers gepicked");
+            return;
+
+        }
 
         //bepalen welke fotoset je wilt
         if(radioButtonSetA.isSelected()){
@@ -98,8 +116,7 @@ public class SpelSetupScreen {
         }
         else{set = 'C';}
 
-        //todo: insert logica om een state te maken, appserver shit daare
-        CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(Main.cnts.getAppImpl().createGame(CurrentUser.getInstance().getUsername(), dimensies, set)));
+        CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(Main.cnts.getAppImpl().createGame(CurrentUser.getInstance().getUsername(), dimensies, set, aantalSpelers)));
         // opstarten spelview
         Main.goToSpel();
 

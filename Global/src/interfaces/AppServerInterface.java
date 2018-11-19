@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface AppServerInterface extends Remote {
 
-    int createGame(String activeUser, int dimensies, char set) throws RemoteException;
+    int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException;
 
     ArrayList<GameInfo> getGameInfoLijst() throws RemoteException;
 

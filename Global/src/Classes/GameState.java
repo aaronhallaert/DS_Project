@@ -66,11 +66,11 @@ public class GameState implements Serializable {
      * @param fotoSet = 'A' , 'B' of 'C'
      * @param hostName de naam van de speler die de game creert
      */
-    public GameState(int gameId, int dimensions, char fotoSet, String hostName) {
+    public GameState(int gameId, int dimensions, char fotoSet, String hostName, int aantalSpelers) {
         this.gameId=gameId;
 
         //TODO; keuze aantal spelers
-        aantalSpelers=3;
+        this.aantalSpelers=aantalSpelers;
 
         /* initialize gamestate ---------*/
         inbox= new HashMap<>();

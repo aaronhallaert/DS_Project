@@ -35,7 +35,7 @@ public class GameInfo implements Serializable {
      * @param dimensions
      * @param set
      */
-    public GameInfo(int gameId, String hostName, int dimensions, char set){
+    public GameInfo(int gameId, String hostName, int dimensions, char set, int aantalSpelers){
         System.out.println("game constructor in appserver, Game.java triggerd");
         this.gameId = gameId;
         this.spelers= new ArrayList<>();
@@ -44,12 +44,12 @@ public class GameInfo implements Serializable {
         this.roosterSize = dimensions;
         this.fotoSet = set+"";
 
-        // TODO keuze aantal spelers
-        this.aantalSpelers=3;
+        this.aantalSpelers=aantalSpelers;
 
     }
 
     public GameInfo(int gameId, ArrayList<String> spelers, int aantalSpelersConnected, String fotoSet, int roosterSize) {
+        System.out.println("spciale GameInfo constructor opgeroepen die we normaal niet meer gebruiken!");
         this.gameId=gameId;
         this.spelers=spelers;
         this.aantalSpelersConnected=aantalSpelersConnected;

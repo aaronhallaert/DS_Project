@@ -33,8 +33,10 @@ public class SpelViewLogica extends Thread{
     Thread waitTurn;
     Thread receiveThread;
 
+
+
     public SpelViewLogica(boolean playerMode) {
-    this.playerMode= playerMode;
+        this.playerMode= playerMode;
     }
 
 

@@ -41,7 +41,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public int createGame(String activeUser, int dimensies, char set) throws RemoteException {
+    public int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
 
         System.out.println("createGame in appserviceImpl triggered");
         System.out.println(activeUser);
@@ -52,7 +52,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             gameId = (int)(Math.random() * 1000);
         }
 
-        Game game = new Game(gameId ,activeUser, dimensies, set);
+        Game game = new Game(gameId ,activeUser, dimensies, set, aantalSpelers);
         gamesLijst.add(game);
         System.out.println("game met naam "+activeUser+" gemaakt!");
         System.out.println("gameslist grootte is nu: "+gamesLijst.size());

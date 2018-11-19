@@ -41,16 +41,16 @@ public class Game implements Serializable {
      * @param dimensions grootte van het rooster (6X6 of 4X4)
      * @param set de set van afbeeldingen die we willen gebruiken
      */
-    public Game(int gameId, String hostName, int dimensions, char set){
+    public Game(int gameId, String hostName, int dimensions, char set, int aantalSpelers){
 
         System.out.println("game wordt gemaakt...");
 
         this.gameId = gameId;
 
-        gameInfo = new GameInfo(gameId, hostName, dimensions, set);
+        gameInfo = new GameInfo(gameId, hostName, dimensions, set, aantalSpelers);
         System.out.println("gameInfo made");
 
-        gameState = new GameState(gameId, dimensions,set, hostName);
+        gameState = new GameState(gameId, dimensions,set, hostName, aantalSpelers);
         System.out.println("gameState made");
     }
 
