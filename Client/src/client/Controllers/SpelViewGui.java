@@ -270,4 +270,8 @@ public class SpelViewGui extends Thread {
     public void spectatorMode() {
         overkoepelendePane.setDisable(true);
     }
+
+    public void setLabelOp(String spectate) {
+        wachtenLabel.setText(spectate);
+    }
 }

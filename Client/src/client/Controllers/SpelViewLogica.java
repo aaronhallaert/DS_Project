@@ -81,6 +81,9 @@ public class SpelViewLogica extends Thread{
                     spvGui.disableMouseClick();
                 }
             }
+            else{
+                spvGui.setLabelOp("SPECTATE");
+            }
 
         } catch (RemoteException e) {
             e.printStackTrace();
