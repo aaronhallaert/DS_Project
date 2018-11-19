@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/SupportiveThreads/LobbyRefreshThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/SupportiveThreads/LobbyRefreshThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -108,7 +108,7 @@
     <session id="1809099310">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.19" value="2" />
@@ -145,13 +145,13 @@
           <entry key="fxml" value="2" />
           <entry key="java" value="27205" />
           <entry key="sql" value="7" />
-          <entry key="txt" value="1107" />
+          <entry key="txt" value="1191" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="27205" />
-          <entry key="PLAIN_TEXT" value="1107" />
+          <entry key="PLAIN_TEXT" value="1191" />
           <entry key="SQL" value="7" />
           <entry key="XML" value="2" />
         </counts>
@@ -160,7 +160,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1183">
@@ -173,11 +173,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+            <state relative-caret-position="342">
+              <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -484,7 +484,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542660087644" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542660139413" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -1698,11 +1698,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542659846176</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="lobby wordt nu zowieso elke 5 seconden gerefresht -&gt; elk lijntje verandert vaker">
+      <created>1542660163363</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1542660163364</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87141000" />
+    <option name="totallyTimeSpent" value="87309000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1717,7 +1724,7 @@
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31190476" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31190476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1819,7 +1826,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="GameState commented" />
     <MESSAGE value="Global/Classes commentaar is klaar" />
     <MESSAGE value="threads en Visualtile commentaar" />
     <MESSAGE value="gameObs commentaar, verre klaar cpain" />
@@ -1844,7 +1850,8 @@
     <MESSAGE value="errormessage wanneer er geen #spelers gekozen is!" />
     <MESSAGE value="speelbaar, spelers pickable, in data tabel, tis oké nu (fiew)" />
     <MESSAGE value="totaal aantal spelers zichtbaar in lobby + aanpassing in GameObs" />
-    <option name="LAST_COMMIT_MESSAGE" value="totaal aantal spelers zichtbaar in lobby + aanpassing in GameObs" />
+    <MESSAGE value="lobby wordt nu zowieso elke 5 seconden gerefresht -&gt; elk lijntje verandert vaker" />
+    <option name="LAST_COMMIT_MESSAGE" value="lobby wordt nu zowieso elke 5 seconden gerefresht -&gt; elk lijntje verandert vaker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2203,6 +2210,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1183">
@@ -2211,13 +2225,6 @@
             <element signature="e#2960#2961#0" expanded="true" />
             <element signature="e#3015#3016#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
         </state>
       </provider>
     </entry>
