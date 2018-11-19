@@ -5,10 +5,7 @@ import client.Main;
 import client.CurrentUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.rmi.RemoteException;
@@ -52,6 +49,9 @@ public class SpelSetupScreen {
     @FXML
     ImageView fotoVoorbeeldSetC;
 
+    @FXML
+    Label errorMessage;
+
     //groepen zodat je maar 1 vd 3 radiobuttons kan selecteren
     ToggleGroup sizeGroup = new ToggleGroup();
     ToggleGroup fotoSetGroup = new ToggleGroup();
@@ -78,6 +78,8 @@ public class SpelSetupScreen {
         Main.setImage(fotoVoorbeeldSetC, "fotoSetC");
 
         aantalSpelersPicker.getItems().addAll(2, 3, 4);
+
+        errorMessage.setVisible(false);
     }
 
     @FXML
@@ -101,7 +103,7 @@ public class SpelSetupScreen {
         }
         else{
 
-            //todo: errormessage, gelieve spelers te picken!
+            errorMessage.setVisible(true);
             System.out.println("geen aantalspelers gepicked");
             return;
 

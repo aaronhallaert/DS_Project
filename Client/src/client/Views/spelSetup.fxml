@@ -43,6 +43,11 @@
       <ImageView fx:id="fotoVoorbeeldSetC" fitHeight="100.0" fitWidth="100.0" layoutX="256.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="410.0" />
       <ChoiceBox fx:id="aantalSpelersPicker" layoutX="410.0" layoutY="108.0" prefWidth="150.0" />
       <Label layoutX="410.0" layoutY="90.0" text="aantal spelers" />
+      <Label fx:id="errorMessage" layoutX="412.0" layoutY="71.0" text="geen #spelers gekozen!" textFill="RED">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
 
 
 
