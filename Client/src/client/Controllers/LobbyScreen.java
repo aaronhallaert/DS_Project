@@ -81,7 +81,7 @@ public class LobbyScreen {
             //deze strings zijn de exacte attribuutnamen van GameObs
             gameIdColumn.setCellValueFactory(new PropertyValueFactory<>("gameId"));
             aantalJoinedColumn.setCellValueFactory(new PropertyValueFactory<>("aantalSpelerConnected"));
-            //totaalSpelersColumn.setCellValueFactory(new PropertyValueFactory<>(""));
+            totaalSpelersColumn.setCellValueFactory(new PropertyValueFactory<>("maxAantalSpelers"));
             fotoSetColumn.setCellValueFactory(new PropertyValueFactory<>("fotoSet"));
             roosterSizeColumn.setCellValueFactory(new PropertyValueFactory<>("roosterSize"));
             spelerNamenColumn.setCellValueFactory(new PropertyValueFactory<>("spelers"));

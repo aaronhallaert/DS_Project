@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/GameObs.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/GameObs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewLogica.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewLogica.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" afterDir="false" />
@@ -150,15 +146,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="2" />
-          <entry key="java" value="27099" />
+          <entry key="java" value="27203" />
           <entry key="sql" value="7" />
-          <entry key="txt" value="945" />
+          <entry key="txt" value="1011" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="27099" />
-          <entry key="PLAIN_TEXT" value="945" />
+          <entry key="JAVA" value="27203" />
+          <entry key="PLAIN_TEXT" value="1011" />
           <entry key="SQL" value="7" />
           <entry key="XML" value="2" />
         </counts>
@@ -193,8 +189,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+            <state relative-caret-position="156">
+              <caret line="33" column="81" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
               <folding>
                 <element signature="e#2808#2809#0" expanded="true" />
                 <element signature="e#2857#2858#0" expanded="true" />
@@ -471,7 +467,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542659453271" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542659739615" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -1671,11 +1667,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542658323469</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="speelbaar, spelers pickable, in data tabel, tis oké nu (fiew)">
+      <created>1542659525864</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1542659525864</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86445000" />
+    <option name="totallyTimeSpent" value="86755000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1700,11 +1703,11 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.40530008" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.07692308" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.29692307" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.728145" weight="0.29692307" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.50214595" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.3276923" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" visible="true" weight="0.24615385" />
       <window_info anchor="bottom" id="Database Changes" order="8" sideWeight="0.49920633" weight="0.32923076" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.271855" side_tool="true" weight="0.29935622" />
@@ -1792,7 +1795,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Image ophalen van dispatch naar appimplementatie + doc game" />
     <MESSAGE value="GameInfo commented" />
     <MESSAGE value="GameState commented" />
     <MESSAGE value="Global/Classes commentaar is klaar" />
@@ -1817,7 +1819,8 @@
     <MESSAGE value="bugfix bij leave, aantalspelersconnected werd niet upgedate in db" />
     <MESSAGE value="fix aantalspelers kiesbaar in spelsetup, heeft ook effect nu (no error)" />
     <MESSAGE value="errormessage wanneer er geen #spelers gekozen is!" />
-    <option name="LAST_COMMIT_MESSAGE" value="errormessage wanneer er geen #spelers gekozen is!" />
+    <MESSAGE value="speelbaar, spelers pickable, in data tabel, tis oké nu (fiew)" />
+    <option name="LAST_COMMIT_MESSAGE" value="speelbaar, spelers pickable, in data tabel, tis oké nu (fiew)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2181,8 +2184,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+        <state relative-caret-position="156">
+          <caret line="33" column="81" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
           <folding>
             <element signature="e#2808#2809#0" expanded="true" />
             <element signature="e#2857#2858#0" expanded="true" />

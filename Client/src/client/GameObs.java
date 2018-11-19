@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class GameObs  {
 
+    private SimpleIntegerProperty maxAantalSpelers;
     private SimpleIntegerProperty gameId;
     private List<SimpleStringProperty> spelers;
     private SimpleIntegerProperty aantalSpelerConnected;
@@ -30,6 +31,7 @@ public class GameObs  {
     private SimpleIntegerProperty roosterSize;
 
     public GameObs(GameInfo gameInfo){
+        maxAantalSpelers = new SimpleIntegerProperty(gameInfo.getAantalSpelers());
         gameId = new SimpleIntegerProperty(gameInfo.getGameId());
         spelers= new ArrayList<>();
         for (String speler : gameInfo.getSpelers()) {
@@ -103,6 +105,14 @@ public class GameObs  {
         sb.deleteCharAt(sb.length()-1);
 
         return sb.toString();
+    }
+
+    public int getMaxAantalSpelers() {
+        return maxAantalSpelers.get();
+    }
+
+    public SimpleIntegerProperty maxAantalSpelersProperty() {
+        return maxAantalSpelers;
     }
 
 }
