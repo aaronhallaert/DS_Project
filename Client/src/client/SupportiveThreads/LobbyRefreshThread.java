@@ -27,7 +27,6 @@ public class LobbyRefreshThread extends Thread{
 
                 ArrayList<GameInfo> serverList= Main.cnts.getAppImpl().getGameInfoLijst();
 
-                if(!equalszelf(serverList,LobbyScreen.gameInfoList)) {
                     //methode in de main, wrapt van ArrayList<Game> -> ObservableList<GameObs>
                     LobbyScreen.gamesObsList = Main.configureList(serverList);
                     LobbyScreen.gameInfoList = new ArrayList<GameInfo>(serverList);
@@ -37,13 +36,6 @@ public class LobbyRefreshThread extends Thread{
                     wait(5000);
                     //System.out.println("wait na refresh buiten lrt");
                     ls.refresh();
-                }
-
-                else{
-                    //System.out.println("wait binnen in lrt");
-                    wait(5000);
-                    //System.out.println("wait buiten in lrt");
-                }
             }
         }
         catch (RemoteException e){
@@ -52,12 +44,5 @@ public class LobbyRefreshThread extends Thread{
             e.printStackTrace();
         }
 
-    }
-
-    private boolean equalszelf(ArrayList<GameInfo> serverList, ArrayList<GameInfo> gameInfoList) {
-
-        if(serverList.size() != gameInfoList.size() ){return false;}
-
-        return true;
     }
 }
