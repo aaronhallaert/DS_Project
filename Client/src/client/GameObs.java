@@ -91,5 +91,18 @@ public class GameObs  {
         this.roosterSize.set(roosterSize);
     }
 
+    public String getSpelers() {
+        StringBuilder sb =new StringBuilder();
+
+        for (SimpleStringProperty speler : spelers) {
+            sb.append(speler.get());
+            sb.append(", ");
+        }
+
+        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length()-1);
+
+        return sb.toString();
+    }
 
 }

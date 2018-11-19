@@ -21,11 +21,12 @@
       <Button fx:id="spelSetup" layoutX="203.0" layoutY="400.0" mnemonicParsing="false" onAction="#spelSetup" text="create game" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="250.0" />
       <TableView fx:id="activeGamesTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="65.0">
         <columns>
-          <TableColumn fx:id="gameIdColumn" prefWidth="147.0" text="gameId" />
-          <TableColumn fx:id="clientAColumn" minWidth="0.0" prefWidth="97.0" text="clientA" />
-            <TableColumn fx:id="clientBColumn" minWidth="0.0" prefWidth="84.0" text="clientB" />
-            <TableColumn fx:id="fotoSetColumn" minWidth="6.0" prefWidth="75.0" text="fotoSet" />
-            <TableColumn fx:id="roosterSizeColumn" minWidth="6.0" prefWidth="136.0" text="roosterSize" />
+          <TableColumn fx:id="gameIdColumn" prefWidth="86.0" text="gameId" />
+          <TableColumn fx:id="totaalSpelersColumn" minWidth="0.0" prefWidth="69.0" text="#sp" />
+            <TableColumn fx:id="aantalJoinedColumn" minWidth="0.0" prefWidth="57.0" text="#joined" />
+            <TableColumn fx:id="fotoSetColumn" minWidth="6.0" prefWidth="69.0" text="fotoSet" />
+            <TableColumn fx:id="roosterSizeColumn" minWidth="6.0" prefWidth="76.0" text="roosterSize" />
+            <TableColumn fx:id="spelerNamenColumn" minWidth="6.0" prefWidth="182.0" text="spelers" />
         </columns>
       </TableView>
       <Label fx:id="joinErrorLabel" layoutX="237.0" layoutY="20.0" text="join failed!" textFill="RED">

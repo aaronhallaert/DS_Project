@@ -17,6 +17,7 @@ import javafx.util.Duration;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LobbyScreen {
 
@@ -47,16 +48,19 @@ public class LobbyScreen {
     public TableColumn<GameObs, String> gameIdColumn;
 
     @FXML
-    public TableColumn<GameObs, String> clientAColumn;
+    public TableColumn<GameObs, Integer> totaalSpelersColumn;
 
     @FXML
-    public TableColumn<GameObs, String> clientBColumn;
+    public TableColumn<GameObs, Integer> aantalJoinedColumn;
 
     @FXML
     public TableColumn<GameObs, String> fotoSetColumn;
 
     @FXML
     public TableColumn<GameObs, Integer> roosterSizeColumn;
+
+    @FXML
+    public TableColumn<GameObs, List<String>> spelerNamenColumn;
 
     public static ArrayList<GameInfo> gameInfoList;
     public static ObservableList<GameObs> gamesObsList;
@@ -76,10 +80,11 @@ public class LobbyScreen {
 
             //deze strings zijn de exacte attribuutnamen van GameObs
             gameIdColumn.setCellValueFactory(new PropertyValueFactory<>("gameId"));
-            clientAColumn.setCellValueFactory(new PropertyValueFactory<>("clientA"));
-            clientBColumn.setCellValueFactory(new PropertyValueFactory<>("clientB"));
+            aantalJoinedColumn.setCellValueFactory(new PropertyValueFactory<>("aantalSpelerConnected"));
+            //totaalSpelersColumn.setCellValueFactory(new PropertyValueFactory<>(""));
             fotoSetColumn.setCellValueFactory(new PropertyValueFactory<>("fotoSet"));
             roosterSizeColumn.setCellValueFactory(new PropertyValueFactory<>("roosterSize"));
+            spelerNamenColumn.setCellValueFactory(new PropertyValueFactory<>("spelers"));
 
             // add data to table
             activeGamesTable.setItems(gamesObsList);

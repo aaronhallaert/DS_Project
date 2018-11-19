@@ -3,12 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Views/spelSetup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Views/spelSetup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/GameObs.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/GameObs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewLogica.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewLogica.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -128,10 +131,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="fxml" value="8" />
+          <entry key="fxml" value="9" />
           <entry key="gameinfo" value="1" />
           <entry key="gamestate" value="2" />
-          <entry key="java" value="124" />
+          <entry key="java" value="127" />
           <entry key="pictures" value="1" />
           <entry key="sqlite_master" value="1" />
           <entry key="sqlite_sequence" value="1" />
@@ -140,22 +143,22 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Database Element" value="6" />
-          <entry key="JAVA" value="124" />
-          <entry key="XML" value="8" />
+          <entry key="JAVA" value="127" />
+          <entry key="XML" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="2" />
-          <entry key="java" value="26738" />
+          <entry key="java" value="27099" />
           <entry key="sql" value="7" />
-          <entry key="txt" value="886" />
+          <entry key="txt" value="945" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="26738" />
-          <entry key="PLAIN_TEXT" value="886" />
+          <entry key="JAVA" value="27099" />
+          <entry key="PLAIN_TEXT" value="945" />
           <entry key="SQL" value="7" />
           <entry key="XML" value="2" />
         </counts>
@@ -164,21 +167,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
+            <state relative-caret-position="182">
+              <caret line="86" column="82" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
+              <folding>
+                <element signature="e#2960#2961#0" expanded="true" />
+                <element signature="e#3015#3016#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/Views/spelSetup.fxml">
-          <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="559">
-              <caret line="43" column="97" selection-start-line="43" selection-start-column="97" selection-end-line="43" selection-end-column="97" />
+        <entry file="file://$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="28" column="49" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+              <folding>
+                <element signature="e#2808#2809#0" expanded="true" />
+                <element signature="e#2857#2858#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -246,13 +266,10 @@
         <option value="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Tile.java" />
         <option value="$PROJECT_DIR$/Client/src/client/CurrentGame.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitOnTurn.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Commando.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/GameObs.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Views/spelViewGui.fxml" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/WaitPlayerThread.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" />
@@ -264,6 +281,9 @@
         <option value="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Views/spelSetup.fxml" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml" />
+        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/GameObs.java" />
       </list>
     </option>
   </component>
@@ -451,7 +471,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542658043226" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542659453271" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -1644,11 +1664,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542658132899</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="errormessage wanneer er geen #spelers gekozen is!">
+      <created>1542658323469</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1542658323469</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85424000" />
+    <option name="totallyTimeSpent" value="86445000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1663,7 +1690,7 @@
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25714287" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31190476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1673,7 +1700,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.40530008" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.07692308" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.29692307" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.29692307" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.50214595" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -1765,7 +1792,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commentaar in dataserverImpl added" />
     <MESSAGE value="Image ophalen van dispatch naar appimplementatie + doc game" />
     <MESSAGE value="GameInfo commented" />
     <MESSAGE value="GameState commented" />
@@ -1790,14 +1816,15 @@
     <MESSAGE value="herjoinen na winnen -&gt; alles unclickable" />
     <MESSAGE value="bugfix bij leave, aantalspelersconnected werd niet upgedate in db" />
     <MESSAGE value="fix aantalspelers kiesbaar in spelsetup, heeft ook effect nu (no error)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix aantalspelers kiesbaar in spelsetup, heeft ook effect nu (no error)" />
+    <MESSAGE value="errormessage wanneer er geen #spelers gekozen is!" />
+    <option name="LAST_COMMIT_MESSAGE" value="errormessage wanneer er geen #spelers gekozen is!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java</url>
-          <line>64</line>
+          <line>68</line>
           <properties />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
@@ -2059,13 +2086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -2073,25 +2093,6 @@
           <folding>
             <element signature="e#922#923#0" expanded="true" />
             <element signature="e#961#962#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="20" column="100" selection-start-line="20" selection-start-column="100" selection-end-line="20" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="150" column="49" selection-start-line="150" selection-start-column="49" selection-end-line="150" selection-end-column="49" />
-          <folding>
-            <element signature="e#2960#2961#0" expanded="true" />
-            <element signature="e#3015#3016#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2154,8 +2155,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
+        <state relative-caret-position="221">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="28" column="49" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="86" column="82" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
+          <folding>
+            <element signature="e#2960#2961#0" expanded="true" />
+            <element signature="e#3015#3016#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+          <folding>
+            <element signature="e#2808#2809#0" expanded="true" />
+            <element signature="e#2857#2858#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
