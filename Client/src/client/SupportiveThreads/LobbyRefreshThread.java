@@ -24,24 +24,20 @@ public class LobbyRefreshThread extends Thread{
 
         try {
             while (true) {
+                System.out.println("vraag naar infolijst");
+                ArrayList<GameInfo> serverList= Main.cnts.getAppImpl().getGameInfoLijst(LobbyScreen.gameInfoList.size());
 
-                ArrayList<GameInfo> serverList= Main.cnts.getAppImpl().getGameInfoLijst();
+                //methode in de main, wrapt van ArrayList<Game> -> ObservableList<GameObs>
+                LobbyScreen.gamesObsList = Main.configureList(serverList);
+                LobbyScreen.gameInfoList = new ArrayList<GameInfo>(serverList);
+                System.out.println("refresh");
 
-                    //methode in de main, wrapt van ArrayList<Game> -> ObservableList<GameObs>
-                    LobbyScreen.gamesObsList = Main.configureList(serverList);
-                    LobbyScreen.gameInfoList = new ArrayList<GameInfo>(serverList);
-                    System.out.println("refresh");
-
-                    //System.out.println("wait na refresh in lrt");
-                    wait(5000);
-                    //System.out.println("wait na refresh buiten lrt");
-                    ls.refresh();
+                ls.refresh();
             }
         }
         catch (RemoteException e){
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("application server is uitgevallen");
+            Main.fixDisconnection(ls.joinErrorLabel.getScene());
         }
 
     }

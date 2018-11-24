@@ -128,7 +128,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     private AppServerInterface setupConnectionWithAppImpl() throws RemoteException{
         try {
             // TODO hier moet een keuze gemaakt worden tussen mogelijke actieve appservers
-            Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appserverPoort);
+            Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appServerPoorten.get(0));
             AppServerInterface appImpl = (AppServerInterface) appRegistry.lookup("AppserverService");
             return appImpl;
         }

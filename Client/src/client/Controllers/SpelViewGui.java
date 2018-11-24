@@ -42,7 +42,7 @@ public class SpelViewGui extends Thread {
     private AnchorPane overkoepelendePane;
 
     @FXML
-    private AnchorPane root;
+    public AnchorPane root;
 
     private SpelViewLogica svl;
 
@@ -273,5 +273,14 @@ public class SpelViewGui extends Thread {
 
     public void setLabelOp(String spectate) {
         wachtenLabel.setText(spectate);
+    }
+
+    public void closeWithoutLeave() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                scoreLabel.getScene().getWindow().hide();
+            }
+        });
     }
 }

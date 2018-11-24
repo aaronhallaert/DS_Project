@@ -25,11 +25,9 @@ public class WaitOnTurn extends Thread{
     public void run() {
         super.run();
 
-
+        try {
         while(true){
 
-
-            try {
                 if(Main.cnts.getAppImpl().changeInTurn(CurrentGame.getInstance().getGameId(), gameState.getAandeBeurt())){
                     String updatedTurn= Main.cnts.getAppImpl().getGameState(CurrentGame.getInstance().getGameId()).getAandeBeurt();
                     gameState.setAandeBeurt(updatedTurn);
@@ -43,9 +41,11 @@ public class WaitOnTurn extends Thread{
                     }
 
                 }
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+
+        }
+        } catch (RemoteException e) {
+            System.out.println("application server is uitgevallen");
+            svl.fixDisconnection();
         }
     }
 }

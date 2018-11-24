@@ -29,9 +29,11 @@ public class SpelViewLogica extends Thread{
     private GameInfo gameInfo;
     private GameState gameState;
 
-    Thread waitPlayer;
-    Thread waitTurn;
-    Thread receiveThread;
+    private boolean disconnected=false;
+
+    private Thread waitPlayer;
+    private Thread waitTurn;
+    private Thread receiveThread;
 
 
 
@@ -257,6 +259,28 @@ public class SpelViewLogica extends Thread{
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    public void fixDisconnection() {
+
+        spvGui.closeWithoutLeave();
+        if(!disconnected){
+            if(playerMode) {
+                waitPlayer.stop();
+                waitTurn.stop();
+            }
+            receiveThread.stop();
+            CurrentGame.resetGame();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Main.goToDisconnection(spvGui.root.getScene());
+                }
+            });
+            disconnected=true;
+        }
+
+
     }
 
     //hier komt methode die pollet naar commando's in de mailbox op de appserver

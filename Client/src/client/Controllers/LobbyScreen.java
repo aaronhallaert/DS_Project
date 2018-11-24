@@ -37,7 +37,7 @@ public class LobbyScreen {
     Button joinButton;
 
     @FXML
-    private Label joinErrorLabel;
+    public Label joinErrorLabel;
     private RotateTransition errorAnimation;
 
     /* table en al zijn columns */
@@ -90,7 +90,7 @@ public class LobbyScreen {
             activeGamesTable.setItems(gamesObsList);
 
             // thread die om de 5 seconden de lobbytafel refresht aanmaken + opstarten
-            Thread checkAvailableGames= new LobbyRefreshThread(this);
+            LobbyRefreshThread checkAvailableGames= new LobbyRefreshThread(this);
             checkAvailableGames.start();
 
             joinErrorLabel.setVisible(false);

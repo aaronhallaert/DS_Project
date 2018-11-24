@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ApplicationServer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ApplicationServer_jar</output-path>
+    <root id="archive" name="ApplicationServer.jar">
+      <element id="module-output" name="ApplicationServer" />
+      <element id="module-output" name="Global" />
+    </root>
+  </artifact>
+</component>

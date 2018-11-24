@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DatabaseServer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DatabaseServer_jar</output-path>
+    <root id="archive" name="DatabaseServer.jar">
+      <element id="module-output" name="DatabaseServer" />
+      <element id="module-output" name="Global" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/DatabaseServer/data/guava-23.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/guava-23.6-jre.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/DatabaseServer/data/sqlite-jdbc-3.23.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

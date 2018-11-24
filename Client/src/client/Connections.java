@@ -2,6 +2,7 @@ package client;
 
 import interfaces.AppServerInterface;
 import interfaces.DispatchInterface;
+import javafx.scene.Scene;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -13,14 +14,14 @@ public class Connections {
     public AppServerInterface appImpl;
     public DispatchInterface dispatchImpl;
 
-    public Connections(int dispatcherpoort ) {
+    public Connections(int dispatcherpoort, Scene close) {
 
         try {
             dispatchRegistry = LocateRegistry.getRegistry("localhost", dispatcherpoort);
             dispatchImpl=(DispatchInterface) dispatchRegistry.lookup("DispatchService");
         }
         catch(Exception e){
-            e.printStackTrace();
+            Main.goToDisconnection(close);
         }
 
     }

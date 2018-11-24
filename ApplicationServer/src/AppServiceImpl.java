@@ -41,7 +41,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
+    public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
 
         System.out.println("createGame in appserviceImpl triggered");
         System.out.println(activeUser);
@@ -57,6 +57,8 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         System.out.println("game met naam "+activeUser+" gemaakt!");
         System.out.println("gameslist grootte is nu: "+gamesLijst.size());
 
+
+        notifyAll();
         // TODO update database met deze game
 
         return gameId;
@@ -86,7 +88,35 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      * @throws RemoteException
      */
     @Override
+    public synchronized ArrayList<GameInfo> getGameInfoLijst(int currentSize) throws RemoteException {
+
+
+        while(currentSize==gamesLijst.size()){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ArrayList<GameInfo> gameInfoLijst = new ArrayList<GameInfo>();
+
+        for (Game game : gamesLijst) {
+            gameInfoLijst.add(game.getGameInfo());
+        }
+
+        return gameInfoLijst;
+
+    }
+
+    /**
+
+     * @return
+     * @throws RemoteException
+     */
+    @Override
     public ArrayList<GameInfo> getGameInfoLijst() throws RemoteException {
+
 
         ArrayList<GameInfo> gameInfoLijst = new ArrayList<GameInfo>();
 

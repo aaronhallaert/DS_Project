@@ -18,6 +18,8 @@ public class AppServerMain {
             // search for database service
             DatabaseInterface impl=(DatabaseInterface) dataRegistry.lookup("DatabaseService");
 
+
+
         }
         catch (Exception e){
             e.printStackTrace();

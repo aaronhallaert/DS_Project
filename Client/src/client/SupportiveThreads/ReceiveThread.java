@@ -30,19 +30,20 @@ public class ReceiveThread extends Thread {
 
         System.out.println("receivethread started");
         System.out.println("met naam "+userName);
-
+        try{
         while(true){
-            try{
+
                 for(Commando c : Main.cnts.getAppImpl().getInbox(userName,gameId)){
                     //System.out.println("commando gevonden, proberen te executen");
                     Platform.runLater(()->{
                         spv.executeCommando(c);
                     });
                 }
+        }
+        } catch (RemoteException e) {
 
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            System.out.println("application server is uitgevallen");
+
         }
     }
 }

@@ -4,6 +4,7 @@ import Classes.GameInfo;
 import client.Controllers.SpelViewLogica;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,7 @@ public class Main extends Application {
 
     //globale variabelen die we vaak gebruiken
     public static Connections cnts; //connectie naar de appserver, database, dispatcher
-
+    public static boolean disconnected;
     /**
      * wordt gebruikt om een afbeelding in te laden, maar enkel in de menu's , de kaartjes worden ingeladen met een
      * andere methode
@@ -100,21 +101,38 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        cnts= new Connections(1902);
+        cnts= new Connections(1902, startScene);
 
 
         // @TODO load in username en token from txt file
         BufferedReader br = new BufferedReader(new FileReader("Client/src/client/userfile.txt"));
         String line= br.readLine();
         br.close();
-        String[] gegevens= line.split(", ");
-        CurrentUser.getInstance().setUsername(gegevens[0]);
-        CurrentUser.getInstance().setToken(gegevens[1]);
+        if(line != null) {
+            String[] gegevens = line.split(", ");
+            CurrentUser.getInstance().setUsername(gegevens[0]);
+            CurrentUser.getInstance().setToken(gegevens[1]);
+        }
     }
 
 
+    public static void goToDisconnection(Scene close){
+        // back to login
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(Main.class.getResource("Views/disconnection.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage registrerStage= new Stage();
+        registrerStage.setTitle("Error");
+        Scene startScene= new Scene(root,600 , 300);
+        registrerStage.setScene(startScene);
+        registrerStage.setResizable(false);
+        registrerStage.show();
 
-
+        close.getWindow().hide();
+    }
 
     // ALLE GO TO METHODEN KOMEN HIER
     // ALLE GO TO METHODEN KOMEN HIER
@@ -135,6 +153,25 @@ public class Main extends Application {
         registrerStage.setScene(startScene);
         registrerStage.setResizable(false);
         registrerStage.show();
+
+        cnts= new Connections(1902, startScene);
+
+
+    }
+
+    public static void fixDisconnection(Scene close) {
+        if(!disconnected){
+
+            CurrentGame.resetGame();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    goToDisconnection(close);
+                }
+            });
+            disconnected=true;
+        }
+
 
     }
 

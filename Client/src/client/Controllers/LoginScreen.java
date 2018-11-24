@@ -104,7 +104,7 @@ public class LoginScreen {
             }
         }
         catch (Exception e){
-            e.printStackTrace();
+            Main.fixDisconnection(usernameField.getScene());
         }
 
     }

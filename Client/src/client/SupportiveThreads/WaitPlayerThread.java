@@ -5,6 +5,8 @@ import client.Controllers.SpelViewLogica;
 import client.CurrentGame;
 import client.Main;
 
+import java.rmi.RemoteException;
+
 /**
  * deze thread wacht op de 2e speler (opdat hij gejoind is) alvorens de eerste speler kan beginnen met zijn kaartjes
  * om te draaien
@@ -24,11 +26,11 @@ public class WaitPlayerThread extends Thread {
     public void run() {
         super.run();
 
-
+        try {
 
         while(true) {
 
-            try {
+
                 System.out.println("voorlopig heb ik "+ gameInfo.getAantalSpelersConnected()+ " geconnecteerde spelers, is er verandering?");
                 if(Main.cnts.getAppImpl().changeInPlayers(CurrentGame.getInstance().getGameId(), gameInfo.getAantalSpelersConnected())) {
 
@@ -52,10 +54,11 @@ public class WaitPlayerThread extends Thread {
                 }
 
             }
-            catch(Exception e){
-                e.printStackTrace();
-            }
 
+
+        }
+        catch(RemoteException e){
+            System.out.println("application server is uitgevallen");
         }
 
 

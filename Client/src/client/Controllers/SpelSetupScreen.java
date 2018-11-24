@@ -83,7 +83,7 @@ public class SpelSetupScreen {
     }
 
     @FXML
-    private void loadSettings() throws RemoteException {
+    private void loadSettings() {
 
         int dimensies=0;
         char set= 'A';
@@ -118,9 +118,15 @@ public class SpelSetupScreen {
         }
         else{set = 'C';}
 
-        CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(Main.cnts.getAppImpl().createGame(CurrentUser.getInstance().getUsername(), dimensies, set, aantalSpelers)));
-        // opstarten spelview
-        Main.goToSpel();
+        try{
+            CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(Main.cnts.getAppImpl().createGame(CurrentUser.getInstance().getUsername(), dimensies, set, aantalSpelers)));
+            // opstarten spelview
+            Main.goToSpel();
+        }
+        catch(RemoteException e){
+            Main.fixDisconnection(radioButton4X4.getScene());
+        }
+
 
         //dit is nodig zodat de UI thread niet stopt na het hiden van deze window
         Platform.setImplicitExit(false);
