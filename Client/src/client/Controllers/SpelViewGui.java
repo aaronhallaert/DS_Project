@@ -175,51 +175,54 @@ public class SpelViewGui extends Thread {
         int uniqueTileId = commando.getUniqueTileId();
 
         VisualTile deTile = getTileMetUniqueId(uniqueTileId, visualTilesList);
+
+        String commandoMessage = commando.getType();
         //execute het commando
-        if(commando.getType().equals("FLIP")){
+        if(commandoMessage.equals("FLIP")){
 
             deTile.flip();
 
         }
-        else if(commando.getType().equals("UNFLIP")){
+        else if(commandoMessage.equals("UNFLIP")){
 
             deTile.unflip();
 
         }
-        else if(commando.getType().equals("SWITCH")){
+        else if(commandoMessage.equals("SWITCH")){
 
             //TODO ik denk dat dit commando weg mag met huidige implementatie
+            //todo : tis waaar éja, grts tibo
 
 
         }
-        else if(commando.getType().equals("LOCK")){
+        else if(commandoMessage.equals("LOCK")){
 
             //System.out.println("disabling tile met nummer :"+uniqueTileId);
             deTile.setDisable(true);
 
         }
 
-        else if(commando.getType().equals("UNLOCK")){
+        else if(commandoMessage.equals("UNLOCK")){
             deTile.setDisable(false);
         }
-        else if(commando.getType().equals("AWARD")){
+        else if(commandoMessage.equals("AWARD")){
 
             String user= commando.getEffectOnUser();
             CurrentGame.getInstance().getGameState().getPunten().put(user, CurrentGame.getInstance().getGameState().getPunten().get(user)+1);
             visualiseerPunten();
 
         }
-        else if(commando.getType().equals("WIN")){
+        else if(commandoMessage.equals("WIN")){
             disableMouseClick();
             wachtenLabel.setText("WINNER WINNER CHICKEN DINNER");
         }
 
-        else if(commando.getType().equals("LOSS")){
+        else if(commandoMessage.equals("LOSS")){
             disableMouseClick();
             wachtenLabel.setText("LOSER");
         }
 
-        else if(commando.getType().equals("DRAW")){
+        else if(commandoMessage.equals("DRAW")){
             disableMouseClick();
             wachtenLabel.setText("GELIJKSPEL");
         }
@@ -230,6 +233,20 @@ public class SpelViewGui extends Thread {
             System.out.println("fout in verwerking, instructie was niet FLIP of UNFLIP");
 
         }
+
+        if(commandoMessage.equals("WIN") || commandoMessage.equals("LOSS") || commandoMessage.equals("DRAW")){
+
+            //todo: fix dat je de game connecties lijk afrondt
+            try {
+                Main.cnts.getDispatchImpl().gameFinished();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
 
 
     }
@@ -259,7 +276,6 @@ public class SpelViewGui extends Thread {
                 scoreLabel.setText(score.toString());
             }
         });
-
 
     }
 

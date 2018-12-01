@@ -119,7 +119,9 @@ public class SpelSetupScreen {
         else{set = 'C';}
 
         try{
+            //creert
             CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(Main.cnts.getAppImpl().createGame(CurrentUser.getInstance().getUsername(), dimensies, set, aantalSpelers)));
+            Main.cnts.getDispatchImpl().newGameCreated();
             // opstarten spelview
             Main.goToSpel();
         }
@@ -139,7 +141,7 @@ public class SpelSetupScreen {
 
         //huidig scherm wegtoveren
         radioButton4X4.getScene().getWindow().hide();
-        //naar lobby gaan
+        //naar lobby gaane
         Main.goToLobby();
     }
 

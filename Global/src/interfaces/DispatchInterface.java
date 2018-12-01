@@ -16,9 +16,11 @@ public interface DispatchInterface extends Remote {
 
     void insertUser(String username, String confirmPassword) throws RemoteException;
 
-
-
     String getToken(String username) throws RemoteException;
 
     AppServerInterface loginWithToken(String token, String username) throws RemoteException;
+
+    void newGameCreated() throws RemoteException;
+
+    void gameFinished() throws RemoteException;
 }

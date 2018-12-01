@@ -1,4 +1,5 @@
 
+import SupportiveThreads.ApplicationServerMaintainer;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
@@ -13,7 +14,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     // TODO: dit moet lijst van databaseInterfaces worden
     DatabaseInterface databaseImpl;
-
+    private ApplicationServerMaintainer asm;
+    private Integer aantalGamesBezig; // en ja, kwil een object, kwil call by reference
 
     public DispatchImpl() throws RemoteException{
         try {
@@ -26,6 +28,17 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         catch(Exception e){
             e.printStackTrace();
         }
+
+        aantalGamesBezig = 0;
+
+        asm = new ApplicationServerMaintainer();
+        asm.start();
+
+
+
+
+
+
     }
 
 
@@ -117,6 +130,22 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         else{
             return null;
         }
+    }
+
+    @Override
+    public void newGameCreated() throws RemoteException {
+        aantalGamesBezig++;
+        asm.setAantalGames(aantalGamesBezig);
+        System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
+
+        //todo: hier checken als het aantal een vaste waarde is overschreden, indien ja, start een 2e applicationserver
+        // misschien toch in een andere thread dan wel
+    }
+
+    @Override
+    public void gameFinished() throws RemoteException{
+        aantalGamesBezig--;
+        System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
     }
 
 
