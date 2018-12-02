@@ -3,26 +3,18 @@
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="ApplicationServer:jar" />
-      <artifact name="Client" />
-      <artifact name="DatabaseServer:jar" />
-      <artifact name="Dispatcher:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="parameters aantalGamesCreated in Dispatcher bestaat nu&#10;&#10;wordt opgehoogd als je een game creert,&#10;wordt verlaagd eenmaal een game klaar is&#10;&#10;applicationservermaintainer thread in Dispatcher kijkt voor logica">
-      <change afterPath="$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -129,11 +121,12 @@
     <session id="1809099310">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.19" value="2" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.26" value="1" />
@@ -141,7 +134,7 @@
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -149,7 +142,7 @@
           <entry key="fxml" value="5" />
           <entry key="gameinfo" value="1" />
           <entry key="gamestate" value="2" />
-          <entry key="java" value="131" />
+          <entry key="java" value="139" />
           <entry key="pictures" value="1" />
           <entry key="sqlite_master" value="1" />
           <entry key="sqlite_sequence" value="1" />
@@ -158,20 +151,20 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Database Element" value="6" />
-          <entry key="JAVA" value="131" />
+          <entry key="JAVA" value="139" />
           <entry key="XML" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="28615" />
+          <entry key="java" value="30534" />
           <entry key="sql" value="7" />
           <entry key="txt" value="1064" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="28615" />
+          <entry key="JAVA" value="30534" />
           <entry key="PLAIN_TEXT" value="1064" />
           <entry key="SQL" value="7" />
         </counts>
@@ -181,66 +174,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java">
+        <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="988">
-              <caret line="123" column="41" selection-start-line="123" selection-start-column="41" selection-end-line="123" selection-end-column="41" />
+            <state relative-caret-position="273">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="242" column="16" selection-start-line="242" selection-start-column="16" selection-end-line="242" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1921#1922#0" expanded="true" />
-                <element signature="e#1962#1963#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-              <folding>
-                <element signature="docComment;method#logoutUser#0;class#DispatchImpl#0" />
-                <element signature="method#logoutUser#0;class#DispatchImpl#0" />
-                <element signature="docComment;method#loginUser#0;class#DispatchImpl#0" />
-                <element signature="method#loginUser#0;class#DispatchImpl#0" />
-                <element signature="docComment;method#userNameExists#0;class#DispatchImpl#0" />
-                <element signature="method#userNameExists#0;class#DispatchImpl#0" />
-                <element signature="docComment;method#insertUser#0;class#DispatchImpl#0" />
-                <element signature="method#insertUser#0;class#DispatchImpl#0" />
-                <element signature="docComment;method#getToken#0;class#DispatchImpl#0" />
-                <element signature="method#getToken#0;class#DispatchImpl#0" />
-                <element signature="docComment;method#loginWithToken#0;class#DispatchImpl#0" />
-                <element signature="method#loginWithToken#0;class#DispatchImpl#0" />
-                <element signature="docComment;method#setupConnectionWithAppImpl#0;class#DispatchImpl#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="10" column="79" lean-forward="true" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
+            <state relative-caret-position="253">
+              <caret line="141" column="22" selection-start-line="141" selection-start-column="22" selection-end-line="141" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -248,8 +197,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="416">
+              <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="78">
+              <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -266,7 +224,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>voorlopig</find>
       <find>update</find>
       <find>push</find>
       <find>aanDeBeurt</find>
@@ -296,6 +253,7 @@
       <find>LobbyRefre</find>
       <find>ReceiveT</find>
       <find>getGameInfoLijst</find>
+      <find>Dispatcher.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -338,9 +296,9 @@
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" />
         <option value="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" />
-        <option value="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" />
-        <option value="$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java" />
         <option value="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" />
+        <option value="$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java" />
+        <option value="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" />
       </list>
     </option>
   </component>
@@ -382,52 +340,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Client" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Client" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Client" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="client" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Client" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="client" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Controllers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Client" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="client" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SupportiveThreads" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Dispatcher" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Dispatcher" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -501,12 +413,29 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Global" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Global" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="jars" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543676499620" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543771967142" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -532,7 +461,7 @@
     <configuration name="AppServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppServerMain" />
       <module name="ApplicationServer" />
-      <option name="PROGRAM_PARAMETERS" value="1900 1901" />
+      <option name="PROGRAM_PARAMETERS" value="2000 1901" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -600,10 +529,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Dispatcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Dispatcher" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Dispatcher" />
       <module name="Dispatcher" />
-      <option name="PROGRAM_PARAMETERS" value="1902 1900" />
+      <option name="PROGRAM_PARAMETERS" value="1902 2000" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -622,8 +551,8 @@
       <item itemvalue="Application.Client2" />
       <item itemvalue="Application.Client3" />
       <item itemvalue="Application.Client4" />
-      <item itemvalue="Multirun.RunArchitecture" />
       <item itemvalue="Application.Dispatcher" />
+      <item itemvalue="Multirun.RunArchitecture" />
       <item itemvalue="Application.DataServerMain" />
       <item itemvalue="Application.Client1" />
       <item itemvalue="Application.AppServerMain" />
@@ -632,7 +561,6 @@
       <list>
         <item itemvalue="Application.Client1" />
         <item itemvalue="Application.AppServerMain" />
-        <item itemvalue="Application.Dispatcher" />
         <item itemvalue="Application.DataServerMain" />
       </list>
     </recent_temporary>
@@ -669,6 +597,7 @@
       <workItem from="1542916542601" duration="16000" />
       <workItem from="1543050767686" duration="9640000" />
       <workItem from="1543672760834" duration="4456000" />
+      <workItem from="1543772543957" duration="262000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -898,7 +827,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98900000" />
+    <option name="totallyTimeSpent" value="104617000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -913,7 +842,7 @@
     <frame x="24" y="-8" width="1904" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17082429" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19143167" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -921,15 +850,15 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.4043659" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.1995842" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.32903227" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.31392932" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.31392932" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.50194854" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.327653" />
       <window_info anchor="bottom" id="Database Changes" order="8" sideWeight="0.49920633" weight="0.32923076" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32848233" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.271855" side_tool="true" weight="0.29935622" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48987207" weight="0.32328483" />
       <window_info anchor="bottom" id="Statistic" order="12" />
@@ -948,7 +877,7 @@
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32962227" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16779324" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1724512" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -956,17 +885,17 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.40530008" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.4043659" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.32903227" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.3129357" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.50214595" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.728145" weight="0.31392932" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.50194854" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.327653" />
       <window_info anchor="bottom" id="Database Changes" order="8" sideWeight="0.49920633" weight="0.32923076" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.271855" side_tool="true" weight="0.29935622" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48987207" weight="0.32378003" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48987207" weight="0.32328483" />
       <window_info anchor="bottom" id="Statistic" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3289166" />
       <window_info anchor="bottom" id="Run with VisualVM" order="14" />
@@ -1054,7 +983,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java</url>
-          <line>157</line>
+          <line>190</line>
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
@@ -1076,13 +1005,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="548">
@@ -1095,13 +1017,6 @@
     <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/persons" />
     <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/sqlite_sequence" />
     <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/pictures" />
-    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Game/VisualTile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1365">
@@ -1128,12 +1043,12 @@
     </entry>
     <entry file="das://cce0852d-e7ad-4c71-a091-e03bfa15cb73/schema/main/table/gamestate" />
     <entry file="file://$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="28" column="49" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="49" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/Game.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1176,12 +1091,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Views/spelViewGui.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1205,12 +1120,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Views/disconnection.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/CurrentGame.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1219,39 +1134,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="103" column="48" selection-start-line="103" selection-start-column="8" selection-end-line="103" selection-end-column="48" />
-          <folding>
-            <element signature="docComment;method#setImage#0;class#Main#0" />
-            <element signature="method#setImage#0;class#Main#0" />
-            <element signature="docComment;method#loadImageBytes#0;class#Main#0" />
-            <element signature="method#loadImageBytes#0;class#Main#0" />
-            <element signature="docComment;method#configureList#0;class#Main#0" />
-            <element signature="method#configureList#0;class#Main#0" />
-            <element signature="method#goToRegister#0;class#Main#0" />
-            <element signature="method#goToLobby#0;class#Main#0" />
-            <element signature="method#goToSpel#0;class#Main#0" />
-            <element signature="method#goToSetupSpel#0;class#Main#0" />
-            <element signature="method#gotoImageUploadPage#0;class#Main#0" />
-            <element signature="e#7292#7293#0" expanded="true" />
-            <element signature="e#7320#7321#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="106" column="58" selection-start-line="106" selection-start-column="58" selection-end-line="106" selection-end-column="58" />
+        <state relative-caret-position="936">
+          <caret line="80" column="51" selection-start-line="80" selection-start-column="51" selection-end-line="80" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Connections.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+        <state relative-caret-position="325">
+          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -1266,13 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="698" column="29" selection-start-line="698" selection-start-column="29" selection-end-line="698" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1329,47 +1215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="242" column="16" selection-start-line="242" selection-start-column="16" selection-end-line="242" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1921#1922#0" expanded="true" />
-            <element signature="e#1962#1963#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-          <folding>
-            <element signature="docComment;method#logoutUser#0;class#DispatchImpl#0" />
-            <element signature="method#logoutUser#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#loginUser#0;class#DispatchImpl#0" />
-            <element signature="method#loginUser#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#userNameExists#0;class#DispatchImpl#0" />
-            <element signature="method#userNameExists#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#insertUser#0;class#DispatchImpl#0" />
-            <element signature="method#insertUser#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#getToken#0;class#DispatchImpl#0" />
-            <element signature="method#getToken#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#loginWithToken#0;class#DispatchImpl#0" />
-            <element signature="method#loginWithToken#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#setupConnectionWithAppImpl#0;class#DispatchImpl#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="10" column="79" lean-forward="true" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
@@ -1382,8 +1227,60 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+        <state relative-caret-position="143">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="156" column="21" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="237" column="12" selection-start-line="237" selection-start-column="12" selection-end-line="237" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="141" column="22" selection-start-line="141" selection-start-column="22" selection-end-line="141" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1393,7 +1290,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>Client</last-edited>
+          <last-edited>ApplicationServer:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1447,6 +1344,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

@@ -5,12 +5,14 @@ import java.util.List;
 
 public class Dispatcher {
     public static List<Integer> appServerPoorten=new ArrayList<>();
+
     public static void main(String[] args) {
 
         try {
             // setup registry met service op poort (zie program arguments) 1902
             System.out.println("dispatcher gelaunced op poort: "+args[0]);
             int appserverPoort=Integer.parseInt(args[1]);
+            System.out.println("appserver connected on port "+args[1]);
             appServerPoorten.add(appserverPoort);
 
 /*

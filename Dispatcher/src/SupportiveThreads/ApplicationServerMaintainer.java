@@ -6,7 +6,7 @@ public class ApplicationServerMaintainer extends Thread{
 
     private final int AANTALGAMESPERAPPSERVER = 3;
 
-    private Integer aantalBezigOpAppServer;
+    private int aantalBezigOpAppServer;
     private int vorigAantalGames;
 
 
@@ -22,15 +22,15 @@ public class ApplicationServerMaintainer extends Thread{
 
     }
 
-    private void setGelijk() {
-    }
+    public int setAantalGames(int aantalGamesBezig) {
 
-    public void setAantalGames(Integer aantalGamesBezig) {
+        int returnValue = 0;
         this.aantalBezigOpAppServer = aantalGamesBezig;
 
         if(aantalBezigOpAppServer > vorigAantalGames && aantalBezigOpAppServer % AANTALGAMESPERAPPSERVER == 0){
 
             System.out.println("gestegen, nieuwe appserver moet aangemaakt worden");
+            returnValue = 1; // 1 omdat je een value moet ophogen
 
 
         }
@@ -38,10 +38,12 @@ public class ApplicationServerMaintainer extends Thread{
         else if(aantalBezigOpAppServer > vorigAantalGames && aantalBezigOpAppServer % AANTALGAMESPERAPPSERVER == 0){
 
             System.out.println("gedaald, appserver moet verwijderd worden");
+            returnValue = -1; // -1 omdat je een server moet wegdoen
 
         }
 
         vorigAantalGames = aantalGamesBezig;
+        return returnValue;
 
 
     }
