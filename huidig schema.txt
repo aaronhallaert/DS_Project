@@ -1,5 +1,5 @@
 database servers:
-	op poorten : 1940, 1950, 1960.
+	op poorten : 1940, 1950, 1960, 1970.
 	Moeten elk een aparte SQLite db hebben en met elkaar communiceren. 
 	Moeten dus telkens een ref naar de andere 2 hebben
 

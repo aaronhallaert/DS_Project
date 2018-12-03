@@ -29,4 +29,6 @@ public interface DatabaseInterface extends Remote {
     void pushGames(ArrayList<Game> games) throws RemoteException;
 
     ArrayList<Game> getGames() throws RemoteException;
+
+    void connectToOtherDbs() throws RemoteException;
 }

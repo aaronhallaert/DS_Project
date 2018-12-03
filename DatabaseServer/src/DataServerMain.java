@@ -3,7 +3,11 @@ import java.rmi.registry.Registry;
 
 public class DataServerMain {
 
+    public static String databaseNaam;
+
     public static void main(String[] args) {
+
+
 
         //vast poortnummer 1901
         // we gaan de databaseServers runnen op poorten 1940,1950,1960,
@@ -11,7 +15,7 @@ public class DataServerMain {
             Registry dataRegistry= LocateRegistry.createRegistry(Integer.parseInt(args[0]));
 
             System.out.println("dataserver gelaunched op: "+ args[0]);
-            String databaseNaam = getDbName(args[0]);
+            databaseNaam = getDbName(args[0]);
 
             dataRegistry.rebind("DatabaseService", new DatabaseImpl(databaseNaam));
             System.out.println("connected met "+databaseNaam);
@@ -36,4 +40,8 @@ public class DataServerMain {
     }
 
 
+    public static void connectToOtherDbs() {
+
+        System.out.println("mijn databasenaam is"+ databaseNaam);
+    }
 }

@@ -7,6 +7,7 @@ import com.google.common.hash.Hashing;
 
 
 import javax.sql.rowset.serial.SerialBlob;
+import javax.xml.crypto.Data;
 import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -28,6 +29,15 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         // maakt connectie met sql database
         connect(databaseString);
     }
+
+
+    @Override
+    public void connectToOtherDbs() throws RemoteException {
+        DataServerMain.connectToOtherDbs();
+    }
+
+
+
 
 
     /**
@@ -634,6 +644,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 */
 return (new ArrayList<>());
     }
+
 
     private static String hash(String password, String salt){
         return Hashing.sha256().hashString((password + salt),StandardCharsets.UTF_8).toString();
