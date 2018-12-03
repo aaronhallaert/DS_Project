@@ -140,35 +140,33 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         int result = asm.setAantalGames(aantalGamesBezig);
 
         if(result == 1){
+
             //todo: start nieuwe appserver
             System.out.println("starting nieuwe appserver...");
 
             // poortnummer van laatst opgestartte appserver nemen en +4 doen
-            int nieuwPoortNummer = Dispatcher.appServerPoorten.get(Dispatcher.appServerPoorten.size()-1) + 4;
-
-            int databasePoortNummer = 1901;
-            //opstarten zelf met dit poortnummer
-            //voorlopig 1091 als databasepoort, moet ook dynamisch gekozen worden
-
+            int applicationPoortNr = Dispatcher.appServerPoorten.get(Dispatcher.appServerPoorten.size()-1) + 4;
+            int databasePoortNr = 1901;
 
             try {
+
+                //start een nieuwe appserver op
                 Runtime rt1 = Runtime.getRuntime();
-                rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+nieuwPoortNummer+" "+databasePoortNummer);
+                rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr+" "+databasePoortNr);
 
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("fout in DispatchImpl: newGameCreated, jar niet kunnen executen");
             }
 
-            System.out.println("nieuwe appserver started on port "+ nieuwPoortNummer);
             //toevoegen aan de lijst met appServerPoorten
-            Dispatcher.appServerPoorten.add(nieuwPoortNummer);
+            System.out.println("nieuwe appserver started on port "+ applicationPoortNr);
+            Dispatcher.appServerPoorten.add(applicationPoortNr);
 
         }
+
         System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
 
-        //todo: hier checken als het aantal een vaste waarde is overschreden, indien ja, start een 2e applicationserver
-        // misschien toch in een andere thread dan wel
     }
 
     @Override

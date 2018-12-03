@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Dispatcher {
     public static List<Integer> appServerPoorten=new ArrayList<>();
+    public static List<Integer> aantalUsersPerAppServer = new ArrayList<>();
 
     public static void main(String[] args) {
 

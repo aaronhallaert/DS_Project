@@ -1,0 +1,16 @@
+database servers:
+	op poorten : 1940, 1950, 1960.
+	Moeten elk een aparte SQLite db hebben en met elkaar communiceren. 
+	Moeten dus telkens een ref naar de andere 2 hebben
+
+dispatcher:
+    maar 1 van, op poort 1902
+    moet connectie naar alledrie de databases hebben
+    moet connnectie naar alle appservers hebben -> dynamisch adden later
+    connectie naar alle clients.
+
+applicationserver
+    beginnen met maar 1 op poort 2000$
+    per 3 actieve spelletjes wordt er een bijgemaakt op puurtnummer 2000+ aantalActief*4
+            dus 2000 , 2004 , 2008, ...
+

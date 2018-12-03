@@ -18,24 +18,26 @@ import java.util.Set;
 
 public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterface {
 
-
+    private String databaseString;
     private static Connection conn = null;
 
 
-    public DatabaseImpl() throws RemoteException{
+    public DatabaseImpl(String databaseNaam) throws RemoteException{
+
+        this.databaseString = databaseNaam;
         // maakt connectie met sql database
-        connect();
+        connect(databaseString);
     }
 
 
     /**
      * connectie met databank maken
      */
-    public void connect() {
+    public void connect(String databaseString) {
 
         // SQLite connection string
         String workingDir = System.getProperty("user.dir");
-        String url = "jdbc:sqlite:"+workingDir+"\\DatabaseServer\\data\\memorydb.db";
+        String url = "jdbc:sqlite:"+workingDir+"\\DatabaseServer\\data\\"+databaseString;
 
         try {
             if(conn == null || conn.isClosed()) {
@@ -76,7 +78,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         String sql = "SELECT Password, Salt FROM Persons WHERE Username=?";
 
         //fire up the connection
-        connect();
+        connect(databaseString);
 
         boolean result = false;
 
@@ -124,7 +126,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         String sql = "INSERT INTO Persons(Username,Password, Salt) VALUES(?,?,?)";
         String salt=hash((System.currentTimeMillis()+"RandomString"));
         String hashedPaswoord= hash(password, salt);
-        connect();
+        connect(databaseString);
 
         try (
 
@@ -152,7 +154,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     public boolean userNameExists(String name){
         String sql = "SELECT Username FROM Persons WHERE Username=?";
 
-        connect();
+        connect(databaseString);
         try (
             PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, name);
@@ -194,7 +196,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             // update query
             String sql="UPDATE Persons SET token=?, token_timestamp=? WHERE Username= ?;";
             String token= hash(password+System.currentTimeMillis());
-            connect();
+            connect(databaseString);
             try{
 
                 PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -220,7 +222,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      */
     @Override
     public boolean isTokenValid(String username, String token) throws RemoteException{
-        connect();
+        connect(databaseString);
         String sql = "SELECT token_timestamp FROM Persons WHERE username = ? AND token = ?";
         try{
 
@@ -258,7 +260,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     @Override
     public void cancelToken(String username) throws RemoteException{
         String sql = "UPDATE Persons SET token_timestamp=? WHERE Username= ?;";
-        connect();
+        connect(databaseString);
         try{
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -283,7 +285,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     public String getToken(String username) throws RemoteException{
         String sql = "SELECT token FROM Persons WHERE Username = ? ";
 
-        connect();
+        connect(databaseString);
         try{
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -309,7 +311,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         /*
         // vraag alle game id's op uit db
         Set<Integer> gameIdList= new HashSet<>();
-        connect();
+        connect(databaseString);
         String getGameId= "SELECT gameId FROM GameInfo";
         try {
             PreparedStatement pstmt= conn.prepareStatement(getGameId);
@@ -372,7 +374,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         String pushGameState = "INSERT INTO GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, " +
                 "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize, aantalParenFound, finished) " +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        connect();
+        connect(databaseString);
         try {
             PreparedStatement pstmtGameState=conn.prepareStatement(pushGameState);
 
@@ -526,7 +528,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         ArrayList<GameState> gameStates= new ArrayList<GameState>();
 
         String sqlGameInfo= "SELECT * FROM GameInfo";
-        connect();
+        connect(databaseString);
         try{
             PreparedStatement pstmt = conn.prepareStatement(sqlGameInfo);
             ResultSet rs= pstmt.executeQuery();
@@ -546,7 +548,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
 
         String sqlGameState= "SELECT * FROM GameState";
-        connect();
+        connect(databaseString);
         try{
             PreparedStatement pstmt = conn.prepareStatement(sqlGameState);
             ResultSet rs= pstmt.executeQuery();
@@ -661,7 +663,7 @@ return (new ArrayList<>());
 
         byte[] array = null;
 
-        connect();
+        connect(databaseString);
 
         try {
 
@@ -696,7 +698,7 @@ return (new ArrayList<>());
 
         String sql = "INSERT INTO pictures(naam,image) VALUES(?,?)";
 
-        connect();
+        connect(databaseString);
 
         try {
 

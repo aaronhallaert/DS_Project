@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="memorydb" uuid="c4d4268e-f397-4ad3-be6d-376d24ad99d1">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="Database 1" uuid="c4d4268e-f397-4ad3-be6d-376d24ad99d1">
+      <driver-ref>0e248da0-da2e-4282-8263-086425284fd1</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\School\Ind Ing\iiw Master\Semester 1\Gedistribueerde Systemen\Project\DatabaseServer\data\memorydb.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/DatabaseServer/data/memorydb.db</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>
@@ -17,6 +17,33 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.20.1.1/xerial-sqlite-license.txt</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Database 2" uuid="1fc8c2b8-e9ec-4eff-82ef-8315aaf76cc7">
+      <driver-ref>0e248da0-da2e-4282-8263-086425284fd1</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/DatabaseServer/data/database2.db</jdbc-url>
+      <driver-properties>
+        <property name="enable_load_extension" value="true" />
+      </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="Database 3" uuid="8a3c72f2-5c68-4b1f-89b8-a5a71b03c4c4">
+      <driver-ref>0e248da0-da2e-4282-8263-086425284fd1</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/DatabaseServer/data/database3.db</jdbc-url>
+      <driver-properties>
+        <property name="enable_load_extension" value="true" />
+      </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="Database 4" uuid="6ec87901-b33a-46aa-8ca1-07983fa89c19">
+      <driver-ref>0e248da0-da2e-4282-8263-086425284fd1</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/DatabaseServer/data/database4.db</jdbc-url>
+      <driver-properties>
+        <property name="enable_load_extension" value="true" />
+      </driver-properties>
     </data-source>
   </component>
 </project>
