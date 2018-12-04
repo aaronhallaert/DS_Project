@@ -26,9 +26,5 @@ public interface DatabaseInterface extends Remote {
 
     String getToken(String username) throws RemoteException;
 
-    void pushGames(ArrayList<Game> games) throws RemoteException;
-
-    ArrayList<Game> getGames() throws RemoteException;
-
-    void connectToOtherDbs() throws RemoteException;
+    void connectTo(DatabaseInterface toImpl) throws RemoteException;
 }

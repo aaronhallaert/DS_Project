@@ -5,6 +5,7 @@ import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     private String databaseNaam;
     private static Connection conn = null;
+    private ArrayList<DatabaseInterface> otherDbs=new ArrayList<>();
 
 
     public DatabaseImpl(String databaseNaam) throws RemoteException{
@@ -22,15 +24,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         // maakt connectie met sql database
         connect();
     }
-
-
-    @Override
-    public void connectToOtherDbs() throws RemoteException {
-        DataServerMain.connectToOtherDbs();
-    }
-
-
-
 
 
     /**
@@ -62,7 +55,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             e.printStackTrace();
         }
     }
-
 
 
 
@@ -310,332 +302,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
 
     @Override
-    public void pushGames(ArrayList<Game> games) throws RemoteException{
-        /*
-        // vraag alle game id's op uit db
-        Set<Integer> gameIdList= new HashSet<>();
-        connect(databaseNaam);
-        String getGameId= "SELECT gameId FROM GameInfo";
-        try {
-            PreparedStatement pstmt= conn.prepareStatement(getGameId);
-            ResultSet rs= pstmt.executeQuery();
-            while(rs.next()){
-                gameIdList.add(rs.getInt("gameId"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        for (Game game : games) {
-            if(!gameIdList.contains(game.getGameId())) {
-                // push game state
-                pushGameState(game);
-
-                // push tegellijst
-                pushTegellijst(game, game.getGameState().getTegelsList().size());
-
-                // push Game Info
-                pushGameInfo(game);
-            }
-            else{
-                //update game nodig
-                updateGameState(game);
-
-                updateGameInfo(game);
-
-                updateTegelLijst(game);
-            }
-
-        }
-
-        closeConnection();
-        */
-    }
-    /*private void pushGameInfo(Game game){
-        String pushGameInfo= "INSERT INTO GameInfo(gameId, clientA, clientB, aantalSpelersConnected, fotoSet, roosterSize) " +
-                "VALUES (?,?,?,?,?,?)";
-
-        try {
-            PreparedStatement pstmtGameInfo= conn.prepareStatement(pushGameInfo);
-
-            pstmtGameInfo.setInt(1,game.getGameId());
-            pstmtGameInfo.setString(2, game.getGameInfo().getClientA());
-            pstmtGameInfo.setString(3, game.getGameInfo().getClientB());
-            pstmtGameInfo.setInt(4,game.getGameInfo().getAantalSpelersConnected());
-            pstmtGameInfo.setString(5, game.getGameInfo().getFotoSet());
-            pstmtGameInfo.setInt(6,game.getGameInfo().getRoosterSize());
-
-            pstmtGameInfo.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void pushGameState(Game game){
-        // push game state
-        String pushGameState = "INSERT INTO GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, " +
-                "aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tileListSize, aantalParenFound, finished) " +
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        connect(databaseNaam);
-        try {
-            PreparedStatement pstmtGameState=conn.prepareStatement(pushGameState);
-
-            pstmtGameState.setInt(1, game.getGameId());
-            pstmtGameState.setInt(2, game.getGameState().getAantalParen());
-            pstmtGameState.setInt(3, game.getGameState().getAantalPerRij());
-            pstmtGameState.setString(4, game.getGameState().getNaamSpelerA());
-            pstmtGameState.setString(5, game.getGameState().getNaamSpelerB());
-            pstmtGameState.setInt(6, game.getGameState().getAantalPuntenSpelerA());
-            pstmtGameState.setInt(7, game.getGameState().getAantalPuntenSpelerB());
-            pstmtGameState.setString(8, Character.toString(game.getGameState().getAandeBeurt()));
-            pstmtGameState.setInt(9, game.getGameState().getTegelsList().size());
-            pstmtGameState.setInt(10, game.getGameState().getAantalParenFound());
-            pstmtGameState.setBoolean(11, game.getGameState().getfinished());
-            pstmtGameState.executeUpdate();
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void pushTegellijst(Game game, int size){
-        StringBuilder sb= new StringBuilder();
-        if (size == 16) {
-            sb.append("INSERT INTO TileList4x4(gameId");
-        }
-        else if (size==36){
-            sb.append("INSERT INTO TileList6x6(gameId");
-        }
-
-        for (int i = 1; i < size+1; i++) {
-            sb.append(", Tile").append(i);
-        }
-        sb.append(") VALUES(?");
-        for (int i = 0; i < size; i++) {
-            sb.append(",?");
-        }
-        sb.append(")");
-
-        String pushList= sb.toString();
-        try {
-            PreparedStatement pstmtTegelLijst = conn.prepareStatement(pushList);
-            pstmtTegelLijst.setInt(1, game.getGameId());
-
-            // push elke tegel
-            int i=2;
-            for (Tile tile : game.getGameState().getTegelsList()) {
-                String pushTegel = "INSERT INTO Tile(uniqueIdentifier, id, imageId, backImageId, isfound, flippedOver, gameId)" +
-                        "VALUES(?,?,?,?,?,?,?)";
-
-
-                PreparedStatement pstmtTegel = conn.prepareStatement(pushTegel);
-
-                pstmtTegel.setInt(1, tile.getUniqueIdentifier());
-                pstmtTegel.setInt(2, tile.getId());
-                pstmtTegel.setString(3, tile.getImageId());
-                pstmtTegel.setString(4, tile.getBackImageId());
-                pstmtTegel.setBoolean(5, tile.isFound());
-                pstmtTegel.setBoolean(6, tile.isFlippedOver());
-                pstmtTegel.setInt(7, game.getGameId());
-
-                pstmtTegel.executeUpdate();
-
-                pstmtTegelLijst.setInt(i,tile.getUniqueIdentifier());
-                i++;
-
-
-
-            }
-
-            pstmtTegelLijst.executeUpdate();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    private void updateGameState(Game game){
-        String updateGameString= "UPDATE GameState " +
-                "SET aantalPuntenSpelerA = ?, aantalPuntenSpelerB = ?, aandeBeurt= ?, aantalParenFound= ?" +
-                "WHERE gameId = ?";
-        try {
-            PreparedStatement pstmtGameState= conn.prepareStatement(updateGameString);
-            pstmtGameState.setInt(1,game.getGameState().getAantalPuntenSpelerA());
-            pstmtGameState.setInt(2,game.getGameState().getAantalPuntenSpelerB());
-            pstmtGameState.setString(3, Character.toString(game.getGameState().getAandeBeurt()));
-            pstmtGameState.setInt(4, game.getGameState().getAantalParenFound());
-            pstmtGameState.setInt(5, game.getGameId());
-
-
-            pstmtGameState.executeUpdate();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void updateGameInfo(Game game){
-        String updateGameInfo= "UPDATE GameInfo " +
-                "SET clientA = ?, clientB = ?, aantalSpelersConnected= ?" +
-                "WHERE gameId = ?";
-        try {
-            PreparedStatement pstmtGameState= conn.prepareStatement(updateGameInfo);
-            pstmtGameState.setString(1,game.getGameInfo().getClientA());
-            pstmtGameState.setString(2,game.getGameInfo().getClientB());
-            pstmtGameState.setInt(3, game.getGameInfo().getAantalSpelersConnected());
-            pstmtGameState.setInt(4, game.getGameId());
-
-
-
-            pstmtGameState.executeUpdate();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void updateTegelLijst(Game game){
-
-        for (Tile tile : game.getGameState().getTegelsList()) {
-            String updateTile= "UPDATE Tile " +
-                    "SET flippedOver = ?, isfound = ?"+
-                    "WHERE gameId= ? AND uniqueIdentifier = ?";
-
-            try {
-                PreparedStatement pstmtTile= conn.prepareStatement(updateTile);
-                pstmtTile.setBoolean(1, tile.isFound());
-                pstmtTile.setBoolean(2, tile.isFlippedOver());
-                pstmtTile.setInt(3, game.getGameId());
-                pstmtTile.setInt(4, tile.getUniqueIdentifier());
-
-                pstmtTile.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
-*/
-    @Override
-    public ArrayList<Game> getGames() throws RemoteException {
-/*
-        ArrayList<Game> games= new ArrayList<>();
-        ArrayList<GameInfo>gameInfos= new ArrayList<>();
-        ArrayList<GameState> gameStates= new ArrayList<GameState>();
-
-        String sqlGameInfo= "SELECT * FROM GameInfo";
-        connect(databaseNaam);
-        try{
-            PreparedStatement pstmt = conn.prepareStatement(sqlGameInfo);
-            ResultSet rs= pstmt.executeQuery();
-            while(rs.next()){
-                int gameId = rs.getInt("gameId");
-                String clientA= rs.getString("clientA");
-                String clientB= rs.getString("clientB");
-                int aantalSpelersConnected= rs.getInt("aantalSpelersConnected");
-                String fotoSet= rs.getString("fotoSet");
-                int roosterSize=rs.getInt("roosterSize");
-                gameInfos.add(new GameInfo(gameId, clientA, clientB, aantalSpelersConnected, fotoSet, roosterSize));
-            }
-
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-
-        String sqlGameState= "SELECT * FROM GameState";
-        connect(databaseNaam);
-        try{
-            PreparedStatement pstmt = conn.prepareStatement(sqlGameState);
-            ResultSet rs= pstmt.executeQuery();
-            while(rs.next()){
-                int gameId= rs.getInt("gameId");
-                int aantalParen= rs.getInt("aantalParen");
-                int aantalPerRij= rs.getInt("aantalPerRij");
-                String naamSpelerA= rs.getString("naamSpelerA");
-                String naamSpelerB= rs.getString("naamSpelerB");
-                int aantalPuntenSpelerA= rs.getInt("aantalPuntenSpelerA");
-                int aantalPuntenSpelerB= rs.getInt("aantalPuntenSpelerB");
-                int aantalParenFound= rs.getInt("aantalParenFound");
-
-                char aandeBeurt= rs.getString("aandeBeurt").charAt(0);
-
-
-
-                int tileListSize= rs.getInt("tileListSize");
-
-                ArrayList<Tile> tiles=  getTiles(gameId, tileListSize);
-                GameState gs =new GameState(gameId, aantalParen, aantalPerRij, naamSpelerA, naamSpelerB, aantalPuntenSpelerA, aantalPuntenSpelerB, aandeBeurt, tiles, aantalParenFound);
-                gameStates.add(gs);
-            }
-
-            for (GameInfo gameInfo : gameInfos) {
-                for (GameState gameState : gameStates) {
-                    if(gameInfo.getGameId() == gameState.getGameId()){
-                        games.add(new Game(gameInfo.getGameId(), gameInfo, gameState));
-                    }
-                }
-            }
-
-            return games;
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        closeConnection();
-
-        return null;
-    }
-
-    private ArrayList<Tile> getTiles(int gameId, int tileListSize) throws SQLException {
-        ArrayList<Tile> tiles= new ArrayList<>();
-        String sqlTiles="";
-        if(tileListSize==16) {
-            sqlTiles = "SELECT * FROM TileList4x4 WHERE gameId = ? ";
-        }
-        else if(tileListSize==36) {
-            sqlTiles="SELECT * FROM TileList6x6 WHERE gameId = ?";
-        }
-        PreparedStatement tilepstmt= conn.prepareStatement(sqlTiles);
-        tilepstmt.setInt(1, gameId);
-        ResultSet tilers= tilepstmt.executeQuery();
-        ArrayList<Integer> tileIds= new ArrayList<>();
-        while(tilers.next()){
-            for (int i = 1; i < tileListSize+1; i++) {
-                String tile= "Tile"+i;
-                tileIds.add(tilers.getInt(tile));
-            }
-        }
-
-        for (Integer tileId : tileIds) {
-            String sqlTile= "SELECT * FROM TILE WHERE uniqueIdentifier = ? and gameId= ?";
-            PreparedStatement singleTilepstmt= conn.prepareStatement(sqlTile);
-            singleTilepstmt.setInt(1, tileId);
-            singleTilepstmt.setInt(2, gameId);
-            ResultSet tile= singleTilepstmt.executeQuery();
-
-            while(tile.next()){
-                int uniqueIdentifier=tile.getInt("uniqueIdentifier");
-                int id= tile.getInt("id");
-                String imageId= tile.getString("imageId");
-                String backImageId= tile.getString("backImageId");
-                boolean found= tile.getBoolean("isfound");
-                boolean flippedOver= tile.getBoolean("flippedOver");
-                tiles.add(new Tile(uniqueIdentifier, id, imageId, backImageId, found, flippedOver));
-            }
-
-        }
-
-        return tiles;
-*/
-return (new ArrayList<>());
+    public void connectTo(DatabaseInterface toImpl) throws RemoteException {
+        otherDbs.add(toImpl);
     }
 
 

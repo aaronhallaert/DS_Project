@@ -17,8 +17,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     // TODO: dit moet lijst van databaseInterfaces worden
 
-    ArrayList<DatabaseInterface> dbImpls;
-    ArrayList<Registry> dbRegistries;
+    ArrayList<DatabaseInterface> dbImpls=new ArrayList<>();
+
 
 
 
@@ -29,38 +29,10 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     public DispatchImpl() throws RemoteException{
         try {
 
-            //dbImpls = new ArrayList<DatabaseInterface>();
-            //dbRegistries = new ArrayList<Registry>();
+
             // setup communicatie met databaseserver
-            // fire to localhost port 1940 and search for application service
             setupConnectionsToDBs();
 
-
-
-            /*
-            Registry db1Registry = LocateRegistry.getRegistry("localhost", 1940);
-            db1Impl = (DatabaseInterface) db1Registry.lookup("DatabaseService");
-            System.out.println("connected with  db on port 1940");
-
-            Registry db2Registry = LocateRegistry.getRegistry("localhost", 1950);
-            db2Impl = (DatabaseInterface) db2Registry.lookup("DatabaseService");
-            System.out.println("connected with  db on port 1950");
-
-            Registry db3Registry = LocateRegistry.getRegistry("localhost", 1960);
-            db3Impl = (DatabaseInterface) db3Registry.lookup("DatabaseService");
-            System.out.println("connected with  db on port 1960");
-
-            Registry db4Registry = LocateRegistry.getRegistry("localhost", 1970);
-            db4Impl = (DatabaseInterface) db4Registry.lookup("DatabaseService");
-            System.out.println("connected with  db on port 1970");
-
-            db1Impl.connectToOtherDbs();
-            db3Impl.connectToOtherDbs();
-            db2Impl.connectToOtherDbs();
-            db4Impl.connectToOtherDbs();*/
-            /*for (DatabaseInterface dbImpl : dbImpls) {
-                dbImpl.connectToOtherDbs();
-            }*/
         }
         catch(Exception e){
             e.printStackTrace();
@@ -76,21 +48,19 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     }
 
     private void setupConnectionsToDBs() throws RemoteException, NotBoundException {
-
         int portnumber = 1940;
         for(int i=0 ; i<4 ; i++){
             DatabaseInterface dbImp= (DatabaseInterface) LocateRegistry.getRegistry("localhost", portnumber).lookup("DatabaseService");
-
             dbImpls.add(dbImp);
             portnumber+=10;
+        }
 
-
-
-            /*dbRegistries.add((Registry) LocateRegistry.getRegistry("localhost", portnumber));
-            DatabaseInterface dbImpl = (DatabaseInterface) dbRegistries.get(i).lookup("DatabaseInterface") ;
-            dbImpls.add( dbImpl );
-            System.out.println("connected with  db on port " + portnumber);
-            portnumber +=10;*/
+        for (DatabaseInterface dbImpl : dbImpls) {
+            for (DatabaseInterface toImpl : dbImpls) {
+                if(dbImpl != toImpl){
+                    dbImpl.connectTo(toImpl);
+                }
+            }
         }
     }
 

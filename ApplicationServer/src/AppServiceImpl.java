@@ -16,20 +16,21 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     private DatabaseInterface databaseImpl;
 
-    private ArrayList<Game> gamesLijst; //game bevat GameInfo en GameState
+    private ArrayList<Game> gamesLijst=new ArrayList<>(); //game bevat GameInfo en GameState
 
     public AppServiceImpl() throws RemoteException{
         try {
 
             // setup communicatie met databaseserver
             // fire to localhost port 1900
-            Registry myRegistry = LocateRegistry.getRegistry("localhost", 1901);
-            // search for application service
-            databaseImpl = (DatabaseInterface) myRegistry.lookup("DatabaseService");
+            //TODO verbind naar willekeurige db
+            // todo: dit moet dynamisch 1940,1950 of 1960 worden
+            int databaseServerPoort = getWillekeurigeDatabaseServerPoort();
+            System.out.println("connecting with DBServer on port "+ databaseServerPoort);
+            Registry dataRegistry= LocateRegistry.getRegistry("localhost",databaseServerPoort);
+            // search for database service
+            databaseImpl=(DatabaseInterface) dataRegistry.lookup("DatabaseService");
 
-
-            // load alle games
-            gamesLijst=databaseImpl.getGames();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -38,6 +39,20 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         //gamesLijst = new ArrayList<>();
         System.out.println("gamesList created");
 
+    }
+
+    private int getWillekeurigeDatabaseServerPoort() {
+
+        int willekeurigGetal = (int)(Math.random() *2 +1); // willekeurig getal tussen 1 en 3
+        switch(willekeurigGetal){
+            case 1: return 1940;
+
+            case 2: return 1950;
+
+            case 3: return 1960;
+
+            default: return 1940;
+        }
     }
 
     @Override
@@ -209,7 +224,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void leaveGame(int currentGameId, String username) throws RemoteException {
         this.getGameInfo(currentGameId).playerLeaves(username);
-        databaseImpl.pushGames(gamesLijst);
+
     }
 
     @Override
