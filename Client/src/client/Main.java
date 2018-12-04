@@ -92,6 +92,7 @@ public class Main extends Application {
     }
 
 
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Views/loginScreen.fxml"));
@@ -242,6 +243,23 @@ public class Main extends Application {
         }
         Stage imageUploadStage= new Stage();
         imageUploadStage.setTitle("upload image");
+        Scene startScene= new Scene(root,600 , 465);
+        imageUploadStage.setScene(startScene);
+        imageUploadStage.setResizable(false);
+        imageUploadStage.show();
+
+    }
+
+    public static void goToScoreScreen() {
+
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(Main.class.getResource("Views/scoreScreen.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage imageUploadStage= new Stage();
+        imageUploadStage.setTitle("scorescreen");
         Scene startScene= new Scene(root,600 , 465);
         imageUploadStage.setScene(startScene);
         imageUploadStage.setResizable(false);
