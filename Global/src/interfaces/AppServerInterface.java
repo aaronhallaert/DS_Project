@@ -44,4 +44,6 @@ public interface AppServerInterface extends Remote {
     void spectate(int gameId, String username) throws RemoteException;
 
     void unsubscribeSpecator(int gameId, String username) throws RemoteException;
+
+    void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException;
 }

@@ -306,6 +306,99 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         otherDbs.add(toImpl);
     }
 
+    @Override
+    public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
+
+        String sql = "SELECT * FROM Scores WHERE Username = ? ";
+
+        ArrayList<String> sqlUpdaters = new ArrayList<>();
+
+        connect();
+        try{
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            ResultSet rs = pstmt.executeQuery();
+
+            int aantalGames = rs.getInt("aantalGames");
+            aantalGames++;
+            sqlUpdaters.add("UPDATE Scores SET aantalGames = "+ aantalGames +" WHERE Username = ? ");
+
+            //maxScores per rooster updooten indien nodig
+
+            if(roosterSize == 4){
+
+                if(eindScore > rs.getInt("max4x4") ){
+                    sqlUpdaters.add("UPDATE Scores SET max4x4 = "+ eindScore +" WHERE Username = ? ");
+                }
+
+            }
+
+            else if(roosterSize == 6){
+
+                if(eindScore > rs.getInt("max6x6") ){
+                    sqlUpdaters.add("UPDATE Scores SET max6x6 = "+ eindScore +" WHERE Username = ? ");
+                }
+
+            }
+
+
+
+            switch(command){
+
+                case "WIN":
+
+                    int dbWins = rs.getInt("wins");
+                    dbWins++;
+                    sqlUpdaters.add("UPDATE Scores SET wins = "+ dbWins +" WHERE Username = ? ");
+                    //dbwins moet terug weg
+                    //aantalGames moet weg
+                    break;
+
+                case "LOSS":
+
+                    int dbLosses = rs.getInt("losses");
+                    dbLosses++;
+                    sqlUpdaters.add("UPDATE Scores SET wins = "+ dbLosses +" WHERE Username = ? ");
+                    break;
+
+
+                case "DRAW":
+
+                    int draws = rs.getInt("draws");
+                    draws++;
+                    sqlUpdaters.add("UPDATE Scores SET wins = "+ draws +" WHERE Username = ? ");
+                    break;
+
+
+                default:
+                    System.out.println("probleem in updateScores in databaseImpl");
+                    break;
+
+            }
+
+
+            //voer elke sql string uit
+            for (String sqlString : sqlUpdaters) {
+
+                PreparedStatement pstmttemp = conn.prepareStatement(sqlString);
+                pstmt.setString(1, username);
+                pstmt.executeUpdate();
+                pstmt.close();
+            }
+
+            closeConnection();
+
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     private static String hash(String password, String salt){
         return Hashing.sha256().hashString((password + salt),StandardCharsets.UTF_8).toString();

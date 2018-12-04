@@ -169,6 +169,12 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
+    public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
+        databaseImpl.updateScores(username, roosterSize, eindScore, command);
+
+    }
+
+    @Override
     public GameInfo getGameInfo(int gameId) throws RemoteException {
 
         for (Game game : gamesLijst) {

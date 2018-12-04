@@ -170,7 +170,7 @@ public class SpelViewGui extends Thread {
 
     }
 
-    public void executeCommando(Commando commando){
+    public void executeCommando(Commando commando) throws RemoteException {
 
         int uniqueTileId = commando.getUniqueTileId();
 
@@ -215,16 +215,31 @@ public class SpelViewGui extends Thread {
         else if(commandoMessage.equals("WIN")){
             disableMouseClick();
             wachtenLabel.setText("WINNER WINNER CHICKEN DINNER");
+
+            String username = commando.getEffectOnUser();
+            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
+            int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
+            Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "WIN");
         }
 
         else if(commandoMessage.equals("LOSS")){
             disableMouseClick();
             wachtenLabel.setText("LOSER");
+
+            String username = commando.getEffectOnUser();
+            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
+            int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
+            Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "LOSS");
         }
 
         else if(commandoMessage.equals("DRAW")){
             disableMouseClick();
             wachtenLabel.setText("GELIJKSPEL");
+
+            String username = commando.getEffectOnUser();
+            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
+            int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
+            Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "DRAW");
         }
 
         else{

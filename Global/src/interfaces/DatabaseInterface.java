@@ -27,4 +27,6 @@ public interface DatabaseInterface extends Remote {
     String getToken(String username) throws RemoteException;
 
     void connectTo(DatabaseInterface toImpl) throws RemoteException;
+
+    void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException;
 }
