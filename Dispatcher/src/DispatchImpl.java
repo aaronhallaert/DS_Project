@@ -19,10 +19,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     ArrayList<DatabaseInterface> dbImpls;
     ArrayList<Registry> dbRegistries;
-    DatabaseInterface db1Impl; // later komen deze in een arraylist terecht
-    DatabaseInterface db2Impl;
-    DatabaseInterface db3Impl;
-    DatabaseInterface db4Impl;
+
+
 
     private ApplicationServerMaintainer asm;
 
@@ -35,8 +33,11 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             //dbRegistries = new ArrayList<Registry>();
             // setup communicatie met databaseserver
             // fire to localhost port 1940 and search for application service
-            //setupConnectionsToDBs();
+            setupConnectionsToDBs();
 
+
+
+            /*
             Registry db1Registry = LocateRegistry.getRegistry("localhost", 1940);
             db1Impl = (DatabaseInterface) db1Registry.lookup("DatabaseService");
             System.out.println("connected with  db on port 1940");
@@ -56,7 +57,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             db1Impl.connectToOtherDbs();
             db3Impl.connectToOtherDbs();
             db2Impl.connectToOtherDbs();
-            db4Impl.connectToOtherDbs();
+            db4Impl.connectToOtherDbs();*/
             /*for (DatabaseInterface dbImpl : dbImpls) {
                 dbImpl.connectToOtherDbs();
             }*/
@@ -77,13 +78,20 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     private void setupConnectionsToDBs() throws RemoteException, NotBoundException {
 
         int portnumber = 1940;
-        /*for(int i=0 ; i<4 ; i++){
-            dbRegistries.add(LocateRegistry.getRegistry("localhost", portnumber));
+        for(int i=0 ; i<4 ; i++){
+            DatabaseInterface dbImp= (DatabaseInterface) LocateRegistry.getRegistry("localhost", portnumber).lookup("DatabaseService");
+
+            dbImpls.add(dbImp);
+            portnumber+=10;
+
+
+
+            /*dbRegistries.add((Registry) LocateRegistry.getRegistry("localhost", portnumber));
             DatabaseInterface dbImpl = (DatabaseInterface) dbRegistries.get(i).lookup("DatabaseInterface") ;
             dbImpls.add( dbImpl );
             System.out.println("connected with  db on port " + portnumber);
-            portnumber +=10;
-        }*/
+            portnumber +=10;*/
+        }
     }
 
 
@@ -94,7 +102,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public void logoutUser(String username) throws RemoteException{
-        db1Impl.cancelToken(username);
+        dbImpls.get(0).cancelToken(username);
 
     }
 
@@ -110,10 +118,10 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     public AppServerInterface loginUser(String username, String paswoord) throws RemoteException{
 
         //als credentials juist zijn
-        if(db1Impl.checkUserCred(username, paswoord)){
+        if(dbImpls.get(0).checkUserCred(username, paswoord)){
 
             //maak nieuwe token voor deze persoon aan
-            db1Impl.createToken(username, paswoord);
+            dbImpls.get(0).createToken(username, paswoord);
 
             return setupConnectionWithAppImpl();
 
@@ -132,7 +140,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public boolean userNameExists(String username) throws RemoteException {
-        return db1Impl.userNameExists(username);
+        return dbImpls.get(0).userNameExists(username);
     }
 
 
@@ -144,7 +152,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public void insertUser(String username, String confirmPassword) throws RemoteException {
-        db1Impl.insertUser(username, confirmPassword);
+        dbImpls.get(0).insertUser(username, confirmPassword);
     }
 
 
@@ -156,7 +164,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public String getToken(String username) throws RemoteException {
-        return db1Impl.getToken(username);
+        return dbImpls.get(0).getToken(username);
     }
 
 
@@ -169,7 +177,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public AppServerInterface loginWithToken(String token, String username) throws RemoteException {
-        if(db1Impl.isTokenValid(username, token)){
+        if(dbImpls.get(0).isTokenValid(username, token)){
             return setupConnectionWithAppImpl();
         }
         else{
