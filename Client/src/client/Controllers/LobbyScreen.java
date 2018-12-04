@@ -36,6 +36,9 @@ public class LobbyScreen {
     Button joinButton;
 
     @FXML
+    Button toScoreScreen;
+
+    @FXML
     public Label joinErrorLabel;
     private RotateTransition errorAnimation;
 
@@ -226,6 +229,11 @@ public class LobbyScreen {
         }
 
 
+    }
+
+    @FXML
+    public void goToScoreScreen(){
+        Main.goToScoreScreen();
     }
 
     private void displayErrorMessage(String message) {
