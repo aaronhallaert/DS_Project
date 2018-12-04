@@ -20,6 +20,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 
 public class Main extends Application {
@@ -27,6 +30,9 @@ public class Main extends Application {
     //globale variabelen die we vaak gebruiken
     public static Connections cnts; //connectie naar de appserver, database, dispatcher
     public static boolean disconnected;
+    public static Map<String, byte[]> imageCache=new HashMap<>();
+    public static LinkedList<String> imageCacheSequence= new LinkedList<>();
+
     /**
      * wordt gebruikt om een afbeelding in te laden, maar enkel in de menu's , de kaartjes worden ingeladen met een
      * andere methode
@@ -61,30 +67,37 @@ public class Main extends Application {
      */
     public static byte[] loadImageBytes(String naam){
 
-        byte[] afbeelding = null;
+        byte[] afbeelding = imageCache.get(naam);
 
-        try {
-
-            afbeelding = Main.cnts.appImpl.getImage(naam);
-
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if(afbeelding==null) {
+            try {
+                afbeelding = Main.cnts.appImpl.getImage(naam);
+                imageCache.put(naam, afbeelding);
+                imageCacheSequence.add(naam);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            if(imageCache.size()>18){
+                String removeImage= imageCacheSequence.removeFirst();
+                imageCache.remove(removeImage);
+            }
+        }
+        else{
+            System.out.println("gevonden in cacheke");
         }
 
         return afbeelding;
     }
 
     /**
-     *
      * @param gameInfoLijst
      * @return
      */
-    public static ObservableList<GameObs> configureList(ArrayList<GameInfo> gameInfoLijst) {
-
-        ArrayList<GameObs> returnList = new ArrayList<GameObs>();
+    public static ObservableList<GameInfoObs> configureList(ArrayList<GameInfo> gameInfoLijst) {
+        ArrayList<GameInfoObs> returnList = new ArrayList<GameInfoObs>();
 
         for (GameInfo gameInfo : gameInfoLijst) {
-            returnList.add(new GameObs(gameInfo));
+            returnList.add(new GameInfoObs(gameInfo));
         }
 
         return FXCollections.observableArrayList(returnList);

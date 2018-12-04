@@ -21,7 +21,7 @@ import java.util.List;
  * in een datatable
  *
  */
-public class GameObs  {
+public class GameInfoObs {
 
     private SimpleIntegerProperty maxAantalSpelers;
     private SimpleIntegerProperty gameId;
@@ -30,7 +30,7 @@ public class GameObs  {
     private SimpleStringProperty fotoSet;
     private SimpleIntegerProperty roosterSize;
 
-    public GameObs(GameInfo gameInfo){
+    public GameInfoObs(GameInfo gameInfo){
         maxAantalSpelers = new SimpleIntegerProperty(gameInfo.getAantalSpelers());
         gameId = new SimpleIntegerProperty(gameInfo.getGameId());
         spelers= new ArrayList<>();

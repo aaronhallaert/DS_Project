@@ -2,11 +2,10 @@ package client.Controllers;
 
 import Classes.GameInfo;
 import client.CurrentGame;
-import client.GameObs;
+import client.GameInfoObs;
 import client.Main;
 import client.SupportiveThreads.LobbyRefreshThread;
 import client.CurrentUser;
-import com.sun.corba.se.spi.orbutil.fsm.GuardBase;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -42,28 +41,28 @@ public class LobbyScreen {
 
     /* table en al zijn columns */
     @FXML
-    public TableView<GameObs> activeGamesTable;
+    public TableView<GameInfoObs> activeGamesTable;
 
     @FXML
-    public TableColumn<GameObs, String> gameIdColumn;
+    public TableColumn<GameInfoObs, String> gameIdColumn;
 
     @FXML
-    public TableColumn<GameObs, Integer> totaalSpelersColumn;
+    public TableColumn<GameInfoObs, Integer> totaalSpelersColumn;
 
     @FXML
-    public TableColumn<GameObs, Integer> aantalJoinedColumn;
+    public TableColumn<GameInfoObs, Integer> aantalJoinedColumn;
 
     @FXML
-    public TableColumn<GameObs, String> fotoSetColumn;
+    public TableColumn<GameInfoObs, String> fotoSetColumn;
 
     @FXML
-    public TableColumn<GameObs, Integer> roosterSizeColumn;
+    public TableColumn<GameInfoObs, Integer> roosterSizeColumn;
 
     @FXML
-    public TableColumn<GameObs, List<String>> spelerNamenColumn;
+    public TableColumn<GameInfoObs, List<String>> spelerNamenColumn;
 
     public static ArrayList<GameInfo> gameInfoList;
-    public static ObservableList<GameObs> gamesObsList;
+    public static ObservableList<GameInfoObs> gamesObsList;
 
 
     @FXML
@@ -134,7 +133,7 @@ public class LobbyScreen {
     @FXML
     private void joinGame() {
 
-        GameObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
+        GameInfoObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
         if(deGameToJoin == null){
 
             //geef iets van info dat je geen game gekozen hebt
@@ -182,7 +181,7 @@ public class LobbyScreen {
     @FXML
     public void spectate(){
 
-        GameObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
+        GameInfoObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
         if(deGameToJoin == null){
 
             //geef iets van info dat je geen game gekozen hebt

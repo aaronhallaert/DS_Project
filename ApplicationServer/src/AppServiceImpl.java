@@ -9,14 +9,17 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class AppServiceImpl extends UnicastRemoteObject implements AppServerInterface {
 
     private DatabaseInterface databaseImpl;
 
     private ArrayList<Game> gamesLijst=new ArrayList<>(); //game bevat GameInfo en GameState
+
+    public static Map<String, byte[]> imageCache=new HashMap<>();
+    public static LinkedList<String> imageCacheSequence= new LinkedList<>();
+
 
     public AppServiceImpl() throws RemoteException{
         try {
@@ -268,7 +271,22 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public byte[] getImage(String naam) throws RemoteException {
-        byte[] afbeelding = databaseImpl.getImage(naam);
+
+        byte[] afbeelding = imageCache.get(naam);
+
+        if(afbeelding==null) {
+            afbeelding= databaseImpl.getImage(naam);
+            imageCache.put(naam, afbeelding);
+            imageCacheSequence.add(naam);
+        }
+        else{
+            System.out.println("gevonden in cacheke");
+        }
+
+        if(imageCache.size()>36) {
+            String removeImage = imageCacheSequence.removeFirst();
+            imageCache.remove(removeImage);
+        }
         return afbeelding;
     }
 
