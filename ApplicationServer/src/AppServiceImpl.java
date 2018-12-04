@@ -278,6 +278,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             afbeelding= databaseImpl.getImage(naam);
             imageCache.put(naam, afbeelding);
             imageCacheSequence.add(naam);
+            System.out.println("moeten inladen vanuit een db");
         }
         else{
             System.out.println("gevonden in cacheke");
