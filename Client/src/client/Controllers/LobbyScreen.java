@@ -72,6 +72,16 @@ public class LobbyScreen {
     public void initialize(){
 
         try {
+
+
+            //todo remove this , gewoon omdat we met verschillende databases werken dat het een probleem kan geven anders
+            try {
+                Main.cnts.getAppImpl().checkIfHasScoreRowAndAddOneIfHasnt(CurrentUser.getInstance().getUsername());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+
             // eerste maal de gamesLijst van de appserver halen en visualiseren en de datatable
             gameInfoList = Main.cnts.getAppImpl().getGameInfoLijst();
 
@@ -232,7 +242,7 @@ public class LobbyScreen {
     }
 
     @FXML
-    public void goToScoreScreen(){
+    public void goToScoreScreen() {
         Main.goToScoreScreen();
     }
 

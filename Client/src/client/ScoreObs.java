@@ -1,4 +1,4 @@
-package client.Views;
+package client;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

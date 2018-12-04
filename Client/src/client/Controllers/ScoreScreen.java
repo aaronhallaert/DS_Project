@@ -1,7 +1,7 @@
 package client.Controllers;
 
 import client.Main;
-import client.Views.ScoreObs;
+import client.ScoreObs;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,6 +43,15 @@ public class ScoreScreen {
 
     @FXML
     public void initialize(){
+
+        refreshScores();
+
+
+
+
+    }
+
+    private void refreshScores() {
 
 
 

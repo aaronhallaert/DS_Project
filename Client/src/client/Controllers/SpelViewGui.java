@@ -216,9 +216,11 @@ public class SpelViewGui extends Thread {
             disableMouseClick();
             wachtenLabel.setText("WINNER WINNER CHICKEN DINNER");
 
-            String username = commando.getEffectOnUser();
-            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
+            String username = CurrentUser.getInstance().getUsername();
             int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
+            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
+
+
             Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "WIN");
         }
 
@@ -226,7 +228,7 @@ public class SpelViewGui extends Thread {
             disableMouseClick();
             wachtenLabel.setText("LOSER");
 
-            String username = commando.getEffectOnUser();
+            String username = CurrentUser.getInstance().getUsername();
             int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
             int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
             Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "LOSS");
@@ -236,7 +238,7 @@ public class SpelViewGui extends Thread {
             disableMouseClick();
             wachtenLabel.setText("GELIJKSPEL");
 
-            String username = commando.getEffectOnUser();
+            String username = CurrentUser.getInstance().getUsername();
             int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
             int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
             Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "DRAW");

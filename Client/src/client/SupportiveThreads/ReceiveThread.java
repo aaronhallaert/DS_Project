@@ -36,7 +36,11 @@ public class ReceiveThread extends Thread {
                 for(Commando c : Main.cnts.getAppImpl().getInbox(userName,gameId)){
                     //System.out.println("commando gevonden, proberen te executen");
                     Platform.runLater(()->{
-                        spv.executeCommando(c);
+                        try {
+                            spv.executeCommando(c);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
                     });
                 }
         }

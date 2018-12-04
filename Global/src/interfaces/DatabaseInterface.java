@@ -29,4 +29,8 @@ public interface DatabaseInterface extends Remote {
     void connectTo(DatabaseInterface toImpl) throws RemoteException;
 
     void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException;
+
+    void insertScoreRow(String username) throws RemoteException;
+
+    boolean hasScoreRij(String username) throws RemoteException;
 }

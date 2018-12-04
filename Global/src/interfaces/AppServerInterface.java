@@ -4,7 +4,6 @@ import Classes.Commando;
 import Classes.Game;
 import Classes.GameInfo;
 import Classes.GameState;
-import com.sun.org.apache.regexp.internal.RE;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -46,4 +45,6 @@ public interface AppServerInterface extends Remote {
     void unsubscribeSpecator(int gameId, String username) throws RemoteException;
 
     void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException;
+
+    void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException;
 }

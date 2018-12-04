@@ -175,6 +175,18 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
+    public void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException {
+
+        if(!databaseImpl.hasScoreRij(username)){
+
+            System.out.println("deze user had nog geen rij in de database");
+            databaseImpl.insertScoreRow(username);
+            System.out.println("nu wel");
+        }
+
+    }
+
+    @Override
     public GameInfo getGameInfo(int gameId) throws RemoteException {
 
         for (Game game : gamesLijst) {

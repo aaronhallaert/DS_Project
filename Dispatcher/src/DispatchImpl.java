@@ -123,6 +123,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void insertUser(String username, String confirmPassword) throws RemoteException {
         dbImpls.get(0).insertUser(username, confirmPassword);
+        dbImpls.get(0).insertScoreRow(username);
     }
 
 
