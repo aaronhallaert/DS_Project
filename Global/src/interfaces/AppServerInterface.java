@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface AppServerInterface extends Remote {
 
+    int getPortNumber() throws RemoteException;
+
     int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException;
 
     ArrayList<GameInfo> getGameInfoLijst(int size) throws RemoteException;
@@ -22,6 +24,8 @@ public interface AppServerInterface extends Remote {
     GameInfo getGameInfo(int gameId) throws RemoteException;
 
     GameState getGameState(int gameId) throws RemoteException;
+
+    boolean hasGame(int gameId) throws RemoteException;
 
     boolean join(String activeUser, int currentGameIdAttempt) throws RemoteException;
 
@@ -44,4 +48,10 @@ public interface AppServerInterface extends Remote {
     void spectate(int gameId, String username) throws RemoteException;
 
     void unsubscribeSpecator(int gameId, String username) throws RemoteException;
+
+    int getNumberOfGames() throws RemoteException;
+
+    void takeOverGame(Game game) throws RemoteException;
+
+    void removeGame(Game game) throws RemoteException;
 }

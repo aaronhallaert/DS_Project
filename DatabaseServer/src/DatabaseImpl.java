@@ -1,4 +1,5 @@
 import Classes.Game;
+import Classes.GameInfo;
 import interfaces.DatabaseInterface;
 import com.google.common.hash.Hashing;
 
@@ -79,7 +80,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         try (
                 // opvragen van password en salt in db
-            PreparedStatement pstmt  = conn.prepareStatement(sql)){
+                PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, naam);
             ResultSet rs  = pstmt.executeQuery();
             String retrievePassword="";
@@ -91,7 +92,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
 
 
-                // effectieve controle credentials
+            // effectieve controle credentials
             if (retrievePassword.equals(hash(paswoord, retrieveSalt))) {
                 result = true;
             } else {
@@ -125,7 +126,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         try (
 
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, hashedPaswoord);
             pstmt.setString(3, salt);
@@ -151,7 +152,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         connect();
         try (
-            PreparedStatement pstmt  = conn.prepareStatement(sql)){
+                PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, name);
 
             ResultSet rs  = pstmt.executeQuery();
@@ -304,6 +305,90 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     @Override
     public void connectTo(DatabaseInterface toImpl) throws RemoteException {
         otherDbs.add(toImpl);
+    }
+
+    @Override
+    public void updateGameInfo(GameInfo gameInfo) {
+        connect();
+        ArrayList<String> spelers= gameInfo.getSpelers();
+        StringBuilder sb= new StringBuilder();
+        for (int i = 0; i < spelers.size(); i++) {
+            sb.append(spelers.get(i));
+            if(i!= spelers.size()-1){
+                sb.append(", ");
+            }
+        }
+        int aantalSpelersConnected=gameInfo.getAantalSpelersConnected();
+        int gameId=gameInfo.getGameId();
+        int appserverpoort=gameInfo.getAppServerPoort();
+
+        try {
+            // update gameInfo
+            String updateGame = "UPDATE GameInfo SET aantalSpelersConnected=?, spelers=?, appserverpoort=? WHERE gameId= ?;";
+            PreparedStatement pstmtUpdate = conn.prepareStatement(updateGame);
+
+            pstmtUpdate.setInt(1, aantalSpelersConnected);
+            pstmtUpdate.setString(2, sb.toString());
+            pstmtUpdate.setInt(3, appserverpoort);
+
+            pstmtUpdate.setInt(4, gameId);
+            pstmtUpdate.executeUpdate();
+        }
+        catch (SQLException se){
+            se.printStackTrace();
+        }
+        closeConnection();
+    }
+
+    @Override
+    public void addGameInfo(GameInfo gameInfo) throws RemoteException {
+
+
+        System.out.println("game info toevoegen");
+        ArrayList<String> spelers= gameInfo.getSpelers();
+        StringBuilder sb= new StringBuilder();
+        for (int i = 0; i < spelers.size(); i++) {
+            sb.append(spelers.get(i));
+            if(i!= spelers.size()-1){
+                sb.append(", ");
+            }
+        }
+
+
+        int aantalSpelersConnected=gameInfo.getAantalSpelersConnected();
+        int aantalSpelers =gameInfo.getAantalSpelers();
+        int roosterSize= gameInfo.getRoosterSize();
+        String fotoset= gameInfo.getFotoSet();
+        int gameId=gameInfo.getGameId();
+        int appserverpoort=gameInfo.getAppServerPoort();
+
+        String sql="SELECT * from GameInfo where gameId=?;";
+
+        try {
+            connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,gameId);
+            ResultSet rs = pstmt.executeQuery();
+            if(!rs.next()){
+                // voeg toe
+                String addGame="INSERT INTO GameInfo(gameId, aantalSpelersConnected, fotoSet, roosterSize, spelers, aantalSpelers, appserverpoort) VALUES(?,?,?,?,?,?,?)";
+                PreparedStatement pstmtAdd=conn.prepareStatement(addGame);
+                pstmtAdd.setInt(1, gameId);
+                pstmtAdd.setInt(2, aantalSpelersConnected);
+                pstmtAdd.setString(3, fotoset);
+                pstmtAdd.setInt(4, roosterSize);
+                pstmtAdd.setString(5, sb.toString());
+                pstmtAdd.setInt(6, aantalSpelers);
+                pstmtAdd.setInt(7, appserverpoort);
+
+                pstmtAdd.executeUpdate();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeConnection();
     }
 
 

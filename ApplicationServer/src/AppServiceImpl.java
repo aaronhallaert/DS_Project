@@ -4,6 +4,7 @@ import Classes.GameInfo;
 import Classes.GameState;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
+import interfaces.DispatchInterface;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -14,6 +15,7 @@ import java.util.*;
 public class AppServiceImpl extends UnicastRemoteObject implements AppServerInterface {
 
     private DatabaseInterface databaseImpl;
+    private DispatchInterface dispatchImpl;
 
     private ArrayList<Game> gamesLijst=new ArrayList<>(); //game bevat GameInfo en GameState
 
@@ -33,6 +35,12 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             Registry dataRegistry= LocateRegistry.getRegistry("localhost",databaseServerPoort);
             // search for database service
             databaseImpl=(DatabaseInterface) dataRegistry.lookup("DatabaseService");
+
+
+
+            //dispatcher
+            Registry dispatchReg= LocateRegistry.getRegistry("localhost", 1902);
+            dispatchImpl=(DispatchInterface) dispatchReg.lookup("DispatchService");
 
         }
         catch(Exception e){
@@ -59,6 +67,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
+    public int getPortNumber() throws RemoteException {
+        return AppServerMain.thisappServerpoort;
+    }
+
+    @Override
     public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
 
         System.out.println("createGame in appserviceImpl triggered");
@@ -70,14 +83,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             gameId = (int)(Math.random() * 1000);
         }
 
-        Game game = new Game(gameId ,activeUser, dimensies, set, aantalSpelers);
+        Game game = new Game(gameId ,activeUser, dimensies, set, aantalSpelers, AppServerMain.thisappServerpoort);
         gamesLijst.add(game);
         System.out.println("game met naam "+activeUser+" gemaakt!");
         System.out.println("gameslist grootte is nu: "+gamesLijst.size());
 
+        // TODO update database met gameinfo
+        databaseImpl.addGameInfo(game.getGameInfo());
 
         notifyAll();
-        // TODO update database met deze game
 
         return gameId;
 
@@ -100,8 +114,9 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
 
-    /**
 
+
+    /**
      * @return
      * @throws RemoteException
      */
@@ -128,7 +143,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     /**
-
      * @return
      * @throws RemoteException
      */
@@ -169,6 +183,23 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
+    public int getNumberOfGames() throws RemoteException {
+        return gamesLijst.size();
+    }
+
+    @Override
+    public void removeGame(Game game) throws RemoteException{
+        gamesLijst.remove(game);
+    }
+
+    @Override
+    public void takeOverGame(Game game) throws RemoteException {
+        game.getGameInfo().setAppServerPoort(AppServerMain.thisappServerpoort);
+        databaseImpl.updateGameInfo(game.getGameInfo());
+        gamesLijst.add(game);
+    }
+
+    @Override
     public GameInfo getGameInfo(int gameId) throws RemoteException {
 
         for (Game game : gamesLijst) {
@@ -191,8 +222,19 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         }
 
         System.out.println("getGameState in AppserverImpl, mag niet gebeuren");
-        return new GameState();
+        return null;
     }
+
+    @Override
+    public boolean hasGame(int gameId) throws RemoteException{
+        if(this.getGameInfo(gameId).getAppServerPoort()==AppServerMain.thisappServerpoort){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     @Override
     public boolean join(String activeUser, int currentGameIdAttempt) throws RemoteException {
@@ -202,6 +244,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             // als de if clause lukt,
             // dan zal het getGameState ook lukken, daarom is getGameState een void
             this.getGameState(currentGameIdAttempt).join(activeUser);
+            databaseImpl.updateGameInfo(getGameInfo(currentGameIdAttempt));
             //setGameStatenaam nog
             return true;
         }
@@ -253,7 +296,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
 
-       // System.out.println("AppServiceImpl : getInbox: door user: "+userName);
+        // System.out.println("AppServiceImpl : getInbox: door user: "+userName);
         return getGameState(currentGameId).getInbox(userName);
 
 

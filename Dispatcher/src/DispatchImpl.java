@@ -1,9 +1,11 @@
 
+import Classes.Game;
 import SupportiveThreads.ApplicationServerMaintainer;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 import sun.rmi.registry.RegistryImpl_Stub;
+import sun.util.locale.LocaleExtensions;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -12,15 +14,15 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class DispatchImpl extends UnicastRemoteObject implements DispatchInterface {
 
     // TODO: dit moet lijst van databaseInterfaces worden
 
     ArrayList<DatabaseInterface> dbImpls=new ArrayList<>();
-
-
-
 
     private ApplicationServerMaintainer asm;
 
@@ -155,6 +157,46 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         }
     }
 
+    public void makeNewAppserver(){
+        List<Integer> mogelijkPoortnummer= new ArrayList<>();
+        int beginPoortnummer=2000;
+        for (int i = 0; i <2080 ; i+=4) {
+            mogelijkPoortnummer.add(beginPoortnummer+i);
+        }
+
+        // poortnummer van laatst opgestartte appserver nemen en +4 doen
+        for (int integer : mogelijkPoortnummer) {
+            if(!Dispatcher.appServerPoorten.contains(integer)){
+                // maak maar aan
+                int applicationPoortNr= integer;
+                int databasePoortNr = 1901;
+                try {
+
+                    //start een nieuwe appserver op
+                    Runtime rt1 = Runtime.getRuntime();
+                    rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr+" "+databasePoortNr);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("fout in DispatchImpl: newGameCreated, jar niet kunnen executen");
+                }
+
+                //toevoegen aan de lijst met appServerPoorten
+                System.out.println("nieuwe appserver started on port "+ applicationPoortNr);
+                Dispatcher.appServerPoorten.add(applicationPoortNr);
+                try {
+                    AppServerInterface newAppServer=(AppServerInterface) LocateRegistry.getRegistry("localhost", applicationPoortNr).lookup("AppserverService");
+                    Dispatcher.appImpls.add(newAppServer);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            }
+        }
+    }
+
+
     @Override
     public void newGameCreated() throws RemoteException {
         aantalGamesBezig++;
@@ -164,31 +206,49 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
             //todo: start nieuwe appserver
             System.out.println("starting nieuwe appserver...");
-
-            // poortnummer van laatst opgestartte appserver nemen en +4 doen
-            int applicationPoortNr = Dispatcher.appServerPoorten.get(Dispatcher.appServerPoorten.size()-1) + 4;
-            int databasePoortNr = 1901;
-
-            try {
-
-                //start een nieuwe appserver op
-                Runtime rt1 = Runtime.getRuntime();
-                rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr+" "+databasePoortNr);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("fout in DispatchImpl: newGameCreated, jar niet kunnen executen");
-            }
-
-            //toevoegen aan de lijst met appServerPoorten
-            System.out.println("nieuwe appserver started on port "+ applicationPoortNr);
-            Dispatcher.appServerPoorten.add(applicationPoortNr);
+            makeNewAppserver();
 
         }
 
         System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
 
     }
+
+
+    @Override
+    public void changeGameServer(AppServerInterface currentAppImpl, Game game) throws RemoteException{
+        List<AppServerInterface> possibleAppServers=new ArrayList<>();
+        for (AppServerInterface appImpl : Dispatcher.appImpls) {
+            if(appImpl.getNumberOfGames()<3){
+                possibleAppServers.add(appImpl);
+            }
+        }
+
+        if(possibleAppServers.size()==0){
+            makeNewAppserver();
+            changeGameServer(currentAppImpl, game);
+        }
+        else{
+            possibleAppServers.get(0).takeOverGame(game);
+            currentAppImpl.removeGame(game);
+        }
+
+
+
+    }
+
+    @Override
+    public AppServerInterface changeClientServer(int currentGameIdAttempt) throws RemoteException {
+        for (AppServerInterface appImpl : Dispatcher.appImpls) {
+            if(appImpl.hasGame(currentGameIdAttempt)){
+                return appImpl;
+            }
+        }
+
+        System.out.println("Mag niet voorkomen, maar kan wel in theorie");
+        return null;
+    }
+
 
     @Override
     public void gameFinished() throws RemoteException{
@@ -203,15 +263,23 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     /**
      * hier wordt een connectie gemaakt met de appserver
+     *
      * @return
      * @throws RemoteException
      */
     private AppServerInterface setupConnectionWithAppImpl() throws RemoteException{
         try {
             // TODO hier moet een keuze gemaakt worden tussen mogelijke actieve appservers
-            Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appServerPoorten.get(0));
-            AppServerInterface appImpl = (AppServerInterface) appRegistry.lookup("AppserverService");
-            return appImpl;
+            if(Dispatcher.appImpls.size()==0){
+                Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appServerPoorten.get(0));
+                AppServerInterface appImpl = (AppServerInterface) appRegistry.lookup("AppserverService");
+                Dispatcher.appImpls.add(appImpl);
+                return appImpl;
+            }
+            else{
+                return Dispatcher.appImpls.get(0);
+            }
+
         }
         catch(NotBoundException ne){
             // service is niet aanwezig
@@ -219,6 +287,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             return null;
         }
     }
+
 
 
 

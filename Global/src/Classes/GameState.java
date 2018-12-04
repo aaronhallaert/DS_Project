@@ -47,7 +47,7 @@ public class GameState implements Serializable {
 
     //elke tegel moet bijgehouden worden, een tegel kan gewoon meerdere shit bevatten
     private ArrayList<Tile> tegelsList; // Tile = datastructuur voor in de AS, wordt dan geconvergeert naar VisualTile
-                                        // in de client
+    // in de client
 
     private boolean finished;
 
@@ -129,7 +129,7 @@ public class GameState implements Serializable {
         // de tegels shuffelen, zodat de positie random is
         Collections.shuffle(tegelsList);
 
-       // GAME CREATED
+        // GAME CREATED
     }
 
     public GameState(int gameId, int aantalParen, int aantalPerRij, ArrayList<String> spelers, HashMap<String, Integer> punten, String aandeBeurt, ArrayList<Tile> tegelsList, int aantalParenFound) {

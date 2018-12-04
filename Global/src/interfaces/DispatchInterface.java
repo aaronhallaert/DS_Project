@@ -1,6 +1,8 @@
 package interfaces;
 
 
+import Classes.Game;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -23,4 +25,8 @@ public interface DispatchInterface extends Remote {
     void newGameCreated() throws RemoteException;
 
     void gameFinished() throws RemoteException;
+
+    void changeGameServer(AppServerInterface appImpl, Game game) throws RemoteException;
+
+    AppServerInterface changeClientServer(int currentGameIdAttempt) throws RemoteException;
 }

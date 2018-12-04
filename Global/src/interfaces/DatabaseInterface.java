@@ -1,6 +1,7 @@
 package interfaces;
 
 import Classes.Game;
+import Classes.GameInfo;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -27,4 +28,8 @@ public interface DatabaseInterface extends Remote {
     String getToken(String username) throws RemoteException;
 
     void connectTo(DatabaseInterface toImpl) throws RemoteException;
+
+    void addGameInfo(GameInfo gameInfo) throws RemoteException;
+
+    void updateGameInfo(GameInfo gameInfo) throws RemoteException;
 }

@@ -16,6 +16,7 @@ public class GameInfo implements Serializable {
     private int aantalSpelersConnected;
     private String fotoSet; // variabele die aangeeft welke preset van fotos er zal ingeladen worden
     private int roosterSize; // grootte van het rooster
+    private int appServerPoort;
 
     /** wordt nergens opgeroepen, tenzij er ergens iets fout gaat (een game die niet gevonden wordt bvb)
      *      als de game niet gevonden wordt wordt een lege nieuwe game opgeroepen
@@ -35,7 +36,7 @@ public class GameInfo implements Serializable {
      * @param dimensions
      * @param set
      */
-    public GameInfo(int gameId, String hostName, int dimensions, char set, int aantalSpelers){
+    public GameInfo(int gameId, String hostName, int dimensions, char set, int aantalSpelers, int appServerPoort){
         System.out.println("game constructor in appserver, Game.java triggerd");
         this.gameId = gameId;
         this.spelers= new ArrayList<>();
@@ -45,10 +46,11 @@ public class GameInfo implements Serializable {
         this.fotoSet = set+"";
 
         this.aantalSpelers=aantalSpelers;
+        this.appServerPoort=appServerPoort;
 
     }
 
-    public GameInfo(int gameId, ArrayList<String> spelers, int aantalSpelersConnected, String fotoSet, int roosterSize) {
+   /* public GameInfo(int gameId, ArrayList<String> spelers, int aantalSpelersConnected, String fotoSet, int roosterSize) {
         System.out.println("spciale GameInfo constructor opgeroepen die we normaal niet meer gebruiken!");
         this.gameId=gameId;
         this.spelers=spelers;
@@ -58,7 +60,7 @@ public class GameInfo implements Serializable {
 
         // TODO keuze aantal spelers
         this.aantalSpelers=3;
-    }
+    }*/
 
 
     public String toString(){
@@ -137,7 +139,7 @@ public class GameInfo implements Serializable {
     }
 
 
-    public Integer getAantalSpelersConnected() {
+    public int getAantalSpelersConnected() {
         return aantalSpelersConnected;
     }
 
@@ -153,12 +155,8 @@ public class GameInfo implements Serializable {
         this.fotoSet = fotoSet;
     }
 
-    public Integer getRoosterSize() {
+    public int getRoosterSize() {
         return roosterSize;
-    }
-
-    public void setRoosterSize(Integer roosterSize) {
-        this.roosterSize = roosterSize;
     }
 
     public ArrayList<String> getSpelers() {
@@ -179,5 +177,13 @@ public class GameInfo implements Serializable {
 
     public void setRoosterSize(int roosterSize) {
         this.roosterSize = roosterSize;
+    }
+
+    public int getAppServerPoort() {
+        return appServerPoort;
+    }
+
+    public void setAppServerPoort(int appServerPoort) {
+        this.appServerPoort = appServerPoort;
     }
 }
