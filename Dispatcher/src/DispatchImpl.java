@@ -102,6 +102,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     // APPSERVER MANAGING //
     @Override
     public void registerAppserver(int portNumber) {
+        System.out.println("nieuwe appserver geregistreerd met poortnummer "+ portNumber);
         appServerPoorten.add(portNumber);
         try {
             appImpls.add( (AppServerInterface) LocateRegistry.getRegistry("localhost", portNumber).lookup("AppserverService"));
@@ -125,6 +126,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         }
         catch (RemoteException re){
             appImpls.remove(appserverImpl);
+            makeNewAppserver();
             return null;
         }
 

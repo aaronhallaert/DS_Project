@@ -235,28 +235,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         return null;
     }
-    @Override
-    public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
-        databaseImpl.updateScores(username, roosterSize, eindScore, command);
 
-    }
-
-    @Override
-    public void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException {
-
-        if(!databaseImpl.hasScoreRij(username)){
-
-            System.out.println("deze user had nog geen rij in de database");
-            databaseImpl.insertScoreRow(username);
-            System.out.println("nu wel");
-        }
-
-    }
-
-    @Override
-    public ArrayList<Score> getScores() throws RemoteException {
-        return databaseImpl.getScores();
-    }
 
     @Override
     public GameInfo getGameInfo(int gameId) throws RemoteException {
@@ -416,6 +395,29 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         game.getGameInfo().setAppServerPoort(AppServerMain.thisappServerpoort);
         databaseImpl.updateGameInfo(game.getGameInfo());
         gamesLijst.add(game);
+    }
+
+
+    // HANDLING SCORE TABLE //
+    @Override
+    public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
+        databaseImpl.updateScores(username, roosterSize, eindScore, command);
+
+    }
+    @Override
+    public void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException {
+
+        if(!databaseImpl.hasScoreRij(username)){
+
+            System.out.println("deze user had nog geen rij in de database");
+            databaseImpl.insertScoreRow(username);
+            System.out.println("nu wel");
+        }
+
+    }
+    @Override
+    public ArrayList<Score> getScores() throws RemoteException {
+        return databaseImpl.getScores();
     }
 
 }
