@@ -1,9 +1,6 @@
 package interfaces;
 
-import Classes.Commando;
-import Classes.Game;
-import Classes.GameInfo;
-import Classes.GameState;
+import Classes.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -47,4 +44,6 @@ public interface AppServerInterface extends Remote {
     void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException;
 
     void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException;
+
+    ArrayList<Score> getScores() throws RemoteException;
 }
