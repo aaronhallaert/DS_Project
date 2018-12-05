@@ -108,7 +108,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         if(databaseImpl.checkUserCred(username, paswoord)){
 
             //maak nieuwe token voor deze persoon aan
-            databaseImpl.createToken(username, paswoord);
+            databaseImpl.createToken(username, paswoord, true);
             return true;
         }
         else{
@@ -138,7 +138,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public void logoutUser(String username) throws RemoteException{
-        databaseImpl.cancelToken(username);
+        databaseImpl.cancelToken(username, true);
 
     }
     /**
@@ -172,7 +172,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         System.out.println("gameslist grootte is nu: "+gamesLijst.size());
 
         // TODO update database met gameinfo
-        databaseImpl.addGameInfo(game.getGameInfo());
+        databaseImpl.addGameInfo(game.getGameInfo(), true);
 
         notifyAll();
 
@@ -281,7 +281,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             // als de if clause lukt,
             // dan zal het getGameState ook lukken, daarom is getGameState een void
             this.getGameState(currentGameIdAttempt).join(activeUser);
-            databaseImpl.updateGameInfo(getGameInfo(currentGameIdAttempt));
+            databaseImpl.updateGameInfo(getGameInfo(currentGameIdAttempt), true);
             //setGameStatenaam nog
             return true;
         }
@@ -381,7 +381,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public void storeImage(String naam, byte[] afbeelding) throws RemoteException{
-        databaseImpl.storeImage(naam,afbeelding);
+        databaseImpl.storeImage(naam,afbeelding, true);
     }
 
 
@@ -393,7 +393,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void takeOverGame(Game game) throws RemoteException {
         game.getGameInfo().setAppServerPoort(AppServerMain.thisappServerpoort);
-        databaseImpl.updateGameInfo(game.getGameInfo());
+        databaseImpl.updateGameInfo(game.getGameInfo(), true);
         gamesLijst.add(game);
     }
 
@@ -401,7 +401,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     // HANDLING SCORE TABLE //
     @Override
     public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
-        databaseImpl.updateScores(username, roosterSize, eindScore, command);
+        databaseImpl.updateScores(username, roosterSize, eindScore, command, true);
 
     }
     @Override
@@ -410,7 +410,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         if(!databaseImpl.hasScoreRij(username)){
 
             System.out.println("deze user had nog geen rij in de database");
-            databaseImpl.insertScoreRow(username);
+            databaseImpl.insertScoreRow(username, true);
             System.out.println("nu wel");
         }
 

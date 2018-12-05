@@ -15,29 +15,29 @@ public interface DatabaseInterface extends Remote {
 
     /*---------- CREDENTIALS ------------*/
     boolean checkUserCred(String naam, String paswoord) throws RemoteException;
-    void createToken(String username, String password) throws RemoteException;
+    void createToken(String username, String password, boolean replicate) throws RemoteException;
     boolean isTokenValid(String username, String token) throws RemoteException;
-    void cancelToken(String username) throws RemoteException;
+    void cancelToken(String username, boolean replicate) throws RemoteException;
     String getToken(String username) throws RemoteException;
 
 
     /*---------- IMAGES -----------------*/
     byte[] getImage(String naam) throws RemoteException;
-    void storeImage(String naamFoto, byte[] afbeelding)throws RemoteException;
+    void storeImage(String naamFoto, byte[] afbeelding, boolean replicate)throws RemoteException;
 
     /*---------- CONNECTIONS ------------*/
     void connectTo(DatabaseInterface toImpl) throws RemoteException;
 
 
     /*---------- GAMES ------------------*/
-    void addGameInfo(GameInfo gameInfo) throws RemoteException;
-    void updateGameInfo(GameInfo gameInfo) throws RemoteException;
+    void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException;
+    void updateGameInfo(GameInfo gameInfo, boolean replicate ) throws RemoteException;
 
 
     /*---------- SCORES -----------------*/
-    void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException;
+    void updateScores(String username, int roosterSize, int eindScore, String command, boolean replicate) throws RemoteException;
 
-    void insertScoreRow(String username) throws RemoteException;
+    void insertScoreRow(String username, boolean replicate) throws RemoteException;
 
     boolean hasScoreRij(String username) throws RemoteException;
 

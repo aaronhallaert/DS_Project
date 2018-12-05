@@ -200,7 +200,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      * @throws RemoteException
      */
     @Override
-    public void createToken(String username, String password)throws RemoteException {
+    public void createToken(String username, String password, boolean replicate)throws RemoteException {
 
         // enkel als credentials juist zijn
         if(checkUserCred(username, password)){
@@ -221,6 +221,12 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 se.printStackTrace();
             }
 
+        }
+
+        if(replicate){
+            for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+                dbRef.createToken(username, password, false);
+            }
         }
     }
     /**
@@ -266,7 +272,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      * @throws RemoteException
      */
     @Override
-    public void cancelToken(String username) throws RemoteException{
+    public void cancelToken(String username, boolean replicate) throws RemoteException{
         String sql = "UPDATE Persons SET token_timestamp=? WHERE Username= ?;";
         connect();
         try{
@@ -280,6 +286,10 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             se.printStackTrace();
         }
         closeConnection();
+
+        for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+            dbRef.cancelToken(username, false);
+        }
     }
     /**
      * opvragen van token
@@ -353,7 +363,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      * @throws RemoteException
      */
     @Override
-    public void storeImage(String afbeeldingId, byte[] afbeelding) throws RemoteException{
+    public void storeImage(String afbeeldingId, byte[] afbeelding, boolean replicate) throws RemoteException{
 
         System.out.println("database storen van een image started");
 
@@ -376,6 +386,12 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         closeConnection();
 
+        if(replicate){
+            for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+                dbRef.storeImage(afbeeldingId, afbeelding, false);
+            }
+        }
+
     }
 
     // CONNECTIONS //
@@ -387,7 +403,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     // GAMES //
     @Override
-    public void updateGameInfo(GameInfo gameInfo) {
+    public void updateGameInfo(GameInfo gameInfo, boolean replicate) {
         connect();
         ArrayList<String> spelers= gameInfo.getSpelers();
         StringBuilder sb= new StringBuilder();
@@ -417,9 +433,19 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             se.printStackTrace();
         }
         closeConnection();
+
+        if(replicate) {
+            for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+                try {
+                    dbRef.updateGameInfo(gameInfo, false);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     @Override
-    public void addGameInfo(GameInfo gameInfo) throws RemoteException {
+    public void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException {
 
 
         System.out.println("game info toevoegen");
@@ -467,6 +493,13 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             e.printStackTrace();
         }
         closeConnection();
+
+        if(replicate){
+            for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+                dbRef.addGameInfo(gameInfo, false);
+            }
+        }
+
 
     }
 
@@ -550,7 +583,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
 
     @Override
-    public void insertScoreRow(String username) throws RemoteException {
+    public void insertScoreRow(String username, boolean replicate) throws RemoteException {
 
         System.out.println("rij toegevoegd voor user" + username +" in scorelijst");
 
@@ -580,10 +613,17 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         closeConnection();
 
+        if(replicate){
+            for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+                dbRef.insertScoreRow(username, false);
+            }
+        }
+
+
     }
 
     @Override
-    public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
+    public void updateScores(String username, int roosterSize, int eindScore, String command, boolean replicate) throws RemoteException {
 
         String sql = "SELECT * FROM Scores WHERE Username = ? ";
 
@@ -664,6 +704,13 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
 
             closeConnection();
+
+            if(replicate){
+                for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+                    dbRef.updateScores(username, roosterSize, eindScore,command,false);
+                }
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();

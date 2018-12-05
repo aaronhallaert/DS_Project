@@ -184,7 +184,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void insertUser(String username, String confirmPassword) throws RemoteException {
         dbImpls.get(0).insertUser(username, confirmPassword, true);
-        dbImpls.get(0).insertScoreRow(username);
+        dbImpls.get(0).insertScoreRow(username, true);
     }
 
 
@@ -206,8 +206,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             possibleAppServers.get(0).takeOverGame(game);
             currentAppImpl.removeGame(game);
         }
-
-
 
     }
 
