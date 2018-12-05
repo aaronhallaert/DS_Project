@@ -73,7 +73,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
                 //toevoegen aan de lijst met appServerPoorten
                 System.out.println("nieuwe appserver started on port "+ applicationPoortNr);
-
                 break;
             }
         }
@@ -103,14 +102,27 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void registerAppserver(int portNumber) {
         System.out.println("nieuwe appserver geregistreerd met poortnummer "+ portNumber);
-        appServerPoorten.add(portNumber);
         try {
-            appImpls.add( (AppServerInterface) LocateRegistry.getRegistry("localhost", portNumber).lookup("AppserverService"));
+            AppServerInterface newAppImpl= (AppServerInterface)LocateRegistry.getRegistry("localhost", portNumber).lookup("AppserverService");
+
+            if(appImpls.size()>=1) {
+                appImpls.get(0).takeBackupFrom(portNumber);
+                newAppImpl.takeBackupFrom(appServerPoorten.get(appServerPoorten.size() - 1));
+            }
+
+
+            appImpls.add(newAppImpl);
+            appServerPoorten.add(portNumber);
+
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
             e.printStackTrace();
         }
+
+
+
+
     }
 
     @Override

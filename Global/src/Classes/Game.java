@@ -54,7 +54,6 @@ public class Game implements Serializable {
         System.out.println("gameState made");
     }
 
-
     // GETTERS AND SETTERS
 
     public int getGameId(){return gameId;}

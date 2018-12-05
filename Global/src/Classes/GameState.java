@@ -226,6 +226,16 @@ public class GameState implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        return "GameState{" +
+                "tegelsFlipped=" + tegelsFlipped +
+                ", aantalParenFound=" + aantalParenFound +
+                ", spelers=" + spelers +
+                ", aandeBeurt='" + aandeBeurt + '\'' +
+                '}';
+    }
+
     /** deze methode wordt altijd opgeroepen nadat een speler op een kaartje gedrukt heeft
      * verwerking van de wat er juist gebeurd is
      *  bijvoorbeeld: als er 2 kaartjes open liggen:

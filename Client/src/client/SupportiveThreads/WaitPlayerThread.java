@@ -31,7 +31,7 @@ public class WaitPlayerThread extends Thread {
         while(true) {
 
 
-                System.out.println("voorlopig heb ik "+ gameInfo.getAantalSpelersConnected()+ " geconnecteerde spelers, is er verandering?");
+               // System.out.println("voorlopig heb ik "+ gameInfo.getAantalSpelersConnected()+ " geconnecteerde spelers, is er verandering?");
                 if(Main.cnts.getAppImpl().changeInPlayers(CurrentGame.getInstance().getGameId(), gameInfo.getAantalSpelersConnected())) {
 
                     int updateValuePlayers= Main.cnts.getAppImpl().getGameInfo(CurrentGame.getInstance().getGameId()).getAantalSpelersConnected();
@@ -46,7 +46,7 @@ public class WaitPlayerThread extends Thread {
                     else{
                         svl.bothPlayersConnected(false);
                         gameInfo.setAantalSpelersConnected(updateValuePlayers);
-                        System.out.println("nog niet alle spelers zijn geconnecteerd");
+                       // System.out.println("nog niet alle spelers zijn geconnecteerd");
                     }
 
                     svl.updateGame();

@@ -83,7 +83,7 @@ public class Main extends Application {
             }
         }
         else{
-            System.out.println("gevonden in cacheke");
+            //System.out.println("gevonden in cacheke");
         }
 
         return afbeelding;

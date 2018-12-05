@@ -3,6 +3,7 @@ import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -17,6 +18,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     /*--------------- ATTRIBUTES ----------------------*/
     private ArrayList<Game> gamesLijst=new ArrayList<>(); //game bevat GameInfo en GameState
+
+    private BackupGames backup;
+    private AppServerInterface destinationBackup;
+
     private static Map<String, byte[]> imageCache=new HashMap<>();
     private static LinkedList<String> imageCacheSequence= new LinkedList<>();
 
@@ -157,7 +162,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
 
-        System.out.println("createGame in appserviceImpl triggered");
+
         System.out.println(activeUser);
 
         //gameId maken, kijken als nog niet reeds bestaat
@@ -225,6 +230,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return gameInfoLijst;
 
     }
+    @Override
+    public ArrayList<Game> getGamesLijst() throws RemoteException {
+        return gamesLijst;
+    }
+
     @Override
     public Game getGame(int currentGameId) {
         for (Game game : gamesLijst) {
@@ -361,10 +371,9 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             afbeelding= databaseImpl.getImage(naam);
             imageCache.put(naam, afbeelding);
             imageCacheSequence.add(naam);
-            System.out.println("moeten inladen vanuit een db");
         }
         else{
-            System.out.println("gevonden in cacheke");
+
         }
 
         if(imageCache.size()>36) {
@@ -420,4 +429,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return databaseImpl.getScores();
     }
 
+    // BACKUP //
+    @Override
+    public void takeBackupFrom(int appserverpoort) throws RemoteException{
+        backup= new BackupGames(appserverpoort);
+
+        System.out.println("I just took a backup from " + backup.getAppserverPoort());
+        for (Game game : backup.getGameList()) {
+            System.out.println(game);
+        }
+
+    }
 }
