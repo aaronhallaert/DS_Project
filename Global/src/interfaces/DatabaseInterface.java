@@ -42,4 +42,6 @@ public interface DatabaseInterface extends Remote {
     boolean hasScoreRij(String username) throws RemoteException;
 
     ArrayList<Score> getScores() throws RemoteException;
+
+    boolean ping() throws RemoteException;
 }

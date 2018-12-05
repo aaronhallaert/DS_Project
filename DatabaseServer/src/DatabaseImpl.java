@@ -537,6 +537,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     }
 
+
+
     @Override
     public void insertScoreRow(String username) throws RemoteException {
 
@@ -657,6 +659,11 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean ping() throws RemoteException {
+        return true;
     }
 
 }

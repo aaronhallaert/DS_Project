@@ -37,14 +37,18 @@ public class PollToOtherDBs extends Thread {
 
         super.run();
 
-        while (true) {
+        boolean setupDone = false;
+
+
+        //we springen uit deze while loop eenmaal alle databases connecteerd zijn met elkaar
+        while (!setupDone) {
 
             try {
                 sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println();
+
             System.out.println();
             System.out.println("herbeginnen met de lus");
 
@@ -52,7 +56,7 @@ public class PollToOtherDBs extends Thread {
 
                 try {
 
-
+                    // als nog niet connected
                     if (!connected.get(i)){
                         System.out.println("trying to connect to db"+otherPortNumbers.get(i));
                         DatabaseInterface dbImp = (DatabaseInterface) LocateRegistry.getRegistry("localhost", otherPortNumbers.get(i)).lookup("DatabaseService");
@@ -68,7 +72,62 @@ public class PollToOtherDBs extends Thread {
                 }
             }
 
+
+            setupDone = zijnWeKlaar(connected);
+            //setupDone true -> uit de loop
+
         }
+
+        System.out.println("alle db's verbonden, we  gaan  over tot volgende while");
+        // vanaf hier moeten  we proberen zaken op te vangen
+
+        //todo: voorlopig niet kijken voor deze zaken, eerst zorgen dat een write gerepliqueerd wordt
+        /*while(true){
+
+            for(int i=0 ; i<dbImpls.size(); i++){
+
+                if(connected.get(i)){
+                    try {
+                        if(dbImpls.get(i).ping()){
+                            System.out.println("nog steeds connectie naar "+otherPortNumbers.get(i));
+                        }
+                    } catch (RemoteException e) { //if connection broke
+
+                        connected.set(i, false);
+                        System.out.println("connection lost to"+otherPortNumbers.get(i));
+                        //start thread op die de connectie restart?
+                        FixConnectionThread fct = new FixConnectionThread(otherPortNumbers.get(i), dbImpls.get(i));
+                        fct.start();
+                    }
+
+                }
+
+            }
+
+            try {
+                sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }*/
+
+
+    }
+
+    private boolean zijnWeKlaar(ArrayList<Boolean> connected) {
+
+        boolean klaar = true;
+
+        for (Boolean aBoolean : connected) {
+
+            if(!aBoolean){
+                klaar  = false;
+            }
+
+        }
+
+        return klaar;
 
     }
 
