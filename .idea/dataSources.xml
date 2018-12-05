@@ -23,7 +23,7 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\School\Ind Ing\iiw Master\Semester 1\Gedistribueerde Systemen\DS_Project\DatabaseServer\data\database2.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/DatabaseServer/data/database2.db</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>

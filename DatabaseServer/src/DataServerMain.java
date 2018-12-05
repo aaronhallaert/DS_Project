@@ -6,6 +6,7 @@ import java.rmi.registry.Registry;
 public class DataServerMain {
 
     public static String databaseNaam;
+    public static PollToOtherDBs pollToOtherDBs;
 
     public static void main(String[] args) {
 
@@ -22,7 +23,7 @@ public class DataServerMain {
             dataRegistry.rebind("DatabaseService", new DatabaseImpl(databaseNaam));
             System.out.println("connected met "+databaseNaam);
 
-            PollToOtherDBs pollToOtherDBs = new PollToOtherDBs(args[0]);
+            pollToOtherDBs = new PollToOtherDBs(args[0]);
             pollToOtherDBs.start();
 
         }

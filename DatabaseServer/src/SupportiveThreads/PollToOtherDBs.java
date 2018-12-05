@@ -146,5 +146,9 @@ public class PollToOtherDBs extends Thread {
         return poortNummers;
     }
 
+    public ArrayList<DatabaseInterface> getDBRefs(){
+        return dbImpls;
+    }
+
 
 }

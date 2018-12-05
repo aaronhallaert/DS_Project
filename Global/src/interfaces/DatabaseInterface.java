@@ -11,7 +11,7 @@ public interface DatabaseInterface extends Remote {
 
     /*---------- USER -------------------*/
     boolean userNameExists(String naam) throws RemoteException;
-    void insertUser(String name, String password) throws RemoteException;
+    void insertUser(String name, String password, boolean replicate) throws RemoteException;
 
     /*---------- CREDENTIALS ------------*/
     boolean checkUserCred(String naam, String paswoord) throws RemoteException;
