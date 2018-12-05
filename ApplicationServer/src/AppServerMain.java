@@ -20,6 +20,7 @@ public class AppServerMain {
             appRegistry.rebind("AppserverService", new AppServiceImpl());
 
             dispatchImpl=(DispatchInterface) LocateRegistry.getRegistry("localhost", 1902).lookup("DispatchService");
+            System.out.println("vraag aan dispatcher om te registreren");
             dispatchImpl.registerAppserver(thisappServerpoort);
             // setup communicatie met databaseserver
 
