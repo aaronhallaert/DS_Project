@@ -19,6 +19,8 @@ public class Connections {
         try {
             dispatchRegistry = LocateRegistry.getRegistry("localhost", dispatcherpoort);
             dispatchImpl=(DispatchInterface) dispatchRegistry.lookup("DispatchService");
+
+            appImpl=dispatchImpl.giveAppserver();
         }
         catch(Exception e){
             Main.goToDisconnection(close);

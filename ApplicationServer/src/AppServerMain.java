@@ -1,4 +1,5 @@
 import interfaces.DatabaseInterface;
+import interfaces.DispatchInterface;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -6,6 +7,8 @@ import java.rmi.registry.Registry;
 public class AppServerMain {
 
     public static int thisappServerpoort;
+
+    private static DispatchInterface dispatchImpl;
 
     public static void main(String[] args) {
         try{
@@ -16,6 +19,8 @@ public class AppServerMain {
             Registry appRegistry= LocateRegistry.createRegistry(thisappServerpoort);
             appRegistry.rebind("AppserverService", new AppServiceImpl());
 
+            dispatchImpl=(DispatchInterface) LocateRegistry.getRegistry("localhost", 1902).lookup("DispatchService");
+            dispatchImpl.registerAppserver(thisappServerpoort);
             // setup communicatie met databaseserver
 
         }

@@ -114,7 +114,7 @@ public class LobbyScreen {
 
     public void logout(){
         try {
-            Main.cnts.getDispatchImpl().logoutUser(CurrentUser.getInstance().getUsername());
+            Main.cnts.getAppImpl().logoutUser(CurrentUser.getInstance().getUsername());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

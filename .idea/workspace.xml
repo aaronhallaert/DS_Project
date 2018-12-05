@@ -6,35 +6,21 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="db in list">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Connections.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Connections.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/DatabaseServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/DatabaseServer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database2.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database3.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database3.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database4.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database4.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/Classes/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewLogica.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewLogica.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/Classes/GameInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -128,6 +114,46 @@
       </path>
     </expand>
     <select />
+  </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="289">
+                    <caret line="17" selection-start-line="17" selection-end-line="17" />
+                    <folding>
+                      <element signature="imports" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="700">
+                    <caret line="59" column="56" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="459">
+                    <caret line="32" column="63" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-553090698">
@@ -247,14 +273,16 @@
     <session id="-287212785">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gameinfo" value="9" />
-          <entry key="java" value="15" />
+          <entry key="java" value="35" />
           <entry key="persons" value="1" />
           <entry key="pictures" value="1" />
           <entry key="sql" value="8" />
@@ -263,8 +291,25 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Database Element" value="11" />
-          <entry key="JAVA" value="15" />
+          <entry key="JAVA" value="35" />
           <entry key="Scratch" value="8" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="3280" />
+          <entry key="txt" value="123" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="3280" />
+          <entry key="PLAIN_TEXT" value="123" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.delete.local" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -272,19 +317,108 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="das://737bf8c4-5535-46da-865c-68cff5a20e77/schema/main/table/gameinfo">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+        <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1683">
+              <caret line="395" selection-start-line="395" selection-end-line="395" />
+              <folding>
+                <element signature="method#AppServiceImpl#0;class#AppServiceImpl#0" />
+                <element signature="e#1000#1040#0" />
+                <element signature="method#getWillekeurigeDatabaseServerPoort#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
+                <element signature="method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
+                <element signature="method#getPortNumber#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#loginUser#0;class#AppServiceImpl#0" />
+                <element signature="method#loginUser#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#loginWithToken#0;class#AppServiceImpl#0" />
+                <element signature="method#loginWithToken#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#logoutUser#0;class#AppServiceImpl#0" />
+                <element signature="method#logoutUser#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#getToken#0;class#AppServiceImpl#0" />
+                <element signature="method#getToken#0;class#AppServiceImpl#0" />
+                <element signature="method#createGame#0;class#AppServiceImpl#0" />
+                <element signature="method#getNumberOfGames#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#getGameInfoLijst#0;class#AppServiceImpl#0" />
+                <element signature="method#getGameInfoLijst#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#getGameInfoLijst#1;class#AppServiceImpl#0" />
+                <element signature="method#getGameInfoLijst#1;class#AppServiceImpl#0" />
+                <element signature="method#getGame#0;class#AppServiceImpl#0" />
+                <element signature="method#getGameInfo#0;class#AppServiceImpl#0" />
+                <element signature="method#getGameState#0;class#AppServiceImpl#0" />
+                <element signature="method#hasGame#0;class#AppServiceImpl#0" />
+                <element signature="method#join#0;class#AppServiceImpl#0" />
+                <element signature="e#7375#7400#0" />
+                <element signature="method#leaveGame#0;class#AppServiceImpl#0" />
+                <element signature="method#changeInPlayers#0;class#AppServiceImpl#0" />
+                <element signature="method#changeInTurn#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#executeFlipCommando#0;class#AppServiceImpl#0" />
+                <element signature="method#executeFlipCommando#0;class#AppServiceImpl#0" />
+                <element signature="method#getInbox#0;class#AppServiceImpl#0" />
+                <element signature="method#spectate#0;class#AppServiceImpl#0" />
+                <element signature="method#unsubscribeSpecator#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#getImage#0;class#AppServiceImpl#0" />
+                <element signature="method#getImage#0;class#AppServiceImpl#0" />
+                <element signature="docComment;method#storeImage#0;class#AppServiceImpl#0" />
+                <element signature="method#storeImage#0;class#AppServiceImpl#0" />
+                <element signature="method#removeGame#0;class#AppServiceImpl#0" />
+                <element signature="method#takeOverGame#0;class#AppServiceImpl#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="das://18c3fb8c-e61e-4fd2-9069-15fb4bce5653/schema/main/table/gameinfo">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+        <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1207">
+              <caret line="459" selection-start-line="459" selection-end-line="459" />
+              <folding>
+                <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
+                <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
+                <element signature="method#connect#0;class#DatabaseImpl#0" />
+                <element signature="docComment;method#closeConnection#0;class#DatabaseImpl#0" />
+                <element signature="method#closeConnection#0;class#DatabaseImpl#0" />
+                <element signature="method#hash#0;class#DatabaseImpl#0" />
+                <element signature="method#hash#1;class#DatabaseImpl#0" />
+                <element signature="docComment;method#userNameExists#0;class#DatabaseImpl#0" />
+                <element signature="method#userNameExists#0;class#DatabaseImpl#0" />
+                <element signature="docComment;method#insertUser#0;class#DatabaseImpl#0" />
+                <element signature="method#insertUser#0;class#DatabaseImpl#0" />
+                <element signature="docComment;method#checkUserCred#0;class#DatabaseImpl#0" />
+                <element signature="method#checkUserCred#0;class#DatabaseImpl#0" />
+                <element signature="e#0#51#1" />
+                <element signature="docComment;method#createToken#0;class#DatabaseImpl#0" />
+                <element signature="method#createToken#0;class#DatabaseImpl#0" />
+                <element signature="e#0#63#0" />
+                <element signature="docComment;method#isTokenValid#0;class#DatabaseImpl#0" />
+                <element signature="method#isTokenValid#0;class#DatabaseImpl#0" />
+                <element signature="e#0#68#1" />
+                <element signature="docComment;method#cancelToken#0;class#DatabaseImpl#0" />
+                <element signature="method#cancelToken#0;class#DatabaseImpl#0" />
+                <element signature="e#0#54#0" />
+                <element signature="docComment;method#getToken#0;class#DatabaseImpl#0" />
+                <element signature="method#getToken#0;class#DatabaseImpl#0" />
+                <element signature="e#0#44#0" />
+                <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
+                <element signature="method#getImage#0;class#DatabaseImpl#0" />
+                <element signature="docComment;method#storeImage#0;class#DatabaseImpl#0" />
+                <element signature="method#storeImage#0;class#DatabaseImpl#0" />
+                <element signature="method#connectTo#0;class#DatabaseImpl#0" />
+                <element signature="method#updateGameInfo#0;class#DatabaseImpl#0" />
+                <element signature="e#0#89#0" />
+                <element signature="method#addGameInfo#0;class#DatabaseImpl#0" />
+                <element signature="e#0#37#0" />
+                <element signature="e#0#136#1" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="8" column="41" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -301,7 +435,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>update</find>
       <find>push</find>
       <find>aanDeBeurt</find>
       <find>createGame</find>
@@ -331,11 +464,17 @@
       <find>ReceiveT</find>
       <find>getGameInfoLijst</find>
       <find>getImage</find>
+      <find>makeNe</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="aaron" />
+      </map>
+    </option>
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="IdeDocumentHistory">
@@ -357,25 +496,25 @@
         <option value="$PROJECT_DIR$/Client/src/client/Views/disconnection.fxml" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Connections.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/DisconnectionController.java" />
         <option value="$PROJECT_DIR$/Client/src/client/SupportiveThreads/LobbyRefreshThread.java" />
         <option value="$PROJECT_DIR$/Client/src/client/GameInfoObs.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Main.java" />
-        <option value="$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java" />
-        <option value="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" />
-        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" />
         <option value="$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java" />
-        <option value="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" />
-        <option value="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" />
-        <option value="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" />
-        <option value="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" />
-        <option value="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/GameInfo.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/Game.java" />
         <option value="$PROJECT_DIR$/Global/src/Classes/GameState.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Main.java" />
+        <option value="$PROJECT_DIR$/Client/src/client/Connections.java" />
+        <option value="$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java" />
+        <option value="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" />
+        <option value="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" />
+        <option value="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" />
+        <option value="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" />
+        <option value="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" />
+        <option value="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" />
         <option value="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" />
       </list>
     </option>
@@ -419,22 +558,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="DatabaseServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="DatabaseServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -464,10 +587,27 @@
             </path>
             <path>
               <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
+              <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dispatcher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="SupportiveThreads" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
@@ -482,7 +622,23 @@
               <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Global" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Classes" type="462c0819:PsiDirectoryNode" />
+              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="DatabaseServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="Project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="DatabaseServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -497,7 +653,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543963012721" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544010959012" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="D:/main_Persons.csv" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -688,7 +844,8 @@
       <workItem from="1543050767686" duration="9702000" />
       <workItem from="1543064368727" duration="23000" />
       <workItem from="1543930449563" duration="9243000" />
-      <workItem from="1543961463922" duration="1481000" />
+      <workItem from="1543961463922" duration="1689000" />
+      <workItem from="1544007559844" duration="3369000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -935,11 +1092,25 @@
       <option name="project" value="LOCAL" />
       <updated>1543933454721</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="gameinfo in db - change game from appserver - controlleer bij join als game aanwezig is anders switch from appserver">
+      <created>1543962996012</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1543962996012</updated>
+    </task>
+    <task id="LOCAL-00037" summary="gameinfo in db - change game from appserver - controlleer bij join als game aanwezig is anders switch from appserver">
+      <created>1543963108491</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1543963108491</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104940000" />
+    <option name="totallyTimeSpent" value="108517000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -954,7 +1125,7 @@
     <frame x="-8" y="-8" width="1904" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21095444" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21312365" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -962,17 +1133,17 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.4043659" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4994577" weight="0.4043659" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.32903227" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.31392932" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.5010395" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.72613883" weight="0.31392932" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4972885" weight="0.107068606" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.32744282" />
-      <window_info anchor="bottom" id="Database Changes" order="8" sideWeight="0.49920633" weight="0.32923076" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.271855" side_tool="true" weight="0.29935622" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48987207" weight="0.32328483" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.7055315" weight="0.32744282" />
+      <window_info anchor="bottom" id="Database Changes" order="8" sideWeight="0.4989154" weight="0.32848233" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4994577" weight="0.32848233" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.27386117" side_tool="true" visible="true" weight="0.31392932" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48806942" weight="0.32328483" />
       <window_info anchor="bottom" id="Statistic" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3289166" />
       <window_info anchor="bottom" id="Run with VisualVM" order="14" />
@@ -982,7 +1153,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info active="true" anchor="right" id="Database" order="5" sideWeight="0.49848485" visible="true" weight="0.12635575" />
+      <window_info anchor="right" id="Database" order="5" sideWeight="0.49848485" visible="true" weight="0.12635575" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
@@ -1057,7 +1228,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="GameInfo commented" />
     <MESSAGE value="GameState commented" />
     <MESSAGE value="Global/Classes commentaar is klaar" />
     <MESSAGE value="threads en Visualtile commentaar" />
@@ -1082,16 +1252,17 @@
     <MESSAGE value="catch server disconnected + dynamic refresh lobby" />
     <MESSAGE value="db in list" />
     <MESSAGE value="tsta goed" />
-    <option name="LAST_COMMIT_MESSAGE" value="tsta goed" />
+    <MESSAGE value="gameinfo in db - change game from appserver - controlleer bij join als game aanwezig is anders switch from appserver" />
+    <option name="LAST_COMMIT_MESSAGE" value="gameinfo in db - change game from appserver - controlleer bij join als game aanwezig is anders switch from appserver" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Client/src/client/Main.java</url>
-          <line>69</line>
+          <url>file://$PROJECT_DIR$/Client/src/client/Connections.java</url>
+          <line>22</line>
           <properties />
-          <option name="timeStamp" value="35" />
+          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1111,9 +1282,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://8a3c72f2-5c68-4b1f-89b8-a5a71b03c4c4/schema/main/table/gameinfo" />
-    <entry file="das://1fc8c2b8-e9ec-4eff-82ef-8315aaf76cc7/schema/main/table/gameinfo" />
-    <entry file="das://1fc8c2b8-e9ec-4eff-82ef-8315aaf76cc7/schema/main/table/pictures" />
     <entry file="das://8a3c72f2-5c68-4b1f-89b8-a5a71b03c4c4/schema/main/table/pictures" />
     <entry file="das://6ec87901-b33a-46aa-8ca1-07983fa89c19/schema/main/table/pictures" />
     <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/pictures" />
@@ -1152,92 +1320,13 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/85e4c2bc-ef2d-4aba-b33b-f16afdccfbd0/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="234" selection-start-line="234" selection-end-line="234" />
-          <folding>
-            <element signature="docComment;method#setImage#0;class#Main#0" />
-            <element signature="method#setImage#0;class#Main#0" />
-            <element signature="docComment;method#loadImageBytes#0;class#Main#0" />
-            <element signature="method#goToRegister#0;class#Main#0" />
-            <element signature="method#goToSpel#0;class#Main#0" />
-            <element signature="method#gotoImageUploadPage#0;class#Main#0" />
-            <element signature="e#7642#7643#0" expanded="true" />
-            <element signature="e#7670#7671#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/27839930-8109-4c96-bf5a-dd762ab88518/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="3" column="34" lean-forward="true" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="565">
           <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="295" selection-start-line="295" selection-end-line="295" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-986">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="e#4129#4139#0" expanded="true" />
-            <element signature="e#4493#4503#0" expanded="true" />
-            <element signature="method#removeGame#0;class#AppServiceImpl#0" />
-            <element signature="method#changeInPlayers#0;class#AppServiceImpl#0" />
-            <element signature="method#changeInTurn#0;class#AppServiceImpl#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1255,42 +1344,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://d1507983-5d6b-4bff-bff0-4d1875d39329/schema/main/table/persons">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://d1507983-5d6b-4bff-bff0-4d1875d39329/schema/main/table/pictures">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
-          <folding>
-            <element signature="method#connectTo#0;class#DatabaseImpl#0" />
-            <element signature="method#hash#0;class#DatabaseImpl#0" />
-            <element signature="method#hash#1;class#DatabaseImpl#0" />
-            <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
-            <element signature="docComment;method#storeImage#0;class#DatabaseImpl#0" />
-            <element signature="method#storeImage#0;class#DatabaseImpl#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3145">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://d1507983-5d6b-4bff-bff0-4d1875d39329/schema/main/table/persons" />
+    <entry file="das://d1507983-5d6b-4bff-bff0-4d1875d39329/schema/main/table/pictures" />
     <entry file="file://$PROJECT_DIR$/Global/src/Classes/GameInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1326,20 +1381,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://27839930-8109-4c96-bf5a-dd762ab88518/schema/main/table/gameinfo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://d1507983-5d6b-4bff-bff0-4d1875d39329/schema/main/table/gameinfo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://27839930-8109-4c96-bf5a-dd762ab88518/schema/main/table/gameinfo" />
+    <entry file="das://d1507983-5d6b-4bff-bff0-4d1875d39329/schema/main/table/gameinfo" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/18c3fb8c-e61e-4fd2-9069-15fb4bce5653/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1355,13 +1398,7 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e5e82524-821c-4a1f-95b6-4e758bf2c96e/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="das://e5e82524-821c-4a1f-95b6-4e758bf2c96e/schema/main/table/gameinfo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://e5e82524-821c-4a1f-95b6-4e758bf2c96e/schema/main/table/gameinfo" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e2b80c25-de7a-4d15-9824-7f2081323ea6/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1396,6 +1433,216 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="116" column="34" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-139">
+          <caret line="77" column="9" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="170" column="24" selection-start-line="170" selection-start-column="24" selection-end-line="170" selection-end-column="24" />
+          <folding>
+            <element signature="docComment;method#setImage#0;class#Main#0" />
+            <element signature="method#setImage#0;class#Main#0" />
+            <element signature="docComment;method#loadImageBytes#0;class#Main#0" />
+            <element signature="method#loadImageBytes#0;class#Main#0" />
+            <element signature="docComment;method#configureList#0;class#Main#0" />
+            <element signature="method#configureList#0;class#Main#0" />
+            <element signature="method#goToDisconnection#0;class#Main#0" />
+            <element signature="e#4502#4535#0" />
+            <element signature="method#fixDisconnection#0;class#Main#0" />
+            <element signature="class#5395:5547" />
+            <element signature="method#goToRegister#0;class#Main#0" />
+            <element signature="method#goToLobby#0;class#Main#0" />
+            <element signature="method#goToSpel#0;class#Main#0" />
+            <element signature="method#goToSetupSpel#0;class#Main#0" />
+            <element signature="method#gotoImageUploadPage#0;class#Main#0" />
+            <element signature="method#goToScoreScreen#0;class#Main#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Connections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="method#DispatchImpl#0;class#DispatchImpl#0" />
+            <element signature="method#makeNewAppserver#0;class#DispatchImpl#0" />
+            <element signature="method#setupConnectionsToDBs#0;class#DispatchImpl#0" />
+            <element signature="method#registerAppserver#0;class#DispatchImpl#0" />
+            <element signature="method#giveAppserver#0;class#DispatchImpl#0" />
+            <element signature="method#newGameCreated#0;class#DispatchImpl#0" />
+            <element signature="method#gameFinished#0;class#DispatchImpl#0" />
+            <element signature="docComment;method#userNameExists#0;class#DispatchImpl#0" />
+            <element signature="method#userNameExists#0;class#DispatchImpl#0" />
+            <element signature="docComment;method#insertUser#0;class#DispatchImpl#0" />
+            <element signature="method#insertUser#0;class#DispatchImpl#0" />
+            <element signature="method#changeGameServer#0;class#DispatchImpl#0" />
+            <element signature="method#changeClientServer#0;class#DispatchImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="241" column="41" selection-start-line="241" selection-start-column="41" selection-end-line="241" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="41" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="395" selection-start-line="395" selection-end-line="395" />
+          <folding>
+            <element signature="method#AppServiceImpl#0;class#AppServiceImpl#0" />
+            <element signature="e#1000#1040#0" />
+            <element signature="method#getWillekeurigeDatabaseServerPoort#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
+            <element signature="method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
+            <element signature="method#getPortNumber#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#loginUser#0;class#AppServiceImpl#0" />
+            <element signature="method#loginUser#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#loginWithToken#0;class#AppServiceImpl#0" />
+            <element signature="method#loginWithToken#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#logoutUser#0;class#AppServiceImpl#0" />
+            <element signature="method#logoutUser#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getToken#0;class#AppServiceImpl#0" />
+            <element signature="method#getToken#0;class#AppServiceImpl#0" />
+            <element signature="method#createGame#0;class#AppServiceImpl#0" />
+            <element signature="method#getNumberOfGames#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getGameInfoLijst#0;class#AppServiceImpl#0" />
+            <element signature="method#getGameInfoLijst#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getGameInfoLijst#1;class#AppServiceImpl#0" />
+            <element signature="method#getGameInfoLijst#1;class#AppServiceImpl#0" />
+            <element signature="method#getGame#0;class#AppServiceImpl#0" />
+            <element signature="method#getGameInfo#0;class#AppServiceImpl#0" />
+            <element signature="method#getGameState#0;class#AppServiceImpl#0" />
+            <element signature="method#hasGame#0;class#AppServiceImpl#0" />
+            <element signature="method#join#0;class#AppServiceImpl#0" />
+            <element signature="e#7375#7400#0" />
+            <element signature="method#leaveGame#0;class#AppServiceImpl#0" />
+            <element signature="method#changeInPlayers#0;class#AppServiceImpl#0" />
+            <element signature="method#changeInTurn#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#executeFlipCommando#0;class#AppServiceImpl#0" />
+            <element signature="method#executeFlipCommando#0;class#AppServiceImpl#0" />
+            <element signature="method#getInbox#0;class#AppServiceImpl#0" />
+            <element signature="method#spectate#0;class#AppServiceImpl#0" />
+            <element signature="method#unsubscribeSpecator#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getImage#0;class#AppServiceImpl#0" />
+            <element signature="method#getImage#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#storeImage#0;class#AppServiceImpl#0" />
+            <element signature="method#storeImage#0;class#AppServiceImpl#0" />
+            <element signature="method#removeGame#0;class#AppServiceImpl#0" />
+            <element signature="method#takeOverGame#0;class#AppServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="32" column="63" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="459" selection-start-line="459" selection-end-line="459" />
+          <folding>
+            <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
+            <element signature="method#connect#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#closeConnection#0;class#DatabaseImpl#0" />
+            <element signature="method#closeConnection#0;class#DatabaseImpl#0" />
+            <element signature="method#hash#0;class#DatabaseImpl#0" />
+            <element signature="method#hash#1;class#DatabaseImpl#0" />
+            <element signature="docComment;method#userNameExists#0;class#DatabaseImpl#0" />
+            <element signature="method#userNameExists#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#insertUser#0;class#DatabaseImpl#0" />
+            <element signature="method#insertUser#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#checkUserCred#0;class#DatabaseImpl#0" />
+            <element signature="method#checkUserCred#0;class#DatabaseImpl#0" />
+            <element signature="e#0#51#1" />
+            <element signature="docComment;method#createToken#0;class#DatabaseImpl#0" />
+            <element signature="method#createToken#0;class#DatabaseImpl#0" />
+            <element signature="e#0#63#0" />
+            <element signature="docComment;method#isTokenValid#0;class#DatabaseImpl#0" />
+            <element signature="method#isTokenValid#0;class#DatabaseImpl#0" />
+            <element signature="e#0#68#1" />
+            <element signature="docComment;method#cancelToken#0;class#DatabaseImpl#0" />
+            <element signature="method#cancelToken#0;class#DatabaseImpl#0" />
+            <element signature="e#0#54#0" />
+            <element signature="docComment;method#getToken#0;class#DatabaseImpl#0" />
+            <element signature="method#getToken#0;class#DatabaseImpl#0" />
+            <element signature="e#0#44#0" />
+            <element signature="docComment;method#getImage#0;class#DatabaseImpl#0" />
+            <element signature="method#getImage#0;class#DatabaseImpl#0" />
+            <element signature="docComment;method#storeImage#0;class#DatabaseImpl#0" />
+            <element signature="method#storeImage#0;class#DatabaseImpl#0" />
+            <element signature="method#connectTo#0;class#DatabaseImpl#0" />
+            <element signature="method#updateGameInfo#0;class#DatabaseImpl#0" />
+            <element signature="e#0#89#0" />
+            <element signature="method#addGameInfo#0;class#DatabaseImpl#0" />
+            <element signature="e#0#37#0" />
+            <element signature="e#0#136#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="59" column="56" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
         </state>
       </provider>
     </entry>

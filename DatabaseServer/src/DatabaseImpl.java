@@ -14,11 +14,13 @@ import java.util.List;
 
 public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterface {
 
+    /*---------ATTRIBUTES --------------------*/
     private String databaseNaam;
     private static Connection conn = null;
     private ArrayList<DatabaseInterface> otherDbs=new ArrayList<>();
 
 
+    /*--------- CONSTRUCTOR ----------------*/
     public DatabaseImpl(String databaseNaam) throws RemoteException{
 
         this.databaseNaam = databaseNaam;
@@ -27,6 +29,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
 
+    /*--------- OWN METHODS ----------------*/
     /**
      * connectie met databank maken
      */
@@ -44,8 +47,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             e.printStackTrace();
         }
     }
-
-
     /**
      * close the connection to the database
      */
@@ -56,11 +57,83 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             e.printStackTrace();
         }
     }
+    private static String hash(String password, String salt){
+        return Hashing.sha256().hashString((password + salt),StandardCharsets.UTF_8).toString();
+    }
+    private static String hash(String password){
+        return Hashing.sha256().hashString((password),StandardCharsets.UTF_8).toString();
+    }
 
 
 
-    //METHODEN VOOR DE PERSONS TABLE
 
+    /*--------- SERVICES --------------------*/
+
+    // USER //
+    /**
+     * check of username al bestaat
+     * @param name
+     * @return
+     */
+    @Override
+    public boolean userNameExists(String name){
+        String sql = "SELECT Username FROM Persons WHERE Username=?";
+
+        connect();
+        try (
+                PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setString(1, name);
+
+            ResultSet rs  = pstmt.executeQuery();
+            List<String> users= new ArrayList<>();
+
+            while(rs.next()){
+                users.add(rs.getString("Username"));
+            }
+
+            if (users.size()>0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("error in usernameExists");
+        }
+
+        closeConnection();
+        return false;
+    }
+    /**
+     * Insert a new row into the users table
+     *
+     * @param name
+     * @param password
+     */
+    @Override
+    public void insertUser(String name, String password) {
+        String sql = "INSERT INTO Persons(Username,Password, Salt) VALUES(?,?,?)";
+        String salt=hash((System.currentTimeMillis()+"RandomString"));
+        String hashedPaswoord= hash(password, salt);
+        connect();
+
+        try (
+
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, hashedPaswoord);
+            pstmt.setString(3, salt);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    // CREDENTIALS //
     /**
      * checkt user credentials
      * @param naam
@@ -109,74 +182,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         return result;
     }
-
-
-    /**
-     * Insert a new row into the users table
-     *
-     * @param name
-     * @param password
-     */
-    @Override
-    public void insertUser(String name, String password) {
-        String sql = "INSERT INTO Persons(Username,Password, Salt) VALUES(?,?,?)";
-        String salt=hash((System.currentTimeMillis()+"RandomString"));
-        String hashedPaswoord= hash(password, salt);
-        connect();
-
-        try (
-
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
-            pstmt.setString(2, hashedPaswoord);
-            pstmt.setString(3, salt);
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-
-        closeConnection();
-    }
-
-
-    /**
-     * check of username al bestaat
-     * @param name
-     * @return
-     */
-    @Override
-    public boolean userNameExists(String name){
-        String sql = "SELECT Username FROM Persons WHERE Username=?";
-
-        connect();
-        try (
-                PreparedStatement pstmt  = conn.prepareStatement(sql)){
-            pstmt.setString(1, name);
-
-            ResultSet rs  = pstmt.executeQuery();
-            List<String> users= new ArrayList<>();
-
-            while(rs.next()){
-                users.add(rs.getString("Username"));
-            }
-
-            if (users.size()>0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("error in usernameExists");
-        }
-
-        closeConnection();
-        return false;
-    }
-
-
     /**
      * aanmaken van token (hash van paswoord en de huidige tijd in ms)
      * @param username
@@ -207,8 +212,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         }
     }
-
-
     /**
      * checkt of token niet vervallen is (minder dan 24u)
      * @param username
@@ -246,8 +249,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
 
     }
-
-
     /**
      * token timestamp op 0 zetten in db
      * @param username naam van de actieve gebruiker
@@ -269,8 +270,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
         closeConnection();
     }
-
-
     /**
      * opvragen van token
      * @param username
@@ -302,11 +301,80 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
 
+    // IMAGES //
+    /**
+     * effectief de array van bytes in de db opvragen
+     * @param afbeeldingId de naam van de afbeelding
+     * @return de array van bytes
+     * @throws RemoteException
+     */
+    @Override
+    public byte[] getImage(String afbeeldingId) throws RemoteException { //in 0 zit de achterkant van de foto
+
+        String sql = "SELECT image FROM pictures WHERE naam=?";
+
+        byte[] array = null;
+
+        connect();
+
+        try {
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, afbeeldingId);
+            ResultSet rs = pstmt.executeQuery();
+            array = rs.getBytes("image");
+            rs.close();
+            pstmt.close();
+
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+        return array;
+    }
+    /**
+     * effectief de array van bytes in de db opslaan
+     * @param afbeeldingId
+     * @param afbeelding
+     * @throws RemoteException
+     */
+    @Override
+    public void storeImage(String afbeeldingId, byte[] afbeelding) throws RemoteException{
+
+        System.out.println("database storen van een image started");
+
+        String sql = "INSERT INTO pictures(naam,image) VALUES(?,?)";
+
+        connect();
+
+        try {
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, afbeeldingId);
+            pstmt.setBytes(2, afbeelding);
+            pstmt.executeUpdate();
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+        closeConnection();
+
+    }
+
+    // CONNECTIONS //
     @Override
     public void connectTo(DatabaseInterface toImpl) throws RemoteException {
         otherDbs.add(toImpl);
     }
 
+
+    // GAMES //
     @Override
     public void updateGameInfo(GameInfo gameInfo) {
         connect();
@@ -339,7 +407,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
         closeConnection();
     }
-
     @Override
     public void addGameInfo(GameInfo gameInfo) throws RemoteException {
 
@@ -390,89 +457,5 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
         closeConnection();
     }
-
-
-    private static String hash(String password, String salt){
-        return Hashing.sha256().hashString((password + salt),StandardCharsets.UTF_8).toString();
-    }
-
-
-    private static String hash(String password){
-        return Hashing.sha256().hashString((password),StandardCharsets.UTF_8).toString();
-    }
-
-
-
-
-    //METHODEN VOOR DE PICTURES TABLE
-
-
-    /**
-     * effectief de array van bytes in de db opvragen
-     * @param afbeeldingId de naam van de afbeelding
-     * @return de array van bytes
-     * @throws RemoteException
-     */
-    @Override
-    public byte[] getImage(String afbeeldingId) throws RemoteException { //in 0 zit de achterkant van de foto
-
-        String sql = "SELECT image FROM pictures WHERE naam=?";
-
-        byte[] array = null;
-
-        connect();
-
-        try {
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, afbeeldingId);
-            ResultSet rs = pstmt.executeQuery();
-            array = rs.getBytes("image");
-            rs.close();
-            pstmt.close();
-
-        }
-
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        closeConnection();
-        return array;
-    }
-
-
-    /**
-     * effectief de array van bytes in de db opslaan
-     * @param afbeeldingId
-     * @param afbeelding
-     * @throws RemoteException
-     */
-    @Override
-    public void storeImage(String afbeeldingId, byte[] afbeelding) throws RemoteException{
-
-        System.out.println("database storen van een image started");
-
-        String sql = "INSERT INTO pictures(naam,image) VALUES(?,?)";
-
-        connect();
-
-        try {
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, afbeeldingId);
-            pstmt.setBytes(2, afbeelding);
-            pstmt.executeUpdate();
-            pstmt.close();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-
-        closeConnection();
-
-    }
-
 
 }
