@@ -8,19 +8,15 @@
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Connections.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Connections.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database2.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -135,8 +131,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="700">
-                    <caret line="59" column="56" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
+                  <state relative-caret-position="112">
+                    <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
                   </state>
                 </provider>
               </entry>
@@ -282,7 +278,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gameinfo" value="9" />
-          <entry key="java" value="35" />
+          <entry key="java" value="37" />
           <entry key="persons" value="1" />
           <entry key="pictures" value="1" />
           <entry key="sql" value="8" />
@@ -291,20 +287,20 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Database Element" value="11" />
-          <entry key="JAVA" value="35" />
+          <entry key="JAVA" value="37" />
           <entry key="Scratch" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3280" />
-          <entry key="txt" value="123" />
+          <entry key="java" value="3446" />
+          <entry key="txt" value="162" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3280" />
-          <entry key="PLAIN_TEXT" value="123" />
+          <entry key="JAVA" value="3446" />
+          <entry key="PLAIN_TEXT" value="162" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -319,8 +315,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1683">
-              <caret line="395" selection-start-line="395" selection-end-line="395" />
+            <state relative-caret-position="425">
+              <caret line="96" column="20" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
               <folding>
                 <element signature="method#AppServiceImpl#0;class#AppServiceImpl#0" />
                 <element signature="e#1000#1040#0" />
@@ -328,6 +324,8 @@
                 <element signature="docComment;method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
                 <element signature="method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
                 <element signature="method#getPortNumber#0;class#AppServiceImpl#0" />
+                <element signature="e#3136#3137#0" expanded="true" />
+                <element signature="e#3163#3164#0" expanded="true" />
                 <element signature="docComment;method#loginUser#0;class#AppServiceImpl#0" />
                 <element signature="method#loginUser#0;class#AppServiceImpl#0" />
                 <element signature="docComment;method#loginWithToken#0;class#AppServiceImpl#0" />
@@ -367,11 +365,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="459" selection-start-line="459" selection-end-line="459" />
+            <state relative-caret-position="-340">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
               <folding>
                 <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
                 <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
@@ -415,10 +413,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="129" column="8" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="8" />
+              <folding>
+                <element signature="method#DispatchImpl#0;class#DispatchImpl#0" />
+                <element signature="method#makeNewAppserver#0;class#DispatchImpl#0" />
+                <element signature="method#setupConnectionsToDBs#0;class#DispatchImpl#0" />
+                <element signature="method#registerAppserver#0;class#DispatchImpl#0" />
+                <element signature="method#newGameCreated#0;class#DispatchImpl#0" />
+                <element signature="method#gameFinished#0;class#DispatchImpl#0" />
+                <element signature="docComment;method#userNameExists#0;class#DispatchImpl#0" />
+                <element signature="method#userNameExists#0;class#DispatchImpl#0" />
+                <element signature="docComment;method#insertUser#0;class#DispatchImpl#0" />
+                <element signature="method#insertUser#0;class#DispatchImpl#0" />
+                <element signature="method#changeGameServer#0;class#DispatchImpl#0" />
+                <element signature="method#changeClientServer#0;class#DispatchImpl#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="8" column="41" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="41" />
+              <caret line="8" column="41" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -510,12 +543,12 @@
         <option value="$PROJECT_DIR$/Client/src/client/Connections.java" />
         <option value="$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java" />
         <option value="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" />
-        <option value="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" />
         <option value="$PROJECT_DIR$/Global/src/interfaces/DispatchInterface.java" />
-        <option value="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" />
         <option value="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" />
-        <option value="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" />
         <option value="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" />
+        <option value="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" />
+        <option value="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" />
+        <option value="$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java" />
       </list>
     </option>
   </component>
@@ -653,7 +686,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544010959012" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544011361311" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="D:/main_Persons.csv" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -675,7 +708,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Multirun.RunArchitecture">
+  <component name="RunManager" selected="Application.AppServerMain">
     <configuration name="AppServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppServerMain" />
       <module name="ApplicationServer" />
@@ -804,8 +837,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client1" />
         <item itemvalue="Application.AppServerMain" />
+        <item itemvalue="Application.Client1" />
         <item itemvalue="Application.Dispatcher" />
         <item itemvalue="Application.DataServerMain" />
       </list>
@@ -845,7 +878,7 @@
       <workItem from="1543064368727" duration="23000" />
       <workItem from="1543930449563" duration="9243000" />
       <workItem from="1543961463922" duration="1689000" />
-      <workItem from="1544007559844" duration="3369000" />
+      <workItem from="1544007559844" duration="3909000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -1106,11 +1139,18 @@
       <option name="project" value="LOCAL" />
       <updated>1543963108491</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="inloggen bij appserver - structuur code">
+      <created>1544011012249</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1544011012249</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108517000" />
+    <option name="totallyTimeSpent" value="109057000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1125,7 +1165,7 @@
     <frame x="-8" y="-8" width="1904" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21312365" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20715836" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1135,14 +1175,14 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4994577" weight="0.4043659" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.32903227" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.72613883" weight="0.31392932" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.7250542" visible="true" weight="0.31392932" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4972885" weight="0.107068606" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.7055315" weight="0.32744282" />
       <window_info anchor="bottom" id="Database Changes" order="8" sideWeight="0.4989154" weight="0.32848233" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4994577" weight="0.32848233" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.27386117" side_tool="true" visible="true" weight="0.31392932" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.27494577" side_tool="true" visible="true" weight="0.31392932" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48806942" weight="0.32328483" />
       <window_info anchor="bottom" id="Statistic" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3289166" />
@@ -1228,7 +1268,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="GameState commented" />
     <MESSAGE value="Global/Classes commentaar is klaar" />
     <MESSAGE value="threads en Visualtile commentaar" />
     <MESSAGE value="gameObs commentaar, verre klaar cpain" />
@@ -1253,7 +1292,8 @@
     <MESSAGE value="db in list" />
     <MESSAGE value="tsta goed" />
     <MESSAGE value="gameinfo in db - change game from appserver - controlleer bij join als game aanwezig is anders switch from appserver" />
-    <option name="LAST_COMMIT_MESSAGE" value="gameinfo in db - change game from appserver - controlleer bij join als game aanwezig is anders switch from appserver" />
+    <MESSAGE value="inloggen bij appserver - structuur code" />
+    <option name="LAST_COMMIT_MESSAGE" value="inloggen bij appserver - structuur code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1482,38 +1522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-          <folding>
-            <element signature="method#DispatchImpl#0;class#DispatchImpl#0" />
-            <element signature="method#makeNewAppserver#0;class#DispatchImpl#0" />
-            <element signature="method#setupConnectionsToDBs#0;class#DispatchImpl#0" />
-            <element signature="method#registerAppserver#0;class#DispatchImpl#0" />
-            <element signature="method#giveAppserver#0;class#DispatchImpl#0" />
-            <element signature="method#newGameCreated#0;class#DispatchImpl#0" />
-            <element signature="method#gameFinished#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#userNameExists#0;class#DispatchImpl#0" />
-            <element signature="method#userNameExists#0;class#DispatchImpl#0" />
-            <element signature="docComment;method#insertUser#0;class#DispatchImpl#0" />
-            <element signature="method#insertUser#0;class#DispatchImpl#0" />
-            <element signature="method#changeGameServer#0;class#DispatchImpl#0" />
-            <element signature="method#changeClientServer#0;class#DispatchImpl#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -1534,56 +1542,7 @@
     <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="8" column="41" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="395" selection-start-line="395" selection-end-line="395" />
-          <folding>
-            <element signature="method#AppServiceImpl#0;class#AppServiceImpl#0" />
-            <element signature="e#1000#1040#0" />
-            <element signature="method#getWillekeurigeDatabaseServerPoort#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
-            <element signature="method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
-            <element signature="method#getPortNumber#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#loginUser#0;class#AppServiceImpl#0" />
-            <element signature="method#loginUser#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#loginWithToken#0;class#AppServiceImpl#0" />
-            <element signature="method#loginWithToken#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#logoutUser#0;class#AppServiceImpl#0" />
-            <element signature="method#logoutUser#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#getToken#0;class#AppServiceImpl#0" />
-            <element signature="method#getToken#0;class#AppServiceImpl#0" />
-            <element signature="method#createGame#0;class#AppServiceImpl#0" />
-            <element signature="method#getNumberOfGames#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#getGameInfoLijst#0;class#AppServiceImpl#0" />
-            <element signature="method#getGameInfoLijst#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#getGameInfoLijst#1;class#AppServiceImpl#0" />
-            <element signature="method#getGameInfoLijst#1;class#AppServiceImpl#0" />
-            <element signature="method#getGame#0;class#AppServiceImpl#0" />
-            <element signature="method#getGameInfo#0;class#AppServiceImpl#0" />
-            <element signature="method#getGameState#0;class#AppServiceImpl#0" />
-            <element signature="method#hasGame#0;class#AppServiceImpl#0" />
-            <element signature="method#join#0;class#AppServiceImpl#0" />
-            <element signature="e#7375#7400#0" />
-            <element signature="method#leaveGame#0;class#AppServiceImpl#0" />
-            <element signature="method#changeInPlayers#0;class#AppServiceImpl#0" />
-            <element signature="method#changeInTurn#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#executeFlipCommando#0;class#AppServiceImpl#0" />
-            <element signature="method#executeFlipCommando#0;class#AppServiceImpl#0" />
-            <element signature="method#getInbox#0;class#AppServiceImpl#0" />
-            <element signature="method#spectate#0;class#AppServiceImpl#0" />
-            <element signature="method#unsubscribeSpecator#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#getImage#0;class#AppServiceImpl#0" />
-            <element signature="method#getImage#0;class#AppServiceImpl#0" />
-            <element signature="docComment;method#storeImage#0;class#AppServiceImpl#0" />
-            <element signature="method#storeImage#0;class#AppServiceImpl#0" />
-            <element signature="method#removeGame#0;class#AppServiceImpl#0" />
-            <element signature="method#takeOverGame#0;class#AppServiceImpl#0" />
-          </folding>
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1596,8 +1555,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="459" selection-start-line="459" selection-end-line="459" />
+        <state relative-caret-position="-340">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
           <folding>
             <element signature="method#DatabaseImpl#0;class#DatabaseImpl#0" />
             <element signature="docComment;method#connect#0;class#DatabaseImpl#0" />
@@ -1639,10 +1598,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="59" column="56" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
+        <state relative-caret-position="112">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="96" column="20" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+          <folding>
+            <element signature="method#AppServiceImpl#0;class#AppServiceImpl#0" />
+            <element signature="e#1000#1040#0" />
+            <element signature="method#getWillekeurigeDatabaseServerPoort#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
+            <element signature="method#reedsGameMetDezeID#0;class#AppServiceImpl#0" />
+            <element signature="method#getPortNumber#0;class#AppServiceImpl#0" />
+            <element signature="e#3136#3137#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="docComment;method#loginUser#0;class#AppServiceImpl#0" />
+            <element signature="method#loginUser#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#loginWithToken#0;class#AppServiceImpl#0" />
+            <element signature="method#loginWithToken#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#logoutUser#0;class#AppServiceImpl#0" />
+            <element signature="method#logoutUser#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getToken#0;class#AppServiceImpl#0" />
+            <element signature="method#getToken#0;class#AppServiceImpl#0" />
+            <element signature="method#createGame#0;class#AppServiceImpl#0" />
+            <element signature="method#getNumberOfGames#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getGameInfoLijst#0;class#AppServiceImpl#0" />
+            <element signature="method#getGameInfoLijst#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getGameInfoLijst#1;class#AppServiceImpl#0" />
+            <element signature="method#getGameInfoLijst#1;class#AppServiceImpl#0" />
+            <element signature="method#getGame#0;class#AppServiceImpl#0" />
+            <element signature="method#getGameInfo#0;class#AppServiceImpl#0" />
+            <element signature="method#getGameState#0;class#AppServiceImpl#0" />
+            <element signature="method#hasGame#0;class#AppServiceImpl#0" />
+            <element signature="method#join#0;class#AppServiceImpl#0" />
+            <element signature="e#7375#7400#0" />
+            <element signature="method#leaveGame#0;class#AppServiceImpl#0" />
+            <element signature="method#changeInPlayers#0;class#AppServiceImpl#0" />
+            <element signature="method#changeInTurn#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#executeFlipCommando#0;class#AppServiceImpl#0" />
+            <element signature="method#executeFlipCommando#0;class#AppServiceImpl#0" />
+            <element signature="method#getInbox#0;class#AppServiceImpl#0" />
+            <element signature="method#spectate#0;class#AppServiceImpl#0" />
+            <element signature="method#unsubscribeSpecator#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#getImage#0;class#AppServiceImpl#0" />
+            <element signature="method#getImage#0;class#AppServiceImpl#0" />
+            <element signature="docComment;method#storeImage#0;class#AppServiceImpl#0" />
+            <element signature="method#storeImage#0;class#AppServiceImpl#0" />
+            <element signature="method#removeGame#0;class#AppServiceImpl#0" />
+            <element signature="method#takeOverGame#0;class#AppServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="129" column="8" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="8" />
+          <folding>
+            <element signature="method#DispatchImpl#0;class#DispatchImpl#0" />
+            <element signature="method#makeNewAppserver#0;class#DispatchImpl#0" />
+            <element signature="method#setupConnectionsToDBs#0;class#DispatchImpl#0" />
+            <element signature="method#registerAppserver#0;class#DispatchImpl#0" />
+            <element signature="method#newGameCreated#0;class#DispatchImpl#0" />
+            <element signature="method#gameFinished#0;class#DispatchImpl#0" />
+            <element signature="docComment;method#userNameExists#0;class#DispatchImpl#0" />
+            <element signature="method#userNameExists#0;class#DispatchImpl#0" />
+            <element signature="docComment;method#insertUser#0;class#DispatchImpl#0" />
+            <element signature="method#insertUser#0;class#DispatchImpl#0" />
+            <element signature="method#changeGameServer#0;class#DispatchImpl#0" />
+            <element signature="method#changeClientServer#0;class#DispatchImpl#0" />
+          </folding>
         </state>
       </provider>
     </entry>

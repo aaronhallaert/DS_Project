@@ -15,6 +15,7 @@ public interface AppServerInterface extends Remote {
 
     /*----------- APPSERVER INFO ---------------------*/
     int getPortNumber() throws RemoteException;
+    boolean testConnection() throws RemoteException;
 
 
     /*----------- USER MANAGER -----------------------*/

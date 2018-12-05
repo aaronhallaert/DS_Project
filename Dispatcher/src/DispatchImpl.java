@@ -118,7 +118,18 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         int appserverIndex= r.nextInt(appServerPoorten.size());
         AppServerInterface appserverImpl= appImpls.get(appserverIndex);
 
-        return appserverImpl;
+        try {
+            if (appserverImpl.testConnection()) {
+                return appserverImpl;
+            }
+        }
+        catch (RemoteException re){
+            appImpls.remove(appserverImpl);
+            return null;
+        }
+
+        return null;
+
     }
 
     @Override

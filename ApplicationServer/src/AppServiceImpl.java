@@ -92,7 +92,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return AppServerMain.thisappServerpoort;
     }
 
-
+    @Override
+    public boolean testConnection() {
+        return true;
+    }
     // USER MANAGER //
     /**
      * Deze methode checkt of credentials juist zijn, indien true, aanmaken van token
