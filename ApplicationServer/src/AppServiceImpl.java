@@ -1,6 +1,7 @@
 import Classes.*;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
+import interfaces.DispatchInterface;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -10,14 +11,16 @@ import java.util.*;
 
 public class AppServiceImpl extends UnicastRemoteObject implements AppServerInterface {
 
+    /*--------------- CONNECTIONS ---------------------*/
     private DatabaseInterface databaseImpl;
+    private DispatchInterface dispatchImpl;
 
+    /*--------------- ATTRIBUTES ----------------------*/
     private ArrayList<Game> gamesLijst=new ArrayList<>(); //game bevat GameInfo en GameState
+    private static Map<String, byte[]> imageCache=new HashMap<>();
+    private static LinkedList<String> imageCacheSequence= new LinkedList<>();
 
-    public static Map<String, byte[]> imageCache=new HashMap<>();
-    public static LinkedList<String> imageCacheSequence= new LinkedList<>();
-
-
+    /*-------------- CONSTRUCTOR ----------------------*/
     public AppServiceImpl() throws RemoteException{
         try {
 
@@ -31,6 +34,12 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             // search for database service
             databaseImpl=(DatabaseInterface) dataRegistry.lookup("DatabaseService");
 
+
+
+            //dispatcher
+            Registry dispatchReg= LocateRegistry.getRegistry("localhost", 1902);
+            dispatchImpl=(DispatchInterface) dispatchReg.lookup("DispatchService");
+
         }
         catch(Exception e){
             e.printStackTrace();
@@ -41,6 +50,8 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
 
+
+    /*-------------- OWN METHODS ----------------------*/
     private int getWillekeurigeDatabaseServerPoort() {
 
         int willekeurigGetal = (int)(Math.random() *2 +1); // willekeurig getal tussen 1 en 3
@@ -54,33 +65,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             default: return 1940;
         }
     }
-
-    @Override
-    public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
-
-        System.out.println("createGame in appserviceImpl triggered");
-        System.out.println(activeUser);
-
-        //gameId maken, kijken als nog niet reeds bestaat
-        int gameId = (int)(Math.random() * 1000);
-        while(reedsGameMetDezeID(gamesLijst,gameId)){
-            gameId = (int)(Math.random() * 1000);
-        }
-
-        Game game = new Game(gameId ,activeUser, dimensies, set, aantalSpelers);
-        gamesLijst.add(game);
-        System.out.println("game met naam "+activeUser+" gemaakt!");
-        System.out.println("gameslist grootte is nu: "+gamesLijst.size());
-
-
-        notifyAll();
-        // TODO update database met deze game
-
-        return gameId;
-
-    }
-
-
     /**
      *
      * @param gamesLijst, de te checken lijst van games
@@ -97,8 +81,109 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
 
-    /**
 
+    /*--------------- SERVICES ------------------------*/
+    // APPSERVERINFO //
+    @Override
+    public int getPortNumber() throws RemoteException {
+        return AppServerMain.thisappServerpoort;
+    }
+
+    @Override
+    public boolean testConnection() {
+        return true;
+    }
+    // USER MANAGER //
+    /**
+     * Deze methode checkt of credentials juist zijn, indien true, aanmaken van token
+     * @param username username
+     * @param paswoord plain text
+     * @return AppServerInterface definieert de connectie tussen deze client en appserver
+     * @throws RemoteException
+     */
+    @Override
+    public boolean loginUser(String username, String paswoord) throws RemoteException{
+
+        //als credentials juist zijn
+        if(databaseImpl.checkUserCred(username, paswoord)){
+
+            //maak nieuwe token voor deze persoon aan
+            databaseImpl.createToken(username, paswoord);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    /**
+     * inloggen met token
+     * @param token
+     * @param username
+     * @return
+     * @throws RemoteException
+     */
+    @Override
+    public boolean loginWithToken(String token, String username) throws RemoteException {
+        if(databaseImpl.isTokenValid(username, token)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    /**
+     * token timestamp op 0 zetten in db
+     * @param username naam van user die uitgelogd wordt
+     * @throws RemoteException
+     */
+    @Override
+    public void logoutUser(String username) throws RemoteException{
+        databaseImpl.cancelToken(username);
+
+    }
+    /**
+     * opvragen van token
+     * @param username
+     * @return
+     * @throws RemoteException
+     */
+    @Override
+    public String getToken(String username) throws RemoteException {
+        return databaseImpl.getToken(username);
+    }
+
+
+    // GAME INFO //
+    @Override
+    public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
+
+        System.out.println("createGame in appserviceImpl triggered");
+        System.out.println(activeUser);
+
+        //gameId maken, kijken als nog niet reeds bestaat
+        int gameId = (int)(Math.random() * 1000);
+        while(reedsGameMetDezeID(gamesLijst,gameId)){
+            gameId = (int)(Math.random() * 1000);
+        }
+
+        Game game = new Game(gameId ,activeUser, dimensies, set, aantalSpelers, AppServerMain.thisappServerpoort);
+        gamesLijst.add(game);
+        System.out.println("game met naam "+activeUser+" gemaakt!");
+        System.out.println("gameslist grootte is nu: "+gamesLijst.size());
+
+        // TODO update database met gameinfo
+        databaseImpl.addGameInfo(game.getGameInfo());
+
+        notifyAll();
+
+        return gameId;
+
+    }
+    @Override
+    public int getNumberOfGames() throws RemoteException {
+        return gamesLijst.size();
+    }
+    /**
      * @return
      * @throws RemoteException
      */
@@ -123,9 +208,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return gameInfoLijst;
 
     }
-
     /**
-
      * @return
      * @throws RemoteException
      */
@@ -142,7 +225,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return gameInfoLijst;
 
     }
-
     @Override
     public Game getGame(int currentGameId) {
         for (Game game : gamesLijst) {
@@ -153,18 +235,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         return null;
     }
-
-    @Override
-    public void spectate(int gameId, String username) throws RemoteException {
-        getGame(gameId).getGameState().getSpectators().add(username);
-    }
-
-    @Override
-    public void unsubscribeSpecator(int gameId, String username) throws RemoteException {
-        getGame(gameId).getGameState().getSpectators().remove(username);
-        getGame(gameId).getGameState().getInboxSpectators().remove(username);
-    }
-
     @Override
     public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
         databaseImpl.updateScores(username, roosterSize, eindScore, command);
@@ -200,7 +270,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         //als er geen game gevonden is met de gameId
         return new GameInfo(); // leeg object, herkennen dan in da spel daar
     }
-
     @Override
     public GameState getGameState(int gameId) throws RemoteException {
 
@@ -211,9 +280,20 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         }
 
         System.out.println("getGameState in AppserverImpl, mag niet gebeuren");
-        return new GameState();
+        return null;
+    }
+    @Override
+    public boolean hasGame(int gameId) throws RemoteException{
+        if(this.getGameInfo(gameId).getAppServerPoort()==AppServerMain.thisappServerpoort){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
+
+    // GAME ACTIONS //
     @Override
     public boolean join(String activeUser, int currentGameIdAttempt) throws RemoteException {
 
@@ -222,6 +302,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             // als de if clause lukt,
             // dan zal het getGameState ook lukken, daarom is getGameState een void
             this.getGameState(currentGameIdAttempt).join(activeUser);
+            databaseImpl.updateGameInfo(getGameInfo(currentGameIdAttempt));
             //setGameStatenaam nog
             return true;
         }
@@ -231,7 +312,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         }
 
     }
+    @Override
+    public void leaveGame(int currentGameId, String username) throws RemoteException {
+        this.getGameInfo(currentGameId).playerLeaves(username);
 
+    }
     @Override
     public boolean changeInPlayers(int currentGameId, int aantalSpelers) throws RemoteException{
         if(this.getGameInfo(currentGameId).changeInPlayers(aantalSpelers)){
@@ -243,18 +328,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         }
 
     }
-
-    @Override
-    public void leaveGame(int currentGameId, String username) throws RemoteException {
-        this.getGameInfo(currentGameId).playerLeaves(username);
-
-    }
-
     @Override
     public boolean changeInTurn(int currentGameId, String userTurn) throws RemoteException{
         return this.getGameState(currentGameId).changeInTurn(userTurn);
     }
-
     /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
      *  omdraaien door het commando in z'n inbox te laten verschijnen, die 2e speler pullt dan het commando en executet
      *  het
@@ -269,20 +346,27 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         getGameState(currentGameId).executeCommando(commando,activeUser);
     }
-
     @Override
     public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
 
-       // System.out.println("AppServiceImpl : getInbox: door user: "+userName);
+        // System.out.println("AppServiceImpl : getInbox: door user: "+userName);
         return getGameState(currentGameId).getInbox(userName);
 
 
 
     }
-    //analoog aan https://github.com/aaronhallaert/DS_ChatRMI/blob/master/src/Server/ChatServiceImpl.java
+    @Override
+    public void spectate(int gameId, String username) throws RemoteException {
+        getGame(gameId).getGameState().getSpectators().add(username);
+    }
+    @Override
+    public void unsubscribeSpecator(int gameId, String username) throws RemoteException {
+        getGame(gameId).getGameState().getSpectators().remove(username);
+        getGame(gameId).getGameState().getInboxSpectators().remove(username);
+    }
 
 
-
+    // ASK / PUSH METADATA //
     /**
      * vraag aan db om een bytestream die een image voorstelt te geven
      * @param naam de id van de image
@@ -310,8 +394,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         }
         return afbeelding;
     }
-
-
     /**
      * vraag aan db om een bytestream die een image voorstelt te storen
      * @param naam de id van de image
@@ -321,6 +403,19 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void storeImage(String naam, byte[] afbeelding) throws RemoteException{
         databaseImpl.storeImage(naam,afbeelding);
+    }
+
+
+    // HANDLING GAMES INTERNALLY //
+    @Override
+    public void removeGame(Game game) throws RemoteException{
+        gamesLijst.remove(game);
+    }
+    @Override
+    public void takeOverGame(Game game) throws RemoteException {
+        game.getGameInfo().setAppServerPoort(AppServerMain.thisappServerpoort);
+        databaseImpl.updateGameInfo(game.getGameInfo());
+        gamesLijst.add(game);
     }
 
 }

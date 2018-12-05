@@ -1,31 +1,28 @@
 
+import Classes.Game;
 import SupportiveThreads.ApplicationServerMaintainer;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
-import sun.rmi.registry.RegistryImpl_Stub;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
+import java.util.*;
 
 public class DispatchImpl extends UnicastRemoteObject implements DispatchInterface {
 
-    // TODO: dit moet lijst van databaseInterfaces worden
-
+    /*------------------ATTRIBUTES ---------------------------------------*/
+    public static List<Integer> appServerPoorten=new ArrayList<>();
+    public static List<AppServerInterface> appImpls=new ArrayList<>();
     ArrayList<DatabaseInterface> dbImpls=new ArrayList<>();
-
-
-
-
     private ApplicationServerMaintainer asm;
-
     private int aantalGamesBezig;
 
+
+    /*------------------CONSTRUCTORS -------------------------------------*/
     public DispatchImpl() throws RemoteException{
         try {
 
@@ -47,6 +44,41 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     }
 
+
+
+    /*------------------ OWN METHODS ----------------------------------------*/
+    public void makeNewAppserver(){
+        List<Integer> mogelijkPoortnummer= new ArrayList<>();
+        int beginPoortnummer=2000;
+        for (int i = 0; i <2080 ; i+=4) {
+            mogelijkPoortnummer.add(beginPoortnummer+i);
+        }
+
+        // poortnummer van laatst opgestartte appserver nemen en +4 doen
+        for (int integer : mogelijkPoortnummer) {
+            if(!appServerPoorten.contains(integer)){
+                // maak maar aan
+                int applicationPoortNr= integer;
+                int databasePoortNr = 1901;
+                try {
+
+                    //start een nieuwe appserver op
+                    Runtime rt1 = Runtime.getRuntime();
+                    rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr+" "+databasePoortNr);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("fout in DispatchImpl: newGameCreated, jar niet kunnen executen");
+                }
+
+                //toevoegen aan de lijst met appServerPoorten
+                System.out.println("nieuwe appserver started on port "+ applicationPoortNr);
+
+                break;
+            }
+        }
+    }
+
     private void setupConnectionsToDBs() throws RemoteException, NotBoundException {
         int portnumber = 1940;
         for(int i=0 ; i<4 ; i++){
@@ -65,95 +97,39 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     }
 
 
-    /**
-     * token timestamp op 0 zetten in db
-     * @param username naam van user die uitgelogd wordt
-     * @throws RemoteException
-     */
+    /*------------------ SERVICES ZIE INTERFACE------------------------------*/
+
+    // APPSERVER MANAGING //
     @Override
-    public void logoutUser(String username) throws RemoteException{
-        dbImpls.get(0).cancelToken(username);
-
-    }
-
-
-    /**
-     * Deze methode checkt of credentials juist zijn, indien true, aanmaken van token
-     * @param username username
-     * @param paswoord plain text
-     * @return AppServerInterface definieert de connectie tussen deze client en appserver
-     * @throws RemoteException
-     */
-    @Override
-    public AppServerInterface loginUser(String username, String paswoord) throws RemoteException{
-
-        //als credentials juist zijn
-        if(dbImpls.get(0).checkUserCred(username, paswoord)){
-
-            //maak nieuwe token voor deze persoon aan
-            dbImpls.get(0).createToken(username, paswoord);
-
-            return setupConnectionWithAppImpl();
-
+    public void registerAppserver(int portNumber) {
+        appServerPoorten.add(portNumber);
+        try {
+            appImpls.add( (AppServerInterface) LocateRegistry.getRegistry("localhost", portNumber).lookup("AppserverService"));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
         }
-        return null;
     }
 
-
-    /**
-     * vraag aan databank of username reeds in gebruik is
-     * wordt opgeroepen bij registreren
-     *
-     * @param username
-     * @return
-     * @throws RemoteException
-     */
     @Override
-    public boolean userNameExists(String username) throws RemoteException {
-        return dbImpls.get(0).userNameExists(username);
-    }
+    public AppServerInterface giveAppserver() throws RemoteException {
+        Random r= new Random();
+        int appserverIndex= r.nextInt(appServerPoorten.size());
+        AppServerInterface appserverImpl= appImpls.get(appserverIndex);
 
-
-    /**
-     * vraag aan databank om nieuwe user aan te maken met attributen zie parameters
-     * @param username
-     * @param confirmPassword plain text
-     * @throws RemoteException
-     */
-    @Override
-    public void insertUser(String username, String confirmPassword) throws RemoteException {
-        dbImpls.get(0).insertUser(username, confirmPassword);
-        dbImpls.get(0).insertScoreRow(username);
-    }
-
-
-    /**
-     * opvragen van token
-     * @param username
-     * @return
-     * @throws RemoteException
-     */
-    @Override
-    public String getToken(String username) throws RemoteException {
-        return dbImpls.get(0).getToken(username);
-    }
-
-
-    /**
-     * inloggen met token
-     * @param token
-     * @param username
-     * @return
-     * @throws RemoteException
-     */
-    @Override
-    public AppServerInterface loginWithToken(String token, String username) throws RemoteException {
-        if(dbImpls.get(0).isTokenValid(username, token)){
-            return setupConnectionWithAppImpl();
+        try {
+            if (appserverImpl.testConnection()) {
+                return appserverImpl;
+            }
         }
-        else{
+        catch (RemoteException re){
+            appImpls.remove(appserverImpl);
             return null;
         }
+
+        return null;
+
     }
 
     @Override
@@ -165,25 +141,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
             //todo: start nieuwe appserver
             System.out.println("starting nieuwe appserver...");
-
-            // poortnummer van laatst opgestartte appserver nemen en +4 doen
-            int applicationPoortNr = Dispatcher.appServerPoorten.get(Dispatcher.appServerPoorten.size()-1) + 4;
-            int databasePoortNr = 1901;
-
-            try {
-
-                //start een nieuwe appserver op
-                Runtime rt1 = Runtime.getRuntime();
-                rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr+" "+databasePoortNr);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("fout in DispatchImpl: newGameCreated, jar niet kunnen executen");
-            }
-
-            //toevoegen aan de lijst met appServerPoorten
-            System.out.println("nieuwe appserver started on port "+ applicationPoortNr);
-            Dispatcher.appServerPoorten.add(applicationPoortNr);
+            makeNewAppserver();
 
         }
 
@@ -202,25 +160,66 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     }
 
 
+    // USER MANAGING //
     /**
-     * hier wordt een connectie gemaakt met de appserver
+     * vraag aan databank of username reeds in gebruik is
+     * wordt opgeroepen bij registreren
+     *
+     * @param username
      * @return
      * @throws RemoteException
      */
-    private AppServerInterface setupConnectionWithAppImpl() throws RemoteException{
-        try {
-            // TODO hier moet een keuze gemaakt worden tussen mogelijke actieve appservers
-            Registry appRegistry = LocateRegistry.getRegistry("localhost", Dispatcher.appServerPoorten.get(0));
-            AppServerInterface appImpl = (AppServerInterface) appRegistry.lookup("AppserverService");
-            return appImpl;
-        }
-        catch(NotBoundException ne){
-            // service is niet aanwezig
-            ne.printStackTrace();
-            return null;
-        }
+    @Override
+    public boolean userNameExists(String username) throws RemoteException {
+        return dbImpls.get(0).userNameExists(username);
+    }
+    /**
+     * vraag aan databank om nieuwe user aan te maken met attributen zie parameters
+     * @param username
+     * @param confirmPassword plain text
+     * @throws RemoteException
+     */
+    @Override
+    public void insertUser(String username, String confirmPassword) throws RemoteException {
+        dbImpls.get(0).insertUser(username, confirmPassword);
+        dbImpls.get(0).insertScoreRow(username);
     }
 
+
+    // OVERZETTEN VAN ... //
+    @Override
+    public void changeGameServer(AppServerInterface currentAppImpl, Game game) throws RemoteException{
+        List<AppServerInterface> possibleAppServers=new ArrayList<>();
+        for (AppServerInterface appImpl : appImpls) {
+            if(appImpl.getNumberOfGames()<3){
+                possibleAppServers.add(appImpl);
+            }
+        }
+
+        if(possibleAppServers.size()==0){
+            makeNewAppserver();
+            changeGameServer(currentAppImpl, game);
+        }
+        else{
+            possibleAppServers.get(0).takeOverGame(game);
+            currentAppImpl.removeGame(game);
+        }
+
+
+
+    }
+
+    @Override
+    public AppServerInterface changeClientServer(int currentGameIdAttempt) throws RemoteException {
+        for (AppServerInterface appImpl : appImpls) {
+            if(appImpl.hasGame(currentGameIdAttempt)){
+                return appImpl;
+            }
+        }
+
+        System.out.println("Mag niet voorkomen, maar kan wel in theorie");
+        return null;
+    }
 
 
 

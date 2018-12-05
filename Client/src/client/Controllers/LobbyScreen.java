@@ -124,7 +124,7 @@ public class LobbyScreen {
 
     public void logout(){
         try {
-            Main.cnts.getDispatchImpl().logoutUser(CurrentUser.getInstance().getUsername());
+            Main.cnts.getAppImpl().logoutUser(CurrentUser.getInstance().getUsername());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -159,30 +159,40 @@ public class LobbyScreen {
             //join this game
             int currentGameIdAttempt = deGameToJoin.getGameId();
 
-            //try to join
+
             try {
-                if(Main.cnts.getAppImpl().join(CurrentUser.getInstance().getUsername(), currentGameIdAttempt)){
-                    CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
+                if(Main.cnts.getAppImpl().hasGame(currentGameIdAttempt)) {
+                    //try to join
+                    try {
+                        if (Main.cnts.getAppImpl().join(CurrentUser.getInstance().getUsername(), currentGameIdAttempt)) {
+                            CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
-                    // ga verder naar GAME
-                    SpelViewLogica spv = new SpelViewLogica(true);
-                    spv.start();
+                            // ga verder naar GAME
+                            SpelViewLogica spv = new SpelViewLogica(true);
+                            spv.start();
 
-                    Platform.setImplicitExit(false);
-                    spelSetup.getScene().getWindow().hide();
+                            Platform.setImplicitExit(false);
+                            spelSetup.getScene().getWindow().hide();
+                        } else { // als geen successvolle join
+
+                            displayErrorMessage("join failed");
+
+                            System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
+
+                        }
+
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+
                 }
-                else{ // als geen successvolle join
-
-                    displayErrorMessage("join failed");
-
-                    System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
-
+                else{
+                    //TODO wat als er geen enkele appserver deze game heeft?
+                    Main.cnts.setAppImpl(Main.cnts.getDispatchImpl().changeClientServer(currentGameIdAttempt));
                 }
-
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
-
 
         }
 

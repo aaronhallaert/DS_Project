@@ -51,12 +51,11 @@ public class LoginScreen {
 
     public void loginWithToken(){
         try{
-            AppServerInterface appImpl=Main.cnts.getDispatchImpl().loginWithToken(CurrentUser.getInstance().getToken(), CurrentUser.getInstance().getUsername());
+            boolean loggedin=Main.cnts.getAppImpl().loginWithToken(CurrentUser.getInstance().getToken(), CurrentUser.getInstance().getUsername());
 
-            if(appImpl != null){
+            if(loggedin){
                 sessionCancelled.setVisible(false);
                 errorLoginMessage.setVisible(false);
-                Main.cnts.setAppImpl(appImpl);
                 Main.goToLobby();
                 registreerLink.getScene().getWindow().hide();
             }
@@ -77,16 +76,14 @@ public class LoginScreen {
     String password=passwordField.getText();
 
     try {
-        AppServerInterface appImpl;
-        if ((appImpl=Main.cnts.getDispatchImpl().loginUser(username, password))!=null) {
+        if (Main.cnts.getAppImpl().loginUser(username, password)) {
             errorLoginMessage.setVisible(false);
             sessionCancelled.setVisible(false);
-            Main.cnts.setAppImpl(appImpl);
             CurrentUser.getInstance().setUsername(username);
-            CurrentUser.getInstance().setToken(Main.cnts.getDispatchImpl().getToken(username));
+            CurrentUser.getInstance().setToken(Main.cnts.getAppImpl().getToken(username));
 
             System.out.println(CurrentUser.getInstance().getUsername());
-            System.out.println(Main.cnts.getDispatchImpl().getToken(username));
+            System.out.println(Main.cnts.getAppImpl().getToken(username));
             Main.goToLobby();
             registreerLink.getScene().getWindow().hide();
 
