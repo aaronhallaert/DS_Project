@@ -107,7 +107,11 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
             if(appImpls.size()>=1) {
                 appImpls.get(0).takeBackupFrom(portNumber);
+                newAppImpl.setDestinationBackup(appImpls.get(0).getPortNumber());
+
+
                 newAppImpl.takeBackupFrom(appServerPoorten.get(appServerPoorten.size() - 1));
+                appImpls.get(appImpls.size()-1).setDestinationBackup(newAppImpl.getPortNumber());
             }
 
 

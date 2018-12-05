@@ -27,6 +27,16 @@ public class BackupGames {
     }
 
 
+    public Game getGame(int gameId){
+        for (Game game : gameList) {
+            if(game.getGameId()== gameId){
+                return game;
+            }
+        }
+
+        return null;
+    }
+
     public int getAppserverPoort() {
         return appserverPoort;
     }

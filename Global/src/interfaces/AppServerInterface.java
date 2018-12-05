@@ -65,4 +65,8 @@ public interface AppServerInterface extends Remote {
 
     /*---------- BACKUP -------------------------------*/
     void takeBackupFrom(int appserverpoort) throws RemoteException;
+
+    void setDestinationBackup(int appBackupPoort) throws RemoteException;
+
+    void updateBackupGS(GameState gameState) throws RemoteException;
 }

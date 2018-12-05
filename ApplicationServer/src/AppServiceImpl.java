@@ -319,7 +319,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
     @Override
     public boolean changeInTurn(int currentGameId, String userTurn) throws RemoteException{
-        return this.getGameState(currentGameId).changeInTurn(userTurn);
+        boolean change=this.getGameState(currentGameId).changeInTurn(userTurn);
+
+
+        // TODO dit wordt meerdere keren gedaan aangezien de methode "changeInTurn" aangeroepen wordt door alle clients die de game aan het spelen zijn
+        if(destinationBackup!=null){
+            destinationBackup.updateBackupGS(getGameState(currentGameId));
+        }
+
+        return change;
     }
     /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
      *  omdraaien door het commando in z'n inbox te laten verschijnen, die 2e speler pullt dan het commando en executet
@@ -332,7 +340,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
-
         getGameState(currentGameId).executeCommando(commando,activeUser);
     }
     @Override
@@ -439,5 +446,25 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             System.out.println(game);
         }
 
+    }
+
+    @Override
+    public void setDestinationBackup(int appserverBackupPoort) throws RemoteException{
+        try {
+            destinationBackup= (AppServerInterface) LocateRegistry.getRegistry("localhost", appserverBackupPoort).lookup("AppserverService");
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateBackupGS(GameState gameState) throws RemoteException {
+        backup.getGame(gameState.getGameId()).setGameState(gameState);
+
+
+        System.out.println("backup UPGEDATE");
+        for (Game game : backup.getGameList()) {
+            System.out.println(game);
+        }
     }
 }
