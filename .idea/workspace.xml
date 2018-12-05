@@ -10,17 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Global/src/Classes/Score.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DatabaseServer/src/SupportiveThreads/PollToOtherDBs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/ScoreScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/ScoreScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/ScoreObs.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/ScoreObs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database2.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/Controllers/SpelViewGui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Global/interfaces/AppServerInterface.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,6 +68,13 @@
         <item name="database 2" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+        <item name="pictures: table" type="ffe0bd85:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="database 2" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
         <item name="Scores: table" type="ffe0bd85:SqliteImplModel$Table" />
       </path>
       <path>
@@ -85,6 +91,13 @@
         <item name="memorydb" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="memorydb" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+        <item name="Scores: table" type="ffe0bd85:SqliteImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -177,11 +190,11 @@
           <entry key="fxml" value="9" />
           <entry key="gameinfo" value="1" />
           <entry key="gamestate" value="2" />
-          <entry key="java" value="189" />
+          <entry key="java" value="199" />
           <entry key="pictures" value="2" />
-          <entry key="scores" value="19" />
+          <entry key="scores" value="20" />
           <entry key="scores_1" value="2" />
-          <entry key="sql" value="5" />
+          <entry key="sql" value="6" />
           <entry key="sqlite_master" value="1" />
           <entry key="sqlite_sequence" value="1" />
           <entry key="txt" value="3" />
@@ -190,10 +203,10 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="3" />
-          <entry key="Database Element" value="28" />
-          <entry key="JAVA" value="189" />
+          <entry key="Database Element" value="29" />
+          <entry key="JAVA" value="199" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Scratch" value="5" />
+          <entry key="Scratch" value="6" />
           <entry key="XML" value="9" />
         </counts>
       </usages-collector>
@@ -201,14 +214,14 @@
         <counts>
           <entry key="cell" value="14" />
           <entry key="fxml" value="52" />
-          <entry key="java" value="32186" />
+          <entry key="java" value="33938" />
           <entry key="sql" value="18" />
           <entry key="txt" value="1004" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="32186" />
+          <entry key="JAVA" value="33938" />
           <entry key="PLAIN_TEXT" value="1004" />
           <entry key="SQL" value="18" />
           <entry key="Scratch" value="14" />
@@ -219,153 +232,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DatabaseServer/src/SupportiveThreads/PollToOtherDBs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="176" selection-start-line="176" selection-end-line="176" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/ScoreObs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="19" column="68" selection-start-line="19" selection-start-column="68" selection-end-line="19" selection-end-column="68" />
-              <folding>
-                <element signature="e#557#558#0" expanded="true" />
-                <element signature="e#596#597#0" expanded="true" />
-                <element signature="e#652#653#0" expanded="true" />
-                <element signature="e#685#686#0" expanded="true" />
-                <element signature="e#737#738#0" expanded="true" />
-                <element signature="e#784#785#0" expanded="true" />
-                <element signature="e#819#820#0" expanded="true" />
-                <element signature="e#859#860#0" expanded="true" />
-                <element signature="e#917#918#0" expanded="true" />
-                <element signature="e#951#952#0" expanded="true" />
-                <element signature="e#1002#1003#0" expanded="true" />
-                <element signature="e#1051#1052#0" expanded="true" />
-                <element signature="e#1085#1086#0" expanded="true" />
-                <element signature="e#1124#1125#0" expanded="true" />
-                <element signature="e#1181#1182#0" expanded="true" />
-                <element signature="e#1214#1215#0" expanded="true" />
-                <element signature="e#1263#1264#0" expanded="true" />
-                <element signature="e#1310#1311#0" expanded="true" />
-                <element signature="e#1345#1346#0" expanded="true" />
-                <element signature="e#1385#1386#0" expanded="true" />
-                <element signature="e#1443#1444#0" expanded="true" />
-                <element signature="e#1477#1478#0" expanded="true" />
-                <element signature="e#1528#1529#0" expanded="true" />
-                <element signature="e#1577#1578#0" expanded="true" />
-                <element signature="e#1613#1614#0" expanded="true" />
-                <element signature="e#1654#1655#0" expanded="true" />
-                <element signature="e#1713#1714#0" expanded="true" />
-                <element signature="e#1748#1749#0" expanded="true" />
-                <element signature="e#1801#1802#0" expanded="true" />
-                <element signature="e#1852#1853#0" expanded="true" />
-                <element signature="e#1885#1886#0" expanded="true" />
-                <element signature="e#1923#1924#0" expanded="true" />
-                <element signature="e#1979#1980#0" expanded="true" />
-                <element signature="e#2011#2012#0" expanded="true" />
-                <element signature="e#2058#2059#0" expanded="true" />
-                <element signature="e#2103#2104#0" expanded="true" />
-                <element signature="e#2136#2137#0" expanded="true" />
-                <element signature="e#2174#2175#0" expanded="true" />
-                <element signature="e#2230#2231#0" expanded="true" />
-                <element signature="e#2262#2263#0" expanded="true" />
-                <element signature="e#2309#2310#0" expanded="true" />
-                <element signature="e#2354#2355#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://514e381a-1e98-46e8-bcfd-0556e2f460dc/schema/main/table/scores">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/ScoreScreen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="59" column="77" selection-start-line="59" selection-start-column="77" selection-end-line="59" selection-end-column="77" />
+            <state relative-caret-position="-13">
+              <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1115#1122#0" expanded="true" />
-                <element signature="e#2458#2459#0" expanded="true" />
-                <element signature="e#2490#2491#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="85" column="31" selection-start-line="84" selection-start-column="11" selection-end-line="85" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/GameInfoObs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
-              <caret line="275" selection-start-line="275" selection-end-line="275" />
-              <folding>
-                <element signature="method#goToRegister#0;class#Main#0" />
-                <element signature="method#goToSpel#0;class#Main#0" />
-                <element signature="method#goToSetupSpel#0;class#Main#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/LobbyScreen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2048">
-              <caret line="245" selection-start-line="245" selection-end-line="245" />
-              <folding>
-                <element signature="e#7210#7211#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2225">
-              <caret line="432" selection-start-line="432" selection-end-line="432" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Global/src/Classes/Score.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="273">
+              <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -440,7 +332,6 @@
         <option value="$PROJECT_DIR$/Client/src/client/Views/disconnection.fxml" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewLogica.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Connections.java" />
-        <option value="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/LoginScreen.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/SpelSetupScreen.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/DisconnectionController.java" />
@@ -461,6 +352,9 @@
         <option value="$PROJECT_DIR$/Global/src/Classes/Score.java" />
         <option value="$PROJECT_DIR$/Client/src/client/ScoreObs.java" />
         <option value="$PROJECT_DIR$/Client/src/client/Controllers/ScoreScreen.java" />
+        <option value="$PROJECT_DIR$/Dispatcher/src/Dispatcher.java" />
+        <option value="$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java" />
+        <option value="$PROJECT_DIR$/DatabaseServer/src/SupportiveThreads/PollToOtherDBs.java" />
       </list>
     </option>
   </component>
@@ -503,90 +397,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ApplicationServer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ApplicationServer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Dispatcher" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Dispatcher" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Global" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Global" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Global" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Global" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -604,18 +414,55 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ApplicationServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ApplicationServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DatabaseServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dispatcher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DS_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="0e248da0-da2e-4282-8263-086425284fd1" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544015086285" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544023696630" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="D:/main_Persons.csv" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -632,7 +479,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Multirun.RunArchitecture">
+  <component name="RunManager" selected="Application.DataServer2">
     <configuration name="AppServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppServerMain" />
       <module name="ApplicationServer" />
@@ -736,6 +583,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DBRunner" type="Multirun" factoryName="Multirun" separateTabs="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0">
+      <runConfiguration name="DataServerMain" type="Application" />
+      <runConfiguration name="DataServer1" type="Application" />
+      <runConfiguration name="DataServer2" type="Application" />
+      <runConfiguration name="DataServer3" type="Application" />
+      <method v="2" />
+    </configuration>
     <configuration name="RunArchitecture" type="Multirun" factoryName="Multirun" separateTabs="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0">
       <runConfiguration name="DataServerMain" type="Application" />
       <runConfiguration name="DataServer1" type="Application" />
@@ -754,6 +608,7 @@
       <item itemvalue="Application.DataServer1" />
       <item itemvalue="Application.DataServer2" />
       <item itemvalue="Application.DataServer3" />
+      <item itemvalue="Multirun.DBRunner" />
       <item itemvalue="Multirun.RunArchitecture" />
       <item itemvalue="Application.Dispatcher" />
       <item itemvalue="Application.DataServerMain" />
@@ -762,10 +617,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DataServerMain" />
         <item itemvalue="Application.Client1" />
         <item itemvalue="Application.AppServerMain" />
         <item itemvalue="Application.Dispatcher" />
-        <item itemvalue="Application.DataServerMain" />
       </list>
     </recent_temporary>
   </component>
@@ -805,6 +660,7 @@
       <workItem from="1543937865215" duration="3799000" />
       <workItem from="1543949496588" duration="809000" />
       <workItem from="1544010738068" duration="4150000" />
+      <workItem from="1544017536929" duration="5618000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -1069,7 +925,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117908000" />
+    <option name="totallyTimeSpent" value="123476000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1082,8 +938,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="24" y="-8" width="1664" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20760599" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21009976" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1093,7 +950,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.40343347" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.32903227" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.31330472" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.24892704" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.44313306" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -1112,7 +969,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.14588529" />
+      <window_info anchor="right" id="Database" order="5" weight="0.07917706" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
@@ -1255,7 +1112,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Client/src/client/Controllers/ScoreScreen.java</url>
-          <line>78</line>
+          <line>79</line>
           <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
@@ -1298,7 +1155,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gameinfo" />
     <entry file="das://c4d4268e-f397-4ad3-be6d-376d24ad99d1/schema/main/table/gamestate" />
     <entry file="file://$PROJECT_DIR$/Client/src/client/GameObs.java" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/27839930-8109-4c96-bf5a-dd762ab88518/console.sql">
@@ -1313,9 +1169,6 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/d372a63c-e700-46f4-bd6a-db53c40163f9/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/514e381a-1e98-46e8-bcfd-0556e2f460dc/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="das://c0c7bf41-5939-4e35-90bb-52c7a8bfa404/schema/main/table/scores_1" />
     <entry file="das://d372a63c-e700-46f4-bd6a-db53c40163f9/schema/main/table/scores_1" />
     <entry file="file://$PROJECT_DIR$/Dispatcher/src/SupportiveThreads/ApplicationServerMaintainer.java">
@@ -1325,24 +1178,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/RegistreerScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
@@ -1391,13 +1230,6 @@
           <folding>
             <element signature="e#161#162#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="199" column="9" selection-start-line="199" selection-start-column="9" selection-end-line="199" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1494,12 +1326,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Views/lobbyScreen.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="16" column="14" selection-start-line="11" selection-start-column="3" selection-end-line="16" selection-end-column="14" />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/interfaces/DatabaseInterface.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1533,26 +1365,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Views/scoreScreen.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="143">
           <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
         </state>
       </provider>
-    </entry>
-    <entry file="das://c0c7bf41-5939-4e35-90bb-52c7a8bfa404/schema/main/table/scores">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="176" selection-start-line="176" selection-end-line="176" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1667,21 +1485,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/client/Controllers/ScoreScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="59" column="77" selection-start-line="59" selection-start-column="77" selection-end-line="59" selection-end-column="77" />
+        <state relative-caret-position="342">
+          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1115#1122#0" expanded="true" />
-            <element signature="e#2458#2459#0" expanded="true" />
-            <element signature="e#2490#2491#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/Dispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/514e381a-1e98-46e8-bcfd-0556e2f460dc/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="176" selection-start-line="176" selection-end-line="177" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DataServerMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="273">
+          <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="85" column="31" selection-start-line="84" selection-start-column="11" selection-end-line="85" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c0c7bf41-5939-4e35-90bb-52c7a8bfa404/schema/main/table/scores">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatabaseServer/src/SupportiveThreads/PollToOtherDBs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13">
+          <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

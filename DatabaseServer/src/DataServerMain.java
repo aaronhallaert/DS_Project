@@ -1,3 +1,5 @@
+import SupportiveThreads.PollToOtherDBs;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -19,6 +21,9 @@ public class DataServerMain {
 
             dataRegistry.rebind("DatabaseService", new DatabaseImpl(databaseNaam));
             System.out.println("connected met "+databaseNaam);
+
+            PollToOtherDBs pollToOtherDBs = new PollToOtherDBs(args[0]);
+            pollToOtherDBs.start();
 
         }
         catch (Exception e) {

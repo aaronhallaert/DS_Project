@@ -12,6 +12,8 @@ public class Dispatcher {
             // aanbieden van service
             Registry dispatchRegistry = LocateRegistry.createRegistry(Integer.parseInt(args[0]));
             dispatchRegistry.rebind("DispatchService", new DispatchImpl());
+
+
         }
         catch(Exception e){
             e.printStackTrace();

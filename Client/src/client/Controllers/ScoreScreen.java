@@ -75,6 +75,7 @@ public class ScoreScreen {
         ArrayList<ScoreObs> scoreObservableList = new ArrayList<>();
 
         try {
+
             ArrayList<Score> toConvert = Main.cnts.getAppImpl().getScores();
 
             System.out.println("wat zit er in scoreList?");
@@ -84,7 +85,6 @@ public class ScoreScreen {
 
             }
 
-
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -92,6 +92,8 @@ public class ScoreScreen {
         System.out.println("wat zit er in scoreObs");
 
         scoreObsLijst = FXCollections.observableArrayList(scoreObservableList);
+
+        //todo: een thread die kijkt naar updates
 
     }
 
