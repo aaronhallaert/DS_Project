@@ -1,4 +1,5 @@
 import Classes.Game;
+import Classes.Score;
 import interfaces.DatabaseInterface;
 import com.google.common.hash.Hashing;
 
@@ -424,6 +425,48 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         closeConnection();
         return returner;
+    }
+
+    @Override
+    public ArrayList<Score> getScores() throws RemoteException {
+
+        String sql = "SELECT * FROM Scores";
+
+        connect();
+
+        ArrayList<Score> scoreList = new ArrayList<>();
+
+        try {
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // de ganse tabel zit in rs nu
+            ResultSet rs = pstmt.executeQuery();
+
+            //zolang dat er rows gevonden worden
+            while(rs.next()){
+                String naam = rs.getString("Username");
+                int wins = rs.getInt("wins");
+                int draws = rs.getInt("draws");
+                int losses = rs.getInt("losses");
+                int max4x4 = rs.getInt("max4x4");
+                int max6x6 = rs.getInt("max6x6");
+                int aantalGames = rs.getInt("aantalGames");
+
+                scoreList.add(new Score(naam, wins, draws, losses, max4x4, max6x6, aantalGames));
+            }
+
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return scoreList;
+
     }
 
     @Override

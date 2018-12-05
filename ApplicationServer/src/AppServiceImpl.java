@@ -1,7 +1,4 @@
-import Classes.Commando;
-import Classes.Game;
-import Classes.GameInfo;
-import Classes.GameState;
+import Classes.*;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 
@@ -184,6 +181,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             System.out.println("nu wel");
         }
 
+    }
+
+    @Override
+    public ArrayList<Score> getScores() throws RemoteException {
+        return databaseImpl.getScores();
     }
 
     @Override

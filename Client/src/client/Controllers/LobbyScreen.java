@@ -244,6 +244,10 @@ public class LobbyScreen {
     @FXML
     public void goToScoreScreen() {
         Main.goToScoreScreen();
+
+        Platform.setImplicitExit(false);
+        spelSetup.getScene().getWindow().hide();
+
     }
 
     private void displayErrorMessage(String message) {

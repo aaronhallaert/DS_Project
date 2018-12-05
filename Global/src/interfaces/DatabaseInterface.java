@@ -1,6 +1,7 @@
 package interfaces;
 
 import Classes.Game;
+import Classes.Score;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -33,4 +34,6 @@ public interface DatabaseInterface extends Remote {
     void insertScoreRow(String username) throws RemoteException;
 
     boolean hasScoreRij(String username) throws RemoteException;
+
+    ArrayList<Score> getScores() throws RemoteException;
 }
