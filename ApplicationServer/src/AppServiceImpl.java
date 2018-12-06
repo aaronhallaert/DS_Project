@@ -309,25 +309,18 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public boolean changeInPlayers(int currentGameId, int aantalSpelers) throws RemoteException{
         if(this.getGameInfo(currentGameId).changeInPlayers(aantalSpelers)){
-            System.out.println("er is verandering in users ontdekt");
+            //System.out.println("er is verandering in users ontdekt");
             return true;
         }else{
-            System.out.println("er geen verandering in users ontdekt");
+            //System.out.println("er geen verandering in users ontdekt");
             return false;
         }
 
     }
     @Override
     public boolean changeInTurn(int currentGameId, String userTurn) throws RemoteException{
-        boolean change=this.getGameState(currentGameId).changeInTurn(userTurn);
+        return this.getGameState(currentGameId).changeInTurn(userTurn);
 
-
-        // TODO dit wordt meerdere keren gedaan aangezien de methode "changeInTurn" aangeroepen wordt door alle clients die de game aan het spelen zijn
-        if(destinationBackup!=null){
-            destinationBackup.updateBackupGS(getGameState(currentGameId));
-        }
-
-        return change;
     }
     /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
      *  omdraaien door het commando in z'n inbox te laten verschijnen, die 2e speler pullt dan het commando en executet
@@ -340,7 +333,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
-        getGameState(currentGameId).executeCommando(commando,activeUser);
+        boolean backup= getGameState(currentGameId).executeCommando(commando,activeUser);
+
+
+        if(backup){
+            if(destinationBackup!=null){
+                destinationBackup.updateBackupGS(getGameState(currentGameId));
+            }
+        }
+
     }
     @Override
     public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{

@@ -171,11 +171,11 @@ public class GameState implements Serializable {
      *                     de GameState ( this ) wordt aangepast, daarin kunnen er extra messages
      *                     in de mailboxes gestopt worden
      */
-    public synchronized void executeCommando(Commando commando, String activeUser) {
+    public synchronized boolean executeCommando(Commando commando, String activeUser) {
 
         for (String speler : spelers) {
             if (!speler.equals(activeUser)){
-                System.out.println("commando added in "+ speler +" zijn inbox");
+               // System.out.println("commando added in "+ speler +" zijn inbox");
                 if(inbox.get(speler) != null) {
                     inbox.get(speler).add(commando);
                 }
@@ -205,7 +205,7 @@ public class GameState implements Serializable {
 
         //verwerking van wat er juist gebeurd en veranderd is, conclusies trekken ivm wat er moet gebeuren
         //indien nodig ook nog messages in de spelers hun mailboxen stoppen
-        pasStateAan(commando, activeUser);
+        return pasStateAan(commando, activeUser);
 
     }
 
@@ -249,8 +249,9 @@ public class GameState implements Serializable {
      *
      * @param commando het commando die juist is uitgevoerd op de client
      * @param activeUser de client die dit commando uitvoert
+     * @return boolean die true weergeeft wanneer backup upgedate moet worden
      */
-    private void pasStateAan(Commando commando, String activeUser) {
+    private boolean pasStateAan(Commando commando, String activeUser) {
 
         //opvragen van de overeenkomstige Tile
         Tile huidigeTile = getTileMetUniqueId(commando.getUniqueTileId());
@@ -373,6 +374,11 @@ public class GameState implements Serializable {
                         break;
                     }
                 }
+
+                //reset de counter die telt hoeveel tegels er openliggen
+                tegelsFlipped = 0;
+                notifyAll();
+                return true;
             }
 
 
@@ -380,6 +386,7 @@ public class GameState implements Serializable {
             tegelsFlipped = 0;
         }
         notifyAll();
+        return false;
 
     }
 
