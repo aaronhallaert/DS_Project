@@ -180,7 +180,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
         if(result == 1){
 
-            //todo: start nieuwe appserver
             System.out.println("starting nieuwe appserver...");
             makeNewAppserver();
 
@@ -196,12 +195,12 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         int result = asm.setAantalGames(aantalGamesBezig);
         if(result == -1){
             //todo: stop een appserver?
-           /* for (AppServerInterface appImpl : appImpls) {
+            for (AppServerInterface appImpl : appImpls) {
                 if(appImpl.getNumberOfGames()<3){
                     closeAppServer(appImpl);
 
                 }
-            }*/
+            }
         }
         System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
     }

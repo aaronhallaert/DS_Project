@@ -23,7 +23,6 @@ public class SpelViewGui extends Thread {
     @FXML
     private Label gameTitel;
 
-    // TODO make scorelabel in fxml
     @FXML
     private Label scoreLabel;
     @FXML
@@ -107,7 +106,7 @@ public class SpelViewGui extends Thread {
 
     private void setupGame(GameInfo gameInfo, GameState gameState) {
 
-        //todo: breid deze methode uit zodat het voor alle gamestates werkt, en niet enkel de initielegamestate
+
         if(gameInfo.getRoosterSize() == 4){
             overkoepelendePane.setPrefSize(600,600);
             root.setPrefSize(460,460);
@@ -189,9 +188,6 @@ public class SpelViewGui extends Thread {
 
         }
         else if(commandoMessage.equals("SWITCH")){
-
-            //TODO ik denk dat dit commando weg mag met huidige implementatie
-            //todo : tis waaar éja, grts tibo
 
 
         }

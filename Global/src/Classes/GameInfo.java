@@ -64,17 +64,7 @@ public class GameInfo implements Serializable {
         this.appServerPoort = appServerPoort;
     }
 
-    /* public GameInfo(int gameId, ArrayList<String> spelers, int aantalSpelersConnected, String fotoSet, int roosterSize) {
-        System.out.println("spciale GameInfo constructor opgeroepen die we normaal niet meer gebruiken!");
-        this.gameId=gameId;
-        this.spelers=spelers;
-        this.aantalSpelersConnected=aantalSpelersConnected;
-        this.fotoSet=fotoSet;
-        this.roosterSize=roosterSize;
 
-        // TODO keuze aantal spelers
-        this.aantalSpelers=3;
-    }*/
 
 
     public String toString(){

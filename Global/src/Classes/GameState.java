@@ -38,7 +38,7 @@ public class GameState implements Serializable {
 
     private int aantalSpelers;
     private ArrayList<String> spectators;
-    private HashMap<String, List<Commando>> inboxSpectators;  // todo: configure spectator inbox
+    private HashMap<String, List<Commando>> inboxSpectators;
 
     //counters om de scores bij te houden -> in een list
     private HashMap<String, Integer> punten;
@@ -69,7 +69,7 @@ public class GameState implements Serializable {
     public GameState(int gameId, int dimensions, char fotoSet, String hostName, int aantalSpelers) {
         this.gameId=gameId;
 
-        //TODO; keuze aantal spelers
+
         this.aantalSpelers=aantalSpelers;
 
         /* initialize gamestate ---------*/
@@ -445,7 +445,7 @@ public class GameState implements Serializable {
 
             return inboxSpeler;
         }
-        else{ // todo : voor de spectator
+        else{
 
             inboxSpectators.putIfAbsent(userName, new ArrayList<>());
 

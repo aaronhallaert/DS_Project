@@ -438,8 +438,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public void updateBackupGS(GameState gameState) throws RemoteException {
-
-        //TODO update enkel als het nog niet is upgedate
         if(!backup.getGame(gameState.getGameId()).getGameState().getAandeBeurt().equals(gameState.getAandeBeurt())) {
             backup.getGame(gameState.getGameId()).setGameState(gameState);
 
