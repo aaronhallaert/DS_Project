@@ -31,34 +31,27 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public AppServiceImpl() throws RemoteException{
         try {
 
-            // setup communicatie met databaseserver
-            // fire to localhost port 1900
-            //TODO verbind naar willekeurige db
-            // todo: dit moet dynamisch 1940,1950 of 1960 worden
+            /*----------DISPATCHER CONN ----------------*/
+            // connectie leggen met dispatcher + registratie bij dispatcher
+            dispatchImpl=(DispatchInterface) LocateRegistry.getRegistry("localhost", 1902).lookup("DispatchService");
+            dispatchImpl.registerAppserver(AppServerMain.thisappServerpoort);
+
+
+            /*----------DATABASE CONN ----------------*/
             int databaseServerPoort = getWillekeurigeDatabaseServerPoort();
             System.out.println("connecting with DBServer on port "+ databaseServerPoort);
             Registry dataRegistry= LocateRegistry.getRegistry("localhost",databaseServerPoort);
-            // search for database service
             databaseImpl=(DatabaseInterface) dataRegistry.lookup("DatabaseService");
 
+            // alle game infos uit database halen + thread voor updates van gameinfo opstarten //
             gameInfos.addAll(databaseImpl.getGameInfoList());
-
             GameInfoListReceiver gilr= new GameInfoListReceiver(databaseImpl, gameInfos);
             gilr.start();
-
-
-
-            //dispatcher
-            Registry dispatchReg= LocateRegistry.getRegistry("localhost", 1902);
-            dispatchImpl=(DispatchInterface) dispatchReg.lookup("DispatchService");
 
         }
         catch(Exception e){
             e.printStackTrace();
         }
-
-        //gamesLijst = new ArrayList<>();
-        System.out.println("gamesList created");
 
     }
 
@@ -108,12 +101,13 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public void close() throws RemoteException {
-        // TODO verhuis alle games
+        // TODO check of dit klopt
         for (Game game : gamesLijst) {
             dispatchImpl.changeGameServer(this, game);
         }
         System.exit(0);
     }
+
     // USER MANAGER //
     /**
      * Deze methode checkt of credentials juist zijn, indien true, aanmaken van token
@@ -160,7 +154,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void logoutUser(String username) throws RemoteException{
         databaseImpl.cancelToken(username, true);
-
     }
     /**
      * opvragen van token
@@ -177,10 +170,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     // GAME INFO //
     @Override
     public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
-
-
-        System.out.println(activeUser);
-
         //gameId maken, kijken als nog niet reeds bestaat
         int gameId = (int)(Math.random() * 1000);
         while(reedsGameMetDezeID(gamesLijst,gameId)){
@@ -189,14 +178,14 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         Game game = new Game(gameId ,activeUser, dimensies, set, aantalSpelers, AppServerMain.thisappServerpoort);
         gamesLijst.add(game);
-        System.out.println("game met naam "+activeUser+" gemaakt!");
+        System.out.println("game door "+activeUser+" aangemaakt!");
         System.out.println("gameslist grootte is nu: "+gamesLijst.size());
 
-        // TODO update database met gameinfo
+        // game info doorgeven aan database
         databaseImpl.addGameInfo(game.getGameInfo(), true);
 
+        // TODO ik denk dat deze methode niet meer hoeft te notifyen
         notifyAll();
-
         return gameId;
 
     }
@@ -204,14 +193,8 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public int getNumberOfGames() throws RemoteException {
         return gamesLijst.size();
     }
-    /**
-     * @return
-     * @throws RemoteException
-     */
     @Override
     public synchronized ArrayList<GameInfo> getGameInfoLijst(int currentSize) throws RemoteException {
-
-
         while(currentSize==gameInfos.size()){
             try {
                 wait();
@@ -223,10 +206,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return new ArrayList<>(gameInfos);
 
     }
-    /**
-     * @return
-     * @throws RemoteException
-     */
     @Override
     public ArrayList<GameInfo> getGameInfoLijst() throws RemoteException {
 
@@ -238,7 +217,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public ArrayList<Game> getGamesLijst() throws RemoteException {
         return gamesLijst;
     }
-
     @Override
     public Game getGame(int currentGameId) {
         for (Game game : gamesLijst) {
@@ -246,7 +224,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
                 return game;
             }
         }
-
         return null;
     }
 
@@ -292,11 +269,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         //aanpassing omdat er ook nog moet gejoined worden in de gameState
         if(this.getGameInfo(currentGameIdAttempt).join(activeUser)){
-            // als de if clause lukt,
-            // dan zal het getGameState ook lukken, daarom is getGameState een void
+            // als je kan joinen bij gameinfo kan je joinen bij gamestate
             this.getGameState(currentGameIdAttempt).join(activeUser);
             databaseImpl.updateGameInfo(getGameInfo(currentGameIdAttempt), true);
-            //setGameStatenaam nog
+
             return true;
         }
         else {
@@ -324,7 +300,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public boolean changeInTurn(int currentGameId, String userTurn) throws RemoteException{
         return this.getGameState(currentGameId).changeInTurn(userTurn);
-
     }
     /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
      *  omdraaien door het commando in z'n inbox te laten verschijnen, die 2e speler pullt dan het commando en executet
@@ -338,7 +313,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
         boolean backup= getGameState(currentGameId).executeCommando(commando,activeUser);
-
 
         if(backup){
             if(destinationBackup!=null){

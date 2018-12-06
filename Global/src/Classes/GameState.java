@@ -164,7 +164,7 @@ public class GameState implements Serializable {
     /**
      * @param commando het commando dat de andere speler moet uitvoeren
      * @param activeUser de speler die het commando al reeds heeft uitgevoerd
-     *
+     * @return returnt true indien na dit commando spelers van beurt wisselen
      *   als speler A deze methode triggert , dan:
      *                     wordt het commmando in speler B zijn mailbox gestopt
      *                     speler B haalt dit commando op en voert het lokaal uit
@@ -249,7 +249,7 @@ public class GameState implements Serializable {
      *
      * @param commando het commando die juist is uitgevoerd op de client
      * @param activeUser de client die dit commando uitvoert
-     * @return boolean die true weergeeft wanneer backup upgedate moet worden
+     * @return boolean die true teruggeeft wanneer backup upgedate moet worden
      */
     private boolean pasStateAan(Commando commando, String activeUser) {
 
