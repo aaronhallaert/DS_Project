@@ -287,8 +287,10 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
         closeConnection();
 
-        for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-            dbRef.cancelToken(username, false);
+        if(replicate) {
+            for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+                dbRef.cancelToken(username, false);
+            }
         }
     }
     /**
