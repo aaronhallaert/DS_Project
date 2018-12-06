@@ -50,7 +50,21 @@ public class GameInfo implements Serializable {
 
     }
 
-   /* public GameInfo(int gameId, ArrayList<String> spelers, int aantalSpelersConnected, String fotoSet, int roosterSize) {
+    public GameInfo(int gameId, String spelers, int aantalSpelers, int aantalSpelersConnected, String fotoSet, int roosterSize, int appServerPoort) {
+        this.gameId = gameId;
+        this.spelers= new ArrayList<>();
+        String [] arraySpelers= spelers.split(", ");
+        for (String arraySpeler : arraySpelers) {
+            this.spelers.add(arraySpeler);
+        }
+        this.aantalSpelers = aantalSpelers;
+        this.aantalSpelersConnected = aantalSpelersConnected;
+        this.fotoSet = fotoSet;
+        this.roosterSize = roosterSize;
+        this.appServerPoort = appServerPoort;
+    }
+
+    /* public GameInfo(int gameId, ArrayList<String> spelers, int aantalSpelersConnected, String fotoSet, int roosterSize) {
         System.out.println("spciale GameInfo constructor opgeroepen die we normaal niet meer gebruiken!");
         this.gameId=gameId;
         this.spelers=spelers;

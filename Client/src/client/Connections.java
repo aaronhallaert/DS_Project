@@ -4,6 +4,7 @@ import interfaces.AppServerInterface;
 import interfaces.DispatchInterface;
 import javafx.scene.Scene;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -21,6 +22,7 @@ public class Connections {
             dispatchImpl=(DispatchInterface) dispatchRegistry.lookup("DispatchService");
 
             appImpl=dispatchImpl.giveAppserver();
+            System.out.println("gekregen appserver heeft als poortnummer " + appImpl.getPortNumber());
         }
         catch(Exception e){
             Main.goToDisconnection(close);
@@ -33,6 +35,11 @@ public class Connections {
     }
 
     public void setAppImpl(AppServerInterface appImpl) {
+        try {
+            System.out.println("nieuwe appserver met als poortnummer" + appImpl.getPortNumber());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         this.appImpl = appImpl;
     }
 

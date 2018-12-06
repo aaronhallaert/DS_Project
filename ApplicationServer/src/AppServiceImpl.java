@@ -1,4 +1,5 @@
 import Classes.*;
+import SupportiveThreads.GameInfoListReceiver;
 import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
@@ -18,6 +19,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     /*--------------- ATTRIBUTES ----------------------*/
     private ArrayList<Game> gamesLijst=new ArrayList<>(); //game bevat GameInfo en GameState
+    public Set<GameInfo> gameInfos= new HashSet<>();
 
     private BackupGames backup;
     private AppServerInterface destinationBackup;
@@ -38,6 +40,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             Registry dataRegistry= LocateRegistry.getRegistry("localhost",databaseServerPoort);
             // search for database service
             databaseImpl=(DatabaseInterface) dataRegistry.lookup("DatabaseService");
+
+            gameInfos.addAll(databaseImpl.getGameInfoList());
+
+            GameInfoListReceiver gilr= new GameInfoListReceiver(databaseImpl, gameInfos);
+            gilr.start();
 
 
 
@@ -205,21 +212,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public synchronized ArrayList<GameInfo> getGameInfoLijst(int currentSize) throws RemoteException {
 
 
-        while(currentSize==gamesLijst.size()){
+        while(currentSize==gameInfos.size()){
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        ArrayList<GameInfo> gameInfoLijst = new ArrayList<GameInfo>();
-
-        for (Game game : gamesLijst) {
-            gameInfoLijst.add(game.getGameInfo());
-        }
-
-        return gameInfoLijst;
+        System.out.println("size van gameinfos" + gameInfos.size());
+        return new ArrayList<>(gameInfos);
 
     }
     /**
@@ -230,13 +231,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public ArrayList<GameInfo> getGameInfoLijst() throws RemoteException {
 
 
-        ArrayList<GameInfo> gameInfoLijst = new ArrayList<GameInfo>();
-
-        for (Game game : gamesLijst) {
-            gameInfoLijst.add(game.getGameInfo());
-        }
-
-        return gameInfoLijst;
+        return new ArrayList<>(gameInfos);
 
     }
     @Override
