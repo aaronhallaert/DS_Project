@@ -3,6 +3,7 @@ import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -17,6 +18,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     /*--------------- ATTRIBUTES ----------------------*/
     private ArrayList<Game> gamesLijst=new ArrayList<>(); //game bevat GameInfo en GameState
+
+    private BackupGames backup;
+    private AppServerInterface destinationBackup;
+
     private static Map<String, byte[]> imageCache=new HashMap<>();
     private static LinkedList<String> imageCacheSequence= new LinkedList<>();
 
@@ -93,6 +98,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public boolean testConnection() {
         return true;
     }
+
+    @Override
+    public void close() throws RemoteException {
+        // TODO verhuis alle games
+        for (Game game : gamesLijst) {
+            dispatchImpl.changeGameServer(this, game);
+        }
+        System.exit(0);
+    }
     // USER MANAGER //
     /**
      * Deze methode checkt of credentials juist zijn, indien true, aanmaken van token
@@ -157,7 +171,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
 
-        System.out.println("createGame in appserviceImpl triggered");
+
         System.out.println(activeUser);
 
         //gameId maken, kijken als nog niet reeds bestaat
@@ -225,6 +239,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return gameInfoLijst;
 
     }
+    @Override
+    public ArrayList<Game> getGamesLijst() throws RemoteException {
+        return gamesLijst;
+    }
+
     @Override
     public Game getGame(int currentGameId) {
         for (Game game : gamesLijst) {
@@ -299,10 +318,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public boolean changeInPlayers(int currentGameId, int aantalSpelers) throws RemoteException{
         if(this.getGameInfo(currentGameId).changeInPlayers(aantalSpelers)){
-            System.out.println("er is verandering in users ontdekt");
+            //System.out.println("er is verandering in users ontdekt");
             return true;
         }else{
-            System.out.println("er geen verandering in users ontdekt");
+            //System.out.println("er geen verandering in users ontdekt");
             return false;
         }
 
@@ -310,6 +329,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public boolean changeInTurn(int currentGameId, String userTurn) throws RemoteException{
         return this.getGameState(currentGameId).changeInTurn(userTurn);
+
     }
     /** wordt getriggerd wanneer een speler op een kaartje klikt, zorgt ervoor dat de andere speler ook het kaartje zal
      *  omdraaien door het commando in z'n inbox te laten verschijnen, die 2e speler pullt dan het commando en executet
@@ -322,8 +342,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
+        boolean backup= getGameState(currentGameId).executeCommando(commando,activeUser);
 
-        getGameState(currentGameId).executeCommando(commando,activeUser);
+
+        if(backup){
+            if(destinationBackup!=null){
+                destinationBackup.updateBackupGS(getGameState(currentGameId));
+            }
+        }
+
     }
     @Override
     public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException{
@@ -361,10 +388,9 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             afbeelding= databaseImpl.getImage(naam);
             imageCache.put(naam, afbeelding);
             imageCacheSequence.add(naam);
-            System.out.println("moeten inladen vanuit een db");
         }
         else{
-            System.out.println("gevonden in cacheke");
+
         }
 
         if(imageCache.size()>36) {
@@ -420,4 +446,39 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         return databaseImpl.getScores();
     }
 
+    // BACKUP //
+    @Override
+    public void takeBackupFrom(int appserverpoort) throws RemoteException{
+        backup= new BackupGames(appserverpoort);
+
+        System.out.println("I just took a backup from " + backup.getAppserverPoort());
+        for (Game game : backup.getGameList()) {
+            System.out.println(game);
+        }
+
+    }
+
+    @Override
+    public void setDestinationBackup(int appserverBackupPoort) throws RemoteException{
+        try {
+            destinationBackup= (AppServerInterface) LocateRegistry.getRegistry("localhost", appserverBackupPoort).lookup("AppserverService");
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateBackupGS(GameState gameState) throws RemoteException {
+
+        //TODO update enkel als het nog niet is upgedate
+        if(!backup.getGame(gameState.getGameId()).getGameState().getAandeBeurt().equals(gameState.getAandeBeurt())) {
+            backup.getGame(gameState.getGameId()).setGameState(gameState);
+
+
+            System.out.println("backup UPGEDATE");
+            for (Game game : backup.getGameList()) {
+                System.out.println(game);
+            }
+        }
+    }
 }
