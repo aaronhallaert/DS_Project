@@ -95,6 +95,26 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         }
     }
 
+    private void closeAppServer(AppServerInterface appImpl) throws RemoteException{
+        appImpl.close();
+
+        int index= appImpls.indexOf(appImpl);
+        appImpls.remove(appImpl);
+        appServerPoorten.remove(index);
+    }
+
+    /**
+     * Wanneer een appserver crasht
+     * @param appserverImpl
+     */
+    private void removeAppImpl(AppServerInterface appserverImpl){
+        int index= appImpls.indexOf(appserverImpl);
+        appImpls.remove(appserverImpl);
+        appServerPoorten.remove(index);
+
+        // TODO crash recovery implementatie, hoeven we niet te doen
+    }
+
 
     /*------------------ SERVICES ZIE INTERFACE------------------------------*/
 
@@ -141,8 +161,11 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             }
         }
         catch (RemoteException re){
-            appImpls.remove(appserverImpl);
-            makeNewAppserver();
+            removeAppImpl(appserverImpl);
+
+            if(appImpls.isEmpty()) {
+                makeNewAppserver();
+            }
             return null;
         }
 
@@ -173,6 +196,12 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         int result = asm.setAantalGames(aantalGamesBezig);
         if(result == -1){
             //todo: stop een appserver?
+            for (AppServerInterface appImpl : appImpls) {
+                if(appImpl.getNumberOfGames()<3){
+                    closeAppServer(appImpl);
+
+                }
+            }
         }
         System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
     }
@@ -206,22 +235,24 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     // OVERZETTEN VAN ... //
     @Override
-    public void changeGameServer(AppServerInterface currentAppImpl, Game game) throws RemoteException{
-        List<AppServerInterface> possibleAppServers=new ArrayList<>();
-        for (AppServerInterface appImpl : appImpls) {
-            if(appImpl.getNumberOfGames()<3){
-                possibleAppServers.add(appImpl);
-            }
-        }
+    public synchronized void changeGameServer(AppServerInterface currentAppImpl, Game game) throws RemoteException{
 
-        if(possibleAppServers.size()==0){
-            makeNewAppserver();
-            changeGameServer(currentAppImpl, game);
-        }
-        else{
-            possibleAppServers.get(0).takeOverGame(game);
-            currentAppImpl.removeGame(game);
-        }
+
+            List<AppServerInterface> possibleAppServers=new ArrayList<>();
+            for (AppServerInterface appImpl : appImpls) {
+                if(appImpl.getNumberOfGames()<3 && appImpl!=currentAppImpl){
+                    possibleAppServers.add(appImpl);
+                }
+            }
+
+            if(possibleAppServers.size()==0){
+                makeNewAppserver();
+                changeGameServer(currentAppImpl, game);
+            }
+            else{
+                possibleAppServers.get(0).takeOverGame(game);
+                currentAppImpl.removeGame(game);
+            }
 
 
 

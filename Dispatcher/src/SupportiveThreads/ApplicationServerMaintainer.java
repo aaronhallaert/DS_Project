@@ -35,7 +35,7 @@ public class ApplicationServerMaintainer extends Thread{
 
         }
 
-        else if(aantalBezigOpAppServer > vorigAantalGames && aantalBezigOpAppServer % AANTALGAMESPERAPPSERVER == 0){
+        else if(aantalBezigOpAppServer < vorigAantalGames && aantalBezigOpAppServer % AANTALGAMESPERAPPSERVER == 0){
 
             System.out.println("gedaald, appserver moet verwijderd worden");
             returnValue = -1; // -1 omdat je een server moet wegdoen

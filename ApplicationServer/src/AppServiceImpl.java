@@ -98,6 +98,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public boolean testConnection() {
         return true;
     }
+
+    @Override
+    public void close() throws RemoteException {
+        // TODO verhuis alle games
+        for (Game game : gamesLijst) {
+            dispatchImpl.changeGameServer(this, game);
+        }
+        System.exit(0);
+    }
     // USER MANAGER //
     /**
      * Deze methode checkt of credentials juist zijn, indien true, aanmaken van token
