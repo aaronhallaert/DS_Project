@@ -54,7 +54,6 @@ public class Game implements Serializable {
         System.out.println("gameState made");
     }
 
-
     // GETTERS AND SETTERS
 
     public int getGameId(){return gameId;}
@@ -64,6 +63,10 @@ public class Game implements Serializable {
     }
 
     public GameState getGameState() { return gameState; }
+
+    public void setGameState(GameState gs){
+        this.gameState=gs;
+    }
 
     public String toString(){
         return gameInfo.toString() + "\n" + gameState.toString();

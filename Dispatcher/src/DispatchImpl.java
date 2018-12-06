@@ -73,7 +73,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
                 //toevoegen aan de lijst met appServerPoorten
                 System.out.println("nieuwe appserver started on port "+ applicationPoortNr);
-
                 break;
             }
         }
@@ -96,6 +95,26 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         }
     }
 
+    private void closeAppServer(AppServerInterface appImpl) throws RemoteException{
+        appImpl.close();
+
+        int index= appImpls.indexOf(appImpl);
+        appImpls.remove(appImpl);
+        appServerPoorten.remove(index);
+    }
+
+    /**
+     * Wanneer een appserver crasht
+     * @param appserverImpl
+     */
+    private void removeAppImpl(AppServerInterface appserverImpl){
+        int index= appImpls.indexOf(appserverImpl);
+        appImpls.remove(appserverImpl);
+        appServerPoorten.remove(index);
+
+        // TODO crash recovery implementatie, hoeven we niet te doen
+    }
+
 
     /*------------------ SERVICES ZIE INTERFACE------------------------------*/
 
@@ -103,14 +122,31 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void registerAppserver(int portNumber) {
         System.out.println("nieuwe appserver geregistreerd met poortnummer "+ portNumber);
-        appServerPoorten.add(portNumber);
         try {
-            appImpls.add( (AppServerInterface) LocateRegistry.getRegistry("localhost", portNumber).lookup("AppserverService"));
+            AppServerInterface newAppImpl= (AppServerInterface)LocateRegistry.getRegistry("localhost", portNumber).lookup("AppserverService");
+
+            if(appImpls.size()>=1) {
+                appImpls.get(0).takeBackupFrom(portNumber);
+                newAppImpl.setDestinationBackup(appImpls.get(0).getPortNumber());
+
+
+                newAppImpl.takeBackupFrom(appServerPoorten.get(appServerPoorten.size() - 1));
+                appImpls.get(appImpls.size()-1).setDestinationBackup(newAppImpl.getPortNumber());
+            }
+
+
+            appImpls.add(newAppImpl);
+            appServerPoorten.add(portNumber);
+
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
             e.printStackTrace();
         }
+
+
+
+
     }
 
     @Override
@@ -125,8 +161,11 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             }
         }
         catch (RemoteException re){
-            appImpls.remove(appserverImpl);
-            makeNewAppserver();
+            removeAppImpl(appserverImpl);
+
+            if(appImpls.isEmpty()) {
+                makeNewAppserver();
+            }
             return null;
         }
 
@@ -157,6 +196,12 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         int result = asm.setAantalGames(aantalGamesBezig);
         if(result == -1){
             //todo: stop een appserver?
+            for (AppServerInterface appImpl : appImpls) {
+                if(appImpl.getNumberOfGames()<3){
+                    closeAppServer(appImpl);
+
+                }
+            }
         }
         System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
     }
@@ -190,22 +235,24 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     // OVERZETTEN VAN ... //
     @Override
-    public void changeGameServer(AppServerInterface currentAppImpl, Game game) throws RemoteException{
-        List<AppServerInterface> possibleAppServers=new ArrayList<>();
-        for (AppServerInterface appImpl : appImpls) {
-            if(appImpl.getNumberOfGames()<3){
-                possibleAppServers.add(appImpl);
-            }
-        }
+    public synchronized void changeGameServer(AppServerInterface currentAppImpl, Game game) throws RemoteException{
 
-        if(possibleAppServers.size()==0){
-            makeNewAppserver();
-            changeGameServer(currentAppImpl, game);
-        }
-        else{
-            possibleAppServers.get(0).takeOverGame(game);
-            currentAppImpl.removeGame(game);
-        }
+
+            List<AppServerInterface> possibleAppServers=new ArrayList<>();
+            for (AppServerInterface appImpl : appImpls) {
+                if(appImpl.getNumberOfGames()<3 && appImpl!=currentAppImpl){
+                    possibleAppServers.add(appImpl);
+                }
+            }
+
+            if(possibleAppServers.size()==0){
+                makeNewAppserver();
+                changeGameServer(currentAppImpl, game);
+            }
+            else{
+                possibleAppServers.get(0).takeOverGame(game);
+                currentAppImpl.removeGame(game);
+            }
 
     }
 
