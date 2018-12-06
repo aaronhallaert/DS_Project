@@ -11,14 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database2.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database3.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database3.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database4.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database4.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ApplicationServer/AppServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dispatcher/DispatchImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/client/userfile.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -203,13 +196,13 @@
           <entry key="fxml" value="52" />
           <entry key="java" value="36928" />
           <entry key="sql" value="18" />
-          <entry key="txt" value="1274" />
+          <entry key="txt" value="1293" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="36928" />
-          <entry key="PLAIN_TEXT" value="1274" />
+          <entry key="PLAIN_TEXT" value="1293" />
           <entry key="SQL" value="18" />
           <entry key="Scratch" value="14" />
           <entry key="XML" value="52" />
@@ -231,8 +224,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="201" column="15" selection-start-line="201" selection-start-column="15" selection-end-line="201" selection-end-column="15" />
+            <state relative-caret-position="974">
+              <caret line="240" column="15" selection-start-line="240" selection-start-column="15" selection-end-line="240" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -252,8 +245,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+            <state relative-caret-position="260">
+              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -264,8 +257,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="140" column="25" selection-start-line="140" selection-start-column="25" selection-end-line="140" selection-end-column="25" />
+            <state relative-caret-position="557">
+              <caret line="154" column="25" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -273,8 +266,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
-              <caret line="293" column="9" selection-start-line="293" selection-start-column="9" selection-end-line="293" selection-end-column="9" />
+            <state relative-caret-position="180">
+              <caret line="266" selection-start-line="266" selection-end-line="266" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -294,8 +287,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>commando</find>
-      <find>Commando</find>
       <find>switc</find>
       <find>executeCommando</find>
       <find>join</find>
@@ -324,6 +315,8 @@
       <find>updateGamei</find>
       <find>updateS</find>
       <find>insertS</find>
+      <find>logout</find>
+      <find>logoutU</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -729,7 +722,7 @@
       <workItem from="1544010738068" duration="4150000" />
       <workItem from="1544017536929" duration="5755000" />
       <workItem from="1544036260509" duration="7825000" />
-      <workItem from="1544112290489" duration="274000" />
+      <workItem from="1544112290489" duration="558000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -1018,11 +1011,25 @@
       <option name="project" value="LOCAL" />
       <updated>1544043116259</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="outloggen fix">
+      <created>1544112698824</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1544112698830</updated>
+    </task>
+    <task id="LOCAL-00043" summary="outloggen fix">
+      <created>1544112819501</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1544112819501</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131712000" />
+    <option name="totallyTimeSpent" value="131996000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1037,7 +1044,7 @@
     <frame x="24" y="-8" width="1664" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15336658" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15336658" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1047,7 +1054,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.40343347" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.32903227" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.728145" weight="0.24570815" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.24570815" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.44313306" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -1141,7 +1148,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="lobbyscreen tabel fix : je ziet nu ook als de 2 e user joint" />
     <MESSAGE value="leavegame button init" />
     <MESSAGE value="probleem met een scherm onzichtbaar te maken" />
     <MESSAGE value="klaar om rejoin te implementeren" />
@@ -1166,7 +1172,8 @@
     <MESSAGE value="databanken maken nu connectie met elkaar in de pollthread" />
     <MESSAGE value="insertUser replicate OK" />
     <MESSAGE value="replication of inserting methods OK" />
-    <option name="LAST_COMMIT_MESSAGE" value="replication of inserting methods OK" />
+    <MESSAGE value="outloggen fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="outloggen fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1191,7 +1198,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java</url>
-          <line>169</line>
+          <line>183</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
@@ -1233,7 +1240,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java</url>
-          <line>140</line>
+          <line>154</line>
           <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
@@ -1555,8 +1562,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dispatcher/src/DispatchImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="201" column="15" selection-start-line="201" selection-start-column="15" selection-end-line="201" selection-end-column="15" />
+        <state relative-caret-position="974">
+          <caret line="240" column="15" selection-start-line="240" selection-start-column="15" selection-end-line="240" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1572,8 +1579,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Global/src/interfaces/AppServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+        <state relative-caret-position="260">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1582,8 +1589,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="140" column="25" selection-start-line="140" selection-start-column="25" selection-end-line="140" selection-end-column="25" />
+        <state relative-caret-position="557">
+          <caret line="154" column="25" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1596,8 +1603,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="293" column="9" selection-start-line="293" selection-start-column="9" selection-end-line="293" selection-end-column="9" />
+        <state relative-caret-position="180">
+          <caret line="266" selection-start-line="266" selection-end-line="266" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
