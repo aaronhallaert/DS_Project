@@ -15,9 +15,10 @@ import java.util.*;
 public class DispatchImpl extends UnicastRemoteObject implements DispatchInterface {
 
     /*------------------ATTRIBUTES ---------------------------------------*/
-    public static List<Integer> appServerPoorten=new ArrayList<>();
-    public static List<AppServerInterface> appImpls=new ArrayList<>();
-    ArrayList<DatabaseInterface> dbImpls=new ArrayList<>();
+    private static List<Integer> appServerPoorten=new ArrayList<>();
+    private static List<AppServerInterface> appImpls=new ArrayList<>();
+
+    private ArrayList<DatabaseInterface> dbImpls=new ArrayList<>();
     private ApplicationServerMaintainer asm;
     private int aantalGamesBezig;
 
@@ -25,11 +26,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     /*------------------CONSTRUCTORS -------------------------------------*/
     public DispatchImpl() throws RemoteException{
         try {
-
-
             // setup communicatie met databaseserver
             setupConnectionsToDBs();
-
         }
         catch(Exception e){
             e.printStackTrace();

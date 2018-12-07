@@ -27,84 +27,17 @@ import java.util.Map;
 
 public class Main extends Application {
 
-    //globale variabelen die we vaak gebruiken
+    /* -------- ATTRIBUTES ----------*/
     public static Connections cnts; //connectie naar de appserver, database, dispatcher
     public static boolean disconnected;
-    public static Map<String, byte[]> imageCache=new HashMap<>();
-    public static LinkedList<String> imageCacheSequence= new LinkedList<>();
-
-    /**
-     * wordt gebruikt om een afbeelding in te laden, maar enkel in de menu's , de kaartjes worden ingeladen met een
-     * andere methode
-     * @param kader
-     * @param naam
-     */
-    public static void setImage(ImageView kader, String naam) {
-
-        byte[] afbeelding = null;
-
-        try {
-
-            afbeelding = Main.cnts.appImpl.getImage(naam);
-
-            //converteren van de byte[] naar een waarde die imageView aankan
-            ByteArrayInputStream is =  new ByteArrayInputStream(afbeelding);
-            Image image = new Image(is);
-
-            //deze waarde in de ImageView zetten
-            kader.setImage(image);
 
 
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+    private static Map<String, byte[]> imageCache=new HashMap<>();
+    private static LinkedList<String> imageCacheSequence= new LinkedList<>();
+
+    public static void main(String[] args) {
+        launch(args);
     }
-
-    /** deze methode wordt gebruikt wanneer we de afbeeldingen van de kaartjes willen inladen
-     *
-     * @param naam
-     * @return
-     */
-    public static byte[] loadImageBytes(String naam){
-
-        byte[] afbeelding = imageCache.get(naam);
-
-        if(afbeelding==null) {
-            try {
-                afbeelding = Main.cnts.appImpl.getImage(naam);
-                imageCache.put(naam, afbeelding);
-                imageCacheSequence.add(naam);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-            if(imageCache.size()>18){
-                String removeImage= imageCacheSequence.removeFirst();
-                imageCache.remove(removeImage);
-            }
-        }
-        else{
-            //System.out.println("gevonden in cacheke");
-        }
-
-        return afbeelding;
-    }
-
-    /**
-     * @param gameInfoLijst
-     * @return
-     */
-    public static ObservableList<GameInfoObs> configureList(ArrayList<GameInfo> gameInfoLijst) {
-        ArrayList<GameInfoObs> returnList = new ArrayList<GameInfoObs>();
-
-        for (GameInfo gameInfo : gameInfoLijst) {
-            returnList.add(new GameInfoObs(gameInfo));
-        }
-
-        return FXCollections.observableArrayList(returnList);
-
-    }
-
-
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -128,6 +61,20 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * @param gameInfoLijst
+     * @return
+     */
+    public static ObservableList<GameInfoObs> configureList(ArrayList<GameInfo> gameInfoLijst) {
+        ArrayList<GameInfoObs> returnList = new ArrayList<GameInfoObs>();
+
+        for (GameInfo gameInfo : gameInfoLijst) {
+            returnList.add(new GameInfoObs(gameInfo));
+        }
+
+        return FXCollections.observableArrayList(returnList);
+
+    }
 
     public static void goToDisconnection(Scene close){
         // back to login
@@ -147,10 +94,7 @@ public class Main extends Application {
         close.getWindow().hide();
     }
 
-    // ALLE GO TO METHODEN KOMEN HIER
-    // ALLE GO TO METHODEN KOMEN HIER
-    // ALLE GO TO METHODEN KOMEN HIER
-    // ALLE GO TO METHODEN KOMEN HIER
+    /*-------------- REDIRECT METHODS ---------------*/
 
     public static void goToLogin(){
         // back to login
@@ -168,22 +112,6 @@ public class Main extends Application {
         registrerStage.show();
 
         cnts= new Connections(1902, startScene);
-
-
-    }
-
-    public static void fixDisconnection(Scene close) {
-        if(!disconnected){
-
-            CurrentGame.resetGame();
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    goToDisconnection(close);
-                }
-            });
-            disconnected=true;
-        }
 
 
     }
@@ -279,7 +207,76 @@ public class Main extends Application {
 
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void fixDisconnection(Scene close) {
+        if(!disconnected){
+            CurrentGame.resetGame();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    goToDisconnection(close);
+                }
+            });
+            disconnected=true;
+        }
+
+
+    }
+
+
+
+    /**
+     * wordt gebruikt om een afbeelding in te laden, maar enkel in de menu's , de kaartjes worden ingeladen met een
+     * andere methode
+     * @param kader
+     * @param naam
+     */
+    public static void setImage(ImageView kader, String naam) {
+
+        byte[] afbeelding = null;
+
+        try {
+
+            afbeelding = Main.cnts.appImpl.getImage(naam);
+
+            //converteren van de byte[] naar een waarde die imageView aankan
+            ByteArrayInputStream is =  new ByteArrayInputStream(afbeelding);
+            Image image = new Image(is);
+
+            //deze waarde in de ImageView zetten
+            kader.setImage(image);
+
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** deze methode wordt gebruikt wanneer we de afbeeldingen van de kaartjes willen inladen
+     *
+     * @param naam
+     * @return
+     */
+    public static byte[] loadImageBytes(String naam){
+
+        byte[] afbeelding = imageCache.get(naam);
+
+        if(afbeelding==null) {
+            try {
+                afbeelding = Main.cnts.appImpl.getImage(naam);
+                imageCache.put(naam, afbeelding);
+                imageCacheSequence.add(naam);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            if(imageCache.size()>18){
+                String removeImage= imageCacheSequence.removeFirst();
+                imageCache.remove(removeImage);
+            }
+        }
+        else{
+            //System.out.println("gevonden in cacheke");
+        }
+
+        return afbeelding;
     }
 }

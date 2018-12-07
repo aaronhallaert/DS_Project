@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Database3" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="DataServerMain" />
+    <module name="DatabaseServer" />
+    <option name="PROGRAM_PARAMETERS" value="1960" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

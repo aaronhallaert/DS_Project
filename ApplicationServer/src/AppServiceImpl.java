@@ -31,11 +31,8 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public AppServiceImpl() throws RemoteException{
         try {
 
-            /*----------DISPATCHER CONN ----------------*/
-            // connectie leggen met dispatcher + registratie bij dispatcher
+            /*---------- DISPATCH CONN ---------------*/
             dispatchImpl=(DispatchInterface) LocateRegistry.getRegistry("localhost", 1902).lookup("DispatchService");
-            dispatchImpl.registerAppserver(AppServerMain.thisappServerpoort);
-
 
             /*----------DATABASE CONN ----------------*/
             int databaseServerPoort = getWillekeurigeDatabaseServerPoort();

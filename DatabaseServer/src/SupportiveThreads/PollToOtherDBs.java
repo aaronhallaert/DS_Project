@@ -2,17 +2,20 @@ package SupportiveThreads;
 
 import interfaces.DatabaseInterface;
 
-import java.rmi.AccessException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 
+/**
+ * deze thread zorgt voor connectie met alle andere databases
+ */
 public class PollToOtherDBs extends Thread {
 
+    /*----- info over andere databases -----------*/
+    // poortnummers van de andere databases
     private ArrayList<Integer> otherPortNumbers;
-
+    // interfaces naar andere databases
     private ArrayList<DatabaseInterface> dbImpls;
+    // deze lijst houdt bij welke databases al reeds geconnecteerd zijn met deze database
     private ArrayList<Boolean> connected;
 
     public PollToOtherDBs(String dataBaseNaam) {
@@ -20,13 +23,10 @@ public class PollToOtherDBs extends Thread {
         otherPortNumbers = getOtherPortNumbers(dataBaseNaam);
         dbImpls = new ArrayList<DatabaseInterface>();
         connected = new ArrayList<>();
-
-        //int begin falses stoppen in die shizzl lijst ma nizzl
+        // initieel zijn er nog geen connecties met andere databases
         for (int i = 0; i < 3; i++) {
             connected.add(false);
         }
-
-        System.out.println("poll to other dbs thread constructor triggerd");
 
     }
 
@@ -49,8 +49,6 @@ public class PollToOtherDBs extends Thread {
                 e.printStackTrace();
             }
 
-            System.out.println();
-            System.out.println("herbeginnen met de lus");
 
             for (int i = 0; i < otherPortNumbers.size(); i++) {
 
@@ -63,17 +61,17 @@ public class PollToOtherDBs extends Thread {
                         dbImpls.add(dbImp);
                     }
 
-                    System.out.println("connected to "+otherPortNumbers.get(i));
+                    // connectie geslaagd
                     connected.set(i, true);
 
-
                 } catch (Exception e) {
-                    System.out.println("geen connectie met databaseServer op poort " + otherPortNumbers.get(i) + "gevonden");
+                    // geen connectie met databaseServer op poort otherPortNumbers.get(i) gevonden
+                    e.printStackTrace();
                 }
             }
 
 
-            setupDone = zijnWeKlaar(connected);
+            setupDone = connectedToAll(connected);
             //setupDone true -> uit de loop
 
         }
@@ -115,7 +113,7 @@ public class PollToOtherDBs extends Thread {
 
     }
 
-    private boolean zijnWeKlaar(ArrayList<Boolean> connected) {
+    private boolean connectedToAll(ArrayList<Boolean> connected) {
 
         boolean klaar = true;
 

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ApplicationServer" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="AppServerMain" />
+    <module name="ApplicationServer" />
+    <option name="PROGRAM_PARAMETERS" value="2000" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

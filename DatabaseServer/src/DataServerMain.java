@@ -11,14 +11,14 @@ public class DataServerMain {
     public static void main(String[] args) {
         // we gaan de databaseServers runnen op poorten 1940,1950,1960,
         try {
-            Registry dataRegistry= LocateRegistry.createRegistry(Integer.parseInt(args[0]));
-
             System.out.println("dataserver gelaunched op: "+ args[0]);
             databaseNaam = getDbName(args[0]);
 
+            // service aanbieden
+            Registry dataRegistry= LocateRegistry.createRegistry(Integer.parseInt(args[0]));
             dataRegistry.rebind("DatabaseService", new DatabaseImpl(databaseNaam));
-            System.out.println("connected met "+databaseNaam);
 
+            // zoeken naar andere databases
             pollToOtherDBs = new PollToOtherDBs(args[0]);
             pollToOtherDBs.start();
 
@@ -41,9 +41,4 @@ public class DataServerMain {
         }
     }
 
-
-    public static void connectToOtherDbs() {
-
-        System.out.println("mijn databasenaam is"+ databaseNaam);
-    }
 }

@@ -23,7 +23,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     /*--------- CONSTRUCTOR ----------------*/
     public DatabaseImpl(String databaseNaam) throws RemoteException{
-
         this.databaseNaam = databaseNaam;
         // maakt connectie met sql database
         connect();

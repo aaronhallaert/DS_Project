@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RunArchitecture" type="Multirun" factoryName="Multirun" separateTabs="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0">
+    <runConfiguration name="Database1" type="Application" />
+    <runConfiguration name="Database2" type="Application" />
+    <runConfiguration name="Database3" type="Application" />
+    <runConfiguration name="Database4" type="Application" />
+    <runConfiguration name="Dispatcher" type="Application" />
+    <runConfiguration name="ApplicationServer" type="Application" />
+    <runConfiguration name="Client" type="Application" />
+    <method v="2" />
+  </configuration>
+</component>

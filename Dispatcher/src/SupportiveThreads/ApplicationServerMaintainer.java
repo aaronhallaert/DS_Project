@@ -1,18 +1,16 @@
 package SupportiveThreads;
 
-import sun.plugin.com.DispatchImpl;
-
 public class ApplicationServerMaintainer extends Thread{
 
     private final int AANTALGAMESPERAPPSERVER = 3;
 
-    private int aantalBezigOpAppServer;
+    private int aantalBezigOpAppServers;
     private int vorigAantalGames;
 
 
     public ApplicationServerMaintainer(){
-        aantalBezigOpAppServer = 0;
-        vorigAantalGames = aantalBezigOpAppServer;
+        aantalBezigOpAppServers = 0;
+        vorigAantalGames = aantalBezigOpAppServers;
     }
 
     @Override
@@ -22,29 +20,27 @@ public class ApplicationServerMaintainer extends Thread{
 
     }
 
+    /**
+     *
+     * @param aantalGamesBezig nieuw aantal games
+     * @return  1 indien aantal games gestegen is
+     *          -1 indien aantal games gedaald is
+     */
     public int setAantalGames(int aantalGamesBezig) {
-
         int returnValue = 0;
-        this.aantalBezigOpAppServer = aantalGamesBezig;
+        this.aantalBezigOpAppServers = aantalGamesBezig;
 
-        if(aantalBezigOpAppServer > vorigAantalGames && aantalBezigOpAppServer % AANTALGAMESPERAPPSERVER == 0){
-
+        if(aantalBezigOpAppServers > vorigAantalGames && (aantalBezigOpAppServers % AANTALGAMESPERAPPSERVER) == 0){
             System.out.println("gestegen, nieuwe appserver moet aangemaakt worden");
-            returnValue = 1; // 1 omdat je een value moet ophogen
-
-
+            returnValue = 1;
         }
 
-        else if(aantalBezigOpAppServer < vorigAantalGames && aantalBezigOpAppServer % AANTALGAMESPERAPPSERVER == 0){
-
+        else if(aantalBezigOpAppServers < vorigAantalGames && (aantalBezigOpAppServers % AANTALGAMESPERAPPSERVER) == 0){
             System.out.println("gedaald, appserver moet verwijderd worden");
-            returnValue = -1; // -1 omdat je een server moet wegdoen
-
+            returnValue = -1;
         }
 
         vorigAantalGames = aantalGamesBezig;
         return returnValue;
-
-
     }
 }

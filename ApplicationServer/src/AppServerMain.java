@@ -7,7 +7,7 @@ import java.rmi.registry.Registry;
 public class AppServerMain {
 
     public static int thisappServerpoort;
-
+    private static DispatchInterface dispatchImpl;
 
 
     public static void main(String[] args) {
@@ -20,6 +20,10 @@ public class AppServerMain {
             Registry appRegistry= LocateRegistry.createRegistry(thisappServerpoort);
             appRegistry.rebind("AppserverService", new AppServiceImpl());
 
+            /*----------DISPATCHER CONN ----------------*/
+            // connectie leggen met dispatcher + registratie bij dispatcher
+            dispatchImpl=(DispatchInterface) LocateRegistry.getRegistry("localhost", 1902).lookup("DispatchService");
+            dispatchImpl.registerAppserver(AppServerMain.thisappServerpoort);
 
         }
         catch (Exception e){

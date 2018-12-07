@@ -10,13 +10,12 @@ import java.rmi.registry.Registry;
 
 public class Connections {
 
-    public Registry dispatchRegistry;
+    private Registry dispatchRegistry;
 
     public AppServerInterface appImpl;
-    public DispatchInterface dispatchImpl;
+    private DispatchInterface dispatchImpl;
 
     public Connections(int dispatcherpoort, Scene close) {
-
         try {
             dispatchRegistry = LocateRegistry.getRegistry("localhost", dispatcherpoort);
             dispatchImpl=(DispatchInterface) dispatchRegistry.lookup("DispatchService");
@@ -45,9 +44,5 @@ public class Connections {
 
     public DispatchInterface getDispatchImpl() {
         return dispatchImpl;
-    }
-
-    public void setDispatchImpl(DispatchInterface dispatchImpl) {
-        this.dispatchImpl = dispatchImpl;
     }
 }
