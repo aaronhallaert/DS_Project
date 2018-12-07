@@ -34,6 +34,7 @@ public interface DatabaseInterface extends Remote {
 
     /*---------- GAMES ------------------*/
     void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException;
+    void deleteGameInfo(int gameId, boolean b) throws RemoteException;
     void updateGameInfo(GameInfo gameInfo, boolean replicate ) throws RemoteException;
     List<GameInfo> getGameInfoList() throws RemoteException;
 
@@ -47,4 +48,5 @@ public interface DatabaseInterface extends Remote {
     ArrayList<Score> getScores() throws RemoteException;
 
     boolean ping() throws RemoteException;
+
 }

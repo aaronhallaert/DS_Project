@@ -25,6 +25,9 @@ public interface AppServerInterface extends Remote {
     /*----------- GAME INFO -----------------------*/
     int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException;
 
+    void deleteGame(int gameId, boolean replicate) throws RemoteException;
+
+
     int getNumberOfGames() throws RemoteException;
     ArrayList<GameInfo> getGameInfoLijst(int size) throws RemoteException; // enkel bij verandering
     ArrayList<GameInfo> getGameInfoLijst() throws RemoteException;  // instant

@@ -76,7 +76,7 @@ public class PollToOtherDBs extends Thread {
 
         }
 
-        System.out.println("alle db's verbonden, we  gaan  over tot volgende while");
+        System.out.println("ik ben met alle andere databases verbonden");
         // vanaf hier moeten  we proberen zaken op te vangen
 
         //todo: voorlopig niet kijken voor deze zaken, eerst zorgen dat een write gerepliqueerd wordt

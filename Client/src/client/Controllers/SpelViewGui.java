@@ -212,32 +212,18 @@ public class SpelViewGui extends Thread {
             disableMouseClick();
             wachtenLabel.setText("WINNER WINNER CHICKEN DINNER");
 
-            String username = CurrentUser.getInstance().getUsername();
-            int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
-            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
-
-
-            Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "WIN");
         }
 
         else if(commandoMessage.equals("LOSS")){
             disableMouseClick();
             wachtenLabel.setText("LOSER");
 
-            String username = CurrentUser.getInstance().getUsername();
-            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
-            int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
-            Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "LOSS");
         }
 
         else if(commandoMessage.equals("DRAW")){
             disableMouseClick();
             wachtenLabel.setText("GELIJKSPEL");
 
-            String username = CurrentUser.getInstance().getUsername();
-            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
-            int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
-            Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, "DRAW");
         }
 
         else{
@@ -248,6 +234,12 @@ public class SpelViewGui extends Thread {
         }
 
         if(commandoMessage.equals("WIN") || commandoMessage.equals("LOSS") || commandoMessage.equals("DRAW")){
+
+            //scorebord onderhouden
+            String username = CurrentUser.getInstance().getUsername();
+            int roosterSize = CurrentGame.getInstance().getGameInfo().getRoosterSize();
+            int eindScore = CurrentGame.getInstance().getGameState().getPunten().get(username);
+            Main.cnts.getAppImpl().updateScores(username, roosterSize, eindScore, commandoMessage);
 
             //todo: fix dat je de game connecties lijk afrondt
             try {
