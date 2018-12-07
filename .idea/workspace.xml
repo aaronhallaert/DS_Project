@@ -10,17 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/RunArchitecture.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/RunArchitecture.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApplicationServer/src/AppServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/Controllers/SpelViewGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/client/userfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/client/userfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database2.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database3.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database3.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/database4.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/database4.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/data/memorydb.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/src/Classes/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Global/src/Classes/GameState.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -213,13 +203,13 @@
           <entry key="fxml" value="52" />
           <entry key="java" value="39063" />
           <entry key="sql" value="18" />
-          <entry key="txt" value="1477" />
+          <entry key="txt" value="1534" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="39063" />
-          <entry key="PLAIN_TEXT" value="1477" />
+          <entry key="PLAIN_TEXT" value="1534" />
           <entry key="SQL" value="18" />
           <entry key="Scratch" value="14" />
           <entry key="XML" value="52" />
@@ -280,7 +270,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -288,15 +278,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.25.2/sqlite-jdbc-3.25.2.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="272" selection-start-line="272" selection-end-line="272" />
             </state>
           </provider>
         </entry>
@@ -781,7 +762,7 @@
       <workItem from="1544036260509" duration="7825000" />
       <workItem from="1544112290489" duration="700000" />
       <workItem from="1544211742531" duration="6020000" />
-      <workItem from="1544218009961" duration="801000" />
+      <workItem from="1544218009961" duration="1281000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -1098,11 +1079,18 @@
       <option name="project" value="LOCAL" />
       <updated>1544214488566</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="synchronized scores updaten">
+      <created>1544219023622</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1544219023622</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138959000" />
+    <option name="totallyTimeSpent" value="139439000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1221,7 +1209,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="probleem met een scherm onzichtbaar te maken" />
     <MESSAGE value="klaar om rejoin te implementeren" />
     <MESSAGE value="rejoinen is nu extreem buggy maar mogelijk" />
     <MESSAGE value="gamestate (flipped tiles en score) OK, volgende stap wie is aan de beurt" />
@@ -1246,7 +1233,8 @@
     <MESSAGE value="replication of inserting methods OK" />
     <MESSAGE value="outloggen fix" />
     <MESSAGE value="scorebord updaten op einde van een game nu in 1 lijn ipv 3 situationeel&#10;&#10;methode die spelletjes verwijderd op de appserver geschreven, nog niet gebruikt" />
-    <option name="LAST_COMMIT_MESSAGE" value="scorebord updaten op einde van een game nu in 1 lijn ipv 3 situationeel&#10;&#10;methode die spelletjes verwijderd op de appserver geschreven, nog niet gebruikt" />
+    <MESSAGE value="synchronized scores updaten" />
+    <option name="LAST_COMMIT_MESSAGE" value="synchronized scores updaten" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1676,6 +1664,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.25.2/sqlite-jdbc-3.25.2.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="272" selection-start-line="272" selection-end-line="272" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1683,13 +1678,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.25.2/sqlite-jdbc-3.25.2.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="272" selection-start-line="272" selection-end-line="272" />
         </state>
       </provider>
     </entry>
