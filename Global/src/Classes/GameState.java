@@ -298,6 +298,7 @@ public class GameState implements Serializable {
 
                     finished = true;
 
+                    //todo: naar hier komet de scoreUpdateLogica van gans het spel, grt
                     //dan is het spel gedaan
                     //wie is de winnaar?
 
@@ -333,6 +334,7 @@ public class GameState implements Serializable {
                         }
                         for (String winner : winners) {
                             inbox.get(winner).add(new Commando("DRAW", 1));
+
                         }
                     }
 

@@ -243,7 +243,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
 
-
     @Override
     public int getNumberOfGames() throws RemoteException {
         return gamesLijst.size();
@@ -465,7 +464,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     // HANDLING SCORE TABLE //
     @Override
-    public void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
+    public synchronized void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
         databaseImpl.updateScores(username, roosterSize, eindScore, command, true);
 
     }
