@@ -478,7 +478,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     @Override
     public synchronized List<GameInfo> getGameInfoList(int currentSize) throws RemoteException {
-
         while(currentSize == gameInfoList.size()) {
             try {
                 wait();
@@ -486,11 +485,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 e.printStackTrace();
             }
         }
-
-        // notify wait in deze methode indien meerdere appservers deze methode aanroepen
-        notifyAll();
         return gameInfoList;
-
 
     }
 

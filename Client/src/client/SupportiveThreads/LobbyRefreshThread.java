@@ -19,15 +19,13 @@ public class LobbyRefreshThread extends Thread{
     }
 
     @Override
-    public synchronized void run() {
-        super.run();
-
+    public void run() {
         try {
             while (true) {
-
                 // zal enkel returnen als grootte van lijst veranderd is
                 ArrayList<GameInfo> serverList= Main.cnts.getAppImpl().getGameInfoLijst(LobbyScreen.gameInfoList.size());
 
+                System.out.println("nieuwe list verkregen");
                 // methode in de main, wrapt van ArrayList<Game> -> ObservableList<GameObs>
                 LobbyScreen.gamesObsList = Main.configureList(serverList);
                 LobbyScreen.gameInfoList = new ArrayList<GameInfo>(serverList);
@@ -41,5 +39,6 @@ public class LobbyRefreshThread extends Thread{
             Main.fixDisconnection(ls.joinErrorLabel.getScene());
         }
 
+        super.run();
     }
 }

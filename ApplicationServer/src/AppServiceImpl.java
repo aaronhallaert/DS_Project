@@ -4,6 +4,7 @@ import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 
+import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -27,6 +28,9 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     private static Map<String, byte[]> imageCache = new HashMap<>();
     private static LinkedList<String> imageCacheSequence = new LinkedList<>();
 
+
+    GameInfoListReceiver gilr;
+
     /*-------------- CONSTRUCTOR ----------------------*/
     public AppServiceImpl() throws RemoteException {
         try {
@@ -42,7 +46,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
             // alle game infos uit database halen + thread voor updates van gameinfo opstarten //
             gameInfos.addAll(databaseImpl.getGameInfoList());
-            GameInfoListReceiver gilr = new GameInfoListReceiver(databaseImpl, gameInfos);
+            gilr = new GameInfoListReceiver(this, databaseImpl, gameInfos);
             gilr.start();
 
         } catch (Exception e) {
@@ -192,8 +196,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         // game info doorgeven aan database
         databaseImpl.addGameInfo(game.getGameInfo(), true);
 
-        // TODO ik denk dat deze methode niet meer hoeft te notifyen
-        notifyAll();
         return gameId;
 
     }
@@ -251,15 +253,20 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public synchronized ArrayList<GameInfo> getGameInfoLijst(int currentSize) throws RemoteException {
+        System.out.println("currentsize is "+ currentSize +" en gaminfo lijst heeft grootte "+ gameInfos.size());
         while (currentSize == gameInfos.size()) {
             try {
                 wait();
+                System.out.println("wait wordt verbroken");
+                System.out.println("currentsize is "+ currentSize +" en gaminfo lijst heeft grootte "+ gameInfos.size());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         System.out.println("size van gameinfos" + gameInfos.size());
-        return new ArrayList<>(gameInfos);
+        ArrayList<GameInfo> gameInfoList= new ArrayList<>(gameInfos);
+        return gameInfoList;
+
 
     }
 
@@ -510,7 +517,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public void updateBackupGS(GameState gameState) throws RemoteException {
-        if (!backup.getGame(gameState.getGameId()).getGameState().getAandeBeurt().equals(gameState.getAandeBeurt())) {
+        //if (!backup.getGame(gameState.getGameId()).getGameState().getAandeBeurt().equals(gameState.getAandeBeurt())) {
             backup.getGame(gameState.getGameId()).setGameState(gameState);
 
 
@@ -518,6 +525,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             for (Game game : backup.getGameList()) {
                 System.out.println(game);
             }
-        }
+       // }
+    }
+
+    @Override
+    public synchronized void notifyGameInfoList() throws RemoteException {
+        notifyAll();
     }
 }
