@@ -9,9 +9,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0b07a0f8-500b-44e5-bac4-29d5b0578e90" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -215,6 +213,11 @@
           <entry key="XML" value="52" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.create.new" value="1" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
@@ -273,8 +276,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="724" selection-start-line="724" selection-end-line="724" />
+            <state relative-caret-position="754">
+              <caret line="767" column="28" lean-forward="true" selection-start-line="767" selection-start-column="28" selection-end-line="767" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -365,6 +368,11 @@
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="IdeDocumentHistory">
@@ -762,7 +770,7 @@
       <workItem from="1544036260509" duration="7825000" />
       <workItem from="1544112290489" duration="700000" />
       <workItem from="1544211742531" duration="6020000" />
-      <workItem from="1544218009961" duration="1281000" />
+      <workItem from="1544218009961" duration="1536000" />
     </task>
     <task id="LOCAL-00001" summary="synchronisatiefout nog, voor de rest oké?">
       <created>1542017843317</created>
@@ -1086,11 +1094,18 @@
       <option name="project" value="LOCAL" />
       <updated>1544219023622</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="synchronized scores updaten">
+      <created>1544219420119</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1544219420119</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139439000" />
+    <option name="totallyTimeSpent" value="139694000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1115,7 +1130,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.40243903" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.32903227" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.728145" visible="true" weight="0.29711753" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.728145" weight="0.29711753" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4984127" weight="0.44313306" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -1137,7 +1152,7 @@
       <window_info anchor="right" id="Database" order="5" weight="0.26589242" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.1314181" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.1314181" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32962227" />
     </layout>
     <layout-to-restore>
@@ -1673,8 +1688,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseServer/src/DatabaseImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="724" selection-start-line="724" selection-end-line="724" />
+        <state relative-caret-position="754">
+          <caret line="767" column="28" lean-forward="true" selection-start-line="767" selection-start-column="28" selection-end-line="767" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
