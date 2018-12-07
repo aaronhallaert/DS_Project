@@ -118,7 +118,6 @@ public class Main extends Application {
         cnts= new Connections(1902, startScene);
 
 
-        // @TODO load in username en token from txt file
         BufferedReader br = new BufferedReader(new FileReader("Client/src/client/userfile.txt"));
         String line= br.readLine();
         br.close();

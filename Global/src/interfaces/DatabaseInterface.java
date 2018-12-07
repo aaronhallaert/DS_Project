@@ -6,6 +6,7 @@ import Classes.GameInfo;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface DatabaseInterface extends Remote {
 
@@ -29,10 +30,12 @@ public interface DatabaseInterface extends Remote {
     void connectTo(DatabaseInterface toImpl) throws RemoteException;
 
 
+    List<GameInfo> getGameInfoList(int currentSize) throws RemoteException;
+
     /*---------- GAMES ------------------*/
     void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException;
     void updateGameInfo(GameInfo gameInfo, boolean replicate ) throws RemoteException;
-
+    List<GameInfo> getGameInfoList() throws RemoteException;
 
     /*---------- SCORES -----------------*/
     void updateScores(String username, int roosterSize, int eindScore, String command, boolean replicate) throws RemoteException;

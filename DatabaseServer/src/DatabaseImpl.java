@@ -19,7 +19,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     private String databaseNaam;
     private static Connection conn = null;
     private ArrayList<DatabaseInterface> otherDbs=new ArrayList<>();
-
+    private List<GameInfo> gameInfoList=new ArrayList<>();
 
     /*--------- CONSTRUCTOR ----------------*/
     public DatabaseImpl(String databaseNaam) throws RemoteException{
@@ -163,8 +163,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         boolean result = false;
 
         try (
-                // opvragen van password en salt in db
-                PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            // opvragen van password en salt in db
+            PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, naam);
             ResultSet rs  = pstmt.executeQuery();
             String retrievePassword="";
@@ -446,8 +446,59 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
         }
     }
+
     @Override
-    public void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException {
+    public List<GameInfo> getGameInfoList() throws RemoteException {
+        connect();
+        String getGameInfoList= "SELECT * FROM GameInfo";
+        gameInfoList=new ArrayList<>();
+        try {
+            PreparedStatement pstmt= conn.prepareStatement(getGameInfoList);
+            ResultSet rs= pstmt.executeQuery();
+            while(rs.next()){
+                gameInfoList.add(
+                        new GameInfo(rs.getInt("gameId"),
+                                rs.getString("spelers"),
+                                rs.getInt("aantalSpelers"),
+                                rs.getInt("aantalSpelersConnected"),
+                                rs.getString("fotoSet"),
+                                rs.getInt("roosterSize"),
+                                rs.getInt("appServerPoort")
+                        )
+                );
+            }
+            closeConnection();
+            return gameInfoList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            return null;
+        }
+    }
+
+    @Override
+    public synchronized List<GameInfo> getGameInfoList(int currentSize) throws RemoteException {
+
+        while(currentSize == gameInfoList.size()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // notify wait in deze methode indien meerdere appservers deze methode aanroepen
+        notifyAll();
+        return gameInfoList;
+
+
+    }
+
+
+
+    @Override
+    public synchronized void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException {
 
 
         System.out.println("game info toevoegen");
@@ -502,10 +553,13 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
         }
 
+        System.out.println("toevoegen van gameinfo in list");
+        gameInfoList.add(gameInfo);
+        notifyAll();
 
     }
 
-    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SCORETABEL @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // SCORETABEL //
 
     @Override
     public boolean hasScoreRij(String username) throws RemoteException{

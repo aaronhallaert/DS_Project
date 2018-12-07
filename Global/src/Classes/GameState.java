@@ -38,7 +38,7 @@ public class GameState implements Serializable {
 
     private int aantalSpelers;
     private ArrayList<String> spectators;
-    private HashMap<String, List<Commando>> inboxSpectators;  // todo: configure spectator inbox
+    private HashMap<String, List<Commando>> inboxSpectators;
 
     //counters om de scores bij te houden -> in een list
     private HashMap<String, Integer> punten;
@@ -69,7 +69,7 @@ public class GameState implements Serializable {
     public GameState(int gameId, int dimensions, char fotoSet, String hostName, int aantalSpelers) {
         this.gameId=gameId;
 
-        //TODO; keuze aantal spelers
+
         this.aantalSpelers=aantalSpelers;
 
         /* initialize gamestate ---------*/
@@ -164,7 +164,7 @@ public class GameState implements Serializable {
     /**
      * @param commando het commando dat de andere speler moet uitvoeren
      * @param activeUser de speler die het commando al reeds heeft uitgevoerd
-     *
+     * @return returnt true indien na dit commando spelers van beurt wisselen
      *   als speler A deze methode triggert , dan:
      *                     wordt het commmando in speler B zijn mailbox gestopt
      *                     speler B haalt dit commando op en voert het lokaal uit
@@ -249,7 +249,7 @@ public class GameState implements Serializable {
      *
      * @param commando het commando die juist is uitgevoerd op de client
      * @param activeUser de client die dit commando uitvoert
-     * @return boolean die true weergeeft wanneer backup upgedate moet worden
+     * @return boolean die true teruggeeft wanneer backup upgedate moet worden
      */
     private boolean pasStateAan(Commando commando, String activeUser) {
 
@@ -445,7 +445,7 @@ public class GameState implements Serializable {
 
             return inboxSpeler;
         }
-        else{ // todo : voor de spectator
+        else{
 
             inboxSpectators.putIfAbsent(userName, new ArrayList<>());
 

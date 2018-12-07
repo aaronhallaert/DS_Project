@@ -6,6 +6,7 @@ import client.GameInfoObs;
 import client.Main;
 import client.SupportiveThreads.LobbyRefreshThread;
 import client.CurrentUser;
+import interfaces.AppServerInterface;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -66,7 +67,7 @@ public class LobbyScreen {
 
     public static ArrayList<GameInfo> gameInfoList;
     public static ObservableList<GameInfoObs> gamesObsList;
-
+    private LobbyRefreshThread checkAvailableGames;
 
     @FXML
     public void initialize(){
@@ -102,7 +103,7 @@ public class LobbyScreen {
             activeGamesTable.setItems(gamesObsList);
 
             // thread die om de 5 seconden de lobbytafel refresht aanmaken + opstarten
-            LobbyRefreshThread checkAvailableGames= new LobbyRefreshThread(this);
+            checkAvailableGames= new LobbyRefreshThread(this);
             checkAvailableGames.start();
 
             joinErrorLabel.setVisible(false);
@@ -122,6 +123,7 @@ public class LobbyScreen {
         activeGamesTable.setItems(gamesObsList);
     }
 
+    @FXML
     public void logout(){
         try {
             Main.cnts.getAppImpl().logoutUser(CurrentUser.getInstance().getUsername());
@@ -188,7 +190,14 @@ public class LobbyScreen {
                 }
                 else{
                     //TODO wat als er geen enkele appserver deze game heeft?
-                    Main.cnts.setAppImpl(Main.cnts.getDispatchImpl().changeClientServer(currentGameIdAttempt));
+                    checkAvailableGames.stop();
+                    AppServerInterface newServer= Main.cnts.getDispatchImpl().changeClientServer(currentGameIdAttempt);
+                    if(newServer!=null) {
+                        Main.cnts.setAppImpl(newServer);
+                    }
+                    checkAvailableGames= new LobbyRefreshThread(this);
+                    checkAvailableGames.start();
+                    joinGame();
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();

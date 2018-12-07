@@ -9,10 +9,6 @@ public class DataServerMain {
     public static PollToOtherDBs pollToOtherDBs;
 
     public static void main(String[] args) {
-
-
-
-        //vast poortnummer 1901
         // we gaan de databaseServers runnen op poorten 1940,1950,1960,
         try {
             Registry dataRegistry= LocateRegistry.createRegistry(Integer.parseInt(args[0]));

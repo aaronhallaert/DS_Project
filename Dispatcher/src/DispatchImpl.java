@@ -180,7 +180,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
         if(result == 1){
 
-            //todo: start nieuwe appserver
             System.out.println("starting nieuwe appserver...");
             makeNewAppserver();
 
