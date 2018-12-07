@@ -75,6 +75,7 @@ public class LobbyScreen {
         try {
 
 
+            /*---------- INIT SCORES ---------------*/
             //todo remove this , gewoon omdat we met verschillende databases werken dat het een probleem kan geven anders
             try {
                 Main.cnts.getAppImpl().checkIfHasScoreRowAndAddOneIfHasnt(CurrentUser.getInstance().getUsername());
@@ -83,15 +84,14 @@ public class LobbyScreen {
             }
 
 
+
+            /*---------- GAMEINFO TABLE -------------*/
+
             // eerste maal de gamesLijst van de appserver halen en visualiseren en de datatable
             gameInfoList = Main.cnts.getAppImpl().getGameInfoLijst();
-
             gamesObsList = Main.configureList(gameInfoList);
 
-
             //waarden van de tabel invullen
-
-            //deze strings zijn de exacte attribuutnamen van GameObs
             gameIdColumn.setCellValueFactory(new PropertyValueFactory<>("gameId"));
             aantalJoinedColumn.setCellValueFactory(new PropertyValueFactory<>("aantalSpelerConnected"));
             totaalSpelersColumn.setCellValueFactory(new PropertyValueFactory<>("maxAantalSpelers"));
@@ -102,12 +102,18 @@ public class LobbyScreen {
             // add data to table
             activeGamesTable.setItems(gamesObsList);
 
-            // thread die om de 5 seconden de lobbytafel refresht aanmaken + opstarten
+            // refresh lobby bij verandering
             checkAvailableGames= new LobbyRefreshThread(this);
             checkAvailableGames.start();
 
+
+
+            /*------------ INIT LAYOUT STATE --------------*/
             joinErrorLabel.setVisible(false);
-            //shaketransition configureren
+
+
+
+            /*---------- ANIMATIONS --------------*/
             errorAnimation = new RotateTransition(Duration.millis(50), joinErrorLabel);
             errorAnimation.setByAngle(10);
             errorAnimation.setCycleCount(8);
@@ -119,6 +125,9 @@ public class LobbyScreen {
 
     }
 
+    /**
+     * refreshen van de game info table
+     */
     public void refresh(){
         activeGamesTable.setItems(gamesObsList);
     }
@@ -130,65 +139,56 @@ public class LobbyScreen {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+
+        // GUI
         Main.goToLogin();
-        // Hide this current window
         logoutLink.getScene().getWindow().hide();
     }
 
     @FXML
     public void spelSetup(){
-
-        //huidig window wegdoen
+        // GUI
         logoutLink.getScene().getWindow().hide();
-
-        //naar volgend window
         Main.goToSetupSpel();
     }
 
     @FXML
     private void joinGame() {
 
+        // selectie opvragen
         GameInfoObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
         if(deGameToJoin == null){
-
-            //geef iets van info dat je geen game gekozen hebt
-            System.out.println("er bestaat geen dergelijke game");
-            displayErrorMessage("Geen game aangeklikt!");
-
+            displayErrorMessage("Geen game geselecteerd!");
         }
         else {
 
-            //join this game
+            // id van game die we proberen te joinen
             int currentGameIdAttempt = deGameToJoin.getGameId();
-
-
             try {
                 if(Main.cnts.getAppImpl().hasGame(currentGameIdAttempt)) {
-                    //try to join
-                    try {
-                        if (Main.cnts.getAppImpl().join(CurrentUser.getInstance().getUsername(), currentGameIdAttempt)) {
-                            CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
+                    // als application server die momenteel verbonden is met deze client de game ter beschikking heeft,
+                    // kan men proberen de game te joinen
+                    if (Main.cnts.getAppImpl().join(CurrentUser.getInstance().getUsername(), currentGameIdAttempt)) {
 
-                            // ga verder naar GAME
-                            SpelViewLogica spv = new SpelViewLogica(true);
-                            spv.start();
+                        // SET GAME //
+                        CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
-                            Platform.setImplicitExit(false);
-                            spelSetup.getScene().getWindow().hide();
-                        } else { // als geen successvolle join
+                        // GUI //
+                        SpelViewLogica spv = new SpelViewLogica(true);
+                        spv.start();
+                        Platform.setImplicitExit(false);
+                        spelSetup.getScene().getWindow().hide();
 
-                            displayErrorMessage("join failed");
 
-                            System.out.println("lobbyscreen.java: je bent een 3 e speler die probeert te joinen en dat mag niet!");
-
-                        }
-
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
+                    } else {
+                        displayErrorMessage("Join Failed");
                     }
+
+
 
                 }
                 else{
+                    /*------- OPVRAGEN NIEUWE APPSERVER --------*/
                     //TODO wat als er geen enkele appserver deze game heeft?
                     checkAvailableGames.stop();
                     AppServerInterface newServer= Main.cnts.getDispatchImpl().changeClientServer(currentGameIdAttempt);
@@ -198,6 +198,7 @@ public class LobbyScreen {
                     checkAvailableGames= new LobbyRefreshThread(this);
                     checkAvailableGames.start();
                     joinGame();
+
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -213,40 +214,50 @@ public class LobbyScreen {
     @FXML
     public void spectate(){
 
+        // selectie opvragen
         GameInfoObs deGameToJoin = activeGamesTable.getSelectionModel().getSelectedItem();
         if(deGameToJoin == null){
-
-            //geef iets van info dat je geen game gekozen hebt
-            System.out.println("er bestaat geen dergelijke game");
             displayErrorMessage("Geen game aangeklikt!");
-
         }
         else {
 
-            //join this game
+            // id van game dat we proberen te spectaten
             int currentGameIdAttempt = deGameToJoin.getGameId();
 
-            //try to join
+
             try {
+                // men kan enkel spectaten bij de appserver waar game draait
+                if(Main.cnts.getAppImpl().hasGame(currentGameIdAttempt)) {
+                    CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
+                    String thisUser = CurrentUser.getInstance().getUsername();
 
-                CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(currentGameIdAttempt));
 
-                String thisUser  = CurrentUser.getInstance().getUsername();
+                    if (!CurrentGame.getInstance().getGameInfo().getSpelers().contains(thisUser)) {
+                        //registratie om te spectaten bij appserver
+                        Main.cnts.getAppImpl().spectate(CurrentGame.getInstance().getGameState().getGameId(), CurrentUser.getInstance().getUsername());
 
-                Main.cnts.getAppImpl().spectate(CurrentGame.getInstance().getGameState().getGameId(), CurrentUser.getInstance().getUsername());
+                        // ga verder naar spectaten ALLEEN als je niet deelneemt aan de game zelf
+                        SpelViewLogica spv = new SpelViewLogica(false);
+                        spv.start();
 
-                if(!CurrentGame.getInstance().getGameInfo().getSpelers().contains(thisUser)) {
-                    // ga verder naar spectaten ALLEEN als je niet deelneemt aan de game zelf
-                    SpelViewLogica spv = new SpelViewLogica(false);
-                    spv.start();
-                    //dit gaat fout want het zal ontlocked worden waarschijnlijk later
-
-                    Platform.setImplicitExit(false);
-                    spelSetup.getScene().getWindow().hide();
+                        Platform.setImplicitExit(false);
+                        spelSetup.getScene().getWindow().hide();
+                    } else {
+                        displayErrorMessage("eigen game niet joinbaar!");
+                    }
                 }
-
                 else{
-                    displayErrorMessage("eigen game niet joinbaar!");
+                    /*------- OPVRAGEN NIEUWE APPSERVER --------*/
+                    //TODO wat als er geen enkele appserver deze game heeft?
+                    checkAvailableGames.stop();
+                    AppServerInterface newServer= Main.cnts.getDispatchImpl().changeClientServer(currentGameIdAttempt);
+                    if(newServer!=null) {
+                        Main.cnts.setAppImpl(newServer);
+                    }
+                    checkAvailableGames= new LobbyRefreshThread(this);
+                    checkAvailableGames.start();
+                    // probeer opnieuw te spectaten
+                    spectate();
                 }
 
             }
@@ -274,9 +285,5 @@ public class LobbyScreen {
         joinErrorLabel.setVisible(true);
         errorAnimation.play();
     }
-
-
-
-
 
 }

@@ -24,14 +24,15 @@ public class LobbyRefreshThread extends Thread{
 
         try {
             while (true) {
-                System.out.println("vraag naar infolijst");
+
+                // zal enkel returnen als grootte van lijst veranderd is
                 ArrayList<GameInfo> serverList= Main.cnts.getAppImpl().getGameInfoLijst(LobbyScreen.gameInfoList.size());
 
-                //methode in de main, wrapt van ArrayList<Game> -> ObservableList<GameObs>
+                // methode in de main, wrapt van ArrayList<Game> -> ObservableList<GameObs>
                 LobbyScreen.gamesObsList = Main.configureList(serverList);
                 LobbyScreen.gameInfoList = new ArrayList<GameInfo>(serverList);
-                System.out.println("refresh");
 
+                // refresh de table
                 ls.refresh();
             }
         }

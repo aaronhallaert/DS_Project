@@ -225,6 +225,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public void insertUser(String username, String confirmPassword) throws RemoteException {
+        // TODO doorsturen naar alle databaseservers in 1 keer? of doorsturen naar een willekeurige database?
         dbImpls.get(0).insertUser(username, confirmPassword, true);
         dbImpls.get(0).insertScoreRow(username, true);
     }
@@ -233,8 +234,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     // OVERZETTEN VAN ... //
     @Override
     public synchronized void changeGameServer(AppServerInterface currentAppImpl, Game game) throws RemoteException{
-
-
             List<AppServerInterface> possibleAppServers=new ArrayList<>();
             for (AppServerInterface appImpl : appImpls) {
                 if(appImpl.getNumberOfGames()<3 && appImpl!=currentAppImpl){
@@ -250,7 +249,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
                 possibleAppServers.get(0).takeOverGame(game);
                 currentAppImpl.removeGame(game);
             }
-
     }
 
     @Override
