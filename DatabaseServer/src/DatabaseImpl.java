@@ -751,6 +751,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             pstmt.setString(1,username);
             ResultSet rs = pstmt.executeQuery();
 
+            closeConnection();
             int aantalGames = rs.getInt("aantalGames");
             aantalGames++;
             sqlUpdaters.add("UPDATE Scores SET aantalGames = "+ aantalGames +" WHERE Username = ? ");
@@ -809,6 +810,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
 
 
+            connect();
             //voer elke sql string uit
             for (String sqlString : sqlUpdaters) {
 

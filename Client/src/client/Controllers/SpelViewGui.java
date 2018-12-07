@@ -162,7 +162,7 @@ public class SpelViewGui extends Thread {
 
         //extra logica zodat finished game niet meer clickable is
         if(gameState.getfinished()){
-            System.out.println("tibotibo game is finished");
+            System.out.println("game is finished");
             //lock alles
             root.setDisable(true);
         }
