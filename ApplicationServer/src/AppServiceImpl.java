@@ -416,6 +416,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     // ASK / PUSH METADATA //
 
+
     /**
      * vraag aan db om een bytestream die een image voorstelt te geven
      *
