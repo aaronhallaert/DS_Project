@@ -65,8 +65,7 @@ public class PollToOtherDBs extends Thread {
                     connected.set(i, true);
 
                 } catch (Exception e) {
-                    // geen connectie met databaseServer op poort otherPortNumbers.get(i) gevonden
-                    e.printStackTrace();
+                    System.out.println("geen connectie met databaseServer op poort"+ otherPortNumbers.get(i)+" gevonden");
                 }
             }
 

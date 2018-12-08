@@ -216,6 +216,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         Game game = new Game(gameId, activeUser, dimensies, set, aantalSpelers, AppServerMain.thisappServerpoort);
         gamesLijst.add(game);
+
+
+        //todo: remove the printing of the kaartjes
+        game.getGameState().printSequence();
+
         System.out.println("game door " + activeUser + " aangemaakt!");
         System.out.println("gameslist grootte is nu: " + gamesLijst.size());
 

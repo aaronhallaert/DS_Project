@@ -612,4 +612,23 @@ public class GameState implements Serializable {
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
+
+    public void printSequence() {
+
+        System.out.println("werkt alleen maar voor een 4X4 spelletje, zit er nu gewoon in om te debuggen");
+        if(aantalPerRij == 4) {
+
+            for (int i = 0; i < tegelsList.size(); i++) {
+
+                System.out.print(tegelsList.get(i).getId() + " | ");
+                i++;
+                System.out.print(tegelsList.get(i).getId() + " | ");
+                i++;
+                System.out.print(tegelsList.get(i).getId() + " | ");
+                i++;
+                System.out.println(tegelsList.get(i).getId());
+
+            }
+        }
+    }
 }
