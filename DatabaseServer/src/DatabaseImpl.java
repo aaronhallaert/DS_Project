@@ -64,6 +64,34 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         return Hashing.sha256().hashString((password),StandardCharsets.UTF_8).toString();
     }
 
+    private boolean vergelijkGameInfoList(List<GameInfo> oudeList, List<GameInfo> gameInfoList){
+        if(oudeList.size()!=gameInfoList.size()){
+            return false;
+        }
+        else{
+            for (GameInfo gameInfo : gameInfoList) {
+                GameInfo foundGameInfo = null;
+
+                for (GameInfo info : oudeList) {
+                    if(info.getGameId()==gameInfo.getGameId()){
+                        foundGameInfo =info;
+
+                        if(info.getSpelers().size()!=gameInfo.getSpelers().size()){
+                            return false;
+                        }
+
+                        break;
+                    }
+                }
+                if(foundGameInfo == null){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
 
 
 
@@ -404,7 +432,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     // GAMES //
     @Override
-    public void updateGameInfo(GameInfo gameInfo, boolean replicate) {
+    public synchronized void updateGameInfo(GameInfo gameInfo, boolean replicate) {
         connect();
         ArrayList<String> spelers= gameInfo.getSpelers();
         StringBuilder sb= new StringBuilder();
@@ -434,7 +462,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             se.printStackTrace();
         }
         closeConnection();
-
+        for (GameInfo info : gameInfoList) {
+            if(info.getGameId()==gameInfo.getGameId()){
+                gameInfoList.remove(info);
+                gameInfoList.add(gameInfo);
+                break;
+            }
+        }
+        notifyAll();
         if(replicate) {
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
                 try {
@@ -477,24 +512,19 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
     @Override
-    public synchronized List<GameInfo> getGameInfoList(int currentSize) throws RemoteException {
-
-        while(currentSize == gameInfoList.size()) {
+    public synchronized List<GameInfo> getGameInfoList(boolean dummy) throws RemoteException {
+        ArrayList<GameInfo> gameInfoOld= new ArrayList<>(gameInfoList);
+        while(vergelijkGameInfoList(gameInfoOld, gameInfoList) ) {
             try {
                 wait();
+                System.out.println("wait wordt verbroken");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        // notify wait in deze methode indien meerdere appservers deze methode aanroepen
-        notifyAll();
         return gameInfoList;
 
-
     }
-
-
 
     @Override
     public synchronized void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException {

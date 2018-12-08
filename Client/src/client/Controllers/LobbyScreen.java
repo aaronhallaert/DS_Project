@@ -129,7 +129,13 @@ public class LobbyScreen {
      * refreshen van de game info table
      */
     public void refresh(){
-        activeGamesTable.setItems(gamesObsList);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                activeGamesTable.setItems(gamesObsList);
+            }
+        });
+
     }
 
     @FXML

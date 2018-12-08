@@ -29,7 +29,7 @@ public interface AppServerInterface extends Remote {
 
 
     int getNumberOfGames() throws RemoteException;
-    ArrayList<GameInfo> getGameInfoLijst(int size) throws RemoteException; // enkel bij verandering
+    ArrayList<GameInfo> getGameInfoLijst(boolean dummy) throws RemoteException; // enkel bij verandering
     ArrayList<GameInfo> getGameInfoLijst() throws RemoteException;  // instant
     ArrayList<Game> getGamesLijst() throws RemoteException;
 
@@ -73,4 +73,7 @@ public interface AppServerInterface extends Remote {
     void setDestinationBackup(int appBackupPoort) throws RemoteException;
 
     void updateBackupGS(GameState gameState) throws RemoteException;
+
+
+    void notifyGameInfoList() throws RemoteException;
 }

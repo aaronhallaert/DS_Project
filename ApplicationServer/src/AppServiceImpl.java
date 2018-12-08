@@ -4,6 +4,7 @@ import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 
+import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -19,13 +20,16 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     /*--------------- ATTRIBUTES ----------------------*/
     private ArrayList<Game> gamesLijst = new ArrayList<>(); //game bevat GameInfo en GameState
-    public Set<GameInfo> gameInfos = new HashSet<>();
+    public ArrayList<GameInfo> gameInfos = new ArrayList<>();
 
     private BackupGames backup;
     private AppServerInterface destinationBackup;
 
     private static Map<String, byte[]> imageCache = new HashMap<>();
     private static LinkedList<String> imageCacheSequence = new LinkedList<>();
+
+
+    GameInfoListReceiver gilr;
 
     /*-------------- CONSTRUCTOR ----------------------*/
     public AppServiceImpl() throws RemoteException {
@@ -42,7 +46,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
             // alle game infos uit database halen + thread voor updates van gameinfo opstarten //
             gameInfos.addAll(databaseImpl.getGameInfoList());
-            GameInfoListReceiver gilr = new GameInfoListReceiver(databaseImpl, gameInfos);
+            gilr = new GameInfoListReceiver(this, databaseImpl, gameInfos);
             gilr.start();
 
         } catch (Exception e) {
@@ -88,7 +92,33 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
 
+    private boolean vergelijkGameInfoList(List<GameInfo> oudeList, List<GameInfo> gameInfoList){
+        if(oudeList.size()!=gameInfoList.size()){
+            return false;
+        }
+        else{
+            for (GameInfo gameInfo : gameInfoList) {
+                GameInfo foundGameInfo = null;
 
+                for (GameInfo info : oudeList) {
+                    if(info.getGameId()==gameInfo.getGameId()){
+                        foundGameInfo =info;
+
+                        if(info.getSpelers().size()!=gameInfo.getSpelers().size()){
+                            return false;
+                        }
+
+                        break;
+                    }
+                }
+                if(foundGameInfo == null){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
     /*--------------- SERVICES ------------------------*/
     // APPSERVERINFO //
     @Override
@@ -192,8 +222,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         // game info doorgeven aan database
         databaseImpl.addGameInfo(game.getGameInfo(), true);
 
-        // TODO ik denk dat deze methode niet meer hoeft te notifyen
-        notifyAll();
         return gameId;
 
     }
@@ -249,16 +277,22 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public synchronized ArrayList<GameInfo> getGameInfoLijst(int currentSize) throws RemoteException {
-        while (currentSize == gameInfos.size()) {
+    public synchronized ArrayList<GameInfo> getGameInfoLijst(boolean dummy) throws RemoteException {
+
+        ArrayList<GameInfo> oudeList= new ArrayList<>(gameInfos);
+        while (vergelijkGameInfoList(oudeList, gameInfos)) {
             try {
                 wait();
+                System.out.println("game info lijst werd genotified");
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         System.out.println("size van gameinfos" + gameInfos.size());
         return new ArrayList<>(gameInfos);
+
+
 
     }
 
@@ -408,6 +442,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     // ASK / PUSH METADATA //
 
+
     /**
      * vraag aan db om een bytestream die een image voorstelt te geven
      *
@@ -509,7 +544,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public void updateBackupGS(GameState gameState) throws RemoteException {
-        if (!backup.getGame(gameState.getGameId()).getGameState().getAandeBeurt().equals(gameState.getAandeBeurt())) {
+        //if (!backup.getGame(gameState.getGameId()).getGameState().getAandeBeurt().equals(gameState.getAandeBeurt())) {
             backup.getGame(gameState.getGameId()).setGameState(gameState);
 
 
@@ -517,6 +552,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             for (Game game : backup.getGameList()) {
                 System.out.println(game);
             }
-        }
+       // }
+    }
+
+    @Override
+    public synchronized void notifyGameInfoList() throws RemoteException {
+        notifyAll();
     }
 }
