@@ -25,7 +25,6 @@ public interface AppServerInterface extends Remote {
     /*----------- GAME INFO -----------------------*/
     int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException;
 
-    void deleteGame(int gameId, boolean replicate) throws RemoteException;
 
 
     int getNumberOfGames() throws RemoteException;
@@ -60,7 +59,9 @@ public interface AppServerInterface extends Remote {
 
     /*---------- HANDLING GAMES INTERNALLY ------------*/
     void takeOverGame(Game game) throws RemoteException;
-    void removeGame(Game game) throws RemoteException;
+    void deleteGame(int gameId, boolean replicate) throws RemoteException;
+    void deleteBackupGame(int gameId) throws RemoteException;
+    void removeGameFromRunningGames(Game game) throws RemoteException;
 
     /*---------- HANDLINE SCORE TABLES ----------------*/
     void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException;
@@ -75,4 +76,5 @@ public interface AppServerInterface extends Remote {
 
 
     void notifyGameInfoList() throws RemoteException;
+
 }

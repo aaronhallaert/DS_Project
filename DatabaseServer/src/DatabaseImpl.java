@@ -589,7 +589,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
     @Override
-    public void deleteGameInfo(int gameId, boolean replicate) throws RemoteException {
+    public synchronized void deleteGameInfo(int gameId, boolean replicate) throws RemoteException {
 
         String sql = "DELETE FROM GameInfo WHERE gameId=?;";
 
@@ -597,7 +597,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, gameId);
-            ResultSet rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
 
         }
 
@@ -613,7 +613,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 dbRef.deleteGameInfo(gameId, false);
             }
         }
-
+        notifyAll();
         System.out.println("game met gameId: "+gameId+"succesvol verwijderd uit DB");
 
     }

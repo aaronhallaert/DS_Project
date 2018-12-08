@@ -14,6 +14,9 @@ import java.util.*;
 
 public class DispatchImpl extends UnicastRemoteObject implements DispatchInterface {
 
+    //todo: ASM moet niet meer in een thread
+
+
     /*------------------ATTRIBUTES ---------------------------------------*/
     private static List<Integer> appServerPoorten=new ArrayList<>();
     private static List<AppServerInterface> appImpls=new ArrayList<>();
@@ -190,10 +193,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void gameFinished() throws RemoteException{
 
-        //todo dit wordt hier door elke speler op het einde van zn game getriggerd
-        //dus aantalGamesbezig = aantalGamesbezig - aantalSpelers
-        // mag neiet
         aantalGamesBezig--;
+
         int result = asm.setAantalGames(aantalGamesBezig);
 
         if(result == -1){
@@ -252,7 +253,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             }
             else{
                 possibleAppServers.get(0).takeOverGame(game);
-                currentAppImpl.removeGame(game);
+                currentAppImpl.removeGameFromRunningGames(game);
             }
     }
 

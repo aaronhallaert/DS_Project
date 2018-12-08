@@ -4,7 +4,6 @@ import interfaces.AppServerInterface;
 import interfaces.DatabaseInterface;
 import interfaces.DispatchInterface;
 
-import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -182,9 +181,14 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void close() throws RemoteException {
         // TODO check of dit klopt
-        for (Game game : gamesLijst) {
+        ArrayList<Game> toDelete= new ArrayList<>(gamesLijst);
+        for (Game game : toDelete) {
             dispatchImpl.changeGameServer(this, game);
+
+            // het probleem is dat de dispatcher games zal verwijderen van deze appserver terwijl dat ie ier aant itereren is erover
         }
+
+
         System.exit(0);
     }
 
@@ -211,7 +215,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             return false;
         }
     }
-
     /**
      * inloggen met token
      *
@@ -279,50 +282,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
 
-    //todo: implement deze methode
-    /**
-     * de gameInfo moet overal verwijderd worden.
-     * op deze appserver
-     * op de backupAppserver
-     * op de databaszq
-     * de gameState moet op deze appserver en zijn backup verwijderd worden
-     * enkel op deze appserver
-     * en in de backupappserver
-     *
-     * eerst de gameState verwijderen
-     *
-     * eerst de backupGameState verwijderen
-     *
-     * @param gameId de id van de game
-     * @throws RemoteException
-     */
-    @Override
-    public void deleteGame(int gameId, boolean replicate) throws RemoteException {
 
-        //eerst in de backup hiervan gaan verwijderen
-        if (replicate) {
-            destinationBackup.deleteGame(gameId, false); // zowel gameInfo als GameState
-        }
-
-        //dan pas lokaal de gameState verijwderen
-        Game game = getGame(gameId);
-        gamesLijst.remove(game);
-        System.out.println("gameState met id: " + gameId + " succesvol verwijderd op appserver");
-        //nu de gameState lokaal verwijderen
-        GameInfo gameInfo = getGameInfo(gameId);
-        gameInfos.remove(gameInfo);
-        System.out.println("gameInfo met id: " + gameId + " succesvol verwijderd op appserver");
-
-
-        // de gameInfo in de databases verwijderen
-        if (replicate) {
-            databaseImpl.deleteGameInfo(gameId, true);
-        }
-
-        System.out.println("klaar met gameInfo " + gameId + " te verwijderen op DB's");
-
-
-    }
 
     @Override
     public int getNumberOfGames() throws RemoteException {
@@ -493,7 +453,14 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
 
             // gameinfo en gamestate verwijderen uit databaseServer
-            // closeconnections indien nodig
+            deleteGame(currentGameId, true);
+
+            // game finishen in dispatcher ( checken als een AS moet afgesloten worden)
+            try {
+                dispatchImpl.gameFinished();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
 
 
         }
@@ -566,10 +533,67 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
 
     // HANDLING GAMES INTERNALLY //
+
+
+
+    //todo: implement deze methode
+    /**
+     * de gameInfo moet overal verwijderd worden.
+     * op deze appserver
+     * op de backupAppserver
+     * op de databaszq
+     * de gameState moet op deze appserver en zijn backup verwijderd worden
+     * enkel op deze appserver
+     * en in de backupappserver
+     *
+     * eerst de gameState verwijderen
+     *
+     * eerst de backupGameState verwijderen
+     *
+     * @param gameId de id van de game
+     * @throws RemoteException
+     */
     @Override
-    public void removeGame(Game game) throws RemoteException {
-        gamesLijst.remove(game);
+    public void deleteGame(int gameId, boolean replicate) throws RemoteException {
+
+        //eerst in de backup hiervan gaan verwijderen
+        if (replicate && destinationBackup!=null) {
+            destinationBackup.deleteBackupGame(gameId); // zowel gameInfo als GameState
+        }
+
+        removeGameFromRunningGames(getGame(gameId));
+
+
+        // de gameInfo in de databases verwijderen
+        if (replicate) {
+            databaseImpl.deleteGameInfo(gameId, true);
+        }
+
+        System.out.println("klaar met gameInfo " + gameId + " te verwijderen op DB's");
+
+
     }
+    @Override
+    public void removeGameFromRunningGames(Game game) throws RemoteException {
+        //dan pas lokaal de gameState verijwderen
+        int gameId= game.getGameId();
+        gamesLijst.remove(game);
+        System.out.println("gameState met id: " + gameId + " succesvol verwijderd op appserver");
+        //nu de gameState lokaal verwijderen
+        GameInfo gameInfo = getGameInfo(gameId);
+        gameInfos.remove(gameInfo);
+        System.out.println("gameInfo met id: " + gameId + " succesvol verwijderd op appserver");
+
+
+    }
+
+    @Override
+    public void deleteBackupGame(int gameId) throws RemoteException {
+        backup.getGameList().remove(backup.getGame(gameId));
+    }
+
+
+
 
     @Override
     public void takeOverGame(Game game) throws RemoteException {
@@ -636,4 +660,5 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public synchronized void notifyGameInfoList() throws RemoteException {
         notifyAll();
     }
+
 }
