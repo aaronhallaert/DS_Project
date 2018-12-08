@@ -738,7 +738,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
     @Override
-    public void updateScores(String username, int roosterSize, int eindScore, String command, boolean replicate) throws RemoteException {
+    public synchronized void updateScores(String username, int roosterSize, int eindScore, String command, boolean replicate) throws RemoteException {
 
         String sql = "SELECT * FROM Scores WHERE Username = ? ";
 
@@ -751,8 +751,18 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             pstmt.setString(1,username);
             ResultSet rs = pstmt.executeQuery();
 
-            closeConnection();
+            //alle info in 1 x uit de rs halen, zodat we kunnen sluiten
+            //als we de connectie sluiten voordat de info uit rs halen, krijgen we error:
+            //java.sql.SQLException: The prepared statement has been finalized
+
             int aantalGames = rs.getInt("aantalGames");
+            int dbWins = rs.getInt("wins");
+            int dbLosses = rs.getInt("losses");
+            int draws = rs.getInt("draws");
+            int eindScoreInDb4x4 = rs.getInt("max4x4");
+            int eindScoreInDb6x6 = rs.getInt("max6x6");
+
+            closeConnection();
             aantalGames++;
             sqlUpdaters.add("UPDATE Scores SET aantalGames = "+ aantalGames +" WHERE Username = ? ");
 
@@ -760,7 +770,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
             if(roosterSize == 4){
 
-                if(eindScore > rs.getInt("max4x4") ){
+                if(eindScore > eindScoreInDb4x4 ){
                     sqlUpdaters.add("UPDATE Scores SET max4x4 = "+ eindScore +" WHERE Username = ? ");
                 }
 
@@ -768,7 +778,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
             else if(roosterSize == 6){
 
-                if(eindScore > rs.getInt("max6x6") ){
+                if(eindScore > eindScoreInDb6x6 ){
                     sqlUpdaters.add("UPDATE Scores SET max6x6 = "+ eindScore +" WHERE Username = ? ");
                 }
 
@@ -780,7 +790,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
                 case "WIN":
 
-                    int dbWins = rs.getInt("wins");
                     dbWins++;
                     sqlUpdaters.add("UPDATE Scores SET wins = "+ dbWins +" WHERE Username = ? ");
                     //dbwins moet terug weg
@@ -789,7 +798,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
                 case "LOSS":
 
-                    int dbLosses = rs.getInt("losses");
+
                     dbLosses++;
                     sqlUpdaters.add("UPDATE Scores SET wins = "+ dbLosses +" WHERE Username = ? ");
                     break;
@@ -797,7 +806,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
                 case "DRAW":
 
-                    int draws = rs.getInt("draws");
+
                     draws++;
                     sqlUpdaters.add("UPDATE Scores SET wins = "+ draws +" WHERE Username = ? ");
                     break;
