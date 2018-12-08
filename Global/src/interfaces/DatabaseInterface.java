@@ -30,7 +30,7 @@ public interface DatabaseInterface extends Remote {
     void connectTo(DatabaseInterface toImpl) throws RemoteException;
 
 
-    List<GameInfo> getGameInfoList(int currentSize) throws RemoteException;
+    List<GameInfo> getGameInfoList(boolean dummy) throws RemoteException;
 
     /*---------- GAMES ------------------*/
     void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException;

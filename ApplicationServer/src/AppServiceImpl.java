@@ -20,7 +20,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     /*--------------- ATTRIBUTES ----------------------*/
     private ArrayList<Game> gamesLijst = new ArrayList<>(); //game bevat GameInfo en GameState
-    public Set<GameInfo> gameInfos = new HashSet<>();
+    public ArrayList<GameInfo> gameInfos = new ArrayList<>();
 
     private BackupGames backup;
     private AppServerInterface destinationBackup;
@@ -92,7 +92,33 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
 
+    private boolean vergelijkGameInfoList(List<GameInfo> oudeList, List<GameInfo> gameInfoList){
+        if(oudeList.size()!=gameInfoList.size()){
+            return false;
+        }
+        else{
+            for (GameInfo gameInfo : gameInfoList) {
+                GameInfo foundGameInfo = null;
 
+                for (GameInfo info : oudeList) {
+                    if(info.getGameId()==gameInfo.getGameId()){
+                        foundGameInfo =info;
+
+                        if(info.getSpelers().size()!=gameInfo.getSpelers().size()){
+                            return false;
+                        }
+
+                        break;
+                    }
+                }
+                if(foundGameInfo == null){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
     /*--------------- SERVICES ------------------------*/
     // APPSERVERINFO //
     @Override
@@ -252,9 +278,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
-    public synchronized ArrayList<GameInfo> getGameInfoLijst(int currentSize) throws RemoteException {
+    public synchronized ArrayList<GameInfo> getGameInfoLijst(boolean dummy) throws RemoteException {
 
-        while (currentSize == gameInfos.size()) {
+        ArrayList<GameInfo> oudeList= new ArrayList<>(gameInfos);
+        while (vergelijkGameInfoList(oudeList, gameInfos)) {
             try {
                 wait();
                 System.out.println("game info lijst werd genotified");
@@ -264,8 +291,8 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             }
         }
         System.out.println("size van gameinfos" + gameInfos.size());
-        ArrayList<GameInfo> gameInfoList= new ArrayList<>(gameInfos);
-        return gameInfoList;
+        return new ArrayList<>(gameInfos);
+
 
 
     }

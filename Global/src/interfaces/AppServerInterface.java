@@ -29,7 +29,7 @@ public interface AppServerInterface extends Remote {
 
 
     int getNumberOfGames() throws RemoteException;
-    ArrayList<GameInfo> getGameInfoLijst(int size) throws RemoteException; // enkel bij verandering
+    ArrayList<GameInfo> getGameInfoLijst(boolean dummy) throws RemoteException; // enkel bij verandering
     ArrayList<GameInfo> getGameInfoLijst() throws RemoteException;  // instant
     ArrayList<Game> getGamesLijst() throws RemoteException;
 

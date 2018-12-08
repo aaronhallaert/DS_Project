@@ -23,7 +23,7 @@ public class LobbyRefreshThread extends Thread{
         try {
             while (true) {
                 // zal enkel returnen als grootte van lijst veranderd is
-                ArrayList<GameInfo> serverList= Main.cnts.getAppImpl().getGameInfoLijst(LobbyScreen.gameInfoList.size());
+                ArrayList<GameInfo> serverList= Main.cnts.getAppImpl().getGameInfoLijst(true);
 
                 System.out.println("nieuwe list verkregen");
                 // methode in de main, wrapt van ArrayList<Game> -> ObservableList<GameObs>
