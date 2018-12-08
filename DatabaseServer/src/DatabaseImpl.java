@@ -489,8 +489,6 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     }
 
-
-
     @Override
     public synchronized void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException {
 

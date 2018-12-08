@@ -253,12 +253,12 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public synchronized ArrayList<GameInfo> getGameInfoLijst(int currentSize) throws RemoteException {
-        System.out.println("currentsize is "+ currentSize +" en gaminfo lijst heeft grootte "+ gameInfos.size());
+
         while (currentSize == gameInfos.size()) {
             try {
                 wait();
-                System.out.println("wait wordt verbroken");
-                System.out.println("currentsize is "+ currentSize +" en gaminfo lijst heeft grootte "+ gameInfos.size());
+                System.out.println("game info lijst werd genotified");
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
