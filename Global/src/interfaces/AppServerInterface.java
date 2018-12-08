@@ -74,8 +74,13 @@ public interface AppServerInterface extends Remote {
 
     void updateBackupGS(GameState gameState) throws RemoteException;
 
+    BackupGames getBackup() throws RemoteException;
 
     void notifyGameInfoList() throws RemoteException;
 
     boolean prepareForNewGame() throws RemoteException;
+
+    void addGameInBackup(Game game) throws RemoteException;
+
+    AppServerInterface getDestinationBackup() throws RemoteException;
 }

@@ -97,7 +97,26 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     }
 
     private void closeAppServer(AppServerInterface appImpl) throws RemoteException{
+
+        if(appImpls.size()>2) {
+            try {
+                AppServerInterface backupFrom = (AppServerInterface) LocateRegistry.getRegistry("localhost", appImpl.getBackup().getAppserverPoort()).lookup("AppserverService");
+                AppServerInterface destinationBackup = appImpl.getDestinationBackup();
+
+                destinationBackup.takeBackupFrom(backupFrom.getPortNumber());
+                destinationBackup.setDestinationBackup(destinationBackup.getPortNumber());
+
+            } catch (NotBoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            AppServerInterface destinationBackup = appImpl.getDestinationBackup();
+            destinationBackup.setDestinationBackup(0);
+        }
+
         appImpl.close();
+
 
         int index= appImpls.indexOf(appImpl);
         appImpls.remove(appImpl);

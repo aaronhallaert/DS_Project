@@ -181,6 +181,10 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     @Override
     public void close() throws RemoteException {
         // TODO check of dit klopt
+
+
+
+
         ArrayList<Game> toDelete= new ArrayList<>(gamesLijst);
         for (Game game : toDelete) {
             dispatchImpl.changeGameServer(this, game);
@@ -268,6 +272,16 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     }
 
     @Override
+    public void addGameInBackup(Game game) throws RemoteException {
+        backup.getGameList().add(game);
+    }
+
+    @Override
+    public AppServerInterface getDestinationBackup() throws RemoteException {
+        return destinationBackup;
+    }
+
+    @Override
     public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
         //gameId maken, kijken als nog niet reeds bestaat
         int gameId = (int) (Math.random() * 1000);
@@ -287,7 +301,9 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         // game info doorgeven aan database
         databaseImpl.addGameInfo(game.getGameInfo(), true);
-
+        if(destinationBackup!=null){
+            destinationBackup.addGameInBackup(game);
+        }
 
         return gameId;
 
@@ -648,10 +664,14 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public void setDestinationBackup(int appserverBackupPoort) throws RemoteException {
-        try {
-            destinationBackup = (AppServerInterface) LocateRegistry.getRegistry("localhost", appserverBackupPoort).lookup("AppserverService");
-        } catch (NotBoundException e) {
-            e.printStackTrace();
+        if(appserverBackupPoort!=0){
+            try {
+                destinationBackup = (AppServerInterface) LocateRegistry.getRegistry("localhost", appserverBackupPoort).lookup("AppserverService");
+            } catch (NotBoundException e) {
+                e.printStackTrace();
+            }
+        }else{
+            destinationBackup=null;
         }
     }
 
@@ -666,6 +686,11 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
                 System.out.println(game);
             }
        // }
+    }
+
+    @Override
+    public BackupGames getBackup() throws RemoteException {
+        return backup;
     }
 
     @Override
