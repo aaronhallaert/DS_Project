@@ -6,7 +6,7 @@
     <runConfiguration name="Database4" type="Application" />
     <runConfiguration name="Dispatcher" type="Application" />
     <runConfiguration name="ApplicationServer" type="Application" />
-    <runConfiguration name="Client" type="Application" />
+    <runConfiguration name="Client1" type="Application" />
     <method v="2" />
   </configuration>
 </component>

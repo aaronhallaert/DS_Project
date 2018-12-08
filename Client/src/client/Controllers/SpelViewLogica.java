@@ -283,11 +283,5 @@ public class SpelViewLogica extends Thread{
 
     }
 
-    //hier komt methode die pollet naar commando's in de mailbox op de appserver
-    //  van de specifieke game
-    //  voor de specifieke speler
-    // als er gevonden zijn :
-    // list met commando's verwerken :              spvGui.executeCommandos(commandoList)
-
 
 }

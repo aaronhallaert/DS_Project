@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Dispatcher" type="Application" factoryName="Application">
+  <configuration default="false" name="Dispatcher" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="Dispatcher" />
     <module name="Dispatcher" />
-    <option name="PROGRAM_PARAMETERS" value="1902" />
+    <option name="PROGRAM_PARAMETERS" value="1902 2000" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

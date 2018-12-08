@@ -574,16 +574,17 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     }
     @Override
-    public void removeGameFromRunningGames(Game game) throws RemoteException {
+    public synchronized void removeGameFromRunningGames(Game game) throws RemoteException {
         //dan pas lokaal de gameState verijwderen
         int gameId= game.getGameId();
         gamesLijst.remove(game);
         System.out.println("gameState met id: " + gameId + " succesvol verwijderd op appserver");
         //nu de gameState lokaal verwijderen
-        GameInfo gameInfo = getGameInfo(gameId);
-        gameInfos.remove(gameInfo);
-        System.out.println("gameInfo met id: " + gameId + " succesvol verwijderd op appserver");
 
+        // MOET GEDAAN WORDEN DOOR GAMEINFOLISTRECEIVER
+        //GameInfo gameInfo = getGameInfo(gameId);
+        //gameInfos.remove(gameInfo);
+        //System.out.println("gameInfo met id: " + gameId + " succesvol verwijderd op appserver");
 
     }
 

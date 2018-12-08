@@ -233,16 +233,6 @@ public class SpelViewGui extends Thread {
 
         }
 
-        if(commandoMessage.equals("WIN") || commandoMessage.equals("LOSS") || commandoMessage.equals("DRAW")){
-
-            // hier stonden methoden die de eindverwerking van een game deden, maar ze zjin verhuisd naar appserver
-            // omdat niet elke client deze methode mag triggeren maar eignelijk maar 1 x mag uitgevoerd worden op de AS
-
-        }
-
-
-
-
 
 
     }

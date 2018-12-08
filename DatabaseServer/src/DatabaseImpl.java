@@ -613,6 +613,13 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
                 dbRef.deleteGameInfo(gameId, false);
             }
         }
+
+        for (GameInfo gameInfo : gameInfoList) {
+            if(gameInfo.getGameId()==gameId){
+                gameInfoList.remove(gameInfo);
+                break;
+            }
+        }
         notifyAll();
         System.out.println("game met gameId: "+gameId+"succesvol verwijderd uit DB");
 
