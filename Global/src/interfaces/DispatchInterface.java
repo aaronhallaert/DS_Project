@@ -24,4 +24,6 @@ public interface DispatchInterface extends Remote {
     /*----------- OVERZETTEN VAN ... ---------------------*/
     void changeGameServer(AppServerInterface appImpl, Game game) throws RemoteException;
     AppServerInterface changeClientServer(int currentGameIdAttempt) throws RemoteException;
+    // verplaatsen naar appserver waar nog een game kan aangemaakt worden
+    AppServerInterface changeClientServer(boolean dummy) throws RemoteException;
 }

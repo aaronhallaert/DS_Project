@@ -119,7 +119,11 @@ public class SpelSetupScreen {
         else{set = 'C';}
 
         try{
-            //creert
+            // telkens vragen om een appserver die nieuwe game kan maken
+            while(!Main.cnts.getAppImpl().prepareForNewGame()){
+                Main.cnts.setAppImpl(Main.cnts.getDispatchImpl().changeClientServer(true));
+            }
+
             CurrentGame.setInstance(Main.cnts.getAppImpl().getGame(Main.cnts.getAppImpl().createGame(CurrentUser.getInstance().getUsername(), dimensies, set, aantalSpelers)));
             Main.cnts.getDispatchImpl().newGameCreated();
             // opstarten spelview

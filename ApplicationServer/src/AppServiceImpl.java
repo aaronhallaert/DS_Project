@@ -257,6 +257,16 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
 
     // GAME INFO //
+
+    @Override
+    public boolean prepareForNewGame() throws RemoteException {
+        if(gamesLijst.size()>=3){
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public synchronized int createGame(String activeUser, int dimensies, char set, int aantalSpelers) throws RemoteException {
         //gameId maken, kijken als nog niet reeds bestaat
@@ -277,6 +287,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
         // game info doorgeven aan database
         databaseImpl.addGameInfo(game.getGameInfo(), true);
+
 
         return gameId;
 
@@ -661,5 +672,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
     public synchronized void notifyGameInfoList() throws RemoteException {
         notifyAll();
     }
+
+
 
 }

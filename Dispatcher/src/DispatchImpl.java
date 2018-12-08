@@ -177,7 +177,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void newGameCreated() throws RemoteException {
         aantalGamesBezig++;
-        int result = asm.setAantalGames(aantalGamesBezig);
+        int result = asm.setAantalGames(aantalGamesBezig, appImpls.size());
 
         if(result == 1){
 
@@ -195,7 +195,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
         aantalGamesBezig--;
 
-        int result = asm.setAantalGames(aantalGamesBezig);
+        int result = asm.setAantalGames(aantalGamesBezig, appImpls.size());
 
         if(result == -1){
             //todo : stop een appserver
@@ -269,6 +269,16 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         return null;
     }
 
+    @Override
+    public AppServerInterface changeClientServer(boolean dummy) throws RemoteException {
+        for (AppServerInterface appImpl : appImpls) {
+            if(appImpl.prepareForNewGame()){
+                return appImpl;
+            }
+        }
+        makeNewAppserver();
+        return null;
+    }
 
 
 }

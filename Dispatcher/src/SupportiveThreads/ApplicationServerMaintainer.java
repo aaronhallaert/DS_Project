@@ -26,17 +26,18 @@ public class ApplicationServerMaintainer extends Thread{
      * @return  1 indien aantal games gestegen is
      *          -1 indien aantal games gedaald is
      */
-    public int setAantalGames(int aantalGamesBezig) {
+    public int setAantalGames(int aantalGamesBezig, int aantalActiveAppservers) {
         int returnValue = 0;
         this.aantalBezigOpAppServers = aantalGamesBezig;
 
         if(aantalBezigOpAppServers > vorigAantalGames && (aantalBezigOpAppServers % AANTALGAMESPERAPPSERVER) == 0){
             System.out.println("gestegen, nieuwe appserver moet aangemaakt worden");
-            returnValue = 1;
+            if(aantalActiveAppservers*3==aantalGamesBezig) returnValue = 1;
         }
 
         else if(aantalBezigOpAppServers < vorigAantalGames && (aantalBezigOpAppServers % AANTALGAMESPERAPPSERVER) == 0 && aantalBezigOpAppServers != 0){
             System.out.println("gedaald, appserver moet verwijderd worden");
+
             returnValue = -1;
         }
 

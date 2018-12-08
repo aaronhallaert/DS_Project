@@ -77,4 +77,5 @@ public interface AppServerInterface extends Remote {
 
     void notifyGameInfoList() throws RemoteException;
 
+    boolean prepareForNewGame() throws RemoteException;
 }
