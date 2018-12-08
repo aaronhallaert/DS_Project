@@ -171,7 +171,7 @@ public class GameState implements Serializable {
      *                     de GameState ( this ) wordt aangepast, daarin kunnen er extra messages
      *                     in de mailboxes gestopt worden
      */
-    public synchronized boolean executeCommando(Commando commando, String activeUser) {
+    public synchronized HashMap<String, Boolean> executeCommando(Commando commando, String activeUser) {
 
         for (String speler : spelers) {
             if (!speler.equals(activeUser)){
@@ -249,9 +249,13 @@ public class GameState implements Serializable {
      *
      * @param commando het commando die juist is uitgevoerd op de client
      * @param activeUser de client die dit commando uitvoert
-     * @return boolean die true teruggeeft wanneer backup upgedate moet worden
+     * @returnt een arraylist van booleans
+     *      1e element = boolean die true teruggeeft wanneer backup upgedate moet worden
+     *      2e element = boolean die true teruggeeft wanneer een spel teneinde is gelopen
      */
-    private boolean pasStateAan(Commando commando, String activeUser) {
+    private HashMap<String, Boolean> pasStateAan(Commando commando, String activeUser) {
+
+        HashMap<String, Boolean> returnHashMap = new HashMap<>();
 
         //opvragen van de overeenkomstige Tile
         Tile huidigeTile = getTileMetUniqueId(commando.getUniqueTileId());
@@ -297,8 +301,7 @@ public class GameState implements Serializable {
                 if(aantalParenFound == aantalParen){
 
                     finished = true;
-
-                    //todo: naar hier komet de scoreUpdateLogica van gans het spel, grt
+                    returnHashMap.put("DONE", finished);
                     //dan is het spel gedaan
                     //wie is de winnaar?
 
@@ -380,7 +383,10 @@ public class GameState implements Serializable {
                 //reset de counter die telt hoeveel tegels er openliggen
                 tegelsFlipped = 0;
                 notifyAll();
-                return true;
+                returnHashMap.put("BACKUP", true);
+                returnHashMap.putIfAbsent("DONE", false);
+
+                return returnHashMap;
             }
 
 
@@ -388,8 +394,10 @@ public class GameState implements Serializable {
             tegelsFlipped = 0;
         }
         notifyAll();
-        return false;
+        returnHashMap.putIfAbsent("BACKUP", false);
+        returnHashMap.putIfAbsent("DONE", false);
 
+        return returnHashMap;
     }
 
 

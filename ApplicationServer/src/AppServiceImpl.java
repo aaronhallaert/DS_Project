@@ -75,6 +75,54 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         }
     }
 
+    private synchronized void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
+        databaseImpl.updateScores(username, roosterSize, eindScore, command, true);
+    }
+
+    private HashMap<String, String> generateResultEndGame(HashMap<String, Integer> puntenLijst) {
+
+        HashMap<String, String> returnHm = new HashMap<>();
+
+        ArrayList<String> winners= new ArrayList<>();
+
+        int max= Collections.max(puntenLijst.values());
+
+        for (String speler : puntenLijst.keySet()) {
+            int punt= puntenLijst.get(speler);
+            if(punt == max){
+                winners.add(speler);
+            }
+        }
+
+        if(winners.size()==1){
+            String winner= winners.get(0);
+
+            for (String speler : puntenLijst.keySet()) {
+                if(!speler.equals(winner)){
+                    returnHm.put(speler, "LOSS");
+                }
+                else{
+                    returnHm.put(speler, "WIN");
+                }
+            }
+
+        }
+        else{
+            for (String speler : puntenLijst.keySet()) {
+                if (!winners.contains(speler)) {
+                    returnHm.put(speler, "LOSS");
+                }
+            }
+            for (String winner : winners) {
+                returnHm.put(winner, "DRAW");
+
+            }
+        }
+
+
+        return returnHm;
+    }
+
     /**
      * @param gamesLijst, de te checken lijst van games
      * @param gameId
@@ -414,22 +462,51 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      */
     @Override
     public void executeFlipCommando(Commando commando, String activeUser, int currentGameId) throws RemoteException {
-        boolean backup = getGameState(currentGameId).executeCommando(commando, activeUser);
 
-        if (backup) {
+        HashMap<String, Boolean> values = getGameState(currentGameId).executeCommando(commando, activeUser);
+        // values(0) = backup boolean
+        // values(1) = game finished boolean
+
+
+        if (values.get("BACKUP")){
             if (destinationBackup != null) {
                 destinationBackup.updateBackupGS(getGameState(currentGameId));
             }
         }
 
+
+        if (values.get("DONE")){ // game is klaar
+
+            // update scores naar DB
+            GameState thisGameState = getGameState(currentGameId);
+            GameInfo thisGameInfo = getGameInfo(currentGameId);
+
+            int roosterSize = thisGameInfo.getRoosterSize();
+            HashMap<String, Integer> puntenLijst = thisGameState.getPunten();
+            HashMap<String, String> resultatenLijst = generateResultEndGame(puntenLijst);
+
+            // voor elke speler natuurlijk
+            for (String speler : thisGameState.getSpelers()) {
+
+                updateScores(speler, roosterSize, puntenLijst.get(speler), resultatenLijst.get(speler));
+            }
+
+
+            // gameinfo en gamestate verwijderen uit databaseServer
+            // closeconnections indien nodig
+
+
+        }
+
     }
+
+
 
     @Override
     public List<Commando> getInbox(String userName, int currentGameId) throws RemoteException {
 
         // System.out.println("AppServiceImpl : getInbox: door user: "+userName);
         return getGameState(currentGameId).getInbox(userName);
-
 
     }
 
@@ -503,11 +580,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
 
     // HANDLING SCORE TABLE //
-    @Override
-    public synchronized void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException {
-        databaseImpl.updateScores(username, roosterSize, eindScore, command, true);
-
-    }
 
     @Override
     public void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException {

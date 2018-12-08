@@ -63,7 +63,6 @@ public interface AppServerInterface extends Remote {
     void removeGame(Game game) throws RemoteException;
 
     /*---------- HANDLINE SCORE TABLES ----------------*/
-    void updateScores(String username, int roosterSize, int eindScore, String command) throws RemoteException;
     void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException;
     ArrayList<Score> getScores() throws RemoteException;
 

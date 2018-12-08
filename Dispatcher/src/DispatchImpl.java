@@ -189,10 +189,15 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
     @Override
     public void gameFinished() throws RemoteException{
+
+        //todo dit wordt hier door elke speler op het einde van zn game getriggerd
+        //dus aantalGamesbezig = aantalGamesbezig - aantalSpelers
+        // mag neiet
         aantalGamesBezig--;
         int result = asm.setAantalGames(aantalGamesBezig);
+
         if(result == -1){
-            //todo: stop een appserver?
+            //todo : stop een appserver
             for (AppServerInterface appImpl : appImpls) {
                 if(appImpl.getNumberOfGames()<3){
                     closeAppServer(appImpl);
