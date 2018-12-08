@@ -162,11 +162,15 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         if(replicate){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                try {
-                    dbRef.insertUser(name, password, false);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
+
+                new Thread(()-> {
+                    try {
+                        dbRef.insertUser(name, password, false);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
             }
         }
     }
@@ -252,7 +256,15 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         if(replicate){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                dbRef.createToken(username, password, false);
+
+                new Thread(() -> {
+                    try {
+                        dbRef.createToken(username, password, false);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
             }
         }
     }
@@ -316,7 +328,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         if(replicate) {
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                dbRef.cancelToken(username, false);
+
+                new Thread(()-> {
+                    try {
+                        dbRef.cancelToken(username, false);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
             }
         }
     }
@@ -417,7 +436,15 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         if(replicate){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                dbRef.storeImage(afbeeldingId, afbeelding, false);
+
+                new Thread(() -> {
+                    try {
+                        dbRef.storeImage(afbeeldingId, afbeelding, false);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
             }
         }
 
@@ -472,11 +499,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         notifyAll();
         if(replicate) {
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
+            new Thread(() -> {
                 try {
                     dbRef.updateGameInfo(gameInfo, false);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
+
+            }).start();
             }
         }
     }
@@ -578,7 +608,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         if(replicate){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                dbRef.addGameInfo(gameInfo, false);
+                new Thread(() -> {
+                    //Do whatever
+                    try {
+                        dbRef.addGameInfo(gameInfo, false);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
             }
         }
 
@@ -610,13 +647,21 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         //broadcast naar de andere databanken
         if(replicate){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                dbRef.deleteGameInfo(gameId, false);
+                new Thread(() -> {
+                    try {
+                        dbRef.deleteGameInfo(gameId, false);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
             }
         }
 
         for (GameInfo gameInfo : gameInfoList) {
             if(gameInfo.getGameId()==gameId){
                 gameInfoList.remove(gameInfo);
+
+
                 break;
             }
         }
@@ -737,7 +782,14 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         if(replicate){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                dbRef.insertScoreRow(username, false);
+                new Thread(() -> {
+                    try {
+                        dbRef.insertScoreRow(username, false);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
             }
         }
 
@@ -840,7 +892,15 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
             if(replicate){
                 for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-                    dbRef.updateScores(username, roosterSize, eindScore,command,false);
+
+                    new Thread(() -> {
+                        try {
+                            dbRef.updateScores(username, roosterSize, eindScore,command,false);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
+
                 }
             }
 
