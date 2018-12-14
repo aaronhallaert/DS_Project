@@ -93,7 +93,6 @@ public class ScoreScreen {
 
         scoreObsLijst = FXCollections.observableArrayList(scoreObservableList);
 
-        //todo: een thread die kijkt naar updates
 
     }
 

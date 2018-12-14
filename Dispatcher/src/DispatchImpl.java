@@ -39,8 +39,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         aantalGamesBezig = 0;
 
         asm = new ApplicationServerMaintainer();
-        asm.start();
-
 
 
     }

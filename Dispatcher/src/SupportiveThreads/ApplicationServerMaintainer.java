@@ -1,6 +1,6 @@
 package SupportiveThreads;
 
-public class ApplicationServerMaintainer extends Thread{
+public class ApplicationServerMaintainer{
 
     private final int AANTALGAMESPERAPPSERVER = 3;
 
@@ -11,13 +11,6 @@ public class ApplicationServerMaintainer extends Thread{
     public ApplicationServerMaintainer(){
         aantalBezigOpAppServers = 0;
         vorigAantalGames = aantalBezigOpAppServers;
-    }
-
-    @Override
-    public void run() {
-        super.run();
-
-
     }
 
     /**

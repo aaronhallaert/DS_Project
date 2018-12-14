@@ -78,38 +78,6 @@ public class PollToOtherDBs extends Thread {
         System.out.println("ik ben met alle andere databases verbonden");
         // vanaf hier moeten  we proberen zaken op te vangen
 
-        //todo: voorlopig niet kijken voor deze zaken, eerst zorgen dat een write gerepliqueerd wordt
-        /*while(true){
-
-            for(int i=0 ; i<dbImpls.size(); i++){
-
-                if(connected.get(i)){
-                    try {
-                        if(dbImpls.get(i).ping()){
-                            System.out.println("nog steeds connectie naar "+otherPortNumbers.get(i));
-                        }
-                    } catch (RemoteException e) { //if connection broke
-
-                        connected.set(i, false);
-                        System.out.println("connection lost to"+otherPortNumbers.get(i));
-                        //start thread op die de connectie restart?
-                        FixConnectionThread fct = new FixConnectionThread(otherPortNumbers.get(i), dbImpls.get(i));
-                        fct.start();
-                    }
-
-                }
-
-            }
-
-            try {
-                sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }*/
-
-
     }
 
     private boolean connectedToAll(ArrayList<Boolean> connected) {

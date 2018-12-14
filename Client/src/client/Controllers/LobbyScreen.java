@@ -76,8 +76,7 @@ public class LobbyScreen {
 
 
             /*---------- INIT SCORES ---------------*/
-            // kijken na inloggen als de speler al een rij heeft in de scoretabel
-            // indien geen scores bijgehouden zijn in het verleden, maken we er nog een aan
+            // een scoreRij toevoegen aan de databaseTabel als hij er nog geen heeft
             try {
                 Main.cnts.getAppImpl().checkIfHasScoreRowAndAddOneIfHasnt(CurrentUser.getInstance().getUsername());
             } catch (RemoteException e) {
