@@ -49,6 +49,7 @@ public class VisualTile extends StackPane {
         this.uniqueId = tile.getUniqueIdentifier();
         this.id = tile.getId();
 
+
         voorkant = new Rectangle(ZIJDETILE,ZIJDETILE);
         achterkant = new Rectangle(ZIJDETILE,ZIJDETILE);
 
@@ -89,7 +90,7 @@ public class VisualTile extends StackPane {
 
     //FLIPT TERUG NAAR DE YUGIOH ACHTERKANT
     public void unflip(){
-
+        stVerbergVoorkant.play();
     }
 
 
