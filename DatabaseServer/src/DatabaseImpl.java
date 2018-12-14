@@ -858,7 +858,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
 
                     dbLosses++;
-                    sqlUpdaters.add("UPDATE Scores SET wins = "+ dbLosses +" WHERE Username = ? ");
+                    sqlUpdaters.add("UPDATE Scores SET losses = "+ dbLosses +" WHERE Username = ? ");
                     break;
 
 
@@ -866,7 +866,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
 
                     draws++;
-                    sqlUpdaters.add("UPDATE Scores SET wins = "+ draws +" WHERE Username = ? ");
+                    sqlUpdaters.add("UPDATE Scores SET draws = "+ draws +" WHERE Username = ? ");
                     break;
 
 
