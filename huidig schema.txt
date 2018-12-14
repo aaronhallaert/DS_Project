@@ -15,13 +15,6 @@ applicationserver
             dus 2000 , 2004 , 2008, ...
 
 
-databasemodel?
-alle writes moeten via de master DB gebeuren
--> nadeel: bottleneck voor writes
--> voordeel: wel te verantwoorden
-
-
-
-dus:
-reads van overal
-writes enkel op eenzelfde db uitvoeren, deze verstuurt dan message naar de anderen.
+1 van de databases is een master.
+als er een writemethode is gaan we deze via de applicationServer direct naar de master databank gaan voeren
+deze repliqueert het dan naar de andere databases.
