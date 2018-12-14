@@ -249,8 +249,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
     @Override
     public void insertUser(String username, String confirmPassword) throws RemoteException {
         // TODO doorsturen naar alle databaseservers in 1 keer? of doorsturen naar een willekeurige database?
-        dbImpls.get(0).insertUser(username, confirmPassword, true);
-        dbImpls.get(0).insertScoreRow(username, true);
+        dbImpls.get(0).insertUser(username, confirmPassword, true); //doet hij op de master
+        dbImpls.get(0).insertScoreRow(username, true); // doet hij op de master
     }
 
 

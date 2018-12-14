@@ -18,3 +18,17 @@ applicationserver
 1 van de databases is een master.
 als er een writemethode is gaan we deze via de applicationServer direct naar de master databank gaan voeren
 deze repliqueert het dan naar de andere databases.
+
+keuze: de eerste database: die op poortnummer 1940 dus
+
+moeten de slaafdatabases dan nog een referentie naar de andere databases hebben tho, want op dit moment is dat wel zo
+
+
+
+
+
+situatie nu:
+    dispatcher
+    heeft lijst van databaseImpls
+    is verbonden met alle databases
+    maar voert zn methoden enkel op de eerste DB uit : de masterDB

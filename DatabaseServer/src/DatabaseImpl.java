@@ -231,7 +231,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      * @throws RemoteException
      */
     @Override
-    public void createToken(String username, String password, boolean replicate)throws RemoteException {
+    public void createToken(String username, String password, boolean onMaster)throws RemoteException {
 
         // enkel als credentials juist zijn
         if(checkUserCred(username, password)){
@@ -254,9 +254,8 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         }
 
-        if(replicate){
+        if(onMaster){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
-
                 new Thread(() -> {
                     try {
                         dbRef.createToken(username, password, false);
@@ -311,7 +310,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      * @throws RemoteException
      */
     @Override
-    public void cancelToken(String username, boolean replicate) throws RemoteException{
+    public void cancelToken(String username, boolean onMaster) throws RemoteException{
         String sql = "UPDATE Persons SET token_timestamp=? WHERE Username= ?;";
         connect();
         try{
@@ -326,7 +325,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
         closeConnection();
 
-        if(replicate) {
+        if(onMaster) {
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
 
                 new Thread(()-> {
@@ -411,7 +410,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      * @throws RemoteException
      */
     @Override
-    public void storeImage(String afbeeldingId, byte[] afbeelding, boolean replicate) throws RemoteException{
+    public void storeImage(String afbeeldingId, byte[] afbeelding, boolean onMaster) throws RemoteException{
 
         System.out.println("database storen van een image started");
 
@@ -434,7 +433,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         closeConnection();
 
-        if(replicate){
+        if(onMaster){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
 
                 new Thread(() -> {
@@ -459,7 +458,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
     // GAMES //
     @Override
-    public synchronized void updateGameInfo(GameInfo gameInfo, boolean replicate) {
+    public synchronized void updateGameInfo(GameInfo gameInfo, boolean onMaster) {
         connect();
         ArrayList<String> spelers= gameInfo.getSpelers();
         StringBuilder sb= new StringBuilder();
@@ -497,7 +496,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
         }
         notifyAll();
-        if(replicate) {
+        if(onMaster) {
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
             new Thread(() -> {
                 try {
@@ -557,7 +556,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
     @Override
-    public synchronized void addGameInfo(GameInfo gameInfo, boolean replicate) throws RemoteException {
+    public synchronized void addGameInfo(GameInfo gameInfo, boolean onMaster) throws RemoteException {
 
 
         System.out.println("game info toevoegen");
@@ -606,7 +605,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         }
         closeConnection();
 
-        if(replicate){
+        if(onMaster){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
                 new Thread(() -> {
                     //Do whatever
@@ -626,7 +625,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
     @Override
-    public synchronized void deleteGameInfo(int gameId, boolean replicate) throws RemoteException {
+    public synchronized void deleteGameInfo(int gameId, boolean onMaster) throws RemoteException {
 
         String sql = "DELETE FROM GameInfo WHERE gameId=?;";
 
@@ -645,7 +644,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
         closeConnection();
 
         //broadcast naar de andere databanken
-        if(replicate){
+        if(onMaster){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
                 new Thread(() -> {
                     try {
@@ -750,7 +749,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
 
     @Override
-    public void insertScoreRow(String username, boolean replicate) throws RemoteException {
+    public void insertScoreRow(String username, boolean onMaster) throws RemoteException {
 
         System.out.println("rij toegevoegd voor user" + username +" in scorelijst");
 
@@ -780,7 +779,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         closeConnection();
 
-        if(replicate){
+        if(onMaster){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
                 new Thread(() -> {
                     try {
@@ -797,7 +796,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
     }
 
     @Override
-    public synchronized void updateScores(String username, int roosterSize, int eindScore, String command, boolean replicate) throws RemoteException {
+    public synchronized void updateScores(String username, int roosterSize, int eindScore, String command, boolean onMaster) throws RemoteException {
 
         String sql = "SELECT * FROM Scores WHERE Username = ? ";
 
@@ -890,7 +889,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
             closeConnection();
 
-            if(replicate){
+            if(onMaster){
                 for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
 
                     new Thread(() -> {
