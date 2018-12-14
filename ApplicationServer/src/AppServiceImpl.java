@@ -598,6 +598,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         System.out.println("klaar met gameInfo " + gameId + " te verwijderen op DB's");
 
 
+
     }
     @Override
     public synchronized void removeGameFromRunningGames(Game game) throws RemoteException {
