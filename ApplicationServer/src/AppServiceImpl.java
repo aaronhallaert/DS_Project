@@ -563,7 +563,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
 
 
-    //todo: implement deze methode
     /**
      * de gameInfo moet overal verwijderd worden.
      * op deze appserver

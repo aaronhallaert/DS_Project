@@ -88,16 +88,12 @@ public class SpelViewGui extends Thread {
     }
 
 
+    //afsluiten van een spelletje
+    // aantal threads moeten gestopt worden
     @FXML
     public void leaveGame(){
-        // stop dit
-        // stop de thread
-        //todo: fix die juiste stop ier tho, das lijk nog nen belangrijken
         svl.leave();
-
         leave.getScene().getWindow().hide();
-
-
         Main.goToLobby();
     }
 

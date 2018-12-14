@@ -26,7 +26,6 @@ public class VisualTile extends StackPane {
     private Rectangle achterkant; //zal telkens dezelfde zijn
     private int uniqueId; //deze is voor elke tegel anders                                  analoog aan Tile
     private int id; //om te vergelijken met andere kaarjes, 2 tegels hebben dezelfde id     analoog aan Tile
-    private boolean open; //state van de kaart achterhalen todo: depricated
     private ScaleTransition stVerbergAchterkant; //animatie die de kaart omdraait naar open
     private ScaleTransition stVerbergVoorkant; //chain van animations die de kaart terug naar gesloten omdraait
 
@@ -49,8 +48,6 @@ public class VisualTile extends StackPane {
         //toekennen van de waarden
         this.uniqueId = tile.getUniqueIdentifier();
         this.id = tile.getId();
-
-        open = false;
 
         voorkant = new Rectangle(ZIJDETILE,ZIJDETILE);
         achterkant = new Rectangle(ZIJDETILE,ZIJDETILE);
@@ -92,7 +89,7 @@ public class VisualTile extends StackPane {
 
     //FLIPT TERUG NAAR DE YUGIOH ACHTERKANT
     public void unflip(){
-        stVerbergVoorkant.play();
+
     }
 
 

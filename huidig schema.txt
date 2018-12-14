@@ -14,3 +14,14 @@ applicationserver
     per 3 actieve spelletjes wordt er een bijgemaakt op puurtnummer 2000+ aantalActief*4
             dus 2000 , 2004 , 2008, ...
 
+
+databasemodel?
+alle writes moeten via de master DB gebeuren
+-> nadeel: bottleneck voor writes
+-> voordeel: wel te verantwoorden
+
+
+
+dus:
+reads van overal
+writes enkel op eenzelfde db uitvoeren, deze verstuurt dan message naar de anderen.

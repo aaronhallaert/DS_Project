@@ -76,7 +76,8 @@ public class LobbyScreen {
 
 
             /*---------- INIT SCORES ---------------*/
-            //todo remove this , gewoon omdat we met verschillende databases werken dat het een probleem kan geven anders
+            // kijken na inloggen als de speler al een rij heeft in de scoretabel
+            // indien geen scores bijgehouden zijn in het verleden, maken we er nog een aan
             try {
                 Main.cnts.getAppImpl().checkIfHasScoreRowAndAddOneIfHasnt(CurrentUser.getInstance().getUsername());
             } catch (RemoteException e) {
