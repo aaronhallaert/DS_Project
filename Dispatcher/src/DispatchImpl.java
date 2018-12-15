@@ -130,7 +130,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         appImpls.remove(appserverImpl);
         appServerPoorten.remove(index);
 
-        // TODO crash recovery implementatie, hoeven we niet te doen
+        //crash recovery implementatie, hoeven we niet te doen
     }
 
 
@@ -238,7 +238,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public boolean userNameExists(String username) throws RemoteException {
-        return dbImpls.get(0).userNameExists(username);
+        return dbImpls.get(1).userNameExists(username);
     }
     /**
      * vraag aan databank om nieuwe user aan te maken met attributen zie parameters
@@ -248,7 +248,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
      */
     @Override
     public void insertUser(String username, String confirmPassword) throws RemoteException {
-        // TODO doorsturen naar alle databaseservers in 1 keer? of doorsturen naar een willekeurige database?
         dbImpls.get(0).insertUser(username, confirmPassword, true); //doet hij op de master
         dbImpls.get(0).insertScoreRow(username, true); // doet hij op de master
     }

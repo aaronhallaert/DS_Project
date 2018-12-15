@@ -192,11 +192,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
     @Override
     public void close() throws RemoteException {
-        // TODO check of dit klopt
-
-
-
-
         ArrayList<Game> toDelete= new ArrayList<>(gamesLijst);
         for (Game game : toDelete) {
             dispatchImpl.changeGameServer(this, game);
