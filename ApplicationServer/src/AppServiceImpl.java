@@ -488,7 +488,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
 
             // gameinfo en gamestate verwijderen uit databaseServer
-            deleteGame(currentGameId, true);
+            deleteGame(currentGameId);
 
             // game finishen in dispatcher ( checken als een AS moet afgesloten worden)
             try {
@@ -595,19 +595,18 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
      * @throws RemoteException
      */
     @Override
-    public void deleteGame(int gameId, boolean replicate) throws RemoteException {
+    public void deleteGame(int gameId) throws RemoteException {
 
         //eerst in de backup hiervan gaan verwijderen
-        if (replicate && destinationBackup!=null) {
+        if (destinationBackup!=null) {
             destinationBackup.deleteBackupGame(gameId); // zowel gameInfo als GameState
         }
 
         removeGameFromRunningGames(getGame(gameId));
 
         // de gameInfo in de databases verwijderen
-        if (replicate) {
-            masterDatabaseImpl.deleteGameInfo(gameId, true);
-        }
+        masterDatabaseImpl.deleteGameInfo(gameId, true);
+
 
         System.out.println("klaar met gameInfo " + gameId + " te verwijderen op DB's");
 
@@ -646,18 +645,6 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
 
 
     // HANDLING SCORE TABLE //
-
-    @Override
-    public void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException {
-
-        if (!databaseImpl.hasScoreRij(username)) {
-
-            System.out.println("deze user had nog geen rij in de database");
-            masterDatabaseImpl.insertScoreRow(username, true);
-            System.out.println("nu wel");
-        }
-
-    }
 
     @Override
     public ArrayList<Score> getScores() throws RemoteException {

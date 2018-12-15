@@ -59,12 +59,11 @@ public interface AppServerInterface extends Remote {
 
     /*---------- HANDLING GAMES INTERNALLY ------------*/
     void takeOverGame(Game game) throws RemoteException;
-    void deleteGame(int gameId, boolean replicate) throws RemoteException;
+    void deleteGame(int gameId) throws RemoteException;
     void deleteBackupGame(int gameId) throws RemoteException;
     void removeGameFromRunningGames(Game game) throws RemoteException;
 
     /*---------- HANDLINE SCORE TABLES ----------------*/
-    void checkIfHasScoreRowAndAddOneIfHasnt(String username) throws RemoteException;
     ArrayList<Score> getScores() throws RemoteException;
 
     /*---------- BACKUP -------------------------------*/

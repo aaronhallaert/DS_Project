@@ -75,15 +75,6 @@ public class LobbyScreen {
         try {
 
 
-            /*---------- INIT SCORES ---------------*/
-            // een scoreRij toevoegen aan de databaseTabel als hij er nog geen heeft
-            try {
-                Main.cnts.getAppImpl().checkIfHasScoreRowAndAddOneIfHasnt(CurrentUser.getInstance().getUsername());
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-
-
 
             /*---------- GAMEINFO TABLE -------------*/
 
