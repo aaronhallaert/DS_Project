@@ -273,9 +273,20 @@ public class Main extends Application {
                 imageCache.remove(removeImage);
             }
         }
-        else{
-            //System.out.println("gevonden in cacheke");
+
+        else {
+            int found= -1;
+            for (int i = 0; i < imageCacheSequence.size(); i++) {
+                String elem= imageCacheSequence.get(i);
+                if(elem.equals(naam)){
+                    found=i;
+                }
+            }
+
+            imageCacheSequence.remove(found);
+            imageCacheSequence.add(naam);
         }
+
 
         return afbeelding;
     }

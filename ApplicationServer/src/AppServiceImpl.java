@@ -544,7 +544,16 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             imageCache.put(naam, afbeelding);
             imageCacheSequence.add(naam);
         } else {
+            int found= -1;
+            for (int i = 0; i < imageCacheSequence.size(); i++) {
+                String elem= imageCacheSequence.get(i);
+                if(elem.equals(naam)){
+                    found=i;
+                }
+            }
 
+            imageCacheSequence.remove(found);
+            imageCacheSequence.add(naam);
         }
 
         if (imageCache.size() > 36) {
