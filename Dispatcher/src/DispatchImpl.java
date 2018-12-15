@@ -215,7 +215,6 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         int result = asm.setAantalGames(aantalGamesBezig, appImpls.size());
 
         if(result == -1){
-            //todo : stop een appserver
             for (AppServerInterface appImpl : appImpls) {
                 if(appImpl.getNumberOfGames()<3){
                     closeAppServer(appImpl);

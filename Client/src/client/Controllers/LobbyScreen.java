@@ -195,15 +195,21 @@ public class LobbyScreen {
                 }
                 else{
                     /*------- OPVRAGEN NIEUWE APPSERVER --------*/
-                    //TODO wat als er geen enkele appserver deze game heeft?
                     checkAvailableGames.stop();
                     AppServerInterface newServer= Main.cnts.getDispatchImpl().changeClientServer(currentGameIdAttempt);
                     if(newServer!=null) {
                         Main.cnts.setAppImpl(newServer);
+                        checkAvailableGames= new LobbyRefreshThread(this);
+                        checkAvailableGames.start();
+                        joinGame();
                     }
-                    checkAvailableGames= new LobbyRefreshThread(this);
-                    checkAvailableGames.start();
-                    joinGame();
+                    else{
+                        displayErrorMessage("Game is niet te vinden!");
+                        Main.cnts.setAppImpl(Main.cnts.getDispatchImpl().giveAppserver());
+                        checkAvailableGames= new LobbyRefreshThread(this);
+                        checkAvailableGames.start();
+                    }
+
 
                 }
             } catch (RemoteException e) {
@@ -254,16 +260,22 @@ public class LobbyScreen {
                 }
                 else{
                     /*------- OPVRAGEN NIEUWE APPSERVER --------*/
-                    //TODO wat als er geen enkele appserver deze game heeft?
                     checkAvailableGames.stop();
                     AppServerInterface newServer= Main.cnts.getDispatchImpl().changeClientServer(currentGameIdAttempt);
                     if(newServer!=null) {
                         Main.cnts.setAppImpl(newServer);
+                        checkAvailableGames= new LobbyRefreshThread(this);
+                        checkAvailableGames.start();
+                        // probeer opnieuw te spectaten
+                        spectate();
                     }
-                    checkAvailableGames= new LobbyRefreshThread(this);
-                    checkAvailableGames.start();
-                    // probeer opnieuw te spectaten
-                    spectate();
+                    else{
+                        displayErrorMessage("Game is niet te vinden!");
+                        Main.cnts.setAppImpl(Main.cnts.getDispatchImpl().giveAppserver());
+                        checkAvailableGames= new LobbyRefreshThread(this);
+                        checkAvailableGames.start();
+                    }
+
                 }
 
             }
