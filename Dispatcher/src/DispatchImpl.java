@@ -58,12 +58,11 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             if(!appServerPoorten.contains(integer)){
                 // maak maar aan
                 int applicationPoortNr= integer;
-                int databasePoortNr = 1901;
                 try {
 
                     //start een nieuwe appserver op
                     Runtime rt1 = Runtime.getRuntime();
-                    rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr+" "+databasePoortNr);
+                    rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr);
 
                 } catch (IOException e) {
                     e.printStackTrace();

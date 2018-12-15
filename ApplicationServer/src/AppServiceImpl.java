@@ -73,16 +73,16 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
         int willekeurigGetal = (int) (Math.random() * 2 + 1); // willekeurig getal tussen 1 en 3
         switch (willekeurigGetal) {
             case 1:
-                return 1940;
-
-            case 2:
                 return 1950;
 
-            case 3:
+            case 2:
                 return 1960;
 
+            case 3:
+                return 1970;
+
             default:
-                return 1940;
+                return 1950;
         }
     }
 
