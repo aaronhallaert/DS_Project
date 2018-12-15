@@ -139,7 +139,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      * @param password
      */
     @Override
-    public void insertUser(String name, String password, boolean replicate) {
+    public void insertUser(String name, String password, boolean onMaster) {
         String sql = "INSERT INTO Persons(Username,Password, Salt) VALUES(?,?,?)";
         String salt=hash((System.currentTimeMillis()+"RandomString"));
         String hashedPaswoord= hash(password, salt);
@@ -160,7 +160,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         closeConnection();
 
-        if(replicate){
+        if(onMaster){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
 
                 new Thread(()-> {
