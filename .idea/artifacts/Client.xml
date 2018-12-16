@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="javafx" name="Client">
-    <output-path>$PROJECT_DIR$/out/artifacts/Client</output-path>
+    <output-path>$PROJECT_DIR$/out/jars</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="client.Main" />

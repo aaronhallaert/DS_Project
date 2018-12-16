@@ -62,7 +62,9 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
                     //start een nieuwe appserver op
                     Runtime rt1 = Runtime.getRuntime();
-                    rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr);
+                    //TODO hier veranderen indien je project wil runnen via intellij
+                    //rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr);
+                    rt1.exec("cmd /c start cmd.exe /K \"java -jar ApplicationServer.jar "+applicationPoortNr);
 
                 } catch (IOException e) {
                     e.printStackTrace();

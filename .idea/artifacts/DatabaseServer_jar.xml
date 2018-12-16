@@ -1,12 +1,12 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="DatabaseServer:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/DatabaseServer_jar</output-path>
+    <output-path>$PROJECT_DIR$/out/jars</output-path>
     <root id="archive" name="DatabaseServer.jar">
       <element id="module-output" name="DatabaseServer" />
       <element id="module-output" name="Global" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/DatabaseServer/data/guava-23.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/guava-23.6-jre.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/DatabaseServer/data/sqlite-jdbc-3.23.1.jar" path-in-jar="/" />
+      <element id="artifact" artifact-name="org_xerial_sqlite-jdbc_3_25_2" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.25.2/sqlite-jdbc-3.25.2.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

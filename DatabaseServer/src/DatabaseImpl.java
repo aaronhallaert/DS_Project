@@ -232,7 +232,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
      */
     @Override
     public void createToken(String username, String password, boolean onMaster)throws RemoteException {
-
+        connect();
         // enkel als credentials juist zijn
         if(checkUserCred(username, password)){
 
@@ -254,6 +254,7 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
 
         }
 
+        closeConnection();
         if(onMaster){
             for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
                 new Thread(() -> {

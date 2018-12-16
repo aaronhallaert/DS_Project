@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Dispatcher:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Dispatcher_jar</output-path>
+    <output-path>$PROJECT_DIR$/out/jars</output-path>
     <root id="archive" name="Dispatcher.jar">
       <element id="module-output" name="Dispatcher" />
       <element id="module-output" name="Global" />
