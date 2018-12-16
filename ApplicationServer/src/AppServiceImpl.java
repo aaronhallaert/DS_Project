@@ -199,7 +199,7 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             // het probleem is dat de dispatcher games zal verwijderen van deze appserver terwijl dat ie ier aant itereren is erover
         }
 
-
+        dispatchImpl.unregisterAppserver(AppServerMain.thisappServerpoort);
         System.exit(0);
     }
 
@@ -484,21 +484,19 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
                 public void run() {
                     try {
 
-            // voor elke speler natuurlijk
-            for (String speler : thisGameState.getSpelers()) {
-                updateScores(speler, roosterSize, puntenLijst.get(speler), resultatenLijst.get(speler));
-            }
+                    // voor elke speler natuurlijk
+                    for (String speler : thisGameState.getSpelers()) {
+                        updateScores(speler, roosterSize, puntenLijst.get(speler), resultatenLijst.get(speler));
+                    }
 
 
-            // gameinfo en gamestate verwijderen uit databaseServer
-            deleteGame(currentGameId);
+                    // gameinfo en gamestate verwijderen uit databaseServer
+                    deleteGame(currentGameId);
 
-            // game finishen in dispatcher ( checken als een AS moet afgesloten worden)
-
-
-                        dispatchImpl.gameFinished();
+                    // game finishen in dispatcher ( checken als een AS moet afgesloten worden)
+                    dispatchImpl.gameFinished();
                     } catch (RemoteException e) {
-                        e.printStackTrace();
+                        System.out.println("");
                     }
                 }
             }).start();

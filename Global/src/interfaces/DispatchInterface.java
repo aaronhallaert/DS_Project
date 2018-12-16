@@ -9,12 +9,14 @@ import java.rmi.RemoteException;
 
 public interface DispatchInterface extends Remote {
 
+
+
     /*---------- APPSERVER MANAGING ---------------------*/
     void registerAppserver(int portNumber) throws RemoteException;
     AppServerInterface giveAppserver() throws RemoteException;
     void newGameCreated() throws RemoteException;
     void gameFinished() throws RemoteException;
-
+    void unregisterAppserver(int appserverPoort) throws RemoteException;
 
     /*----------- USER MANAGING --------------------------*/
     boolean userNameExists(String username) throws RemoteException;

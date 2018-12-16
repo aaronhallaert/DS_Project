@@ -7,6 +7,7 @@ import interfaces.DispatchInterface;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
@@ -63,8 +64,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
                     //start een nieuwe appserver op
                     Runtime rt1 = Runtime.getRuntime();
                     //TODO hier veranderen indien je project wil runnen via intellij
-                    rt1.exec("cmd /c start cmd.exe /K \"cd out && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr);
-                    //rt1.exec("cmd /c start cmd.exe /K \"java -jar ./ApplicationServer.jar "+applicationPoortNr);
+                    //rt1.exec("cmd /c start cmd.exe /K \"cd out && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr);
+                    rt1.exec("cmd /c start cmd.exe /K \"java -jar ./ApplicationServer.jar "+applicationPoortNr);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -95,33 +96,43 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         }
     }
 
-    private void closeAppServer(AppServerInterface appImpl) throws RemoteException{
+    private void closeAppServer(AppServerInterface appImpl){
+        try {
+            if (appImpls.size() > 2) {
 
-        if(appImpls.size()>2) {
-            try {
                 AppServerInterface backupFrom = (AppServerInterface) LocateRegistry.getRegistry("localhost", appImpl.getBackup().getAppserverPoort()).lookup("AppserverService");
                 AppServerInterface destinationBackup = appImpl.getDestinationBackup();
 
                 destinationBackup.takeBackupFrom(backupFrom.getPortNumber());
                 destinationBackup.setDestinationBackup(destinationBackup.getPortNumber());
 
-            } catch (NotBoundException e) {
-                e.printStackTrace();
+
+            } else {
+                AppServerInterface destinationBackup = appImpl.getDestinationBackup();
+                destinationBackup.setDestinationBackup(0);
             }
+
+            System.out.println("Er wordt een application server afgesloten met poortnummer " + appImpl.getPortNumber());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        appImpl.close();
+                    } catch (RemoteException e) {
+                        System.out.println("error door het afsluiten");
+                    }
+                }
+            }).start();
+
         }
-        else{
-            AppServerInterface destinationBackup = appImpl.getDestinationBackup();
-            destinationBackup.setDestinationBackup(0);
+        catch (Exception e){
+            System.out.println(";)");
         }
 
-        System.out.println("Er wordt een application server afgesloten met poortnummer "+ appImpl.getPortNumber());
-        appImpl.close();
 
-
-        int index= appImpls.indexOf(appImpl);
-        appImpls.remove(appImpl);
-        appServerPoorten.remove(index);
     }
+
+
 
     /**
      * Wanneer een appserver crasht
@@ -166,6 +177,14 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
 
 
 
+
+    }
+
+    @Override
+    public void unregisterAppserver(int appserverPoort) throws RemoteException {
+        int index= appServerPoorten.indexOf(new Integer(appserverPoort));
+        appImpls.remove(index);
+        appServerPoorten.remove(index);
 
     }
 

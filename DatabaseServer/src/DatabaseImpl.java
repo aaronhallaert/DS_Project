@@ -813,13 +813,20 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             //alle info in 1 x uit de rs halen, zodat we kunnen sluiten
             //als we de connectie sluiten voordat de info uit rs halen, krijgen we error:
             //java.sql.SQLException: The prepared statement has been finalized
-
-            int aantalGames = rs.getInt("aantalGames");
-            int dbWins = rs.getInt("wins");
-            int dbLosses = rs.getInt("losses");
-            int draws = rs.getInt("draws");
-            int eindScoreInDb4x4 = rs.getInt("max4x4");
-            int eindScoreInDb6x6 = rs.getInt("max6x6");
+            int dbWins=-1;
+            int draws=-1;
+            int dbLosses=-1;
+            int eindScoreInDb4x4=-1;
+            int eindScoreInDb6x6=-1;
+            int aantalGames=-1;
+            while(rs.next()) {
+                dbWins = rs.getInt("wins");
+                draws = rs.getInt("draws");
+                dbLosses = rs.getInt("losses");
+                eindScoreInDb4x4 = rs.getInt("max4x4");
+                eindScoreInDb6x6 = rs.getInt("max6x6");
+                aantalGames = rs.getInt("aantalGames");
+            }
 
             closeConnection();
             aantalGames++;
@@ -878,17 +885,18 @@ public class DatabaseImpl extends UnicastRemoteObject implements DatabaseInterfa
             }
 
 
-            connect();
+
             //voer elke sql string uit
             for (String sqlString : sqlUpdaters) {
-
+                connect();
                 PreparedStatement pstmttemp = conn.prepareStatement(sqlString);
                 pstmttemp.setString(1, username);
                 pstmttemp.executeUpdate();
                 pstmttemp.close();
+                closeConnection();
             }
 
-            closeConnection();
+
 
             if(onMaster){
                 for (DatabaseInterface dbRef : DataServerMain.pollToOtherDBs.getDBRefs()) {
