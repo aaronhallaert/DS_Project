@@ -29,7 +29,6 @@ public interface DatabaseInterface extends Remote {
     /*---------- CONNECTIONS ------------*/
     void connectTo(DatabaseInterface toImpl) throws RemoteException;
 
-
     List<GameInfo> getGameInfoList(boolean dummy) throws RemoteException;
 
     /*---------- GAMES ------------------*/
