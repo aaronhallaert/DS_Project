@@ -63,8 +63,8 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
                     //start een nieuwe appserver op
                     Runtime rt1 = Runtime.getRuntime();
                     //TODO hier veranderen indien je project wil runnen via intellij
-                    //rt1.exec("cmd /c start cmd.exe /K \"cd Global && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr);
-                    rt1.exec("cmd /c start cmd.exe /K \"java -jar ApplicationServer.jar "+applicationPoortNr);
+                    rt1.exec("cmd /c start cmd.exe /K \"cd out && cd jars && java -jar ApplicationServer.jar "+applicationPoortNr);
+                    //rt1.exec("cmd /c start cmd.exe /K \"java -jar ./ApplicationServer.jar "+applicationPoortNr);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -114,6 +114,7 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
             destinationBackup.setDestinationBackup(0);
         }
 
+        System.out.println("Er wordt een application server afgesloten met poortnummer "+ appImpl.getPortNumber());
         appImpl.close();
 
 
@@ -214,15 +215,21 @@ public class DispatchImpl extends UnicastRemoteObject implements DispatchInterfa
         aantalGamesBezig--;
 
         int result = asm.setAantalGames(aantalGamesBezig, appImpls.size());
-
+        int min= Integer.MAX_VALUE;
+        AppServerInterface toDelete=null;
         if(result == -1){
             for (AppServerInterface appImpl : appImpls) {
-                if(appImpl.getNumberOfGames()<3){
-                    closeAppServer(appImpl);
-
+                int number= appImpl.getNumberOfGames();
+                if(number<3 && number<min){
+                    min=number;
+                    toDelete=appImpl;
                 }
             }
+            if(toDelete!=null) {
+                closeAppServer(toDelete);
+            }
         }
+
         System.out.println("aantalGamesBezig is nu: "+aantalGamesBezig);
     }
 

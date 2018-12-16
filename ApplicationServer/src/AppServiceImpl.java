@@ -479,10 +479,13 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             int roosterSize = thisGameInfo.getRoosterSize();
             HashMap<String, Integer> puntenLijst = thisGameState.getPunten();
             HashMap<String, String> resultatenLijst = generateResultEndGame(puntenLijst);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
 
             // voor elke speler natuurlijk
             for (String speler : thisGameState.getSpelers()) {
-
                 updateScores(speler, roosterSize, puntenLijst.get(speler), resultatenLijst.get(speler));
             }
 
@@ -491,11 +494,15 @@ public class AppServiceImpl extends UnicastRemoteObject implements AppServerInte
             deleteGame(currentGameId);
 
             // game finishen in dispatcher ( checken als een AS moet afgesloten worden)
-            try {
-                dispatchImpl.gameFinished();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+
+
+                        dispatchImpl.gameFinished();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
 
 
         }

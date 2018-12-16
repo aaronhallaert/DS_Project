@@ -28,7 +28,7 @@ public class ApplicationServerMaintainer{
             if(aantalActiveAppservers*3==aantalGamesBezig) returnValue = 1;
         }
 
-        else if(aantalBezigOpAppServers < vorigAantalGames && (aantalBezigOpAppServers % AANTALGAMESPERAPPSERVER) == 0 && aantalBezigOpAppServers != 0){
+        else if(aantalBezigOpAppServers < vorigAantalGames && ((aantalBezigOpAppServers % AANTALGAMESPERAPPSERVER) == 0 || (aantalActiveAppservers-1)*3>aantalGamesBezig) && aantalBezigOpAppServers != 0){
             System.out.println("gedaald, appserver moet verwijderd worden");
 
             returnValue = -1;
